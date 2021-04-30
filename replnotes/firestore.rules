@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+    	allow read;
+      allow create, update: if request.auth != null && request.auth.uid == userId
+    }
+    match /posts/{postId} {
+      allow read;
+      allow create: if true //request.auth != null && request.resource.data.user.id == request.auth.uid && request.resource.data.user.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.name
+      allow update: if request.auth != null && request.resource.data.user.id == request.auth.uid && request.resource.data.user.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.name
+      allow delete: if request.auth != null && resource.data.user.id == request.auth.uid
+    }
+    match /readonly/{userId} {
+    	allow read;
+      allow write: if false
+    }
+    match /feedback/{messageId} {
+    	allow write;
+    }
+    match /subscriptions/{messageId} {
+    	allow read, write;
+    }
+  }
+}
