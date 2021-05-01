@@ -94,6 +94,11 @@ export default {
             isLoading: false,
         }
     },
+    asyncData(context) {
+        return {
+            redirect: context.query.redirect? context.query.redirect : "/dashboard"
+        }
+    },
     computed: {
         hasErrors() {
             return this.errors.length > 0
@@ -110,11 +115,12 @@ export default {
             this.isLoading = true
             this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
                 .then((userCredential) => {
-                    
-                    this.$fire.analytics.logEvent(
-                        this.$fireModule.analytics.EventName.LOGIN,
-                        userCredential.user.toJSON()
-                    )
+                    // this.$fire.analytics.logEvent(
+                    //     this.$fireModule.analytics.EventName.LOGIN,
+                    //     userCredential.user.toJSON()
+                    // )
+
+                    this.$router.push(this.redirect)
                 })
                 .catch((error) => {
                     this.errors.push(error.message)

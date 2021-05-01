@@ -114,6 +114,13 @@ export default {
         'create-post': CreatePost,
         Profile,
     },
+    middleware({ app, redirect }) {
+      // If the user is not authenticated
+      console.log(app.$fire.auth.currentUser)
+      if (!app.$fire.auth.currentUser) {
+        return redirect('/login?redirect=/dashboard')
+      }
+    },
     data() {
         return {
             posts: [],

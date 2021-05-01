@@ -39,15 +39,12 @@ export const actions = {
 
   async onAuthStateChangedAction(state, { authUser }) {
 
-    console.log(authUser)
     if (!authUser) {
       // remove state
       state.commit('SET_USER', {})
-      state.commit('SET_AUTH_STATE', null)
+      state.commit("SET_TOKEN", null);
       this.$router.push("/login");
-
     } else {
-      this.$router.push('/dashboard')
       authUser.getIdToken(/* forceRefresh */ true).then((token) => {
         this.$fire.analytics.setUserId(authUser.uid);
         state.commit("SET_TOKEN", token);
@@ -73,7 +70,6 @@ export const actions = {
 export const mutations = {
     SET_USER(state, val) {
       state.currentUser = val;
-      state.auth.loggedIn = true
     },
     SET_AUTH_STATE(state, val) {
       state.auth.user = val

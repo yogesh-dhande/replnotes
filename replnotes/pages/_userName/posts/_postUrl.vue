@@ -12,13 +12,13 @@
                     <router-link :to="`/${post.user.name}`">
                         <span class="sr-only">{{ post.user.displayName }}</span>
                         <thumbnail
-                            class="rounded-full h-8 w-8 lg:h-10 lg:w-10 border border-indigo-300"
+                            class="rounded-full h-8 w-8 lg:h-10 lg:w-10"
                             :src="post.user.thumbnailUrl"
                         />
                     </router-link>
                 </div>
                 <div class="ml-3">
-                    <p class="text-sm font-medium text-gray-300">
+                    <p class="text-sm font-medium text-indigo-300">
                         <router-link
                             :to="`/${post.user.name}`"
                             class="hover:underline"
@@ -28,7 +28,7 @@
                     </p>
                     <div
                         v-if="readableDate"
-                        class="flex space-x-1 text-sm text-gray-400"
+                        class="flex space-x-1 text-sm text-indigo-200"
                     >
                         <time datetime="2020-03-16">
                             {{ readableDate }}

@@ -7,7 +7,7 @@ service cloud.firestore {
     }
     match /posts/{postId} {
       allow read;
-      allow create: if true //request.auth != null && request.resource.data.user.id == request.auth.uid && request.resource.data.user.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.name
+      allow create: if request.auth != null && request.resource.data.user.id == request.auth.uid && request.resource.data.user.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.name
       allow update: if request.auth != null && request.resource.data.user.id == request.auth.uid && request.resource.data.user.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.name
       allow delete: if request.auth != null && resource.data.user.id == request.auth.uid
     }
@@ -17,9 +17,6 @@ service cloud.firestore {
     }
     match /feedback/{messageId} {
     	allow write;
-    }
-    match /subscriptions/{messageId} {
-    	allow read, write;
     }
   }
 }

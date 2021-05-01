@@ -31,6 +31,7 @@
                     v-else
                     @save="editMode = false"
                     @cancel="editMode = false"
+                    :currentUser="user"
                 />
             </template>
         </window>

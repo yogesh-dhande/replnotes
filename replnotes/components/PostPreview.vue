@@ -28,7 +28,7 @@
                                     post.user.displayName
                                 }}</span>
                                 <thumbnail
-                                    class="rounded-full h-8 w-8 lg:h-10 lg:w-10 border border-indigo-300"
+                                    class="rounded-full h-8 w-8 lg:h-10 lg:w-10"
                                     :src="post.user.thumbnailUrl"
                                 />
                             </nuxt-link>
@@ -38,7 +38,7 @@
                             class="block ml-3 hover:text-indigo-50"
                         >
                             <div>
-                                <p class="text-sm font-bold text-indigo-100">
+                                <p class="text-sm font-bold text-indigo-300">
                                     {{ post.user.displayName }}
                                 </p>
                                 <p

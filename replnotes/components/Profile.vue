@@ -3,19 +3,19 @@
         <h2 class="mb-3 py-2 text-xl font-bold">Update Your Profile</h2>
         <text-input
             class="mt-3"
-            v-model="currentUser.displayName"
+            v-model="displayName"
             label="Display Name"
         />
-        <text-input class="mt-3" v-model="currentUser.title" label="Title" />
+        <text-input class="mt-3" v-model="title" label="Title" />
         <text-input
             class="mt-3"
-            v-model="currentUser.location"
+            v-model="location"
             label="Location"
         />
         <text-area-input
             class="mt-3"
             label="About Me (Plan Text/Markdown) "
-            v-model="currentUser.aboutMe"
+            v-model="aboutMe"
         />
 
         <div class="mt-3">
@@ -23,33 +23,33 @@
             <image-uploader
                 :refKey="currentUser.id"
                 v-model="photo"
-                :imageSrc="currentUser.photoUrl"
-                :key="currentUser.photoUrl"
+                :imageSrc="photoUrl"
+                :key="photoUrl"
                 @url="assignUrl"
                 @remove="removePhoto"
             ></image-uploader>
         </div>
-        <div v-if="currentUser.social">
+        <div v-if="social">
             <text-input
                 class="mt-3"
-                v-model="currentUser.social.github.url"
-                :label="currentUser.social.github.label"
+                v-model="social.github.url"
+                :label="social.github.label"
             />
             <text-input
                 class="mt-3"
-                v-model="currentUser.social.linkedIn.url"
-                :label="currentUser.social.linkedIn.label"
+                v-model="social.linkedIn.url"
+                :label="social.linkedIn.label"
             />
 
             <text-input
                 class="mt-3"
-                v-model="currentUser.social.twitter.url"
-                :label="currentUser.social.twitter.label"
+                v-model="social.twitter.url"
+                :label="social.twitter.label"
             />
             <text-input
                 class="mt-3"
-                v-model="currentUser.social.youtube.url"
-                :label="currentUser.social.youtube.label"
+                v-model="social.youtube.url"
+                :label="social.youtube.label"
             />
         </div>
 
@@ -74,6 +74,11 @@ import ImageUploader from '@/components/ImageUploader.vue'
 
 export default {
     name: 'profile',
+    props: {
+        currentUser: {
+            type: Object
+        }
+    },
     components: {
         'text-input': TextInput,
         'text-area-input': TextAreaInput,
@@ -87,43 +92,52 @@ export default {
             isLoading: false,
             progress: 0,
             errors: [],
+            displayName: this.currentUser.displayName,
+            title: this.currentUser.title ? this.currentUser.title : '',
+            location: this.currentUser.location,
+            photoUrl: this.currentUser.photoUrl || '',
+            thumbnailUrl: this.currentUser.thumbnailUrl || '',
+            aboutMe: this.currentUser.aboutMe,
+            social: this.currentUser.social,
         }
     },
     computed: {
-        ...mapState(['currentUser', 'token']),
+        ...mapState(['token']),
         patch() {
             return {
-                displayName: this.currentUser.displayName,
-                title: this.currentUser.title ? this.currentUser.title : '',
-                location: this.currentUser.location,
-                photoUrl: this.currentUser.photoUrl || '',
-                thumbnailUrl: this.currentUser.thumbnailUrl || '',
-                aboutMe: this.currentUser.aboutMe,
-                social: this.currentUser.social,
+                displayName: this.displayName,
+                title: this.title,
+                location: this.location,
+                photoUrl: this.photoUrl,
+                thumbnailUrl: this.thumbnailUrl,
+                aboutMe: this.aboutMe,
+                social: this.social,
             }
         },
     },
     methods: {
         removePhoto() {
             this.photo = null
-            this.currentUser.photoUrl = ''
-            this.currentUser.thumbnailUrl = ''
+            this.photoUrl = ''
+            this.thumbnailUrl = ''
         },
         assignUrl(url) {
-            this.currentUser.photoUrl = url
+            this.photoUrl = url
         },
         async save() {
             try {
                 this.isLoading = true
+                console.log(this.$fire.auth.currentUser)
                 await this.updateUser()
                 this.$router.push(`/${this.currentUser.name}`)
             } catch (error) {
-                if (error.message) {
-                    this.errors.push(error.message)
-                }
-                if (error.response.data.message) {
-                    this.errors.push(error.response.data.message)
-                }
+                // if (error.message) {
+                //     this.errors.push(error.message)
+                // }
+                // if (error.response.data.message) {
+                //     this.errors.push(error.response.data.message)
+                // }
+                console.log(error)
             } finally {
                 this.isLoading = false
             }
@@ -142,7 +156,7 @@ export default {
                 await this.$updateUserPhoto(data, this.token)
                 this.progress = 100
             } else {
-                await this.$usersCollection
+                await this.$fire.firestore.collection("users")
                     .doc(this.currentUser.id)
                     .update(this.patch)
             }
