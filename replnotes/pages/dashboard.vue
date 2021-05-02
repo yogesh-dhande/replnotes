@@ -64,7 +64,7 @@
                     </div>
 
                     <div v-else>
-                        <profile @cancel="editProfile = false"></profile>
+                        <profile @cancel="editProfile = false" :currentUser="currentUser"></profile>
                     </div>
                 </div>
                 <router-link :to="`/${currentUser.name}/posts`">

@@ -70,6 +70,7 @@ import { readFile, parseAttachments, parseMagicMethods, downloadNotebook } from 
 export default {
     name: 'post',
     asyncData(context) {
+        console.log("async data for post called")
         return {
             userName: context.params.userName,
             postUrl: context.params.postUrl,

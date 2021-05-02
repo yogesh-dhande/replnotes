@@ -298,8 +298,6 @@ export default {
                 } catch (error) {
                     console.log(error)
                     this.postRef.delete()
-                    
-
                     if (error.message) {
                         this.errors.push(error.message)
                     }

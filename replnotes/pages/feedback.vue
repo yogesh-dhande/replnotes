@@ -68,7 +68,7 @@ export default {
             })
 
             this.feedback.message = ''
-            this.$router.push('/dashboard').catch(() => {})
+            this.$router.push('/dashboard')
         },
     },
 }

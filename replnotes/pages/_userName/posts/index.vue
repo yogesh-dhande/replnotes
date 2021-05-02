@@ -54,16 +54,13 @@ export default {
     asyncData(context) {
         return {
             userName: context.params.userName,
-            queryTags: context.params.queryTags
+            queryTags: context.params.queryTags? context.params.queryTags: []
         }
     },
     data() {
         return {
             user: {},
             posts: null,
-            tags: Array.isArray(this.queryTags)
-                ? this.queryTags
-                : [this.queryTags],
             listeners: [],
             editMode: false,
         }
@@ -85,6 +82,11 @@ export default {
                 .slice()
                 .sort((a, b) => b.created.seconds - a.created.seconds)
         },
+        tags () {
+                        return Array.isArray(this.queryTags)
+                ? this.queryTags
+                : [this.queryTags]
+        }
     },
     watch: {
         queryTags(newValue) {
