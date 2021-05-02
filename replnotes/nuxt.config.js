@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV === 'development'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -57,22 +59,19 @@ export default {
           subscribeManually: false
         },
         ssr: true, // default
-        emulatorPort: process.env.NODE_ENV === 'development' ? 10000 : undefined,
-        emulatorHost: process.env.NODE_ENV === 'development' ? 'http://localhost' : undefined,
+        emulatorPort: isDev ? 10000 : undefined,
+        emulatorHost: isDev ? 'http://localhost' : undefined,
       },
       functions: {
         location: 'us-central1',
-        emulatorPort: process.env.NODE_ENV === 'development' ? 10001 : undefined,
-        emulatorHost: process.env.NODE_ENV === 'development' ? 'localhost' : undefined,
+        emulatorPort: isDev ? 10001 : undefined,
+        emulatorHost: isDev ? 'localhost' : undefined,
       },
       firestore: {
         memoryOnly: false, // default
-        enablePersistence: true,
-        emulatorPort: process.env.NODE_ENV === 'development' ? 10002 : undefined,
-        emulatorHost: process.env.NODE_ENV === 'development' ? 'localhost' : undefined,
-        settings: {
-          // Firestore Settings - currently only works in SPA mode
-        }
+        enablePersistence: !isDev,
+        emulatorPort: isDev ? 10002 : undefined,
+        emulatorHost: isDev ? 'localhost' : undefined,
       },
       storage: true,
       analytics: {

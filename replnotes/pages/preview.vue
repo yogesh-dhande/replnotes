@@ -6,14 +6,14 @@
             v-model="url"
             @change="preview"
         ></url-slug-input>
-        <notebook :file="file" :key="updateCount" v-if="file" />
+        <notebook :nbJson="nbJson" :key="updateCount" v-if="nbJson" />
     </div>
 </template>
 
 <script>
 import URLSlugInput from '@/components/URLSlugInput'
 import Notebook from '@/components/Notebook'
-import { downloadFileFromUrl } from '~/services/notebook'
+import { getNbJsonFromUrl } from '~/services/notebook'
 
 export default {
     name: 'url-preview',
@@ -25,15 +25,12 @@ export default {
         return {
             url: null,
             updateCount: 0,
-            file: null,
+            nbJson: null,
         }
     },
     methods: {
-        preview() {
-            downloadFileFromUrl(this.url, (file) => {
-                this.file = file
-                this.updateCount += 1
-            })
+        async preview() {
+            this.nbJson = await getNbJsonFromUrl(this.url)
         },
     },
 }

@@ -1,10 +1,13 @@
 <template>
-    <div class="prose max-w-none text-indigo-200"></div>
+    <div class="prose max-w-none text-indigo-200">
+        <div v-html="html" v-if="html"></div>
+    </div>
 </template>
 
 <script>
-import { render } from 'ipynb2html/lib/browser'
+import * as ipynb from 'ipynb2html'
 import 'highlight.js/styles/monokai.css'
+import { Document } from 'nodom'
 
 export default {
     name: 'notebook',
@@ -18,8 +21,13 @@ export default {
             },
         },
     },
-    async mounted() {
-        this.parseNotebook(this.file)
+    data() {
+        return {
+            html: null
+        }
+    },
+    async created() {
+        this.html = ipynb.createRenderer(new Document())(this.nbJson).outerHTML
     },
     methods: {
         async parseNotebook() {

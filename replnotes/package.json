@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "POST=8080 && npm run default && firebase emulators:start & nuxt --dotenv .env.development.local",
+    "dev": "PORT=8080 && npm run default && firebase emulators:start & nuxt --dotenv .env.development.local",
     "default": "firebase use default",
     "prod": "firebase use prod",
     "build": "rm -rf .nuxt && nuxt build --dotenv .env.staging.local",
@@ -27,6 +27,7 @@
     "firebase-admin": "^9.7.0",
     "highlight.js": "^10.7.2",
     "ipynb2html": "^0.3.0",
+    "nodom": "^2.4.0",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {

@@ -1,13 +1,20 @@
 import marked from "marked";
+import * as axios from "axios"
 
-export function downloadFileFromUrl(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.responseType = "blob";
-  xhr.onload = () => {
-    callback(xhr.response);
-  };
-  xhr.open("GET", url);
-  xhr.send();
+export async function getNbJsonFromUrl(url) {
+  let res = await axios.get(url)
+  let content = res.data
+
+  content.cells.forEach((cell) => {
+      // parseMagicCommands
+      parseMagicMethods(cell)
+
+      if (cell.cell_type == 'markdown') {
+          parseAttachments(cell)
+      }
+      cell.source = cell.source.filter(parseMagicTags)
+  })
+  return content
 }
 
 export function downloadNotebook(url, callback) {
@@ -21,6 +28,21 @@ export function readFile(file) {
     reader.onerror = (error) => reject(error);
     reader.readAsText(file);
   });
+}
+
+export function parseMagicTags(line) {
+  let commands = line.split(':')
+  let key = commands[0].trim().replace(' ', '').toLowerCase()
+  if (key.includes('#title')) {
+      return false
+  } else if (key.includes('#url')) {
+      return false
+  } else if (key.includes('#description')) {
+      return false
+  } else if (key.includes('#tags')) {
+      return false
+  }
+  return true
 }
 
 export function getImageSrcFromBase64String(base64String, type) {
