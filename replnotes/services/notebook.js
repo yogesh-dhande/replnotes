@@ -1,5 +1,8 @@
 import marked from "marked";
 import * as axios from "axios"
+import { firebase } from '@firebase/app';
+import "@firebase/firestore";
+
 
 export async function getNbJsonFromUrl(url) {
   let res = await axios.get(url)
@@ -19,6 +22,19 @@ export async function getNbJsonFromUrl(url) {
 
 export function downloadNotebook(url, callback) {
   return downloadFileFromUrl(url, callback);
+}
+
+export function getReadableDate(timeStamp) {
+  try {
+      timeStamp = new firebase.firestore.Timestamp(timeStamp.seconds, timeStamp.nanoseconds)
+      let date = timeStamp.toDate()
+      let year = date.getFullYear()
+      let month = date.toLocaleString('default', { month: 'long' })
+      let day = date.getDate()
+      return `${month} ${day}, ${year}`
+  } catch (error) {
+    return null
+  }
 }
 
 export function readFile(file) {

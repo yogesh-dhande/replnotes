@@ -115,10 +115,10 @@ export default {
             this.isLoading = true
             this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
                 .then((userCredential) => {
-                    // this.$fire.analytics.logEvent(
-                    //     this.$fireModule.analytics.EventName.LOGIN,
-                    //     userCredential.user.toJSON()
-                    // )
+                    this.$fire.analytics.logEvent(
+                        this.$analyticsEvents.LOGIN,
+                        userCredential.user.toJSON()
+                    )
 
                     this.$router.push(this.redirect)
                 })

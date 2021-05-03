@@ -210,6 +210,7 @@ export default {
         logout() {
             this.$fire.auth.signOut().finally(() => {
                 this.$store.commit('SET_USER', {})
+                this.$router.go()
             })
         },
     },

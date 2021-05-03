@@ -51,16 +51,26 @@ export default {
         PostList,
         CreatePost,
     },
-    asyncData(context) {
-        return {
+    async asyncData(context) {
+        let returnData = {
             userName: context.params.userName,
-            queryTags: context.params.queryTags? context.params.queryTags: []
+            queryTags: context.params.queryTags? context.params.queryTags: [],
+            posts: [],
+            user: {}
         }
+
+        let querySnapshot = await context.app.$postsCollection
+                .where('user.name', '==', returnData.userName)
+                .get() 
+
+        if (!querySnapshot.empty) {
+            returnData.posts = querySnapshot.docs.map((doc) => doc.data())
+            returnData.user = returnData.posts[0].user
+        }
+        return returnData
     },
     data() {
         return {
-            user: {},
-            posts: null,
             listeners: [],
             editMode: false,
         }
@@ -78,12 +88,13 @@ export default {
         },
         orderedPosts() {
             // most recent first
-            return this.filteredPosts
+            let o = this.filteredPosts
                 .slice()
                 .sort((a, b) => b.created.seconds - a.created.seconds)
+            return o
         },
         tags () {
-                        return Array.isArray(this.queryTags)
+            return Array.isArray(this.queryTags)
                 ? this.queryTags
                 : [this.queryTags]
         }
@@ -92,50 +103,6 @@ export default {
         queryTags(newValue) {
             this.tags = Array.isArray(newValue) ? newValue : [newValue]
         },
-    },
-    methods: {
-        load() {
-            let listener = this.$postsCollection
-                .where('user.name', '==', this.userName)
-                .onSnapshot((querySnapshot) => {
-                    if (querySnapshot.size > 0) {
-                        this.posts = querySnapshot.docs.map((doc) => doc.data())
-                        this.user = this.posts[0].user
-                        this.updateDocumentTitle()
-                    } else {
-                        // TODO push router to 404
-                        this.posts = []
-                    }
-                })
-            this.listeners.push(listener)
-        },
-        detachListeners() {
-            if (this.listeners) {
-                this.listeners.forEach((listener) => listener())
-            }
-        },
-        updateDocumentTitle() {
-            document.title = `${this.user.displayName}'s Posts`
-            this.$fire.analytics.logEvent("view_user_posts", this.user)
-        },
-    },
-    beforeRouteEnter(to, from, next) {
-        next((vm) => {
-            let params = to.params
-            if (params.userName) {
-                if (vm.user) {
-                    vm.updateDocumentTitle()
-                    if (vm.user.name != params.userName) {
-                        vm.load()
-                    }
-                } else {
-                    vm.load()
-                }
-            }
-        })
-    },
-    beforeDestroy() {
-        this.detachListeners()
     },
 }
 </script>

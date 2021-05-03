@@ -101,7 +101,6 @@ export default {
             this.$emit('click')
         },
         modalClick(e) {
-            console.log('modal click')
             e.preventDefault()
             e.stopPropagation()
         },

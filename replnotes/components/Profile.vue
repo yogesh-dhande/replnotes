@@ -127,17 +127,16 @@ export default {
         async save() {
             try {
                 this.isLoading = true
-                console.log(this.$fire.auth.currentUser)
                 await this.updateUser()
                 this.$router.push(`/${this.currentUser.name}`)
+                this.$router.go()  // Refresh the page
             } catch (error) {
-                // if (error.message) {
-                //     this.errors.push(error.message)
-                // }
-                // if (error.response.data.message) {
-                //     this.errors.push(error.response.data.message)
-                // }
-                console.log(error)
+                if (error.message) {
+                    this.errors.push(error.message)
+                }
+                if (error.response.data.message) {
+                    this.errors.push(error.response.data.message)
+                }
             } finally {
                 this.isLoading = false
             }

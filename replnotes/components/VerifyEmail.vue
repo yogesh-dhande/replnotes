@@ -58,7 +58,6 @@ export default {
     },
     mounted() {
         this.verificationInterval = setInterval(() => {
-            console.log('checking email verification')
             this.$fire.auth.currentUser.reload().then(() => {
                 if (this.$fire.auth.currentUser.emailVerified) {
                     clearInterval(this.verificationInterval)

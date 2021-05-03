@@ -43,7 +43,6 @@ export const actions = {
       // remove state
       state.commit('SET_USER', {})
       state.commit("SET_TOKEN", null);
-      this.$router.push("/login");
     } else {
       authUser.getIdToken(/* forceRefresh */ true).then((token) => {
         this.$fire.analytics.setUserId(authUser.uid);

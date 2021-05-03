@@ -296,7 +296,6 @@ export default {
                     await this.upload()
                     this.progress = 100
                 } catch (error) {
-                    console.log(error)
                     this.postRef.delete()
                     if (error.message) {
                         this.errors.push(error.message)

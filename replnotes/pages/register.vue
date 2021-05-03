@@ -169,7 +169,7 @@ export default {
                         url: `${process.env.NUXT_ENV_BASE_URL}/dashboard`,
                     })
                     this.$fire.analytics.logEvent(
-                        this.$fireModule.analytics.EventName.SIGN_UP,
+                        this.$analyticsEvents.SIGN_UP,
                         userCredential.user.toJSON()
                     )
 

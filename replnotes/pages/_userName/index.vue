@@ -53,65 +53,30 @@ export default {
         Window,
         IconButton,
     },
-    asyncData(context) {
-        return {
-            userName: context.params.userName,
+    async asyncData(context) {
+        let returnData = {
+            userName:  context.params.userName,
+            user: null
         }
+
+        let querySnapshot = await context.app.$usersCollection
+                .where('name', '==', returnData.userName)
+                .get() 
+
+        if (!querySnapshot.empty) {
+            returnData.user = querySnapshot.docs[0].data()
+        }
+
+        return returnData
     },
     data() {
         return {
-            user: null,
             listeners: [],
             editMode: false,
         }
     },
     computed: {
         ...mapState(['currentUser']),
-    },
-    mounted() {},
-    methods: {
-        load() {
-            let listener = this.$usersCollection
-                .where('name', '==', this.userName)
-                .onSnapshot((querySnapshot) => {
-                    if (querySnapshot.size > 0) {
-                        this.user = querySnapshot.docs[0].data()
-                        this.updateDocumentTitle()
-                    } else {
-                        // TODO push router to 404
-                        this.$router.push('/404')
-                    }
-                })
-            this.listeners.push(listener)
-        },
-        detachListeners() {
-            if (this.listeners) {
-                this.listeners.forEach((listener) => listener())
-            }
-        },
-        updateDocumentTitle() {
-            document.title = this.user.displayName
-            this.$fire.analytics.logEvent("view_user_home", this.user)
-        },
-    },
-    beforeRouteEnter(to, from, next) {
-        next((vm) => {
-            let params = to.params
-            if (params.userName) {
-                if (vm.user) {
-                    vm.updateDocumentTitle()
-                    if (vm.user.name != params.userName) {
-                        vm.load()
-                    }
-                } else {
-                    vm.load()
-                }
-            }
-        })
-    },
-
-    beforeDestroy() {
-        this.detachListeners()
     },
 }
 </script>

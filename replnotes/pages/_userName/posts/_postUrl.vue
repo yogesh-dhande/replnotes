@@ -2,29 +2,29 @@
     <div class="px-2 lg:px-12 py-2 lg:py-6 bg-gray-800 min-h-screen">
         <card
             class="py-6 px-12 max-w-6xl mx-auto text-indigo-200"
-            v-if="post"
+            v-if="post.id"
         >
             <h1 class="text-3xl lg:text-4xl font-extrabold my-6 tracking-tight">
                 {{ post.title }}
             </h1>
             <div class="mt-6 flex items-center">
                 <div class="flex-shrink-0">
-                    <router-link :to="`/${post.user.name}`">
+                    <nuxt-link :to="`/${post.user.name}`">
                         <span class="sr-only">{{ post.user.displayName }}</span>
                         <thumbnail
                             class="rounded-full h-8 w-8 lg:h-10 lg:w-10"
                             :src="post.user.thumbnailUrl"
                         />
-                    </router-link>
+                    </nuxt-link>
                 </div>
                 <div class="ml-3">
                     <div class="text-sm font-medium text-indigo-300">
-                        <router-link
+                        <nuxt-link
                             :to="`/${post.user.name}`"
                             class="hover:underline"
                         >
                             {{ post.user.displayName }}
-                        </router-link>
+                        </nuxt-link>
                     </div>
                     <div
                         v-if="readableDate"
@@ -46,11 +46,11 @@
                     class="mt-0 mb-2 ml-0 mr-2"
                     v-for="tag in post.tags"
                     :key="tag"
-                    ><router-link
+                    ><nuxt-link
                         :to="`/${post.user.name}/posts/?tag=${tag}`"
                         class="italic hover:underline"
                     >
-                        {{ tag }}</router-link
+                        {{ tag }}</nuxt-link
                     ></badge
                 >
             </div>
@@ -63,29 +63,16 @@ import Notebook from '@/components/Notebook'
 import Card from '@/components/Card'
 import Badge from '@/components/Badge'
 import Thumbnail from '@/components/Thumbnail'
-import { getNbJsonFromUrl } from '~/services/notebook'
+import { getNbJsonFromUrl, getReadableDate } from '~/services/notebook'
 
-function getReadableDate(timeStamp) {
-    try {
-        let date = timeStamp.toDate()
-        let year = date.getFullYear()
-        let month = date.toLocaleString('default', { month: 'long' })
-        let day = date.getDate()
-        return `${month} ${day}, ${year}`
-    } catch (error) {
-        return null
-    }
-}
 
 export default {
     name: 'post',
     async asyncData(context) {
-        console.log("async data for post called")
-
         let returnData = {
             userName:  context.params.userName,
             postUrl: context.params.postUrl,
-            post: null,
+            post: {},
         }
 
         let querySnapshot = await context.app.$postsCollection
@@ -96,9 +83,7 @@ export default {
         if (!querySnapshot.empty) {
             returnData.post = querySnapshot.docs[0].data()
             returnData.nbJson = await getNbJsonFromUrl(returnData.post.file.url)
-            returnData.readableDate = getReadableDate(returnData.post.created)
         }
-
         return returnData
     },
     components: {
@@ -107,6 +92,11 @@ export default {
         badge: Badge,
         thumbnail: Thumbnail,
     },
+    computed: {
+        readableDate() {
+            return getReadableDate(this.post.created)
+        }
+    }
 }
 </script>
 

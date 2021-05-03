@@ -38,9 +38,6 @@ export default {
             )
         },
     },
-    filteredPosts() {
-        return this.posts.filter((_, j) => j % this.numCols === 0)
-    },
 }
 </script>
 

@@ -52,17 +52,4 @@ export default async ({ app }, inject) => {
 
       inject('updateUserPhoto', updateUserPhoto)
 
-      // const EventName = app.$fireModule.analytics.EventName;
-
-      // const CustomEvents = {
-      //   ...EventName,
-      //   VIEW_USER_POSTS: "view_user_posts",
-      //   VIEW_USER_HOME: "view_user_home",
-      //   VIEW_POST: "view_post",
-      //   CREATE_POST: "create_post",
-      //   EDIT_POST: "edit_post",
-      // }
-
-      // inject('CustomEvents', CustomEvents)
-
   }
