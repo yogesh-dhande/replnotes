@@ -111,6 +111,11 @@ export default {
         'password-input': PasswordInput,
         'url-slug-input': URLSlugInput,
     },
+    head() {
+        return {
+            title: "Join REPL Notes"
+        }
+    },
     data() {
         return {
             BASE_URL: `${process.env.NUXT_ENV_DISPLAY_URL}/`,

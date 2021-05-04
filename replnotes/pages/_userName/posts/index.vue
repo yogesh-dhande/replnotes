@@ -51,6 +51,11 @@ export default {
         PostList,
         CreatePost,
     },
+    head() {
+        return {
+            title: this.userName + "'s Posts @ REPL Notes"
+        }
+    },
     async asyncData(context) {
         let returnData = {
             userName: context.params.userName,

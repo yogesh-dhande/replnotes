@@ -53,6 +53,11 @@ export default {
         Window,
         IconButton,
     },
+    head() {
+        return {
+            title: this.userName + " @ REPL Notes"
+        }
+    },
     async asyncData(context) {
         let returnData = {
             userName:  context.params.userName,

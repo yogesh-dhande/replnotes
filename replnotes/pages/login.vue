@@ -83,6 +83,11 @@ export default {
         FormPage,
         'password-input': PasswordInput,
     },
+    head() {
+        return {
+            title: "Sign In to REPL Notes"
+        }
+    },
     data() {
         return {
             email: '',

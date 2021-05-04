@@ -21,6 +21,11 @@ export default {
         'url-slug-input': URLSlugInput,
         Notebook,
     },
+    head() {
+        return {
+            title: "Preview a Jupyter Notebook on REPL Notes"
+        }
+    },
     data() {
         return {
             url: null,

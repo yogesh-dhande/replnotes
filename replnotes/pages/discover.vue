@@ -12,6 +12,11 @@ export default {
     components: {
         PostList,
     },
+    head() {
+        return {
+            title: "Discover Content on REPL Notes"
+        }
+    },
     data() {
         return {
             featuredPosts: [],

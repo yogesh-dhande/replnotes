@@ -120,6 +120,11 @@ export default {
         return redirect('/login?redirect=/dashboard')
       }
     },
+    head() {
+        return {
+            title: "Dashboard. REPL Notes"
+        }
+    },
     data() {
         return {
             posts: [],

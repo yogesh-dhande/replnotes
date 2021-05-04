@@ -44,7 +44,11 @@ export default {
         FormPage,
         CustomButton,
     },
-
+    head() {
+        return {
+            title: "Provide Feedback on REPL Notes"
+        }
+    },
     data() {
         return {
             feedback: {

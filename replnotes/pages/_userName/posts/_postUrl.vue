@@ -68,6 +68,11 @@ import { getNbJsonFromUrl, getReadableDate } from '~/services/notebook'
 
 export default {
     name: 'post',
+    head() {
+        return {
+            title: this.post.title + " by " + this.post.user.displayName + " @ REPL Notes"
+        }
+    },
     async asyncData(context) {
         let returnData = {
             userName:  context.params.userName,
