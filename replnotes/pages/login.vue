@@ -1,7 +1,7 @@
 <template>
     <form-page>
         <form
-            class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-600 bg-opacity-25 rounded-lg shadow-xl"
+            class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 bg-opacity-25 rounded-lg shadow-xl"
         >
             <div class="mt-3">
                 <label class="block text-sm font-medium mt-2 mb-0">
@@ -83,6 +83,7 @@ export default {
         FormPage,
         'password-input': PasswordInput,
     },
+    middleware: 'guest',
     head() {
         return {
             title: "Sign In to REPL Notes"

@@ -1,6 +1,6 @@
 <template>
     <div @mouseover="showButtons = true" @mouseleave="showButtons = false">
-        <card v-if="!editMode" class="shadow-lg bg-gray-700">
+        <card v-if="!editMode" class="shadow-lg bg-gray-900">
             <window>
                 <template v-slot:top-right v-if="showButtons && editable">
                     <icon-button @click="edit">

@@ -4,11 +4,9 @@ import { firebase } from '@firebase/app';
 import "@firebase/firestore";
 
 
-export async function getNbJsonFromUrl(url) {
-  let res = await axios.get(url)
-  let content = res.data
+export function parseNbJson(nbJson) {
 
-  content.cells.forEach((cell) => {
+  nbJson.cells.forEach((cell) => {
       // parseMagicCommands
       parseMagicMethods(cell)
 
@@ -17,7 +15,21 @@ export async function getNbJsonFromUrl(url) {
       }
       cell.source = cell.source.filter(parseMagicTags)
   })
-  return content
+  return nbJson
+}
+
+export async function getNbJsonFromUrl(url) {
+  let res = await axios.get(url)
+  let content = res.data
+  return parseNbJson(content)
+}
+
+export async function getNbJsonFromFile(file) {
+  console.log(file)
+  let text = await readFile(file)
+  let content = JSON.parse(text)
+  console.log(content)
+  return parseNbJson(content)
 }
 
 export function downloadNotebook(url, callback) {

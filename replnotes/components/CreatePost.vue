@@ -1,5 +1,5 @@
 <template>
-  <card class="mx-auto pb-3 shadow bg-gray-700 text-gray-300" :key="post.id">
+  <card class="mx-auto shadow bg-gray-900 text-indigo-100" :key="post.id">
     <h2 class="mb-3 py-2 text-xl font-bold">Add a New Post</h2>
     <file-input
       class="mt-3"
@@ -62,7 +62,9 @@
           <post-preview :post="post"></post-preview>
         </card>
       </div>
-      <save-cancel
+
+    </div>
+          <save-cancel
         class="mt-3"
         :isLoading="isLoading"
         :progress="progress"
@@ -71,7 +73,6 @@
         @save="createPost"
         @cancel="$emit('cancel')"
       />
-    </div>
   </card>
 </template>
 

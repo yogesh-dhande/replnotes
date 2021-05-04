@@ -1,5 +1,5 @@
 <template>
-    <card class="mx-auto shadow items-center bg-gray-700 text-gray-300">
+    <card class="mx-auto shadow items-center bg-gray-900 text-gray-300">
         <h2 class="mb-3 py-2 text-xl font-bold">Update Your Profile</h2>
         <text-input
             class="mt-3"

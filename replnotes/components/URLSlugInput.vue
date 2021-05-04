@@ -5,7 +5,7 @@
         </label>
         <div class="mt-1 flex rounded-md shadow-sm">
             <span
-                class="inline-flex items-center px-3 rounded-l-md bg-gray-600"
+                class="inline-flex items-center px-3 rounded-l-md bg-gray-900"
             >
                 {{ prefix }}
             </span>

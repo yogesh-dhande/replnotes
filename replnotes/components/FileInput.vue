@@ -1,5 +1,4 @@
 <template>
-    <div>
         <div
             class="mt-2 flex justify-center pt-2 pb-2 bg-gray-800 rounded-md"
             @drop.prevent="handleFileDrop"
@@ -29,7 +28,6 @@
                 </p>
             </div>
         </div>
-    </div>
 </template>
 
 <script>

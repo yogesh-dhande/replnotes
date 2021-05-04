@@ -10,7 +10,7 @@
             >
         </h1>
         <form
-            class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-600 bg-opacity-25 rounded-lg shadow-xl"
+            class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 bg-opacity-25 rounded-lg shadow-xl"
         >
             <url-slug-input
                 :prefix="BASE_URL"
@@ -111,6 +111,7 @@ export default {
         'password-input': PasswordInput,
         'url-slug-input': URLSlugInput,
     },
+    middleware: 'guest',
     head() {
         return {
             title: "Join REPL Notes"
