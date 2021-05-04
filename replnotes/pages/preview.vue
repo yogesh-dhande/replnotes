@@ -23,7 +23,7 @@ export default {
     },
     head() {
         return {
-            title: "Preview a Jupyter Notebook on REPL Notes"
+            title: "Preview a Jupyter Notebook URL on REPL Notes"
         }
     },
     data() {

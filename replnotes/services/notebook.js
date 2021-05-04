@@ -21,7 +21,7 @@ export async function getNbJsonFromUrl(url) {
 }
 
 export function downloadNotebook(url, callback) {
-  return downloadFileFromUrl(url, callback);
+  return getNbJsonFromUrl(url, callback);
 }
 
 export function getReadableDate(timeStamp) {
