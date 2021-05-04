@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "PORT=8080 && npm run default && firebase emulators:start & nuxt --dotenv .env.development.local",
+    "dev": "nuxt --dotenv .env.development.local",
+    "firebase": "npm run default && firebase emulators:start --import tests/.seed",
+    "export": "firebase emulators:export tests/.seed",
     "default": "firebase use default",
     "prod": "firebase use prod",
     "build": "rm -rf .nuxt && nuxt build --dotenv .env.staging.local",
@@ -12,7 +14,6 @@
     "generate": "nuxt generate --dotenv .env.staging.local",
     "deploy": "npm run default && npm run build && firebase deploy",
     "deploy:prod": "npm run prod && npm run build:prod && firebase deploy",
-    "export": "firebase emulators:export tests/.seed",
     "test": "firebase emulators:exec 'jest --env=node'"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/firebase": "^7.5.0",
     "@nuxtjs/pwa": "^3.3.5",
+    "@nuxtjs/sitemap": "^2.4.0",
     "@tailwindcss/typography": "^0.4.0",
     "axios": "^0.21.1",
     "core-js": "^3.11.1",

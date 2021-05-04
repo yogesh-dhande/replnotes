@@ -82,12 +82,12 @@
             />
             <div class="py-1 sm:px-6 text-md font-medium">
                 <span class="float-right">
-                    <router-link
+                    <nuxt-link
                         to="/login"
                         class="p-1 inline-flex justify-center rounded hover:underline outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         <span>Sign In</span>
-                    </router-link>
+                    </nuxt-link>
                 </span>
             </div>
         </form>

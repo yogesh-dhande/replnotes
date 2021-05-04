@@ -19,6 +19,8 @@ const reservedNames = [
   "explore",
   "browse",
   "discover",
+  "preview",
+  "demo",
   "search",
   "find",
   "status",

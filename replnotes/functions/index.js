@@ -439,3 +439,36 @@ exports.updateUserPhoto = functions.https.onRequest(async (req, res) => {
   });
 });
 
+async function getAppRoutes() {
+  let routes = []
+
+  const usersRef = db.collection("users")
+ 
+  const snapshot = await usersRef.get();
+ snapshot.forEach(doc => {
+     let user = doc.data()
+     console.log(user)
+     routes.push(`/${user.name}`)
+ 
+     if (user.posts) {
+      routes.push(`/${user.name}/posts`)
+       Object.values(user.posts).map((post) => {
+         routes.push(`/${user.name}/posts/${post.url}`)
+       });
+     }
+ 
+ })
+
+   return routes;
+ }
+
+ exports.getRoutes = functions.https.onRequest(async (req, res) => {
+  return cors(req, res, async () => {
+    try {
+      return res.status(200).send(await getAppRoutes());
+    } catch (error) {
+      console.log(error)
+      return res.status(200).send([]);
+    }
+  })
+  })

@@ -67,7 +67,7 @@
                         <profile @cancel="editProfile = false" :currentUser="currentUser"></profile>
                     </div>
                 </div>
-                <router-link :to="`/${currentUser.name}/posts`">
+                <nuxt-link :to="`/${currentUser.name}/posts`">
                     <div
                         class="text-center px-4 py-5 bg-gray-900 shadow hover:bg-black rounded-lg overflow-hidden sm:p-6"
                     >
@@ -80,7 +80,7 @@
                             {{ this.posts.length }}
                         </dd>
                     </div>
-                </router-link>
+                </nuxt-link>
 
                 <div
                     class="text-center text-indigo-300 px-4 py-5 bg-gray-900 shadow rounded-lg overflow-hidden sm:p-6"

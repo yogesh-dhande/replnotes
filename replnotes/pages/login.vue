@@ -49,12 +49,12 @@
 
             <div class="py-1 sm:px-6 text-sm font-medium">
                 <span class="float-left">
-                    <router-link
+                    <nuxt-link
                         to="/register"
                         class="p-1 inline-flex justify-center rounded hover:underline outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         <span>Sign Up</span>
-                    </router-link>
+                    </nuxt-link>
                 </span>
                 <span class="float-right">
                     <button

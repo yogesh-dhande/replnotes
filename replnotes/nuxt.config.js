@@ -1,5 +1,7 @@
 const isDev = process.env.NODE_ENV === 'development'
 
+const getAppRoutes = require('./services/getRoutes.js');
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -41,7 +43,19 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/firebase',
+    '@nuxtjs/sitemap'
   ],
+  sitemap: {
+    hostname: process.env.NUXT_ENV_BASE_URL,
+    async routes () {
+      let routes = await getAppRoutes()
+      console.log(routes)
+      return routes
+    },
+    exclude: [
+      '/dashboard',
+    ],
+  },
   firebase: {
     config: {
       apiKey: process.env.NUXT_ENV_FIREBASE_CONFIG_API_KEY,
