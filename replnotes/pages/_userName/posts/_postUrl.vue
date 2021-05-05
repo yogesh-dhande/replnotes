@@ -35,10 +35,16 @@ import { getNbJsonFromUrl, getReadableDate } from "~/services/notebook";
 export default {
   name: "post",
   head() {
-    return {
-      title:
-        this.post.title + " by " + this.post.user.displayName + " @ REPL Notes",
-    };
+    return this.$createSEOMeta({
+      title: this.post.title,
+      description: this.post.description
+        ? this.post.description
+        : this.post.title +
+          " by " +
+          this.post.user.displayName +
+          " @ REPL Notes",
+      image: this.post.thumbnail,
+    });
   },
   async asyncData(context) {
     let returnData = {

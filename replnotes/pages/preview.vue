@@ -1,44 +1,44 @@
 <template>
-    <div class="px-12 mt-6">
-        <url-slug-input
-            class="mt-3"
-            prefix="URL"
-            v-model="url"
-            @change="preview"
-        ></url-slug-input>
-        <notebook :nbJson="nbJson" :key="updateCount" v-if="nbJson" />
-    </div>
+  <div class="px-12 mt-6">
+    <url-slug-input
+      class="mt-3"
+      prefix="URL"
+      v-model="url"
+      @change="preview"
+    ></url-slug-input>
+    <notebook :nbJson="nbJson" :key="updateCount" v-if="nbJson" />
+  </div>
 </template>
 
 <script>
-import URLSlugInput from '@/components/URLSlugInput'
-import Notebook from '@/components/Notebook'
-import { getNbJsonFromUrl } from '~/services/notebook'
+import URLSlugInput from "@/components/URLSlugInput";
+import Notebook from "@/components/Notebook";
+import { getNbJsonFromUrl } from "~/services/notebook";
 
 export default {
-    name: 'url-preview',
-    components: {
-        'url-slug-input': URLSlugInput,
-        Notebook,
+  name: "url-preview",
+  components: {
+    "url-slug-input": URLSlugInput,
+    Notebook,
+  },
+  head() {
+    return this.$createSEOMeta({
+      title: "Preview a Jupyter Notebook URL on REPL Notes",
+    });
+  },
+  data() {
+    return {
+      url: null,
+      updateCount: 0,
+      nbJson: null,
+    };
+  },
+  methods: {
+    async preview() {
+      this.nbJson = await getNbJsonFromUrl(this.url);
     },
-    head() {
-        return {
-            title: "Preview a Jupyter Notebook URL on REPL Notes"
-        }
-    },
-    data() {
-        return {
-            url: null,
-            updateCount: 0,
-            nbJson: null,
-        }
-    },
-    methods: {
-        async preview() {
-            this.nbJson = await getNbJsonFromUrl(this.url)
-        },
-    },
-}
+  },
+};
 </script>
 
 <style>

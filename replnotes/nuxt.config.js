@@ -12,7 +12,19 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Blog with Jupyter Notebooks - REPL Notes' }
+      { hid: "og:title", property: "og:title", content: 'REPL Notes' },
+      { hid: 'description', name: 'description', content: 'Blog with Jupyter Notebooks @ REPL Notes' },
+      {
+        hid: "og:description",
+        property: "og:description",
+        content: 'Blog with Jupyter Notebooks @ REPL Notes',
+      },
+      {
+          hid: "og:url",
+          property: "og:url",
+          content: process.env.NUXT_ENV_BASE_URL,
+      },
+      { hid: "og:image", property: "og:image", content: '~/assets/logo.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -26,7 +38,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/firebaseConfig.js',
-    '~/plugins/analytics.client.js'
+    '~/plugins/analytics.client.js',
+    '~/plugins/meta.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -108,7 +121,7 @@ export default {
       ],
       // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
       // only set this true for testing and remember to always clear your browser cache in development
-      dev: true,
+      dev: false,
     }
   },
   axios: {

@@ -54,9 +54,12 @@ export default {
         IconButton,
     },
     head() {
-        return {
-            title: this.userName + " @ REPL Notes"
-        }
+        return this.$createSEOMeta({
+            title: this.userName,
+            description: this.userName + " @ REPL Notes",
+            image: this.user.photoUrl
+        })
+       
     },
     async asyncData(context) {
         let returnData = {
