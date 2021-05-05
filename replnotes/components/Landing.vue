@@ -34,10 +34,10 @@
                 </div>
                 <div class="ml-3 inline-flex">
                     <nuxt-link
-                        to="/blog/posts"
+                        to="/demo"
                         class="w-full px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
                     >
-                        See Examples
+                        See Demo
                     </nuxt-link>
                 </div>
             </div>

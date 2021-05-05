@@ -2,9 +2,9 @@
   <div
     class="px-2 lg:px-12 py-2 max-w-6xl mx-auto lg:py-6 bg-gray-800 text-indigo-100 min-h-screen"
   >
-    <card class="shadow py-3 px-12 bg-gray-900">
+    <card class="shadow pt-3 pb-6 px-12 bg-gray-900">
       <h2 class="mb-3 py-2 text-xl font-bold text-center">
-        Upload a Jupyter Notebook to Preview
+        {{ pageTitle }}
       </h2>
 
       <file-input
@@ -41,6 +41,11 @@ export default {
     FileInput,
     Card,
   },
+  head() {
+      return {
+          title: this.pageTitle
+      }
+  },
   data() {
     return {
       file: null,
@@ -48,6 +53,7 @@ export default {
       nbJson: null,
       updateCount: 0,
       title: "Add a custom title to the post",
+      pageTitle: "Preview a Jupyter Notebook as a Blog Post"
     };
   },
   watch: {

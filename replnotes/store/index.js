@@ -1,4 +1,5 @@
 export const state = () => ({
+    authUserId: null,
     showFeedbackModal: false,
     token: null,
     currentUser: {},
@@ -33,45 +34,43 @@ export const getters = {
 
       return [...new Set([].concat.apply([], tagList))];
     },
+    loggedIn(state) {
+      return state.authUserId
+    }
   }
 
 export const actions = {
-  // async nuxtServerInit({ dispatch, commit }, { res }) {
-  //   if (res && res.locals && res.locals.user) {
-  //     const { allClaims: claims, idToken: token, ...authUser } = res.locals.user
-  
-  //     await dispatch('onAuthStateChangedAction', {
-  //       authUser,
-  //       claims,
-  //       token
-  //     })
-  
-  //     // or
-  
-  //     commit('ON_AUTH_STATE_CHANGED_MUTATION', { authUser, claims, token })
-  //   }
-  // },
+  async nuxtServerInit({ commit }, { res }) {
+    if (res && res.locals && res.locals.user) {
+      const { allClaims: claims, idToken: token, ...authUser } = res.locals.user
+      commit("SET_AUTH_STATE", authUser);
 
-  async onAuthStateChangedAction(state, { authUser }) {
+    }
+  },
+
+  async onAuthStateChangedAction({ commit }, { authUser }) {
+    commit("SET_AUTH_STATE", authUser);
 
     if (!authUser) {
       // remove state
-      state.commit('SET_USER', {})
-      state.commit("SET_TOKEN", null);
+      commit('SET_USER', {})
+      commit("SET_TOKEN", null);
+
+
     } else {
       authUser.getIdToken(/* forceRefresh */ true).then((token) => {
         this.$fire.analytics.setUserId(authUser.uid);
-        state.commit("SET_TOKEN", token);
-        state.commit("SET_EMAIL_VERIFIED", authUser.emailVerified);
+        commit("SET_TOKEN", token);
+        commit("SET_EMAIL_VERIFIED", authUser.emailVerified);
 
         this.$usersCollection.doc(authUser.uid).onSnapshot((snap) => {
-          state.commit("SET_USER", snap.data() || {});
+          commit("SET_USER", snap.data() || {});
         })
   
         this.$readonlyCollection
           .doc(authUser.uid)
           .onSnapshot((snap) => {
-            state.commit("SET_READONLY_DATA", snap.data() || {});
+            commit("SET_READONLY_DATA", snap.data() || {});
           })
          
       })
@@ -85,9 +84,8 @@ export const mutations = {
     SET_USER(state, val) {
       state.currentUser = val;
     },
-    SET_AUTH_STATE(state, val) {
-      state.auth.user = val
-      state.auth.loggedIn = val ? true: false
+    SET_AUTH_STATE(state, authUser) {
+      state.authUserId = authUser.uid
     },
     SET_TOKEN(state, val) {
       state.token = val;

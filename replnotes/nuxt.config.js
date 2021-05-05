@@ -41,8 +41,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/firebase',
+    '@nuxtjs/pwa',
     '@nuxtjs/sitemap'
   ],
   sitemap: {
@@ -74,8 +74,8 @@ export default {
           subscribeManually: false
         },
         ssr: true, // default
-        emulatorPort: isDev ? 10000 : undefined,
-        emulatorHost: isDev ? 'http://localhost' : undefined,
+        // emulatorPort: isDev ? 10000 : undefined,
+        // emulatorHost: isDev ? 'http://localhost' : undefined,
       },
       functions: {
         location: 'us-central1',
@@ -85,8 +85,8 @@ export default {
       firestore: {
         memoryOnly: false, // default
         enablePersistence: !isDev,
-        emulatorPort: isDev ? 10002 : undefined,
-        emulatorHost: isDev ? 'localhost' : undefined,
+        // emulatorPort: isDev ? 10002 : undefined,
+        // emulatorHost: isDev ? 'localhost' : undefined,
       },
       storage: true,
       analytics: {
@@ -108,7 +108,7 @@ export default {
       ],
       // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
       // only set this true for testing and remember to always clear your browser cache in development
-      dev: false,
+      dev: true,
     }
   },
   axios: {
