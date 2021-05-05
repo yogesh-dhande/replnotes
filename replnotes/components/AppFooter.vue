@@ -20,6 +20,12 @@
                     >Blog</nuxt-link
                 >
                 <nuxt-link
+                    to="/demo"
+                    class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                    @click.native="scrollToTop"
+                    >Demo</nuxt-link
+                >
+                <nuxt-link
                     to="/discover"
                     class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
                     @click.native="scrollToTop"
