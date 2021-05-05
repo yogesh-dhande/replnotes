@@ -15,7 +15,7 @@
         <badge class="mt-0 mb-2 ml-0 mr-2" v-for="tag in post.tags" :key="tag"
           ><nuxt-link
             :to="`/${post.user.name}/posts/?tag=${tag}`"
-            class="italic hover:underline"
+            class="hover:underline"
           >
             {{ tag }}</nuxt-link
           ></badge
