@@ -30,6 +30,7 @@ export default async ({ route }, inject) => {
                 { hid: "og:image", property: "og:image", content: data.image },
             )
         }
+        
         return meta
     }
 
