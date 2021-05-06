@@ -124,6 +124,7 @@ export default {
             this.$analyticsEvents.LOGIN,
             userCredential.user.toJSON()
           );
+          this.$store.commit("SET_AUTH_STATE", userCredential.user);
 
           this.$router.push(this.redirect);
         })

@@ -62,7 +62,6 @@ export default {
     hostname: process.env.NUXT_ENV_BASE_URL,
     async routes () {
       let routes = await getAppRoutes()
-      console.log(routes)
       return routes
     },
     exclude: [

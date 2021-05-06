@@ -25,10 +25,8 @@ export async function getNbJsonFromUrl(url) {
 }
 
 export async function getNbJsonFromFile(file) {
-  console.log(file)
   let text = await readFile(file)
   let content = JSON.parse(text)
-  console.log(content)
   return parseNbJson(content)
 }
 

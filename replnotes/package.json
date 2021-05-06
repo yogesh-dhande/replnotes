@@ -10,7 +10,7 @@
     "prod": "firebase use prod",
     "build": "rm -rf .nuxt && nuxt build --dotenv .env.staging.local",
     "build:prod": "rm -rf .nuxt && nuxt build --dotenv .env.production.local",
-    "start": "nuxt start",
+    "start": "nuxt start --dotenv .env.staging.local",
     "generate": "nuxt generate --dotenv .env.staging.local",
     "deploy": "npm run default && npm run build && firebase deploy",
     "deploy:prod": "npm run prod && npm run build:prod && firebase deploy",

@@ -59,7 +59,6 @@ export default {
   },
   watch: {
     async file(newValue) {
-      console.log("file changed");
       this.nbJson = null;
       await this.handleFileChange(newValue);
       this.updateCount += 1;
@@ -79,10 +78,8 @@ export default {
   methods: {
     async handleFileChange(newValue) {
       if (newValue) {
-        console.log("newvalue found");
         if (this.fileErrors.length == 0) {
           try {
-            console.log("trying");
             this.nbJson = await getNbJsonFromFile(newValue);
           } catch (error) {
             this.fileErrors.push(error.message);

@@ -49,7 +49,7 @@ export const actions = {
   },
 
   async onAuthStateChangedAction({ commit }, { authUser }) {
-    commit("SET_AUTH_STATE", authUser);
+    commit("SET_AUTH_STATE", authUser? authUser: {});
 
     if (!authUser) {
       // remove state
