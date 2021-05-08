@@ -12,8 +12,8 @@
     "build:prod": "rm -rf .nuxt && nuxt build --dotenv .env.production.local",
     "start": "nuxt start --dotenv .env.staging.local",
     "generate": "nuxt generate --dotenv .env.staging.local",
-    "deploy": "npm run default && npm run build && firebase deploy",
-    "deploy:prod": "npm run prod && npm run build:prod && firebase deploy",
+    "deploy": "npm run default && firebase deploy",
+    "deploy:prod": "npm run prod && firebase deploy",
     "test": "firebase emulators:exec 'jest --env=node'",
     "reinstall": "rm package-lock.json && rm -rf node_modules && npm i"
   },
