@@ -50,7 +50,9 @@ export default {
     let returnData = {
       userName: context.params.userName,
       postUrl: context.params.postUrl,
-      post: {},
+      post: {
+        user: {},
+      },
     };
 
     let querySnapshot = await context.app.$postsCollection

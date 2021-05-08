@@ -1,15 +1,24 @@
-FROM node:14
+FROM node:14-alpine as builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY . ./
 RUN npm install
 
-EXPOSE 8080
-
-ENV HOST=0.0.0.0
-ENV PORT=8080
-
 RUN npm run build
 
+FROM node:14-alpine 
+
+WORKDIR /app
+ENV NODE_ENV=production
+ADD package*.json ./
+RUN npm install
+
+ADD nuxt.config.js ./
+COPY --from=builder ./app/.nuxt ./.nuxt/
+COPY --from=builder ./app/static ./static/
+
+EXPOSE 8080
+ENV HOST=0.0.0.0
+ENV PORT=8080
 CMD [ "npm", "run", "start" ]

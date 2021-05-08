@@ -1,6 +1,6 @@
 <template>
   <div v-if="posts" class="px-2 lg:px-12 py-2 bg-gray-800 min-h-screen">
-    <div class="mt-6" v-if="currentUser.id == user.id">
+    <div class="mt-6" v-if="currentUser.name == userName">
       <div class="text-center" v-if="!editMode">
         <button
           class="p-2 w-10 h-10 text-gray-300 bg-indigo-600 rounded-full hover:bg-indigo-700 shadow hover:shadow-xl mouse transition ease-in duration-200 focus:outline-none"

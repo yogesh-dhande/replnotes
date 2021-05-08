@@ -1,3 +1,5 @@
+const { join } = require("path");
+
 export default async ({ app }, inject) => {
     inject('postsCollection', app.$fire.firestore.collection("posts"))
     inject('usersCollection', app.$fire.firestore.collection("users"))
@@ -32,7 +34,7 @@ export default async ({ app }, inject) => {
             },
           });
           return await ref.getDownloadURL();
-        } catch {
+        } catch (error) {
           // If not valid data url
           return thumbnailSrc;
         }

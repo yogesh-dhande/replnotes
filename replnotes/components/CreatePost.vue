@@ -62,17 +62,16 @@
           <post-preview :post="post"></post-preview>
         </card>
       </div>
-
     </div>
-          <save-cancel
-        class="mt-3"
-        :isLoading="isLoading"
-        :progress="progress"
-        :errors="errors"
-        :disabled="disabled"
-        @save="createPost"
-        @cancel="$emit('cancel')"
-      />
+    <save-cancel
+      class="mt-3"
+      :isLoading="isLoading"
+      :progress="progress"
+      :errors="errors"
+      :disabled="disabled"
+      @save="createPost"
+      @cancel="$emit('cancel')"
+    />
   </card>
 </template>
 
@@ -290,11 +289,12 @@ export default {
           await this.upload();
           this.progress = 100;
         } catch (error) {
-          this.postRef.delete();
-          if (error.message) {
-            this.errors.push(error.message);
+          // this.postRef.delete();
+          console.log(error.message);
+          if (error.message && error.message.error.message) {
+            this.errors.push(error.message.error.message);
           }
-          if (error.response.data.message) {
+          if (error.response && error.response.data.message) {
             this.errors.push(error.response.data.message);
           }
         } finally {
@@ -311,13 +311,13 @@ export default {
 
       this.postRef = this.$postsCollection.doc();
       this.file = null;
-      this.content = null;
-      this.url = "";
-      this.title = "";
-      this.description = "";
-      this.tags = [];
-      this.thumbnails = [];
-      this.thumbnailSrc = null;
+      // this.content = null;
+      // this.url = "";
+      // this.title = "";
+      // this.description = "";
+      // this.tags = [];
+      // this.thumbnails = [];
+      // this.thumbnailSrc = null;
     },
   },
 };

@@ -43,6 +43,7 @@ export function getReadableDate(timeStamp) {
       let day = date.getDate()
       return `${month} ${day}, ${year}`
   } catch (error) {
+    console.log(error)
     return null
   }
 }

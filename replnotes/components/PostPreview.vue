@@ -28,13 +28,12 @@
             v-if="imageSrc"
             alt="Thumbnail"
           />
-        <user-date-thumbnail
+          <user-date-thumbnail
             :name="post.user.displayName"
             :date="readableDate"
             :link="`/${post.user.name}`"
             :thumbnailUrl="post.user.thumbnailUrl"
-        
-        ></user-date-thumbnail>
+          ></user-date-thumbnail>
           <div class="flex flex-row flex-wrap space-x-2 mt-6">
             <badge class="mt-0 mb-2 mx-0" v-for="tag in post.tags" :key="tag"
               ><nuxt-link
@@ -59,8 +58,7 @@ import { getReadableDate } from "~/services/notebook";
 export default {
   name: "post-preview",
   props: ["post"],
-  components: { Badge,
-  "user-date-thumbnail":  UserDateThumbnail},
+  components: { Badge, "user-date-thumbnail": UserDateThumbnail },
   computed: {
     imageSrc() {
       return this.post.thumbnail;
@@ -75,8 +73,10 @@ export default {
       return "#";
     },
     readableDate() {
-      let d = getReadableDate(this.post.created);
-      return d;
+      if (this.post.created.toDate) {
+        return getReadableDate(this.post.created);
+      }
+      return null;
     },
   },
 };

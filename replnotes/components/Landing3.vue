@@ -51,12 +51,12 @@
         <div class="p-6 rounded-lg overflow-hidden">
           <img
             class="hidden lg:block relative rounded-lg"
-            src="./../assets/demo-lg-new.gif"
+            src="./../static/demo-lg-new.gif"
             alt="App Demo Gif"
           />
           <img
             class="lg:hidden relative rounded-lg"
-            src="./../assets/demo-sm-new.gif"
+            src="./../static/demo-sm-new.gif"
             alt="App Demo Gif"
           />
         </div>

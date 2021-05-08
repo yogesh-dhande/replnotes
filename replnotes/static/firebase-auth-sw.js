@@ -1,15 +1,17 @@
 const ignorePaths = ["\u002F__webpack_hmr","\u002F_loading","\u002F_nuxt\u002F"]
 
 importScripts(
-  'https://www.gstatic.com/firebasejs/8.4.0/firebase-app.js'
+  'https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js'
 )
 importScripts(
-  'https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js'
+  'https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js'
 )
 firebase.initializeApp({"apiKey":"AIzaSyBWKIWo53-7-NRtQTT2tiZtCyXg4koowjA","authDomain":"staging-2cacb.firebaseapp.com","projectId":"staging-2cacb","storageBucket":"staging-2cacb.appspot.com","messagingSenderId":"436006303418","appId":"1:436006303418:web:682a37b2efd0fc02347483","measurementId":"G-BZ4LSGQD7P"})
 
 // Initialize authService
 const authService = firebase.auth()
+
+authService.useEmulator('http://localhost:10000')
 
 /**
  * Returns a promise that resolves with an ID token if available.

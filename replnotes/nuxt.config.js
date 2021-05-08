@@ -1,6 +1,13 @@
 const isDev = process.env.NODE_ENV === 'development'
 
-const getAppRoutes = require('./services/getRoutes.js');
+const axios = require('axios')
+
+async function getAppRoutes() {
+  let res = await axios.get(
+      `${process.env.NUXT_ENV_FIREBASE_FUNCTIONS_URL}/getRoutes`
+  )
+  return res.data
+};
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -24,7 +31,7 @@ export default {
           property: "og:url",
           content: process.env.NUXT_ENV_BASE_URL,
       },
-      { hid: "og:image", property: "og:image", content: '~/assets/logo.png' },
+      { hid: "og:image", property: "og:image", content: '~/static/logo.png' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -86,8 +93,8 @@ export default {
           subscribeManually: false
         },
         ssr: true, // default
-        // emulatorPort: isDev ? 10000 : undefined,
-        // emulatorHost: isDev ? 'http://localhost' : undefined,
+        emulatorPort: isDev ? 10000 : undefined,
+        emulatorHost: isDev ? 'http://localhost' : undefined,
       },
       functions: {
         location: 'us-central1',
@@ -129,5 +136,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    babel:{
+      plugins: [
+        ['@babel/plugin-proposal-private-methods', { loose: true }]
+      ]
+    }
   }
 }
