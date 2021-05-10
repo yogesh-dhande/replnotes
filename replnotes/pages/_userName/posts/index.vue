@@ -52,9 +52,11 @@ export default {
     CreatePost,
   },
   head() {
+    let name = this.user ? this.user.displayName : this.userName;
+
     return this.$createSEOMeta({
-      title: this.userName + "'s Posts",
-      description: this.userName + "'s Posts @ REPL Notes",
+      title: name + "'s Posts",
+      description: name + "'s Posts @ REPL Notes",
       image: this.user.photoUrl,
     });
   },
