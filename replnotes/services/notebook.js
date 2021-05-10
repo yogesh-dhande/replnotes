@@ -34,6 +34,16 @@ export function downloadNotebook(url, callback) {
   return getNbJsonFromUrl(url, callback);
 }
 
+export async function downloadFileFromUrl(url) {
+  let res = await axios({
+    url: url,
+    method: 'GET',
+    responseType: 'blob', // important
+  })
+
+  return res.data
+}
+
 export function getReadableDate(timeStamp) {
   try {
       timeStamp = new firebase.firestore.Timestamp(timeStamp.seconds, timeStamp.nanoseconds)
@@ -43,7 +53,6 @@ export function getReadableDate(timeStamp) {
       let day = date.getDate()
       return `${month} ${day}, ${year}`
   } catch (error) {
-    console.log(error)
     return null
   }
 }

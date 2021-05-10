@@ -73,10 +73,7 @@ export default {
       return "#";
     },
     readableDate() {
-      if (this.post.created.toDate) {
-        return getReadableDate(this.post.created);
-      }
-      return null;
+      return getReadableDate(this.post.created);
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <card :key="localPost.id" class="mx-auto shadow bg-gray-700 text-gray-300">
+  <card :key="localPost.id" class="mx-auto shadow bg-gray-900 text-indigo-100">
     <file-input
       class="mt-3"
       v-model="file"
@@ -54,7 +54,7 @@
     ></multi-choice>
     <div v-if="file">
       <h2 class="mt-3 text-sm font-medium">Preview</h2>
-      <card class="bg-gray-600 shadow mt-3">
+      <card class="bg-gray-700 bg-opacity-25 hover:bg-opacity-50 shadow mt-3">
         <post-preview :post="localPost"></post-preview>
       </card>
     </div>
@@ -85,7 +85,7 @@ import InputErrors from "@/components/InputErrors";
 import {
   readFile,
   parseThumbnailsFromNbJson,
-  downloadNotebook,
+  downloadFileFromUrl,
 } from "~/services/notebook";
 import { mapGetters, mapState } from "vuex";
 
@@ -123,11 +123,9 @@ export default {
       errors: [],
     };
   },
-  mounted() {
+  async mounted() {
     if (this.file.url) {
-      downloadNotebook(this.file.url, (file) => {
-        this.file = file;
-      });
+      this.file = await downloadFileFromUrl(this.file.url);
     }
   },
   computed: {

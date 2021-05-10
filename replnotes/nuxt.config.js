@@ -93,8 +93,8 @@ export default {
           subscribeManually: false
         },
         ssr: true, // default
-        emulatorPort: isDev ? 10000 : undefined,
-        emulatorHost: isDev ? 'http://localhost' : undefined,
+        // emulatorPort: isDev ? 10000 : undefined,
+        // emulatorHost: isDev ? 'http://localhost' : undefined,
       },
       functions: {
         location: 'us-central1',
