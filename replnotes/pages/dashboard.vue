@@ -113,6 +113,7 @@ export default {
   head() {
     return this.$createSEOMeta({
       title: "Dashboard. REPL Notes",
+      noIndex: true,
     });
   },
   data() {

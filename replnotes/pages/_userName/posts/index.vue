@@ -58,12 +58,13 @@ export default {
       title: name + "'s Posts",
       description: name + "'s Posts @ REPL Notes",
       image: this.user.photoUrl,
+      canonical: this.tags.length == 0,
     });
   },
   async asyncData(context) {
     let returnData = {
       userName: context.params.userName,
-      queryTags: context.params.queryTags ? context.params.queryTags : [],
+      queryTags: context.query.tag ? context.query.tag : [],
       posts: [],
       user: {},
     };
