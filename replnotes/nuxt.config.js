@@ -1,52 +1,53 @@
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === "development";
 
-const axios = require('axios')
+const axios = require("axios");
 
 async function getAppRoutes() {
   let res = await axios.get(
-      `${process.env.NUXT_ENV_FIREBASE_FUNCTIONS_URL}/getRoutes`
-  )
-  return res.data
-};
+    `${process.env.NUXT_ENV_FIREBASE_FUNCTIONS_URL}/getRoutes`
+  );
+  return res.data;
+}
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'REPL Notes',
+    title: "REPL Notes",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en"
     },
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: "og:title", property: "og:title", content: 'REPL Notes' },
-      { hid: 'description', name: 'description', content: 'Blog with Jupyter Notebooks @ REPL Notes' },
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "og:title", property: "og:title", content: "REPL Notes" },
+      {
+        hid: "description",
+        name: "description",
+        content: "Blog with Jupyter Notebooks @ REPL Notes"
+      },
       {
         hid: "og:description",
         property: "og:description",
-        content: 'Blog with Jupyter Notebooks @ REPL Notes',
+        content: "Blog with Jupyter Notebooks @ REPL Notes"
       },
       {
-          hid: "og:url",
-          property: "og:url",
-          content: process.env.NUXT_ENV_BASE_URL,
+        hid: "og:url",
+        property: "og:url",
+        content: process.env.NUXT_ENV_BASE_URL
       },
-      { hid: "og:image", property: "og:image", content: '~/static/logo.png' },
+      { hid: "og:image", property: "og:image", content: "~/static/logo.png" }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/firebaseConfig.js',
-    '~/plugins/analytics.client.js',
-    '~/plugins/meta.js',
+    "~/plugins/firebaseConfig.js",
+    "~/plugins/analytics.client.js",
+    "~/plugins/meta.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,25 +56,23 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    "@nuxtjs/tailwindcss"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/firebase',
-    '@nuxtjs/pwa',
-    '@nuxtjs/sitemap'
+    "@nuxtjs/axios",
+    "@nuxtjs/firebase",
+    "@nuxtjs/pwa",
+    "@nuxtjs/sitemap"
   ],
   sitemap: {
     hostname: process.env.NUXT_ENV_BASE_URL,
-    async routes () {
-      let routes = await getAppRoutes()
-      return routes
+    async routes() {
+      let routes = await getAppRoutes();
+      return routes;
     },
-    exclude: [
-      '/dashboard',
-    ],
+    exclude: ["/dashboard"]
   },
   firebase: {
     config: {
@@ -87,23 +86,23 @@ export default {
     },
     services: {
       auth: {
-        persistence: 'local', // default
+        persistence: "local", // default
         initialize: {
-          onAuthStateChangedAction: 'onAuthStateChangedAction',
+          onAuthStateChangedAction: "onAuthStateChangedAction",
           subscribeManually: false
         },
-        ssr: true, // default
+        ssr: true // default
         // emulatorPort: isDev ? 10000 : undefined,
         // emulatorHost: isDev ? 'http://localhost' : undefined,
       },
       functions: {
-        location: 'us-central1',
-        emulatorPort: isDev ? 10001 : undefined,
-        emulatorHost: isDev ? 'localhost' : undefined,
+        location: "us-central1"
+        // emulatorPort: isDev ? 10001 : undefined,
+        // emulatorHost: isDev ? 'localhost' : undefined,
       },
       firestore: {
         memoryOnly: false, // default
-        enablePersistence: !isDev,
+        enablePersistence: !isDev
         // emulatorPort: isDev ? 10002 : undefined,
         // emulatorHost: isDev ? 'localhost' : undefined,
       },
@@ -123,11 +122,11 @@ export default {
     workbox: {
       importScripts: [
         // ...
-        '/firebase-auth-sw.js'
+        "/firebase-auth-sw.js"
       ],
       // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
       // only set this true for testing and remember to always clear your browser cache in development
-      dev: false,
+      dev: false
     }
   },
   axios: {
@@ -136,10 +135,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    babel:{
-      plugins: [
-        ['@babel/plugin-proposal-private-methods', { loose: true }]
-      ]
+    babel: {
+      plugins: [["@babel/plugin-proposal-private-methods", { loose: true }]]
     }
   }
-}
+};

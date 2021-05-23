@@ -98,7 +98,7 @@ export default {
 }
 
 .nb-source > pre {
-  background-color: #374151;
+  background-color: #111827;
   color: #c7d2fe;
   border: none;
   border-radius: 0.5em;
@@ -156,13 +156,16 @@ export default {
   color: #fef3c7;
 }
 
+code {
+  background-color: #111827;
+}
+
 .prose code {
   color: #c7d2fe;
   padding: 3px 6px 3px 6px;
   margin: 0 3px 0 3px;
   border-radius: 0.5em;
   font-weight: 100;
-  background-color: #374151;
   color: #c7d2fe;
   border: none;
   overflow-x: auto;
