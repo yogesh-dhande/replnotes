@@ -29,7 +29,7 @@
             to="/register"
             class="w-full px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-pink-600 to-indigo-600 hover:from-indigo-600 hover:to-pink-600 border-none md:py-4 md:text-lg md:px-10"
           >
-            Get started
+            Start a Blog
           </nuxt-link>
         </div>
         <div class="ml-3 inline-flex">
