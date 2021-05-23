@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . ./
 RUN npm install
 
-RUN npm run build
+RUN npm run build:prod
 
 FROM node:14-alpine 
 
