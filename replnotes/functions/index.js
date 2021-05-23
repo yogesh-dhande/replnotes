@@ -27,12 +27,12 @@ const bucket = admin.storage().bucket();
 const plans = {
   free: {
     storageLimit: 100 * 1024 * 1024, // MB
-    fileSizeLimit: 10 * 1024 * 1024,
+    fileSizeLimit: 10 * 1024 * 1024
   },
   paid: {
     storageLimit: 1024, // MB,
-    fileSizeLimit: 100 * 1024 * 1024,
-  },
+    fileSizeLimit: 100 * 1024 * 1024
+  }
 };
 
 const calculateStorageUsed = async function(userId) {
@@ -44,7 +44,7 @@ const calculateStorageUsed = async function(userId) {
       if (error) {
         console.log(error);
       } else {
-        files.forEach(async (file) => {
+        files.forEach(async file => {
           readonly.totalStorageUsed += parseInt(file.metadata.size);
         });
       }
@@ -80,7 +80,7 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        passwordConfirmation: req.body.passwordConfirmation,
+        passwordConfirmation: req.body.passwordConfirmation
       };
 
       if (newUser.password !== newUser.passwordConfirmation) {
@@ -88,7 +88,7 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
       }
       if (reservedNames.includes(newUser.name)) {
         return res.status(403).json({
-          message: `Username ${newUser.name} not allowed. Please pick a different name.`,
+          message: `Username ${newUser.name} not allowed. Please pick a different name.`
         });
       }
       let snap = await db
@@ -106,7 +106,7 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
         let user = await admin.auth().createUser({
           email: newUser.email,
           password: newUser.password,
-          emailVerified: false,
+          emailVerified: false
         });
 
         let userDoc = {
@@ -122,22 +122,22 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
           social: {
             github: {
               label: "Github",
-              url: "",
+              url: ""
             },
             linkedIn: {
               label: "LinkedIn",
-              url: "",
+              url: ""
             },
             twitter: {
               label: "Twitter",
-              url: "",
+              url: ""
             },
             youtube: {
               label: "Youtube",
-              url: "",
-            },
+              url: ""
+            }
           },
-          aboutMe: "",
+          aboutMe: ""
         };
         await db
           .collection("users")
@@ -149,7 +149,7 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
           .set({
             id: user.uid,
             totalStorageUsed: 0,
-            plan: "free",
+            plan: "free"
           });
         return res.status(200).send(newUser);
       }
@@ -172,7 +172,7 @@ exports.updateUserWhenNewPostCreated = functions.firestore
         file: data.file,
         created: data.created,
         tags: data.tags,
-        id: data.id,
+        id: data.id
       });
       await calculateStorageUsed(userId);
       console.log(`Created post ${postId} for user ${userId}`);
@@ -193,7 +193,7 @@ exports.updateUserWhenPostUpdated = functions.firestore
       let patch = {
         url: data.url,
         title: data.title,
-        tags: data.tags,
+        tags: data.tags
       };
 
       if (data.file) {
@@ -223,7 +223,7 @@ exports.handlePostDeleted = functions.firestore
 
       let storageUrl = join("users", userId, "posts", postId);
       await bucket.deleteFiles({
-        prefix: storageUrl,
+        prefix: storageUrl
       });
 
       console.log(`Removed post ${postId} for user ${userId}`);
@@ -251,7 +251,7 @@ exports.updatePostsWhenUserUpdated = functions.firestore
           .collection("posts")
           .where("user.id", "==", userId)
           .get();
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(doc => {
           db.doc(`posts/${doc.id}`).update(patch);
           console.log(`Updated post ${doc.id} for the user ${userId}`);
         });
@@ -281,17 +281,17 @@ async function uploadFileToStorage(destination, localFilePath, mimetype) {
   const metadata = {
     contentType: mimetype,
     // To enable Client-side caching you can set the Cache-Control headers here. Uncomment below.
-    "Cache-Control": "public,max-age=3600",
+    "Cache-Control": "public,max-age=3600"
   };
 
   await bucket.upload(localFilePath, {
     destination: destination,
-    metadata: metadata,
+    metadata: metadata
   });
 
   let url = await file.getSignedUrl({
     action: "read",
-    expires: "03-01-2500",
+    expires: "03-01-2500"
   });
 
   return url[0];
@@ -311,7 +311,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
         res.status(403).json({
           message: `Storage exceeded the limit of ${
             plans[readonly.plan].storageLimit
-          }`,
+          }`
         });
         return null;
       }
@@ -354,7 +354,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
 
         let patch = {
           "file.url": url,
-          "file.size": fs.statSync(fileToUpload.filepath).size,
+          "file.size": fs.statSync(fileToUpload.filepath).size
         };
         await postRef.update(patch);
         res.status(200).send("ok");
@@ -401,7 +401,7 @@ exports.updateUserPhoto = functions.https.onRequest(async (req, res) => {
             fileToUpload.filepath,
             "-thumbnail",
             `${THUMB_MAX_WIDTH}x${THUMB_MAX_HEIGHT}>`,
-            fileToUpload.thumnailFilepath,
+            fileToUpload.thumnailFilepath
           ],
           { capture: ["stdout", "stderr"] }
         );
@@ -440,35 +440,32 @@ exports.updateUserPhoto = functions.https.onRequest(async (req, res) => {
 });
 
 async function getAppRoutes() {
-  let routes = []
+  let routes = [];
 
-  const usersRef = db.collection("users")
- 
+  const usersRef = db.collection("users");
+
   const snapshot = await usersRef.get();
- snapshot.forEach(doc => {
-     let user = doc.data()
-     console.log(user)
-     routes.push(`/${user.name}`)
- 
-     if (user.posts) {
-      routes.push(`/${user.name}/posts`)
-       Object.values(user.posts).map((post) => {
-         routes.push(`/${user.name}/posts/${post.url}`)
-       });
-     }
- 
- })
+  snapshot.forEach(doc => {
+    let user = doc.data();
+    if (user.posts) {
+      routes.push(`/${user.name}`);
+      routes.push(`/${user.name}/posts`);
+      Object.values(user.posts).map(post => {
+        routes.push(`/${user.name}/posts/${post.url}`);
+      });
+    }
+  });
 
-   return routes;
- }
+  return routes;
+}
 
- exports.getRoutes = functions.https.onRequest(async (req, res) => {
+exports.getRoutes = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       return res.status(200).send(await getAppRoutes());
     } catch (error) {
-      console.log(error)
+      console.log(error);
       return res.status(200).send([]);
     }
-  })
-  })
+  });
+});

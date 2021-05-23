@@ -28,11 +28,11 @@ export default {
     };
   },
   async created() {
-    this.html = ipynb.createRenderer(new Document())(this.nbJson).outerHTML;
+    // this.html = ipynb.createRenderer(new Document())(this.nbJson).outerHTML;
   },
-  mounted() {
+  async mounted() {
     // Bokeh JS loaded on the server does not work on the client
-    this.parseNotebook();
+    await this.parseNotebook();
     this.html = null;
   },
   methods: {
