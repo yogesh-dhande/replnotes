@@ -197,9 +197,19 @@ export default {
     },
   },
   methods: {
+    resetData() {
+      this.content = null;
+      this.url = "";
+      this.title = "";
+      this.description = "";
+      this.tags = [];
+      this.thumbnails = [];
+      this.thumbnailSrc = null;
+    },
     async handleFileChange(newValue) {
       if (newValue) {
         if (this.fileErrors.length == 0) {
+          this.resetData();
           let text = await readFile(this.file);
           try {
             this.content = JSON.parse(text);
@@ -208,6 +218,9 @@ export default {
             });
             if (!this.url) {
               this.url = this.filename.replace(" ", "_");
+            }
+            if (!this.description & (this.content.cells.length > 0)) {
+              this.description = this.content.cells[0].source.join();
             }
 
             this.thumbnails = parseThumbnailsFromNbJson(this.content);
@@ -311,13 +324,6 @@ export default {
 
       this.postRef = this.$postsCollection.doc();
       this.file = null;
-      // this.content = null;
-      // this.url = "";
-      // this.title = "";
-      // this.description = "";
-      // this.tags = [];
-      // this.thumbnails = [];
-      // this.thumbnailSrc = null;
     },
   },
 };

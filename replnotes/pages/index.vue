@@ -1,14 +1,11 @@
 <template>
-    <landing />
+  <landing />
 </template>
 
 <script>
-import Landing from '@/components/Landing'
-
 export default {
-    name: 'home',
-    components: { Landing },
-}
+  name: "home",
+};
 </script>
 
 <style>
