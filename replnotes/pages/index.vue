@@ -1,5 +1,8 @@
 <template>
-  <landing />
+  <div>
+    <landing />
+    <!-- <pricing /> -->
+  </div>
 </template>
 
 <script>

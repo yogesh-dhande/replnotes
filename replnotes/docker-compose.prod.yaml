@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  #   Run the node application
+  replnotes:
+    container_name: replnotes
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    build:
+      context: ./
+
+  # Run the caddy server
+  caddy:
+    image: caddy/caddy:2.4.3-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    ports:
+      - "5500:5500"
+      - "443:443"
+    volumes:
+      - /Users/yogesh/projects/replnotes/replnotes/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

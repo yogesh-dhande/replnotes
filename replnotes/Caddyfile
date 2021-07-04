@@ -1,0 +1,4 @@
+# Replace example.com with your application's domain
+localhost:5500 {
+    reverse_proxy localhost:8080
+}
