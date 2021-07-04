@@ -41,9 +41,6 @@ export const getters = {
 
 export const actions = {
   async nuxtServerInit({ commit }, { res, req }) {
-    if (process.server) {
-      console.log(req.headers);
-    }
     if (res && res.locals && res.locals.user) {
       const {
         allClaims: claims,
