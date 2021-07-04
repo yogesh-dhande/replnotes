@@ -1,7 +1,15 @@
 <template>
   <form-page>
     <form
-      class="max-w-lg m-4 py-6 px-10 bg-gray-900 bg-opacity-25 rounded-lg shadow-xl"
+      class="
+        max-w-lg
+        m-4
+        py-6
+        px-10
+        bg-gray-900 bg-opacity-25
+        rounded-lg
+        shadow-xl
+      "
     >
       <text-input
         label="Email"
@@ -49,6 +57,7 @@ export default {
       title: "Provide Feedback on REPL Notes",
     });
   },
+  middleware: ["invalidOnCustomDomain"],
   data() {
     return {
       feedback: {

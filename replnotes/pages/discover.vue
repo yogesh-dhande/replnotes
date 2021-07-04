@@ -17,6 +17,7 @@ export default {
       title: "Discover Content on REPL Notes",
     });
   },
+  middleware: ["invalidOnCustomDomain"],
   data() {
     return {
       featuredPosts: [],

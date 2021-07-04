@@ -47,6 +47,7 @@ export default {
     Window,
     IconButton,
   },
+  middleware: "invalidOnCustomDomain",
   head() {
     let name = this.user ? this.user.displayName : this.userName;
 
@@ -66,10 +67,11 @@ export default {
       .where("name", "==", returnData.userName)
       .get();
 
-    if (!querySnapshot.empty) {
-      returnData.user = querySnapshot.docs[0].data();
+    if (querySnapshot.empty) {
+      context.error({ statusCode: 404 });
+      return;
     }
-
+    returnData.user = querySnapshot.docs[0].data();
     return returnData;
   },
   data() {

@@ -1,7 +1,13 @@
 <template>
   <form-page>
     <h1
-      class="text-center text-5xl tracking-tight font-extrabold text-indigo-100 mb-6"
+      class="
+        text-center text-5xl
+        tracking-tight
+        font-extrabold
+        text-indigo-100
+        mb-6
+      "
     >
       Start Blogging
       <span class="block text-indigo-400 text-3xl">
@@ -10,7 +16,16 @@
       >
     </h1>
     <form
-      class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 bg-opacity-25 rounded-lg shadow-xl"
+      class="
+        max-w-lg
+        m-4
+        pt-6
+        pb-12
+        px-10
+        bg-gray-900 bg-opacity-25
+        rounded-lg
+        shadow-xl
+      "
     >
       <url-slug-input
         :prefix="BASE_URL"
@@ -34,7 +49,18 @@
             autocomplete="email"
             required
             rows="3"
-            class="shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 p-2 block w-full text-sm bg-gray-800 rounded-md"
+            class="
+              shadow-sm
+              focus:ring-gray-500
+              focus:border-gray-500
+              mt-1
+              p-2
+              block
+              w-full
+              text-sm
+              bg-gray-800
+              rounded-md
+            "
             v-model="email"
             @focus="
               emailErrors = [];
@@ -82,7 +108,15 @@
         <span class="float-right">
           <nuxt-link
             to="/login"
-            class="p-1 inline-flex justify-center rounded hover:underline outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="
+              p-1
+              inline-flex
+              justify-center
+              rounded
+              hover:underline
+              outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+            "
           >
             <span>Sign In</span>
           </nuxt-link>
@@ -109,7 +143,7 @@ export default {
     "password-input": PasswordInput,
     "url-slug-input": URLSlugInput,
   },
-  middleware: "guest",
+  middleware: ["guest", "invalidOnCustomDomain"],
   head() {
     return this.$createSEOMeta({
       title: "Join REPL Notes",

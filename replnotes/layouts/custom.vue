@@ -1,7 +1,8 @@
 <template>
   <div class="bg-gray-800">
     <div class="min-h-screen">
-      <NavBar
+      <UserNavBar
+        :user="siteOwner"
         class="sticky top-0 z-50"
         :class="{
           'shadow-2xl bg-gray-800 border-b-2 border-gray-900 border-opacity-75':
@@ -10,12 +11,15 @@
       />
       <Nuxt />
     </div>
-    <AppFooter />
+
+    <UserFooter :user="siteOwner" />
   </div>
 </template>
 
 <script>
 import NavBar from "~/components/NavBar";
+import { mapState } from "vuex";
+
 export default {
   components: {
     NavBar,
@@ -31,6 +35,9 @@ export default {
   // a beforeMount call to add a listener to the window
   beforeMount() {
     window.addEventListener("scroll", this.handleScroll);
+  },
+  computed: {
+    ...mapState(["siteOwner"]),
   },
 
   methods: {

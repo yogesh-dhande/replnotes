@@ -36,10 +36,7 @@
           ></user-date-thumbnail>
           <div class="flex flex-row flex-wrap space-x-2 mt-6">
             <badge class="mt-0 mb-2 mx-0" v-for="tag in post.tags" :key="tag"
-              ><nuxt-link
-                :to="`/${post.user.name}/posts/?tag=${tag}`"
-                class="hover:underline"
-              >
+              ><nuxt-link :to="topicLink(tag)" class="hover:underline">
                 {{ tag }}</nuxt-link
               ></badge
             >
@@ -51,15 +48,17 @@
 </template>
 
 <script>
-import Badge from "@/components/Badge";
+import Badge from "./../../common/Badge.vue";
 import UserDateThumbnail from "@/components/UserDateThumbnail";
 import { getReadableDate } from "~/services/notebook";
+import { mapState } from "vuex";
 
 export default {
   name: "post-preview",
   props: ["post"],
   components: { Badge, "user-date-thumbnail": UserDateThumbnail },
   computed: {
+    ...mapState(["siteOwner"]),
     imageSrc() {
       return this.post.thumbnail;
     },
@@ -71,6 +70,14 @@ export default {
           : "exampleLink";
       }
       return "#";
+    },
+    topicLink() {
+      return (tag) => {
+        if (this.siteOwner) {
+          return `/topics/${tag}`;
+        }
+        return `/${this.post.user.name}/posts/?tag=${tag}`;
+      };
     },
     readableDate() {
       return getReadableDate(this.post.created);

@@ -7,7 +7,25 @@
         <div class="flex flex-col">
           <div v-if="!editPosts">
             <button
-              class="flex flex-row w-full py-6 justify-center items-center text-indigo-300 font-bold text-lg bg-gray-900 bg-opacity-50 rounded-lg hover:bg-opacity-100 mouse shadow transition ease-in duration-200 focus:outline-none"
+              class="
+                flex flex-row
+                w-full
+                py-6
+                justify-center
+                items-center
+                text-indigo-300
+                font-bold
+                text-lg
+                bg-gray-900 bg-opacity-50
+                rounded-lg
+                hover:bg-opacity-100
+                mouse
+                shadow
+                transition
+                ease-in
+                duration-200
+                focus:outline-none
+              "
               @click="editPosts = true"
             >
               <div>
@@ -39,7 +57,25 @@
         <div class="flex flex-col">
           <div v-if="!editProfile">
             <button
-              class="flex flex-row w-full py-6 justify-center items-center text-indigo-300 font-bold text-lg bg-gray-900 bg-opacity-50 rounded-lg hover:bg-opacity-100 mouse shadow transition ease-in duration-200 focus:outline-none"
+              class="
+                flex flex-row
+                w-full
+                py-6
+                justify-center
+                items-center
+                text-indigo-300
+                font-bold
+                text-lg
+                bg-gray-900 bg-opacity-50
+                rounded-lg
+                hover:bg-opacity-100
+                mouse
+                shadow
+                transition
+                ease-in
+                duration-200
+                focus:outline-none
+              "
               @click="editProfile = true"
             >
               <div>
@@ -72,7 +108,17 @@
         </div>
         <nuxt-link :to="`/${currentUser.name}/posts`">
           <div
-            class="text-center px-4 py-5 bg-gray-900 bg-opacity-50 shadow hover:bg-opacity-100 rounded-lg overflow-hidden sm:p-6"
+            class="
+              text-center
+              px-4
+              py-5
+              bg-gray-900 bg-opacity-50
+              shadow
+              hover:bg-opacity-100
+              rounded-lg
+              overflow-hidden
+              sm:p-6
+            "
           >
             <dt class="text-md font-medium text-indigo-300 truncate">Posts</dt>
             <dd class="mt-1 text-3xl font-semibold text-indigo-500">
@@ -82,7 +128,16 @@
         </nuxt-link>
 
         <div
-          class="text-center text-indigo-300 px-4 py-5 bg-gray-900 bg-opacity-50 shadow rounded-lg overflow-hidden sm:p-6"
+          class="
+            text-center text-indigo-300
+            px-4
+            py-5
+            bg-gray-900 bg-opacity-50
+            shadow
+            rounded-lg
+            overflow-hidden
+            sm:p-6
+          "
         >
           <dt class="text-md font-medium truncate text-indigo-300">Storage</dt>
           <dd class="mt-1 text-3xl text-indigo-300">
@@ -109,7 +164,7 @@ export default {
     "create-post": CreatePost,
     Profile,
   },
-  middleware: "auth",
+  middleware: ["auth", "invalidOnCustomDomain"],
   head() {
     return this.$createSEOMeta({
       title: "Dashboard. REPL Notes",
