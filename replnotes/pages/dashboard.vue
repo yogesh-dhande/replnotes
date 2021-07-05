@@ -2,59 +2,29 @@
   <div
     class="px-2 lg:px-12 py-2 lg:py-12 text-indigo-100 bg-gray-800 min-h-screen"
   >
-    <div>
-      <dl class="mx-12 mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
-        <div></div>
-        <div class="flex flex-col">
-          <div v-if="!editPosts">
-            <button
-              class="
-                flex flex-row
-                w-full
-                py-6
-                justify-center
-                items-center
-                text-indigo-300
-                font-bold
-                text-lg
-                bg-gray-900 bg-opacity-50
-                rounded-lg
-                hover:bg-opacity-100
-                mouse
-                shadow
-                transition
-                ease-in
-                duration-200
-                focus:outline-none
-              "
-              @click="editPosts = true"
-            >
-              <div>
-                <svg
-                  class="h-8 w-8 mx-auto"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                  />
-                </svg>
-              </div>
-
-              <div class="ml-3">Add a New Post</div>
-            </button>
-          </div>
-
-          <div v-else>
-            <create-post @cancel="editPosts = false"></create-post>
-          </div>
+    <div class="max-w-2xl mx-auto">
+      <dl class="mx-12 mt-5 grid grid-cols-1 gap-5 lg:grid-cols-1">
+        <div
+          class="
+            text-center text-indigo-300
+            px-4
+            py-5
+            bg-gray-900 bg-opacity-50
+            shadow
+            rounded-lg
+            overflow-hidden
+            sm:p-6
+          "
+        >
+          <dt class="text-md font-medium truncate text-indigo-300">Storage</dt>
+          <dd class="mt-1 text-3xl text-indigo-300">
+            <span class="font-base">{{ storageUsed.size }} </span
+            ><span class="text-2xl">{{ storageUsed.units }}</span>
+            /
+            <span class="font-bold text-indigo-500">100 </span>
+            <span class="text-2xl font-bold text-indigo-500">MB</span>
+          </dd>
         </div>
-
         <div class="flex flex-col">
           <div v-if="!editProfile">
             <button
@@ -133,8 +103,8 @@
             >
               <div>
                 <svg
-                  class="h-8 w-8 mx-auto p-1"
                   xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 mx-auto p-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -143,7 +113,7 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
                   />
                 </svg>
               </div>
@@ -159,30 +129,8 @@
             ></site-settings>
           </div>
         </div>
-        <nuxt-link :to="`/${currentUser.name}/posts`">
-          <div
-            class="
-              text-center
-              px-4
-              py-5
-              bg-gray-900 bg-opacity-50
-              shadow
-              hover:bg-opacity-100
-              rounded-lg
-              overflow-hidden
-              sm:p-6
-            "
-          >
-            <dt class="text-md font-medium text-indigo-300 truncate">Posts</dt>
-            <dd class="mt-1 text-3xl font-semibold text-indigo-500">
-              {{ this.posts.length }}
-            </dd>
-          </div>
-        </nuxt-link>
-
         <div
           class="
-            text-center text-indigo-300
             px-4
             py-5
             bg-gray-900 bg-opacity-50
@@ -192,14 +140,78 @@
             sm:p-6
           "
         >
-          <dt class="text-md font-medium truncate text-indigo-300">Storage</dt>
-          <dd class="mt-1 text-3xl text-indigo-300">
-            <span class="font-base">{{ storageUsed.size }} </span
-            ><span class="text-2xl">{{ storageUsed.units }}</span>
-            /
-            <span class="font-bold text-indigo-500">100 </span>
-            <span class="text-2xl font-bold text-indigo-500">MB</span>
-          </dd>
+          <div
+            class="text-center text-2xl font-medium text-indigo-300 truncate"
+          >
+            <h2>
+              {{ this.posts.length }}
+              <span v-if="this.posts.length === 1">Post</span
+              ><span v-else>Posts</span>
+            </h2>
+          </div>
+
+          <div class="flex flex-col my-3 mx-6">
+            <div v-if="!editPosts">
+              <button
+                class="
+                  flex flex-row
+                  w-full
+                  py-2
+                  justify-center
+                  items-center
+                  text-indigo-100
+                  font-bold
+                  bg-indigo-600
+                  hover:bg-indigo-700
+                  rounded-lg
+                  hover:bg-opacity-100
+                  mouse
+                  shadow
+                  transition
+                  ease-in
+                  duration-200
+                  focus:outline-none
+                "
+                @click="editPosts = true"
+              >
+                <div>
+                  <svg
+                    class="h-8 w-8 mx-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
+                  </svg>
+                </div>
+
+                <div class="ml-3">Add a New Post</div>
+              </button>
+            </div>
+
+            <div v-else>
+              <create-post @cancel="editPosts = false"></create-post>
+            </div>
+          </div>
+          <post-list-item
+            class="mt-6"
+            :post="post"
+            v-for="post in orderedPosts"
+            :key="post.id"
+          >
+            <div class="text-left px-3 py-8 rounded">
+              <h2>{{ post.title }}</h2>
+              <h3 class="text-sm text-indigo-300">
+                URL: {{ `/posts/${post.url}` }}
+              </h3>
+            </div>
+          </post-list-item>
         </div>
       </dl>
     </div>

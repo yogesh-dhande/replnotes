@@ -25,8 +25,14 @@ export default {
         ? this.siteOwner.displayName
         : this.siteOwner.name;
       return this.$createSEOMeta({
-        title: name + "'s Posts", // replace with site title
-        description: name + "'s Posts", // replace with site description
+        title:
+          this.siteOwner.site && this.siteOwner.site.title
+            ? this.siteOwner.site.title
+            : name + "'s Posts", // replace with site title
+        description:
+          this.siteOwner.site && this.siteOwner.site.description
+            ? this.siteOwner.site.description
+            : name + "'s Posts", // replace with site description
         image: this.siteOwner.photoUrl,
       });
     }

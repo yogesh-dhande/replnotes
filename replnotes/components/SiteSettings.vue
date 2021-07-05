@@ -8,13 +8,13 @@
       class="mt-3"
     ></text-area-input>
     <!-- Add a favicon -->
-    <image-uploader
+    <!-- <image-uploader
       v-model="favicon"
       :imageSrc="site.favicon"
       label="Upload a favicon"
       refKey="favicon"
       class="mt-3"
-    ></image-uploader>
+    ></image-uploader> -->
     <label for="navbar-builder" class="block mt-3 px-2">Navigation Menu</label>
     <div id="navbar-builder" class="flex flex-col space-y-2">
       <div v-for="(navItem, i) in site.navbar" :key="i" class="mt-3">
@@ -64,7 +64,7 @@ export default {
       site: {
         title: this.user.site ? this.user.site.title : "",
         description: this.user.site ? this.user.site.description : "",
-        favicon: this.user.site ? this.user.site.favicon : "",
+        // favicon: this.user.site ? this.user.site.favicon : "",
         navbar:
           this.user.site && this.user.site.navbar
             ? this.user.site.navbar

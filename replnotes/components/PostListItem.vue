@@ -37,7 +37,7 @@
           </confirmed-delete>
         </template>
         <template v-slot:body>
-          <post-preview :post="post"></post-preview>
+          <slot><post-preview :post="post"></post-preview></slot>
         </template>
       </window>
     </card>

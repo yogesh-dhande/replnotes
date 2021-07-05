@@ -1,6 +1,6 @@
 export const state = () => ({
   siteOwner: {
-    name: "blog",
+    // name: "blog",
     location: "",
     site: {
       title: "Yogesh Dhande",
