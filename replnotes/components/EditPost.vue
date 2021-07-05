@@ -29,7 +29,6 @@
       label="Title"
       v-model="title"
       @focus="titleErrors = []"
-      @blur="validateTitle"
     ></text-input>
     <input-errors :errors="titleErrors"></input-errors>
 
@@ -264,7 +263,6 @@ export default {
     },
     isFormValid() {
       this.validateUrl();
-      this.validateTitle();
       return !this.disabled;
     },
 

@@ -33,7 +33,6 @@
           titleErrors = [];
           errors = [];
         "
-        @blur="validateTitle"
       ></text-input>
       <input-errors :errors="titleErrors"></input-errors>
 
@@ -284,7 +283,6 @@ export default {
     isFormValid() {
       this.validateFile();
       this.validateUrl();
-      this.validateTitle();
       return !this.disabled;
     },
     async createPost() {
