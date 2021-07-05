@@ -143,7 +143,7 @@ export default {
     "password-input": PasswordInput,
     "url-slug-input": URLSlugInput,
   },
-  middleware: ["guest", "invalidOnCustomDomain"],
+  middleware: ["invalidOnCustomDomain", "guest"],
   head() {
     return this.$createSEOMeta({
       title: "Join REPL Notes",

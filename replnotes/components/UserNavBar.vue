@@ -117,6 +117,19 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <nuxt-link
+                to="/"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
+                >Home</nuxt-link
+              >
+              <nuxt-link
                 to="/about"
                 class="
                   text-indigo-100
@@ -144,12 +157,25 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <nuxt-link
+          to="/"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-6
+            py-2
+            text-lg
+            font-bold
+          "
+          >Home</nuxt-link
+        >
+        <nuxt-link
           to="/about"
           class="
             block
             text-indigo-100
             hover:text-indigo-300
-            px-3
+            px-6
             py-2
             text-lg
             font-bold

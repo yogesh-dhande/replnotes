@@ -24,11 +24,13 @@ export default {
   },
   head() {
     if (this.siteOwner.name) {
-      let name = this.user.displayName ? this.user.displayName : this.userName;
+      let name = this.siteOwner.displayName
+        ? this.siteOwner.displayName
+        : this.siteOwner.name;
       return this.$createSEOMeta({
         title: name + "'s Posts", // replace with site title
         description: name + "'s Posts", // replace with site description
-        image: this.user.photoUrl,
+        image: this.siteOwner.photoUrl,
       });
     }
   },

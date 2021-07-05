@@ -164,7 +164,7 @@ export default {
     "create-post": CreatePost,
     Profile,
   },
-  middleware: ["auth", "invalidOnCustomDomain"],
+  middleware: ["invalidOnCustomDomain", "auth"],
   head() {
     return this.$createSEOMeta({
       title: "Dashboard. REPL Notes",

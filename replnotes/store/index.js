@@ -12,6 +12,7 @@ export const state = () => ({
       twitter: { label: "Twitter", url: "" },
       github: { url: "", label: "Github" }
     },
+    pinnedPostId: "64y8yQyTExCWgdVMSLP9",
     posts: [
       {
         created: { seconds: 1617545334, nanoseconds: 609000000 },

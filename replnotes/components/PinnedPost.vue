@@ -8,11 +8,26 @@
       v-slot="{ navigate }"
     >
       <div
-        class="sm:px-0 flex flex-col cursor-pointer"
+        class="sm:px-0 flex flex-col lg:flex-row cursor-pointer"
         @click="navigate"
         @keypress.enter="navigate"
         role="link"
       >
+        <img
+          class="
+            my-2
+            mx-auto
+            max-h-48
+            bg-white
+            opacity-80
+            rounded-md
+            hidden
+            lg:block
+          "
+          :src="imageSrc"
+          v-if="imageSrc"
+          alt="Thumbnail"
+        />
         <div class="flex-1 p-6 flex flex-col justify-between">
           <div class="flex-1 block mt-2">
             <p class="text-xl my-2 font-bold tracking-tight text-indigo-200">
@@ -23,7 +38,15 @@
             </p>
           </div>
           <img
-            class="my-2 mx-auto max-h-48 bg-white opacity-80 rounded-md"
+            class="
+              my-2
+              mx-auto
+              max-h-48
+              bg-white
+              opacity-80
+              rounded-md
+              lg:hidden
+            "
             :src="imageSrc"
             v-if="imageSrc"
             alt="Thumbnail"
@@ -54,8 +77,12 @@ import { getReadableDate } from "~/services/notebook";
 import { mapState } from "vuex";
 
 export default {
-  name: "post-preview",
-  props: ["post"],
+  props: {
+    post: {
+      type: Object,
+      default: () => {},
+    },
+  },
   components: { Badge, "user-date-thumbnail": UserDateThumbnail },
   computed: {
     ...mapState(["siteOwner"]),

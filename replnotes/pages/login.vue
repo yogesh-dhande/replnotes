@@ -132,7 +132,7 @@ export default {
     FormPage,
     "password-input": PasswordInput,
   },
-  middleware: ["guest", "invalidOnCustomDomain"],
+  middleware: ["invalidOnCustomDomain", "guest"],
   head() {
     return this.$createSEOMeta({
       title: "Sign In to REPL Notes",
