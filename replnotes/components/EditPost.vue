@@ -188,6 +188,9 @@ export default {
         this.content.cells.forEach((cell) => {
           cell.source.forEach(this.parseMagicTags);
         });
+        if (!this.description & (this.content.cells.length > 0)) {
+          this.description = this.content.cells[0].source.join();
+        }
       } else {
         await this.handleFileChange(newValue);
       }
