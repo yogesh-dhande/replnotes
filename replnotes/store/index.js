@@ -1,7 +1,11 @@
 export const state = () => ({
   siteOwner: {
-    // name: "blog",
+    name: "blog",
     location: "",
+    site: {
+      title: "Yogesh Dhande",
+      description: "Yogesh Dhande's website on REPL Notes"
+    },
     photoUrl:
       "https://storage.googleapis.com/staging-2cacb.appspot.com/users/WmUJgxHnAQP47QShMC6by5tKu8h1/userPhoto?GoogleAccessId=firebase-adminsdk-348nb%40staging-2cacb.iam.gserviceaccount.com&Expires=16730323200&Signature=aM23WZLLhtm2be5ILs7fz87JnasUuL3lzvo8TFftwcZBzpvMqq6EgPdkRtfncde3JfRAA%2BsquUY2tW%2FbTd%2F0j61ZWGSdlqd94mZz0HrCRBbwsXUxrAuqHY4IaeRX1xpeVPu1YaFRBtySeCodLN%2F%2BMdhFjT86ObawsUFXQb7Y%2FkE3tFdu6clboIbRheXpWALkcJdV9rumDN7IzS3fLiTi5Yh6qZaGo5x1rWl1Qk4SYj7H50LVaBFdstJSaHP6CFYHXIXX9zNibI4ShRvochhZVOrt8nUMw0vDsAVNwvV0FrsaQSEL4Nz8j6EN%2BW5iGm9sBBBsC9GtUgwdG9OwCZAbFA%3D%3D",
     email: "yogeschkd1988@yahoo.com",

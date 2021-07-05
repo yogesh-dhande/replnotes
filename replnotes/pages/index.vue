@@ -5,10 +5,7 @@
       <!-- <pricing /> -->
     </div>
     <div v-else>
-      <user-posts
-        :userName="siteOwner.name"
-        :posts="siteOwner.posts"
-      ></user-posts>
+      <user-home :user="siteOwner"></user-home>
     </div>
   </div>
 </template>

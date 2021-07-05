@@ -4,6 +4,7 @@
   >
     <div>
       <dl class="mx-12 mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div></div>
         <div class="flex flex-col">
           <div v-if="!editPosts">
             <button
@@ -106,6 +107,58 @@
             ></profile>
           </div>
         </div>
+        <div class="flex flex-col">
+          <div v-if="!editSiteSettings">
+            <button
+              class="
+                flex flex-row
+                w-full
+                py-6
+                justify-center
+                items-center
+                text-indigo-300
+                font-bold
+                text-lg
+                bg-gray-900 bg-opacity-50
+                rounded-lg
+                hover:bg-opacity-100
+                mouse
+                shadow
+                transition
+                ease-in
+                duration-200
+                focus:outline-none
+              "
+              @click="editSiteSettings = true"
+            >
+              <div>
+                <svg
+                  class="h-8 w-8 mx-auto p-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+
+              <div class="ml-3">Edit Site Settings</div>
+            </button>
+          </div>
+
+          <div v-else>
+            <site-settings
+              @cancel="editSiteSettings = false"
+              :user="currentUser"
+            ></site-settings>
+          </div>
+        </div>
         <nuxt-link :to="`/${currentUser.name}/posts`">
           <div
             class="
@@ -157,12 +210,14 @@
 import CreatePost from "@/components/CreatePost";
 import Profile from "@/components/Profile";
 import { mapState } from "vuex";
+import SiteSettings from "@/components/SiteSettings.vue";
 
 export default {
   name: "dashboard",
   components: {
     "create-post": CreatePost,
     Profile,
+    SiteSettings,
   },
   middleware: ["invalidOnCustomDomain", "auth"],
   head() {
@@ -177,6 +232,7 @@ export default {
       listeners: [],
       editPosts: false,
       editProfile: false,
+      editSiteSettings: false,
     };
   },
   computed: {

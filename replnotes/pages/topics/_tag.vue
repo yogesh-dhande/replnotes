@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1 class="text-center text-4xl font-bold text-indigo-100 p-6">
+    <h1 class="text-center text-4xl font-bold text-indigo-200 p-6">
       {{ tag }}
     </h1>
     <user-posts
       :userName="userName"
-      :queryTags="tags"
+      :queryTags="[tag]"
       :posts="posts"
     ></user-posts>
   </div>
@@ -30,11 +30,12 @@ export default {
       image: this.siteOwner.photoUrl,
     });
   },
+  layout: "custom",
   middleware: "validIfCustomDomain",
   async asyncData(context) {
     let returnData = {
       userName: context.store.state.siteOwner.name,
-      tags: [context.params.tag],
+      tag: context.params.tag,
       posts: context.store.state.siteOwner.posts,
     };
     return returnData;

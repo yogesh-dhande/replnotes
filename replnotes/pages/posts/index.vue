@@ -11,15 +11,18 @@ export default {
     UserPosts,
   },
   head() {
-    let name = this.user.displayName ? this.user.displayName : this.userName;
+    let name = this.siteOwner.displayName
+      ? this.siteOwner.displayName
+      : this.siteOwner.name;
 
     return this.$createSEOMeta({
       title: name + "'s Posts",
       description: name + "'s Posts @ REPL Notes",
-      image: this.user.photoUrl,
+      image: this.siteOwner.photoUrl,
     });
   },
   middleware: ["validIfCustomDomain"],
+  layout: "custom",
 
   computed: {
     ...mapState(["siteOwner"]),

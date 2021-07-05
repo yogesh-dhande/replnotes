@@ -116,32 +116,36 @@
           <div class="hidden lg:block md:ml-6">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <nuxt-link
-                to="/"
-                class="
-                  text-indigo-100
-                  hover:text-indigo-300
-                  px-3
-                  py-2
-                  text-lg
-                  font-bold
-                  border-transparent
-                "
-                >Home</nuxt-link
-              >
-              <nuxt-link
-                to="/about"
-                class="
-                  text-indigo-100
-                  hover:text-indigo-300
-                  px-3
-                  py-2
-                  text-lg
-                  font-bold
-                  border-transparent
-                "
-                >About</nuxt-link
-              >
+              <span v-for="(navItem, i) in navbar" :key="i">
+                <nuxt-link
+                  v-if="!navItem.external"
+                  :to="navItem.url"
+                  class="
+                    text-indigo-100
+                    hover:text-indigo-300
+                    px-6
+                    py-2
+                    text-lg
+                    font-bold
+                  "
+                  >{{ navItem.label }}</nuxt-link
+                >
+                <a
+                  v-else
+                  :href="navItem.url"
+                  class="
+                    text-indigo-100
+                    hover:text-indigo-300
+                    px-6
+                    py-2
+                    text-lg
+                    font-bold
+                    cursor-pointer
+                  "
+                  target="_blank"
+                  >{{ navItem.label }}</a
+                >
+              </span>
             </div>
           </div>
         </div>
@@ -156,32 +160,38 @@
     <div class="lg:hidden" :class="{ hidden: !showMobileMenu }">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <nuxt-link
-          to="/"
-          class="
-            block
-            text-indigo-100
-            hover:text-indigo-300
-            px-6
-            py-2
-            text-lg
-            font-bold
-          "
-          >Home</nuxt-link
-        >
-        <nuxt-link
-          to="/about"
-          class="
-            block
-            text-indigo-100
-            hover:text-indigo-300
-            px-6
-            py-2
-            text-lg
-            font-bold
-          "
-          >About</nuxt-link
-        >
+        <span v-for="(navItem, i) in navbar" :key="i">
+          <nuxt-link
+            v-if="!navItem.external"
+            :to="navItem.url"
+            class="
+              block
+              text-indigo-100
+              hover:text-indigo-300
+              px-6
+              py-2
+              text-lg
+              font-bold
+            "
+            >{{ navItem.label }}</nuxt-link
+          >
+          <a
+            v-else
+            :href="navItem.url"
+            class="
+              block
+              text-indigo-100
+              hover:text-indigo-300
+              px-6
+              py-2
+              text-lg
+              font-bold
+              cursor-pointer
+            "
+            target="_blank"
+            >{{ navItem.label }}</a
+          >
+        </span>
       </div>
     </div>
   </nav>
@@ -203,6 +213,24 @@ export default {
       showProfileMenu: false,
       showMobileMenu: false,
     };
+  },
+  computed: {
+    navbar() {
+      return this.user.site && this.user.site.navbar
+        ? this.user.site.navbar
+        : [
+            {
+              label: "Home",
+              external: false,
+              url: "/",
+            },
+            {
+              label: "About",
+              external: false,
+              url: "/about",
+            },
+          ];
+    },
   },
 };
 </script>

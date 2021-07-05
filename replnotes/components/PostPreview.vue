@@ -65,9 +65,13 @@ export default {
     postLink() {
       if (this.readableDate) {
         // post has not been created yet
-        return this.post.user
-          ? `/${this.post.user.name}/posts/${this.post.url}`
-          : "exampleLink";
+        if (this.post.user) {
+          if (this.siteOwner.name) {
+            return `/posts/${this.post.url}`;
+          }
+          return `/${this.post.user.name}/posts/${this.post.url}`;
+        }
+        return "exampleLink";
       }
       return "#";
     },

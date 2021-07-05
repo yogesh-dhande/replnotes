@@ -35,6 +35,6 @@ export default {
   components: {
     FormPage,
   },
-  layout: "default", // you can set a custom layout for the error page
+  layout: ({ store }) => (store.state.siteOwner.name ? "custom" : "default"),
 };
 </script>

@@ -1,33 +1,39 @@
 <template>
-    <span
-        class="outline-none mx-2 px-2 my-1 py-1 rouded-lg bg-yellow-400 text-yellow-700"
-    >
-        <input
-            class="hidden"
-            type="checkbox"
-            v-model="localValue"
-            @input="input"
-        />
-        {{ label }}
-    </span>
+  <label :for="id" class="px-2 py-1 text-sm">
+    <input
+      :id="id"
+      v-model="localValue"
+      type="checkbox"
+      @change="handleChange"
+    />
+    {{ label }}
+  </label>
 </template>
 
 <script>
 export default {
-    name: 'toggle',
-    props: ['value', 'label'],
-    data() {
-        return {
-            localValue: this.value,
-        }
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
     },
-    methods: {
-        input() {
-            this.$emit('input', this.localValue)
-        },
+    label: {
+      type: String,
+      default: "",
     },
-}
+  },
+  data() {
+    return {
+      localValue: this.value,
+      id: "_" + Math.random().toString(36).substr(2, 9),
+    };
+  },
+  methods: {
+    handleChange(e) {
+      this.$emit("input", e.target.checked);
+    },
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

@@ -5,6 +5,7 @@
 <script>
 export default {
   middleware: "validIfCustomDomain",
+  layout: "custom",
 };
 </script>
 
