@@ -28,10 +28,23 @@ const reservedNames = [
   "blob",
   "tree",
   "error",
+  "404",
   "render",
   "email",
   "verify",
   "device",
+  "user",
+  "admin",
+  "test",
+  "tests",
+  "testing",
+  "custom",
+  "config",
+  "settings",
+  "profile",
+  "account",
+  "secret",
+  "confidential"
 ];
 
 module.exports = { reservedNames };
