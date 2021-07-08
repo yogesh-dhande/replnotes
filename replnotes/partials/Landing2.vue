@@ -10,19 +10,15 @@
             sm:text-7xl
             tracking-tight
             font-extrabold
-            text-indigo-400
+            text-indigo-100
           "
         >
-          Jupyter Notebooks
-          <span class="block text-indigo-100"
-            >To a
-            <span class="inline text-indigo-400">
-              Blog
-              <span class="block text-5xl text-indigo-100"
-                >Within Minutes
-              </span></span
-            >
-          </span>
+          Start Blogging
+          <span class="text-indigo-100 text-5xl">with</span>
+
+          <span class="block text-indigo-400 text-5xl sm:text-7xl">
+            Jupyter notebooks</span
+          >
         </h1>
         <p
           class="
@@ -102,12 +98,12 @@
         <div class="p-6 rounded-lg overflow-hidden">
           <img
             class="hidden lg:block relative rounded-lg"
-            src="./../static/demo-lg-new.gif"
+            src="@/static/demo-lg-new.gif"
             alt="App Demo Gif"
           />
           <img
             class="lg:hidden relative rounded-lg"
-            src="./../static/demo-sm-new.gif"
+            src="@/static/demo-sm-new.gif"
             alt="App Demo Gif"
           />
         </div>

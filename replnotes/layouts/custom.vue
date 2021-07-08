@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import NavBar from "~/components/NavBar";
+import NavBar from "@/partials/NavBar";
 import { mapState } from "vuex";
 
 export default {

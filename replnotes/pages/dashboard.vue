@@ -2,7 +2,7 @@
   <div
     class="px-2 lg:px-12 py-2 lg:py-12 text-indigo-100 bg-gray-800 min-h-screen"
   >
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-3xl mx-auto">
       <dl class="mx-12 mt-5 grid grid-cols-1 gap-5 lg:grid-cols-1">
         <div
           class="
@@ -252,6 +252,7 @@ export default {
     orderedPosts() {
       // most recent first
       return this.posts
+        .filter((post) => post.created)
         .slice()
         .sort((a, b) => b.created.seconds - a.created.seconds);
     },

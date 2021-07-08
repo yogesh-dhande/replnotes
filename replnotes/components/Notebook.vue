@@ -160,6 +160,18 @@ code {
   background-color: #111827;
 }
 
+.prose p {
+  color: #c7d2fe;
+}
+
+.prose strong {
+  color: #a5b4fc;
+}
+
+.prose a code {
+  color: #c7d2fe;
+}
+
 .prose code {
   color: #c7d2fe;
   padding: 3px 6px 3px 6px;

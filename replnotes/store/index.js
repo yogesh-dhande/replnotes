@@ -1,6 +1,7 @@
 export const state = () => ({
   siteOwner: {
     // name: "blog",
+    isPremium: false,
     location: "",
     site: {
       title: "Yogesh Dhande",

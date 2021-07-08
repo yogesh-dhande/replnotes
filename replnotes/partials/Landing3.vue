@@ -3,7 +3,7 @@
     <div
       class="max-w-4xl mx-auto text-center py-12 px-2 sm:px-6 lg:py-16 lg:px-8"
     >
-      <div class="flex flex-col place-items-center px-2">
+      <div class="flex flex-col place-items-center">
         <h1
           class="
             text-center text-5xl
@@ -14,34 +14,36 @@
           "
         >
           Jupyter Notebooks
-          <span class="block text-indigo-100">
+          <span class="block text-indigo-100"
+            >To a
             <span class="inline text-indigo-400">
-              <span class="block text-4xl sm:text-6xl text-indigo-100">
-                to a Blog Within Minutes</span
-              ></span
+              Blog
+              <span class="block text-5xl text-indigo-100"
+                >Within Minutes
+              </span></span
             >
           </span>
         </h1>
         <p
           class="
             mt-3
-            px-12
-            sm:px-0
+            text-lg
             font-thin
             tracking-wider
             text-indigo-100
             sm:mt-5
-            text-md
             sm:text-xl
-            md:text-2xl
-            sm:max-w-2xl
+            sm:max-w-xl
             sm:mx-auto
             md:mt-5
+            md:text-2xl
             lg:mx-0
           "
         >
-          Quickly create a portfolio by turning Jupyter notebooks into beautiful
-          blog posts. No coding required.
+          Quickly create a portfolio by turning
+          <span class="block md:inline"
+            >Jupyter notebooks into beautiful blog posts</span
+          >
         </p>
       </div>
       <div class="mt-8 flex justify-center">
@@ -68,12 +70,12 @@
               md:px-10
             "
           >
-            Start a Blog
+            Get started
           </nuxt-link>
         </div>
         <div class="ml-3 inline-flex">
           <nuxt-link
-            to="/demo"
+            to="/blog/posts"
             class="
               w-full
               px-8
@@ -90,20 +92,25 @@
               md:px-10
             "
           >
-            See Demo
+            See Examples
           </nuxt-link>
         </div>
       </div>
-      <h2 class="mt-6 text-indigo-100 font-medium text-lg">
-        Have questions? Ask them
-        <nuxt-link to="/feedback" class="text-indigo-500 italic"
-          >here!</nuxt-link
-        >
-      </h2>
     </div>
-    <div class="pb-20 bg-gray-800">
+    <div class="pb-20">
       <div class="max-w-7xl mx-auto px-2 sm:px-12">
-        <div class="p-6 rounded-lg shadow-lg"></div>
+        <div class="p-6 rounded-lg overflow-hidden">
+          <img
+            class="hidden lg:block relative rounded-lg"
+            src="@/static/demo-lg-new.gif"
+            alt="App Demo Gif"
+          />
+          <img
+            class="lg:hidden relative rounded-lg"
+            src="@/static/demo-sm-new.gif"
+            alt="App Demo Gif"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -111,7 +118,7 @@
 
 <script>
 export default {
-  name: "landing",
+  name: "landing2",
 };
 </script>
 

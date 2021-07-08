@@ -2,12 +2,29 @@
   <nav>
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div
-        class="relative flex whitespace-nowrap items-center justify-between h-16"
+        class="
+          relative
+          flex
+          whitespace-nowrap
+          items-center
+          justify-between
+          h-16
+        "
       >
         <div class="absolute inset-y-0 left-0 flex items-center lg:hidden">
           <!-- Mobile menu button-->
           <button
-            class="inline-flex items-center justify-center p-2 rounded-md text-indigo-100 hover:text-indigo-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-100"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              p-2
+              rounded-md
+              text-indigo-100
+              hover:text-indigo-300
+              focus:outline-none
+              focus:ring-2 focus:ring-inset focus:ring-indigo-100
+            "
             aria-expanded="false"
             @click="showMobileMenu = !showMobileMenu"
           >
@@ -57,67 +74,159 @@
           </button>
         </div>
         <div
-          class="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start"
+          class="
+            flex-1 flex
+            items-center
+            justify-center
+            lg:items-stretch
+            lg:justify-start
+          "
         >
           <div
-            class="flex-shrink-0 text-indigo-100 hover:text-indigo-300 font-bold text-2xl flex items-center border-transparent"
+            class="
+              flex-shrink-0
+              text-indigo-100
+              hover:text-indigo-300
+              font-bold
+              text-2xl
+              flex
+              items-center
+              border-transparent
+            "
           >
             <nuxt-link to="/"
               ><img
-                class="inline h-8 md:h-10 lg:h-12 bg-gray-800"
-                src="./../static/logo.png"
+                class="inline h-8 md:h-10 lg:h-12"
+                src="@/static/logo.png"
                 alt="REPL Notes Logo"
             /></nuxt-link>
           </div>
         </div>
         <div
-          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+          class="
+            absolute
+            inset-y-0
+            right-0
+            flex
+            items-center
+            pr-2
+            sm:static
+            sm:inset-auto
+            sm:ml-6
+            sm:pr-0
+          "
         >
           <div class="hidden lg:block md:ml-6">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <nuxt-link
                 to="/feedback"
-                class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
                 >Feedback</nuxt-link
               >
               <nuxt-link
                 to="/discover"
-                class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
                 >Discover</nuxt-link
               >
               <nuxt-link
                 to="/dashboard"
-                class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
                 >Dashboard</nuxt-link
               >
               <nuxt-link
                 v-if="aboutLink"
                 :to="aboutLink"
-                class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
                 >{{ routeUserDisplayName }}</nuxt-link
               >
               <nuxt-link
                 v-if="postsLink"
                 :to="postsLink"
-                class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
                 >Posts</nuxt-link
               >
               <div v-if="!currentUser.id" class="self-center">
                 <nuxt-link
                   to="/login"
-                  class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                  class="
+                    text-indigo-100
+                    hover:text-indigo-300
+                    px-3
+                    py-2
+                    text-lg
+                    font-bold
+                    border-transparent
+                  "
                   >Sign In</nuxt-link
                 >
                 <nuxt-link
                   to="/register"
-                  class="text-indigo-100 bg-indigo-600 hover:bg-indigo-700 px-3 py-2 rounded-md text-md font-bold mx-4"
+                  class="
+                    text-indigo-100
+                    bg-indigo-600
+                    hover:bg-indigo-700
+                    px-3
+                    py-2
+                    rounded-md
+                    text-md
+                    font-bold
+                    mx-4
+                  "
                   >Sign Up</nuxt-link
                 >
               </div>
               <div v-else>
                 <button
-                  class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                  class="
+                    text-indigo-100
+                    hover:text-indigo-300
+                    px-3
+                    py-2
+                    text-lg
+                    font-bold
+                    border-transparent
+                  "
                   id="user-menu"
                   aria-haspopup="true"
                   @click="logout"
@@ -141,46 +250,112 @@
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <nuxt-link
           to="/feedback"
-          class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+          "
           >Feedback</nuxt-link
         >
         <nuxt-link
           to="/discover"
-          class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+          "
           >Discover</nuxt-link
         >
         <nuxt-link
           to="/dashboard"
-          class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+          "
           >Dashboard</nuxt-link
         >
         <nuxt-link
           v-if="aboutLink"
           :to="aboutLink"
-          class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+          "
           >{{ routeUserDisplayName }}</nuxt-link
         >
         <nuxt-link
           v-if="postsLink"
           :to="postsLink"
-          class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+          "
           >Posts</nuxt-link
         >
         <div v-if="!currentUser.id">
           <nuxt-link
             to="/login"
-            class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+            class="
+              block
+              text-indigo-100
+              hover:text-indigo-300
+              px-3
+              py-2
+              text-lg
+              font-bold
+            "
             >Sign In</nuxt-link
           >
           <nuxt-link
             to="/register"
-            class="block text-indigo-100 bg-indigo-600 hover:bg-indigo-700 px-3 py-2 rounded-md text-md font-bold"
+            class="
+              block
+              text-indigo-100
+              bg-indigo-600
+              hover:bg-indigo-700
+              px-3
+              py-2
+              rounded-md
+              text-md
+              font-bold
+            "
             >Sign Up</nuxt-link
           >
         </div>
         <div v-else>
           <button
-            class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold"
+            class="
+              block
+              text-indigo-100
+              hover:text-indigo-300
+              px-3
+              py-2
+              text-lg
+              font-bold
+            "
             id="user-menu"
             aria-haspopup="true"
             @click="logout"

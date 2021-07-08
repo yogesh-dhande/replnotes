@@ -13,11 +13,13 @@
 <script>
 import { mapState } from "vuex";
 import UserPosts from "@/components/UserPosts";
+import Landing from "@/partials/Landing";
 
 export default {
   name: "home",
   components: {
     UserPosts,
+    Landing,
   },
   head() {
     if (this.siteOwner.name) {

@@ -1,10 +1,14 @@
 <template>
   <card class="mx-auto shadow items-center bg-gray-900 text-indigo-200">
     <h2 class="mb-3 py-2 text-xl font-bold">Customize Your Website</h2>
-    <text-input v-model="site.title" label="Title" class="mt-3"></text-input>
+    <text-input
+      v-model="site.title"
+      label="Home page heading"
+      class="mt-3"
+    ></text-input>
     <text-area-input
       v-model="site.description"
-      label="Description"
+      label="Home page sub-heading"
       class="mt-3"
     ></text-area-input>
     <!-- Add a favicon -->

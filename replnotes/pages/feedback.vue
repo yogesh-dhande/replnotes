@@ -10,6 +10,7 @@
         rounded-lg
         shadow-xl
       "
+      data-aos="fade-up"
     >
       <text-input
         label="Email"
@@ -41,7 +42,7 @@ import TextInput from "@/components/TextInput";
 import TextAreaInput from "@/components/TextAreaInput";
 import ImageUploader from "@/components/ImageUploader";
 import FormPage from "@/components/FormPage";
-import CustomButton from "../components/CustomButton.vue";
+import CustomButton from "@/components/CustomButton.vue";
 
 export default {
   name: "feedback-form",
