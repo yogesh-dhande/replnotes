@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <landing />
-      <!-- <pricing /> -->
-    </div>
+    <landing />
   </div>
 </template>
 
@@ -13,10 +10,8 @@ import Landing from "@/partials/Landing";
 export default {
   name: "home",
   components: {
-    UserPosts,
     Landing,
   },
-
   layout: "default",
 };
 </script>
