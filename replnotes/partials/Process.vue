@@ -1,7 +1,7 @@
 <template>
-  <section class="bg-gray-900" data-aos="fade-up">
+  <section class="bg-gray-900">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 text-indigo-200">
-      <div class="pt-12 pb-16 md:pt-20 md:pb-24">
+      <div class="pt-12 pb-12 md:pt-24 md:pb-24">
         <!-- Section header -->
         <div class="max-w-3xl mx-auto text-center pb-8 md:pb-12">
           <h2

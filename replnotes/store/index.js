@@ -150,8 +150,9 @@ export const getters = {
 };
 
 export const actions = {
-  async nuxtServerInit({ commit }, { res }) {
+  async nuxtServerInit({ commit }, { res, req }) {
     // TODO: set siteOwner and siteOwner.posts if custom domain
+    console.log(req.headers);
     if (res && res.locals && res.locals.user) {
       const {
         allClaims: claims,

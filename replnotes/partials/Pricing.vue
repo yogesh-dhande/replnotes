@@ -169,7 +169,7 @@
               >
             </div>
             <p class="mt-5 text-lg text-indigo-300">
-              Building your data science portfolio.
+              Build your data science portfolio.
             </p>
           </div>
           <div
