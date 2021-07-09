@@ -17,12 +17,14 @@
 </template>
 
 <script>
-import NavBar from "@/partials/NavBar";
+import UserNavBar from "@/partials/UserNavBar";
+import UserFooter from "@/partials/UserFooter";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    NavBar,
+    UserNavBar,
+    UserFooter,
   },
   data() {
     return {

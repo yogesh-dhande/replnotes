@@ -1,15 +1,7 @@
 <template>
   <form-page>
     <form
-      class="
-        max-w-lg
-        m-4
-        py-6
-        px-10
-        bg-gray-900 bg-opacity-25
-        rounded-lg
-        shadow-xl
-      "
+      class="max-w-lg m-4 py-6 px-10 bg-gray-900 rounded-lg shadow-xl"
       data-aos="fade-up"
     >
       <text-input
@@ -82,7 +74,7 @@ export default {
       });
 
       this.feedback.message = "";
-      this.$router.push("/dashboard");
+      this.$router.push("/admin/dashboard");
     },
   },
 };

@@ -1,5 +1,5 @@
 export default function({ store, redirect }) {
   if (store.getters.loggedIn) {
-    return redirect("/dashboard");
+    return redirect("/admin/dashboard");
   }
 }

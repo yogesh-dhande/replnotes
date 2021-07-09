@@ -7,8 +7,10 @@
 
 <script>
 import AnErrorOccured from "@/partials/AnErrorOccured.vue";
+import PageNotFound from "@/partials/PageNotFound.vue";
+
 export default {
-  components: { AnErrorOccured },
+  components: { AnErrorOccured, PageNotFound },
   props: ["error"],
   layout: ({ store }) => (store.state.siteOwner.name ? "custom" : "default"),
 };

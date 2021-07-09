@@ -1,17 +1,20 @@
 <template>
   <div>
-    <user-home :user="siteOwner"></user-home>
+    <user-home v-if="siteOwner && siteOwner.name" :user="siteOwner"></user-home>
+    <div v-else class="text-4xl text-indigo-200 font-bold p-12 text-center">
+      Site Not Found
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 
-import UserPosts from "@/components/UserPosts";
+import UserHome from "@/partials/UserHome";
 
 export default {
   components: {
-    UserPosts,
+    UserHome,
   },
   layout: "custom",
 

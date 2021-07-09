@@ -94,7 +94,7 @@
               border-transparent
             "
           >
-            <nuxt-link to="/"
+            <nuxt-link to="/admin"
               ><img
                 class="inline h-8 md:h-10 lg:h-12"
                 src="@/static/logo.png"
@@ -120,7 +120,7 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <nuxt-link
-                to="/feedback"
+                to="/admin/feedback"
                 class="
                   text-indigo-100
                   hover:text-indigo-300
@@ -133,7 +133,7 @@
                 >Feedback</nuxt-link
               >
               <nuxt-link
-                to="/discover"
+                to="/admin/discover"
                 class="
                   text-indigo-100
                   hover:text-indigo-300
@@ -146,7 +146,7 @@
                 >Discover</nuxt-link
               >
               <nuxt-link
-                to="/dashboard"
+                to="/admin/dashboard"
                 class="
                   text-indigo-100
                   hover:text-indigo-300
@@ -158,37 +158,22 @@
                 "
                 >Dashboard</nuxt-link
               >
-              <nuxt-link
-                v-if="aboutLink"
-                :to="aboutLink"
-                class="
-                  text-indigo-100
-                  hover:text-indigo-300
-                  px-3
-                  py-2
-                  text-lg
-                  font-bold
-                  border-transparent
-                "
-                >{{ routeUserDisplayName }}</nuxt-link
-              >
-              <nuxt-link
-                v-if="postsLink"
-                :to="postsLink"
-                class="
-                  text-indigo-100
-                  hover:text-indigo-300
-                  px-3
-                  py-2
-                  text-lg
-                  font-bold
-                  border-transparent
-                "
-                >Posts</nuxt-link
-              >
               <div v-if="!currentUser.id" class="self-center">
                 <nuxt-link
-                  to="/login"
+                  to="/admin/#pricing"
+                  class="
+                    text-indigo-100
+                    hover:text-indigo-300
+                    px-3
+                    py-2
+                    text-lg
+                    font-bold
+                    border-transparent
+                  "
+                  >Pricing</nuxt-link
+                >
+                <nuxt-link
+                  to="/admin/login"
                   class="
                     text-indigo-100
                     hover:text-indigo-300
@@ -201,7 +186,7 @@
                   >Sign In</nuxt-link
                 >
                 <nuxt-link
-                  to="/register"
+                  to="/admin/register"
                   class="
                     text-indigo-100
                     bg-indigo-600
@@ -249,7 +234,7 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <nuxt-link
-          to="/feedback"
+          to="/admin/feedback"
           class="
             block
             text-indigo-100
@@ -262,7 +247,7 @@
           >Feedback</nuxt-link
         >
         <nuxt-link
-          to="/discover"
+          to="/admin/discover"
           class="
             block
             text-indigo-100
@@ -275,7 +260,7 @@
           >Discover</nuxt-link
         >
         <nuxt-link
-          to="/dashboard"
+          to="/admin/dashboard"
           class="
             block
             text-indigo-100
@@ -287,37 +272,9 @@
           "
           >Dashboard</nuxt-link
         >
-        <nuxt-link
-          v-if="aboutLink"
-          :to="aboutLink"
-          class="
-            block
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-          "
-          >{{ routeUserDisplayName }}</nuxt-link
-        >
-        <nuxt-link
-          v-if="postsLink"
-          :to="postsLink"
-          class="
-            block
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-          "
-          >Posts</nuxt-link
-        >
         <div v-if="!currentUser.id">
           <nuxt-link
-            to="/login"
+            to="/admin/login"
             class="
               block
               text-indigo-100
@@ -330,7 +287,7 @@
             >Sign In</nuxt-link
           >
           <nuxt-link
-            to="/register"
+            to="/admin/register"
             class="
               block
               text-indigo-100

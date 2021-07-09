@@ -49,7 +49,7 @@
       <div class="mt-8 flex justify-center">
         <div class="inline-flex rounded-md shadow">
           <nuxt-link
-            to="/register"
+            to="/admin/register"
             class="
               w-full
               px-8

@@ -9,6 +9,23 @@
   "hosting": {
     "public": "static",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      {
+        "source": "**",
+        "destination": "logo.png",
+        "type": 301
+      },
+      {
+        "source": "tinywebapps.com/:path",
+        "destination": "/admin/:path",
+        "type": 301
+      },
+      {
+        "source": "user.tinywebapps.com/:path",
+        "destination": "/user/:path",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "source": "**",

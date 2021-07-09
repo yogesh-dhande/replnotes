@@ -55,7 +55,7 @@
       <div class="mt-8 flex justify-center">
         <div class="inline-flex rounded-md shadow">
           <nuxt-link
-            to="/register"
+            to="/admin/register"
             class="
               w-full
               px-8
@@ -197,7 +197,7 @@
     >
       Have questions? Ask them
       <nuxt-link
-        to="/feedback"
+        to="/admin/feedback"
         class="text-indigo-400 hover:text-indigo-500 italic"
         >here!</nuxt-link
       >

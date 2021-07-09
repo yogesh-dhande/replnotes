@@ -5,28 +5,12 @@
         <div class="mx-auto text-center">
           <!-- Top image -->
           <!-- 404 content -->
-          <h1
-            class="text-indigo-300 text-2xl sm:text-4xl mb-4"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
+          <h1 class="text-indigo-300 text-2xl sm:text-4xl mb-4">
             🔍 404 <span class="mx-3">|</span> That page doesn’t exist.
           </h1>
-          <p
-            class="text-lg sm:text-2xl"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
+          <p class="text-lg sm:text-2xl">
             Head to the
-            <router-link
-              to="/"
-              class="
-                text-indigo-500
-                hover:text-indigo-600
-                transition
-                duration-150
-                ease-in-out
-              "
+            <router-link to="/" class="text-indigo-500 hover:text-indigo-600"
               >home page</router-link
             >, or try double-checking the URL.
           </p>

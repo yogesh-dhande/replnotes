@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-800 text-indigo-100">
+  <section id="pricing" class="bg-gray-800 text-indigo-100">
     <div class="pt-12 sm:pt-16 lg:pt-24">
       <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto space-y-2 lg:max-w-none">
@@ -114,7 +114,7 @@
             </ul>
             <div class="rounded-md shadow">
               <nuxt-link
-                to="/register"
+                to="/admin/register"
                 class="
                   flex
                   items-center
@@ -215,7 +215,7 @@
             </ul>
             <div class="rounded-md shadow">
               <nuxt-link
-                to="/register"
+                to="/admin/register"
                 class="
                   flex
                   items-center
@@ -239,7 +239,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

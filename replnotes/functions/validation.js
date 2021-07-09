@@ -44,7 +44,10 @@ const reservedNames = [
   "profile",
   "account",
   "secret",
-  "confidential"
+  "confidential",
+  "token",
+  "free",
+  "premium"
 ];
 
 module.exports = { reservedNames };

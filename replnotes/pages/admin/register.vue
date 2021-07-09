@@ -16,16 +16,7 @@
       >
     </h1>
     <form
-      class="
-        max-w-lg
-        m-4
-        pt-6
-        pb-12
-        px-10
-        bg-gray-900 bg-opacity-25
-        rounded-lg
-        shadow-xl
-      "
+      class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 rounded-lg shadow-xl"
     >
       <url-slug-input
         :prefix="BASE_URL"
@@ -107,7 +98,7 @@
       <div class="py-1 sm:px-6 text-md font-medium">
         <span class="float-right">
           <nuxt-link
-            to="/login"
+            to="/admin/login"
             class="
               p-1
               inline-flex
@@ -211,7 +202,7 @@ export default {
             userCredential.user.toJSON()
           );
 
-          this.$router.push("/dashboard");
+          this.$router.push("/admin/dashboard");
         } catch (error) {
           if (error.response && error.response.data.message) {
             this.errors.push(error.response.data.message);

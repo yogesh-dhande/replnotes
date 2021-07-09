@@ -34,7 +34,7 @@
           >Blog</nuxt-link
         >
         <nuxt-link
-          to="/demo"
+          to="/admin/demo"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -48,7 +48,7 @@
           >Demo</nuxt-link
         >
         <nuxt-link
-          to="/discover"
+          to="/admin/discover"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -62,7 +62,7 @@
           >Discover</nuxt-link
         >
         <nuxt-link
-          to="/feedback"
+          to="/admin/feedback"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -77,7 +77,7 @@
         >
         <nuxt-link
           v-if="!currentUser.id"
-          to="/login"
+          to="/admin/login"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -92,7 +92,7 @@
         >
         <nuxt-link
           v-if="!currentUser.id"
-          to="/register"
+          to="/admin/register"
           class="
             text-indigo-100
             hover:text-indigo-300

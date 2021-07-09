@@ -16,16 +16,7 @@
       >
     </h1>
     <form
-      class="
-        max-w-lg
-        m-4
-        pt-6
-        pb-12
-        px-10
-        bg-gray-900 bg-opacity-25
-        rounded-lg
-        shadow-xl
-      "
+      class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 rounded-lg shadow-xl"
     >
       <div class="mt-3">
         <label class="block text-sm font-medium mt-2 mb-0"> Email </label>
@@ -83,7 +74,7 @@
       <div class="py-1 sm:px-6 text-sm font-medium">
         <span class="float-left">
           <nuxt-link
-            to="/register"
+            to="/admin/register"
             class="
               p-1
               inline-flex
@@ -151,7 +142,9 @@ export default {
   },
   asyncData(context) {
     return {
-      redirect: context.query.redirect ? context.query.redirect : "/dashboard",
+      redirect: context.query.redirect
+        ? context.query.redirect
+        : "/admin/dashboard",
     };
   },
   computed: {
