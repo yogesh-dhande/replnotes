@@ -6,7 +6,7 @@
 #   }
 # }
 
-tinywebapps.com {
+localhost tinywebapps.com {
   tls {
     on_demand
   }

@@ -4,7 +4,6 @@ WORKDIR /app
 ADD package*.json ./
 RUN npm install
 COPY . ./
-RUN npm install
 
 RUN npm run build:prod
 

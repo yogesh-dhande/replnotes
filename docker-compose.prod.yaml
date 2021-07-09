@@ -7,7 +7,7 @@ services:
     environment:
       - NODE_ENV=production
     build:
-      context: ./
+      context: replnotes
 
   # Run the caddy server
   caddy:
