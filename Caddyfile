@@ -6,7 +6,7 @@
 #   }
 # }
 
-replnotes.com {
+tinywebapps.com {
   tls {
     on_demand
   }
@@ -14,7 +14,7 @@ replnotes.com {
   reverse_proxy replnotes:8080
 }
 
-:80 :443 {
+*.tinywebapps.com :80 :443 {
   tls {
     on_demand
   }

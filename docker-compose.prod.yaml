@@ -1,13 +1,13 @@
 version: "3.8"
 services:
   #   Run the node application
-  # replnotes:
-  #   container_name: replnotes
-  #   restart: unless-stopped
-  #   environment:
-  #     - NODE_ENV=production
-  #   build:
-  #     context: ./
+  replnotes:
+    container_name: replnotes
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    build:
+      context: ./
 
   # Run the caddy server
   caddy:
