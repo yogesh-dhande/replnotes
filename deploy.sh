@@ -4,7 +4,7 @@
 # git pull
 
 echo "Building application"
-docker run --rm \
+docker run --rm -d \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v "$PWD:$PWD" \
     -w="$PWD" \

@@ -4,6 +4,8 @@ services:
   replnotes:
     container_name: replnotes
     restart: unless-stopped
+    env_file:
+      - replnotes/.env.staging.local
     environment:
       - NODE_ENV=production
     build:

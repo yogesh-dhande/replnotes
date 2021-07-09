@@ -15,7 +15,7 @@ ADD package*.json ./
 RUN npm install
 
 ADD nuxt.config.js ./
-COPY --from=builder ./app/.nuxt ./.nuxt/
+
 COPY --from=builder ./app/static ./static/
 
 EXPOSE 8080
