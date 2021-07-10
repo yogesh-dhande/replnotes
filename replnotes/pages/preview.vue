@@ -31,7 +31,7 @@
 import URLSlugInput from "@/components/URLSlugInput";
 import Notebook from "@/components/Notebook";
 import Card from "@/components/Card";
-import { getNbJsonFromUrl } from "@/../services/notebook";
+import { getNbJsonFromUrl } from "@/services/notebook";
 
 export default {
   name: "url-preview",

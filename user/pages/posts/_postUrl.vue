@@ -33,7 +33,7 @@ import Notebook from '@/components/Notebook'
 import Card from '@/components/Card'
 import Badge from '@/components/Badge'
 import UserDateThumbnail from '@/components/UserDateThumbnail'
-import { getNbJsonFromUrl, getReadableDate } from '@/../services/notebook'
+import { getNbJsonFromUrl, getReadableDate } from '@/services/notebook'
 
 export default {
   name: 'Post',

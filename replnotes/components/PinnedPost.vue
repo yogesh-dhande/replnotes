@@ -73,7 +73,7 @@
 <script>
 import Badge from '@/components/Badge.vue'
 import UserDateThumbnail from '@/components/UserDateThumbnail'
-import { getReadableDate } from '@/../services/notebook'
+import { getReadableDate } from '@/services/notebook'
 import { mapState } from 'vuex'
 
 export default {

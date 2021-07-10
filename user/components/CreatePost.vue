@@ -86,7 +86,7 @@ import MultiChoice from '@/components/MultiChoice'
 import PostPreview from '@/components/PostPreview'
 import InputErrors from '@/components/InputErrors'
 
-import { readFile, parseThumbnailsFromNbJson } from '@/../services/notebook'
+import { readFile, parseThumbnailsFromNbJson } from '@/services/notebook'
 import { mapGetters, mapState } from 'vuex'
 
 export default {

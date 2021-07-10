@@ -85,7 +85,7 @@ import {
   readFile,
   parseThumbnailsFromNbJson,
   downloadFileFromUrl,
-} from '@/../services/notebook'
+} from '@/services/notebook'
 import { mapGetters, mapState } from 'vuex'
 
 export default {

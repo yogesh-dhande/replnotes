@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { getNbJsonFromFile } from '@/../services/notebook'
+import { getNbJsonFromFile } from '@/services/notebook'
 import Notebook from '@/components/Notebook'
 import FileInput from '@/components/FileInput'
 

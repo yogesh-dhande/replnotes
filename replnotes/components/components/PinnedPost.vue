@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import Badge from '@/components/Badge.vue'
-import UserDateThumbnail from '@/components/UserDateThumbnail'
-import { getReadableDate } from '@/../services/notebook'
-import { mapState } from 'vuex'
+import Badge from "@/components/Badge.vue";
+import UserDateThumbnail from "@/components/UserDateThumbnail";
+import { getReadableDate } from "@/services/notebook";
+import { mapState } from "vuex";
 
 export default {
-  components: { Badge, 'user-date-thumbnail': UserDateThumbnail },
+  components: { Badge, "user-date-thumbnail": UserDateThumbnail },
   props: {
     post: {
       type: Object,
@@ -85,32 +85,32 @@ export default {
     },
   },
   computed: {
-    ...mapState(['siteOwner']),
+    ...mapState(["siteOwner"]),
     imageSrc() {
-      return this.post.thumbnail
+      return this.post.thumbnail;
     },
     postLink() {
       if (this.readableDate) {
         // post has not been created yet
         return this.post.user
           ? `/${this.post.user.name}/posts/${this.post.url}`
-          : 'exampleLink'
+          : "exampleLink";
       }
-      return '#'
+      return "#";
     },
     topicLink() {
       return (tag) => {
         if (this.siteOwner) {
-          return `/topics/${tag}`
+          return `/topics/${tag}`;
         }
-        return `/${this.post.user.name}/posts/?tag=${tag}`
-      }
+        return `/${this.post.user.name}/posts/?tag=${tag}`;
+      };
     },
     readableDate() {
-      return getReadableDate(this.post.created)
+      return getReadableDate(this.post.created);
     },
   },
-}
+};
 </script>
 
 <style>
