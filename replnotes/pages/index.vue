@@ -1,12 +1,18 @@
 <template>
-  <h1 class="text-4xl text-indigo-400 text-center font-bold p-12">
-    REPL Notes
-  </h1>
+  <div>
+    <landing />
+  </div>
 </template>
 
 <script>
+import Landing from "@/../components/partials/Landing";
+
 export default {
-  middleware: "redirectToHome",
+  name: "home",
+  components: {
+    Landing,
+  },
+  layout: "default",
 };
 </script>
 

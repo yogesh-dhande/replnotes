@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AnErrorOccured from "@/partials/AnErrorOccured.vue";
-import PageNotFound from "@/partials/PageNotFound.vue";
+import AnErrorOccured from "@/../components/partials/AnErrorOccured.vue";
+import PageNotFound from "@/../components/partials/PageNotFound.vue";
 
 export default {
   components: { AnErrorOccured, PageNotFound },

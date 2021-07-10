@@ -1,8 +1,9 @@
 <template>
   <div class="bg-gray-800">
     <div class="min-h-screen">
-      <NavBar
-        class="sticky top-0 z-50 bg-gray-800"
+      <UserNavBar
+        :user="siteOwner"
+        class="sticky top-0 z-50"
         :class="{
           'shadow-2xl bg-gray-800 border-b-2 border-gray-900 border-opacity-75':
             !view.atTopOfPage,
@@ -10,40 +11,34 @@
       />
       <Nuxt />
     </div>
-    <AppFooter />
+
+    <UserFooter :user="siteOwner" />
   </div>
 </template>
 
 <script>
-import NavBar from "@/../components/partials/NavBar";
-import AppFooter from "@/../components/partials/AppFooter";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import UserNavBar from '@/../components/partials/UserNavBar'
+import UserFooter from '@/../components/partials/UserFooter'
+import { mapState } from 'vuex'
 
 export default {
   components: {
-    NavBar,
-    AppFooter,
+    UserNavBar,
+    UserFooter,
   },
   data() {
     return {
       view: {
         atTopOfPage: true,
       },
-    };
+    }
   },
-
+  computed: {
+    ...mapState(['siteOwner']),
+  },
   // a beforeMount call to add a listener to the window
   beforeMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  mounted() {
-    AOS.init({
-      once: true,
-      disable: "phone",
-      duration: 600,
-      easing: "ease-out-sine",
-    });
+    window.addEventListener('scroll', this.handleScroll)
   },
 
   methods: {
@@ -52,14 +47,14 @@ export default {
       // when the user scrolls, check the pageYOffset
       if (window.pageYOffset > 0) {
         // user is scrolled
-        if (this.view.atTopOfPage) this.view.atTopOfPage = false;
-      } else {
+        if (this.view.atTopOfPage) this.view.atTopOfPage = false
+      } else if (!this.view.atTopOfPage) {
         // user is at top of page
-        if (!this.view.atTopOfPage) this.view.atTopOfPage = true;
+        this.view.atTopOfPage = true
       }
     },
   },
-};
+}
 </script>
 
 <style>
