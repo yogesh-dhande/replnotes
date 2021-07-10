@@ -74,7 +74,7 @@
       <div class="py-1 sm:px-6 text-sm font-medium">
         <span class="float-left">
           <nuxt-link
-            to="/admin/register"
+            to="/register"
             class="
               p-1
               inline-flex
@@ -112,9 +112,9 @@
   </form-page>
 </template>
 <script>
-import Submit from "@/../components/Submit";
-import FormPage from "@/../components/FormPage";
-import PasswordInput from "@/../components/PasswordInput";
+import Submit from "@/components/Submit";
+import FormPage from "@/components/FormPage";
+import PasswordInput from "@/components/PasswordInput";
 
 export default {
   name: "login",
@@ -123,7 +123,7 @@ export default {
     FormPage,
     "password-input": PasswordInput,
   },
-  middleware: ["invalidOnCustomDomain", "guest"],
+  middleware: ["guest"],
   head() {
     return this.$createSEOMeta({
       title: "Sign In to REPL Notes",

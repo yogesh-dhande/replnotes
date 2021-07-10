@@ -55,7 +55,7 @@
       <div class="mt-8 flex justify-center">
         <div class="inline-flex rounded-md shadow">
           <nuxt-link
-            to="/admin/register"
+            to="/register"
             class="
               w-full
               px-8
@@ -124,9 +124,9 @@
           />
           <a
             class="absolute group"
-            @click.prevent.stop="videoModalOpen = true"
             href="#0"
             aria-controls="modal"
+            @click.prevent.stop="videoModalOpen = true"
           >
             <svg
               class="
@@ -144,11 +144,11 @@
             >
               <defs>
                 <linearGradient
+                  id="a"
                   x1="78.169%"
                   y1="9.507%"
                   x2="24.434%"
                   y2="90.469%"
-                  id="a"
                 >
                   <stop stop-color="#EBF1F5" stop-opacity=".8" offset="0%" />
                   <stop stop-color="#EBF1F5" offset="100%" />
@@ -166,7 +166,7 @@
         <!-- Modal -->
         <Modal
           id="modal"
-          ariaLabel="modal-headline"
+          aria-label="modal-headline"
           :show="videoModalOpen"
           @handleClose="videoModalOpen = false"
         >
@@ -197,7 +197,7 @@
     >
       Have questions? Ask them
       <nuxt-link
-        to="/admin/feedback"
+        to="/feedback"
         class="text-indigo-400 hover:text-indigo-500 italic"
         >here!</nuxt-link
       >
@@ -206,17 +206,17 @@
 </template>
 
 <script>
-import Process from "@/../components/partials/Process.vue";
-import Pricing from "@/../components/partials/Pricing.vue";
-import Modal from "@/../components/layouts/Modal.vue";
+import Process from '@/components/partials/Process.vue'
+import Pricing from '@/components/partials/Pricing.vue'
+import Modal from '@/components/layouts/Modal.vue'
 
 export default {
   components: { Process, Pricing, Modal },
   data() {
     return {
       videoModalOpen: false,
-    };
+    }
   },
-};
+}
 </script>
 <style></style>;

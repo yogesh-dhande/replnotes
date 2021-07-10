@@ -10,7 +10,7 @@
 <script>
 import { mapState } from 'vuex'
 
-import UserHome from '@/../components/partials/UserHome'
+import UserHome from '@/components/partials/UserHome'
 
 export default {
   components: {

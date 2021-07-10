@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import URLSlugInput from "@/../components/URLSlugInput";
-import Notebook from "@/../components/Notebook";
-import Card from "@/../components/Card";
+import URLSlugInput from "@/components/URLSlugInput";
+import Notebook from "@/components/Notebook";
+import Card from "@/components/Card";
 import { getNbJsonFromUrl } from "@/../services/notebook";
 
 export default {
@@ -45,7 +45,6 @@ export default {
       title: "Preview a Jupyter Notebook URL on REPL Notes",
     });
   },
-  middleware: ["invalidOnCustomDomain"],
   data() {
     return {
       url: null,

@@ -2,18 +2,19 @@
   <div>
     <nuxt-link
       v-if="post"
+      v-slot="{ navigate }"
       :to="postLink"
       alt="Post Link"
       custom
-      v-slot="{ navigate }"
     >
       <div
         class="sm:px-0 flex flex-col lg:flex-row cursor-pointer"
+        role="link"
         @click="navigate"
         @keypress.enter="navigate"
-        role="link"
       >
         <img
+          v-if="imageSrc"
           class="
             my-2
             mx-auto
@@ -25,7 +26,6 @@
             lg:block
           "
           :src="imageSrc"
-          v-if="imageSrc"
           alt="Thumbnail"
         />
         <div class="flex-1 p-6 flex flex-col justify-between">
@@ -38,6 +38,7 @@
             </p>
           </div>
           <img
+            v-if="imageSrc"
             class="
               my-2
               mx-auto
@@ -48,17 +49,16 @@
               lg:hidden
             "
             :src="imageSrc"
-            v-if="imageSrc"
             alt="Thumbnail"
           />
           <user-date-thumbnail
             :name="post.user.displayName"
             :date="readableDate"
             :link="`/${post.user.name}`"
-            :thumbnailUrl="post.user.thumbnailUrl"
+            :thumbnail-url="post.user.thumbnailUrl"
           ></user-date-thumbnail>
           <div class="flex flex-row flex-wrap space-x-2 mt-6">
-            <badge class="mt-0 mb-2 mx-0" v-for="tag in post.tags" :key="tag"
+            <badge v-for="tag in post.tags" :key="tag" class="mt-0 mb-2 mx-0"
               ><nuxt-link :to="topicLink(tag)" class="hover:underline">
                 {{ tag }}</nuxt-link
               ></badge
@@ -71,46 +71,46 @@
 </template>
 
 <script>
-import Badge from "@/../components/Badge.vue";
-import UserDateThumbnail from "@/../components/UserDateThumbnail";
-import { getReadableDate } from "@/../services/notebook";
-import { mapState } from "vuex";
+import Badge from '@/components/Badge.vue'
+import UserDateThumbnail from '@/components/UserDateThumbnail'
+import { getReadableDate } from '@/../services/notebook'
+import { mapState } from 'vuex'
 
 export default {
+  components: { Badge, 'user-date-thumbnail': UserDateThumbnail },
   props: {
     post: {
       type: Object,
       default: () => {},
     },
   },
-  components: { Badge, "user-date-thumbnail": UserDateThumbnail },
   computed: {
-    ...mapState(["siteOwner"]),
+    ...mapState(['siteOwner']),
     imageSrc() {
-      return this.post.thumbnail;
+      return this.post.thumbnail
     },
     postLink() {
       if (this.readableDate) {
         // post has not been created yet
         return this.post.user
           ? `/${this.post.user.name}/posts/${this.post.url}`
-          : "exampleLink";
+          : 'exampleLink'
       }
-      return "#";
+      return '#'
     },
     topicLink() {
       return (tag) => {
         if (this.siteOwner) {
-          return `/topics/${tag}`;
+          return `/topics/${tag}`
         }
-        return `/${this.post.user.name}/posts/?tag=${tag}`;
-      };
+        return `/${this.post.user.name}/posts/?tag=${tag}`
+      }
     },
     readableDate() {
-      return getReadableDate(this.post.created);
+      return getReadableDate(this.post.created)
     },
   },
-};
+}
 </script>
 
 <style>

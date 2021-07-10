@@ -1,7 +1,7 @@
 <template>
   <div v-if="posts" class="px-2 lg:px-12 py-2 bg-gray-800 min-h-screen">
-    <div class="mt-6" v-if="currentUser.name == userName">
-      <div class="text-center" v-if="!editMode">
+    <div v-if="currentUser.name == userName" class="mt-6">
+      <div v-if="!editMode" class="text-center">
         <button
           class="
             p-2
@@ -46,22 +46,22 @@
 
     <div>
       <!-- Published page -->
-      <post-list :posts="orderedPosts" :key="userName"> </post-list>
+      <post-list :key="userName" :posts="orderedPosts"> </post-list>
     </div>
   </div>
 </template>
 
 <script>
-import PostList from "@/../components/PostList";
-import CreatePost from "@/../components/CreatePost";
-import { mapState, mapGetters } from "vuex";
+import PostList from '@/components/PostList'
+import CreatePost from '@/components/CreatePost'
+import { mapState, mapGetters } from 'vuex'
 
 function findCommonElements(arr1, arr2) {
-  return arr1.some((item) => arr2.includes(item));
+  return arr1.some((item) => arr2.includes(item))
 }
 
 export default {
-  name: "user-posts",
+  name: 'UserPosts',
   components: {
     PostList,
     CreatePost,
@@ -84,36 +84,36 @@ export default {
     return {
       listeners: [],
       editMode: false,
-    };
+    }
   },
   computed: {
-    ...mapState(["currentUser"]),
-    ...mapGetters(["userTags"]),
+    ...mapState(['currentUser']),
+    ...mapGetters(['userTags']),
     filteredPosts() {
       if (this.tags.length > 0) {
         return this.posts.filter((post) => {
-          return findCommonElements(this.tags, post.tags);
-        });
+          return findCommonElements(this.tags, post.tags)
+        })
       }
-      return this.posts;
+      return this.posts
     },
     orderedPosts() {
       // most recent first
-      let o = this.filteredPosts
+      const o = this.filteredPosts
         .slice()
-        .sort((a, b) => b.created.seconds - a.created.seconds);
-      return o;
+        .sort((a, b) => b.created.seconds - a.created.seconds)
+      return o
     },
     tags() {
-      return Array.isArray(this.queryTags) ? this.queryTags : [this.queryTags];
+      return Array.isArray(this.queryTags) ? this.queryTags : [this.queryTags]
     },
   },
   watch: {
     queryTags(newValue) {
-      this.tags = Array.isArray(newValue) ? newValue : [newValue];
+      this.tags = Array.isArray(newValue) ? newValue : [newValue]
     },
   },
-};
+}
 </script>
 
 <style>

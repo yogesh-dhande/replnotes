@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PostList from "@/../components/PostList";
+import PostList from "@/components/PostList";
 
 export default {
   name: "discover",
@@ -17,7 +17,6 @@ export default {
       title: "Discover Content on REPL Notes",
     });
   },
-  middleware: ["invalidOnCustomDomain"],
   data() {
     return {
       featuredPosts: [],

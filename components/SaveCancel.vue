@@ -1,15 +1,14 @@
 <template>
   <div>
     <div class="px-4 py-3 sm:px-6">
-      <errors :errors="errors" v-if="errors.length > 0" />
+      <errors v-if="errors.length > 0" :errors="errors" />
       <errors
-        :errors="['Please correct all errors before proceeding.']"
         v-else-if="disabled"
+        :errors="['Please correct all errors before proceeding.']"
       />
-      <div class="sm:flex sm:flex-row-reverse" v-if="!isLoading">
+      <div v-if="!isLoading" class="sm:flex sm:flex-row-reverse">
         <button
           type="button"
-          @click="$emit('save')"
           class="
             w-full
             inline-flex
@@ -33,13 +32,13 @@
             disabled:hover:bg-indigo-600
           "
           :disabled="errors.length > 0 || disabled"
+          @click="$emit('save')"
         >
           Save
         </button>
 
         <button
           type="button"
-          @click="$emit('cancel')"
           class="
             mt-3
             w-full
@@ -62,11 +61,12 @@
             sm:w-auto
             sm:text-sm
           "
+          @click="$emit('cancel')"
         >
           Cancel
         </button>
       </div>
-      <div class="h-8 w-full rounded boder boder-indigo-300" v-else>
+      <div v-else class="h-8 w-full rounded boder boder-indigo-300">
         <div
           class="
             bar
@@ -88,28 +88,32 @@
 </template>
 
 <script>
-import Errors from "@/../components/Errors";
+import Errors from '@/components/Errors'
 
 export default {
-  name: "save-cancel",
-  props: {
-    isLoading: {
-      default: false,
-    },
-    progress: {
-      default: 0,
-    },
-    errors: {
-      default: () => [],
-    },
-    disabled: {
-      default: false,
-    },
-  },
+  name: 'SaveCancel',
   components: {
     Errors,
   },
-};
+  props: {
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+    progress: {
+      type: Number,
+      default: 0,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+}
 </script>
 
 <style scoped>

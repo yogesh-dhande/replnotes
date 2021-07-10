@@ -5,7 +5,7 @@
         class="-mx-5 -my-2 flex flex-wrap justify-center"
         aria-label="Footer"
       >
-        <nuxt-link
+        <!-- <nuxt-link
           to="/blog"
           class="
             text-indigo-100
@@ -32,9 +32,9 @@
           "
           @click.native="scrollToTop"
           >Blog</nuxt-link
-        >
+        > -->
         <nuxt-link
-          to="/admin/demo"
+          to="/demo"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -48,7 +48,7 @@
           >Demo</nuxt-link
         >
         <nuxt-link
-          to="/admin/discover"
+          to="/discover"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -62,7 +62,7 @@
           >Discover</nuxt-link
         >
         <nuxt-link
-          to="/admin/feedback"
+          to="/feedback"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -77,7 +77,7 @@
         >
         <nuxt-link
           v-if="!currentUser.id"
-          to="/admin/login"
+          to="/login"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -92,7 +92,7 @@
         >
         <nuxt-link
           v-if="!currentUser.id"
-          to="/admin/register"
+          to="/register"
           class="
             text-indigo-100
             hover:text-indigo-300

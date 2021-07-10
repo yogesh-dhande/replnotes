@@ -1,8 +1,8 @@
 <template>
   <div class="mt-6 flex items-center">
     <div class="flex-shrink-0">
-      <nuxt-link :to="link" custom v-slot="{ navigate }">
-        <div @click="navigate" @keypress.enter="navigate" role="link">
+      <nuxt-link v-slot="{ navigate }" :to="link" custom>
+        <div role="link" @click="navigate" @keypress.enter="navigate">
           <span class="sr-only">{{ name }}</span>
           <thumbnail
             class="rounded-full h-8 w-8 lg:h-10 lg:w-10"
@@ -27,28 +27,32 @@
 </template>
 
 <script>
-import Thumbnail from "@/../components/Thumbnail";
+import Thumbnail from '@/components/Thumbnail'
 
 export default {
-  name: "user-date-thumbnail",
+  name: 'UserDateThumbnail',
   components: {
     Thumbnail,
   },
   props: {
     date: {
       type: String,
+      default: '',
     },
     name: {
       type: String,
+      default: '',
     },
     link: {
       type: String,
+      default: '',
     },
     thumbnailUrl: {
       type: String,
+      default: '',
     },
   },
-};
+}
 </script>
 
 <style>

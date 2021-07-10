@@ -25,16 +25,16 @@
             >
             <input
               :id="refKey"
+              :ref="refKey"
               type="file"
               class="sr-only"
-              :ref="refKey"
               @change="handleFileInput"
             />
           </label>
           <span class="pl-1">or drag and drop</span>
         </div>
       </div>
-      <div class="mt-2" v-if="photoUrl">
+      <div v-if="photoUrl" class="mt-2">
         <div
           class="mx-auto h-48 w-48 bg-cover bg-center flex justify-center"
           :class="{ ' rounded-full': showThumbnail }"
@@ -44,7 +44,6 @@
         >
           <button
             type="button"
-            @click="remove"
             class="
               my-auto
               mb-10
@@ -61,6 +60,7 @@
               focus:outline-none
               focus:ring-2 focus:ring-offset-2 focus:ring-red-300
             "
+            @click="remove"
           >
             Remove
           </button>
@@ -71,47 +71,47 @@
 </template>
 
 <script>
-const max_width = 1000;
-const max_height = 1000;
+const maxWidth = 1000
+const maxHeight = 1000
 
 function resizeImage(img) {
-  var canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas')
 
-  var width = img.width;
-  var height = img.height;
+  let width = img.width
+  let height = img.height
 
   // calculate the width and height, constraining the proportions
   if (width > height) {
-    if (width > max_width) {
-      //height *= max_width / width;
-      height = Math.round((height *= max_width / width));
-      width = max_width;
+    if (width > maxWidth) {
+      // height *= maxWidth / width;
+      height = Math.round((height *= maxWidth / width))
+      width = maxWidth
     }
-  } else {
-    if (height > max_height) {
-      //width *= max_height / height;
-      width = Math.round((width *= max_height / height));
-      height = max_height;
-    }
+  } else if (height > maxHeight) {
+    // width *= maxHeight / height;
+    width = Math.round((width *= maxHeight / height))
+    height = maxHeight
   }
 
   // resize the canvas and draw the image data into it
-  canvas.width = width;
-  canvas.height = height;
-  var ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0, width, height);
+  canvas.width = width
+  canvas.height = height
+  const ctx = canvas.getContext('2d')
+  ctx.drawImage(img, 0, 0, width, height)
 
-  return canvas.toDataURL("image/jpeg", 0.7); // get the data from canvas as 70% JPG (can be also PNG, etc.)
+  return canvas.toDataURL('image/jpeg', 0.7) // get the data from canvas as 70% JPG (can be also PNG, etc.)
 }
 
 export default {
-  name: "image-input",
+  name: 'ImageInput',
   props: {
     imageSrc: {
       type: String,
+      default: null,
     },
     refKey: {
       type: String,
+      default: null,
     },
     showThumbnail: {
       type: Boolean,
@@ -119,57 +119,57 @@ export default {
     },
     label: {
       type: String,
-      default: "Upload an image",
+      default: 'Upload an image',
     },
   },
   data() {
     return {
       file: null,
       photoUrl: this.imageSrc,
-    };
+    }
   },
   methods: {
     remove() {
-      this.file = null;
-      this.photoUrl = null;
-      this.$emit("remove");
+      this.file = null
+      this.photoUrl = null
+      this.$emit('remove')
     },
     handleFileInput() {
-      this.selectFile(this.$refs[this.refKey].files[0]);
+      this.selectFile(this.$refs[this.refKey].files[0])
     },
     handleFileDrop(event) {
-      let droppedFiles = event.dataTransfer.files;
+      const droppedFiles = event.dataTransfer.files
       if (droppedFiles) {
-        this.selectFile(droppedFiles[0]);
+        this.selectFile(droppedFiles[0])
       }
     },
     selectFile(file) {
-      this.file = file;
-      this.$emit("input", this.file);
+      this.file = file
+      this.$emit('input', this.file)
 
       // read the files
-      var reader = new FileReader();
-      reader.readAsArrayBuffer(this.file);
+      const reader = new FileReader()
+      reader.readAsArrayBuffer(this.file)
 
       reader.onload = (event) => {
         // blob stuff
-        var blob = new Blob([event.target.result]); // create blob...
-        window.URL = window.URL || window.webkitURL;
-        var blobURL = window.URL.createObjectURL(blob); // and get it's URL
+        const blob = new Blob([event.target.result]) // create blob...
+        window.URL = window.URL || window.webkitURL
+        const blobURL = window.URL.createObjectURL(blob) // and get it's URL
 
         // helper Image object
-        var image = new Image();
-        image.src = blobURL;
-        //preview.appendChild(image); // preview commented out, I am using the canvas instead
+        const image = new Image()
+        image.src = blobURL
+        // preview.appendChild(image); // preview commented out, I am using the canvas instead
         image.onload = () => {
           // have to wait till it's loaded
-          this.photoUrl = resizeImage(image); // send it to canvas
-          this.$emit("url", this.photoUrl);
-        };
-      };
+          this.photoUrl = resizeImage(image) // send it to canvas
+          this.$emit('url', this.photoUrl)
+        }
+      }
     },
   },
-};
+}
 </script>
 
 <style>

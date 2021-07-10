@@ -5,8 +5,8 @@
     </label>
     <div class="mt-2 flex items-center">
       <img
-        :src="thumbnailSrc"
         v-if="thumbnailSrc"
+        :src="thumbnailSrc"
         alt="Thumbnail"
         class="w-9/12 bg-white rounded opacity-80"
       />
@@ -57,7 +57,7 @@
         aria-labelledby="modal-headline"
       >
         <window>
-          <template v-slot:top-right>
+          <template #top-right>
             <button
               class="m-2 p-2 text-gray-500 h-10 w-10 hover:text-pink-600"
               @click="closeModal"
@@ -77,7 +77,7 @@
               </svg>
             </button>
           </template>
-          <template v-slot:body>
+          <template #body>
             <div class="bg-gray-700 px-4 py-4 sm:p-6 sm:pb-4">
               <div
                 class="
@@ -119,47 +119,60 @@
 </template>
 
 <script>
-import Modal from "@/../components/Modal";
-import Window from "@/../components/Window";
+import Modal from '@/components/Modal'
+import Window from '@/components/Window'
 
 export default {
-  name: "image-picker",
+  name: 'ImagePicker',
   components: { Modal, Window },
-  props: ["label", "thumbnails", "value"],
+  props: {
+    label: {
+      type: String,
+      default: '',
+    },
+    thumbnails: {
+      type: Array,
+      default: () => [],
+    },
+    value: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
       thumbnailSrc: this.value,
       showModal: false,
-    };
+    }
+  },
+  watch: {
+    thumbnailSrc(newVal) {
+      this.$emit('input', newVal)
+      this.$emit('change', newVal)
+    },
+    thumbnails(newVal) {
+      try {
+        this.thumbnailSrc = newVal[0]
+      } catch (error) {
+        this.thumbnailSrc = null
+      }
+    },
   },
   mounted() {
     if (!this.value && this.thumbnails.length > 0) {
-      this.thumbnailSrc = this.thumbnails[0];
+      this.thumbnailSrc = this.thumbnails[0]
     }
   },
   methods: {
     select(val) {
-      this.thumbnailSrc = val;
-      this.closeModal();
+      this.thumbnailSrc = val
+      this.closeModal()
     },
     closeModal() {
-      this.showModal = false;
+      this.showModal = false
     },
   },
-  watch: {
-    thumbnailSrc(newVal) {
-      this.$emit("input", newVal);
-      this.$emit("change", newVal);
-    },
-    thumbnails(newVal) {
-      try {
-        this.thumbnailSrc = newVal[0];
-      } catch (error) {
-        this.thumbnailSrc = null;
-      }
-    },
-  },
-};
+}
 </script>
 
 <style>

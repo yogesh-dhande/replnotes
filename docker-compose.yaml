@@ -1,13 +1,31 @@
 version: "3.8"
 services:
-  client:
-    build: .
-    stdin_open: true
-    tty: true
+  replnotes:
+    container_name: replnotes
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=8080
     ports:
       - "8080:8080"
     volumes:
-      - /app/node_modules
-      - /Users/yogesh/projects/replnotes/replnotes:/app
-    env_file:
-      - .env
+      - /app/replnotes/node_modules
+      - ${PWD}:/app
+    build:
+      context: replnotes
+      dockerfile: Dockerfile
+
+  user:
+    container_name: user
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - PORT=8081
+    ports:
+      - "8081:8081"
+    volumes:
+      - /app/user/node_modules
+      - ${PWD}:/app
+    build:
+      context: user
+      dockerfile: Dockerfile

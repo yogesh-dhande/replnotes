@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import UserNavBar from '@/../components/partials/UserNavBar'
-import UserFooter from '@/../components/partials/UserFooter'
+import UserNavBar from '@/components/partials/UserNavBar'
+import UserFooter from '@/components/partials/UserFooter'
 import { mapState } from 'vuex'
 
 export default {

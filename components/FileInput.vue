@@ -34,16 +34,16 @@
           >
           <input
             :id="refKey"
+            :ref="refKey"
             name="file-upload"
             type="file"
             class="sr-only"
-            :ref="refKey"
             @change="handleFileInput"
           />
         </label>
         <span class="pl-1">or drag and drop</span>
       </div>
-      <p class="text-md text-indigo-300 font-bold" v-if="file">
+      <p v-if="file" class="text-md text-indigo-300 font-bold">
         Selected File: {{ file.name }}
       </p>
     </div>
@@ -52,30 +52,30 @@
 
 <script>
 export default {
-  name: "file-input",
-  props: ["refKey"],
+  name: 'FileInput',
+  props: ['refKey'],
   data() {
     return {
       file: null,
-    };
+    }
   },
   methods: {
     handleFileInput() {
-      this.selectFile(this.$refs[this.refKey].files[0]);
+      this.selectFile(this.$refs[this.refKey].files[0])
     },
     handleFileDrop(event) {
-      let droppedFiles = event.dataTransfer.files;
+      const droppedFiles = event.dataTransfer.files
       if (droppedFiles) {
-        this.selectFile(droppedFiles[0]);
+        this.selectFile(droppedFiles[0])
       }
     },
     selectFile(file) {
-      this.file = file;
-      this.$emit("input", this.file);
-      this.$emit("change", this.file);
+      this.file = file
+      this.$emit('input', this.file)
+      this.$emit('change', this.file)
     },
   },
-};
+}
 </script>
 
 <style>

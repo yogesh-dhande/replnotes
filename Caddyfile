@@ -12,7 +12,6 @@
   tls {
     on_demand
   }
-  rewrite * /user{uri}
   reverse_proxy replnotes:8080
 }
 
@@ -21,17 +20,15 @@
   tls {
     on_demand
   }
-  rewrite * /user{uri}
-  reverse_proxy replnotes:8080
+  reverse_proxy replnotes:8081
 }
 
 
-# For the main site
-tinywebapps.com {
-  tls {
-    on_demand
-  }
-  rewrite * /admin{uri}
-  reverse_proxy replnotes:8080
-}
+# # For the main site
+# tinywebapps.com {
+#   tls {
+#     on_demand
+#   }
+#   reverse_proxy replnotes:8080
+# }
 

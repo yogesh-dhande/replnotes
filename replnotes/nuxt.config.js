@@ -10,8 +10,8 @@ async function getAppRoutes() {
 }
 
 export default {
+  target: "static",
   dev: isDev,
-  components: [{ path: "~/../components" }],
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "REPL Notes",

@@ -1,14 +1,14 @@
 <template>
   <div class="mb-3">
-    <errors :errors="errors" v-if="errors.length > 0" />
+    <errors v-if="errors.length > 0" :errors="errors" />
     <errors
-      :errors="['Please correct all errors before proceeding.']"
       v-else-if="disabled"
+      :errors="['Please correct all errors before proceeding.']"
     />
     <div v-if="!isLoading">
       <custom-button
-        @click="() => $emit('click')"
         :disabled="errors.length > 0 || disabled"
+        @click="() => $emit('click')"
         >{{ label }}</custom-button
       >
     </div>
@@ -19,30 +19,33 @@
 </template>
 
 <script>
-import Errors from "@/../components/Errors";
-import CustomButton from "@/../components/CustomButton";
+import Errors from '@/components/Errors'
+import CustomButton from '@/components/CustomButton'
 
 export default {
-  name: "submit",
+  components: {
+    errors: Errors,
+    'custom-button': CustomButton,
+  },
   props: {
     isLoading: {
+      type: Boolean,
       default: false,
     },
     errors: {
+      type: Array,
       default: () => [],
     },
     label: {
-      default: "Submit",
+      type: String,
+      default: 'Submit',
     },
     disabled: {
+      type: Boolean,
       default: false,
     },
   },
-  components: {
-    errors: Errors,
-    "custom-button": CustomButton,
-  },
-};
+}
 </script>
 
 <style>

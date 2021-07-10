@@ -1,24 +1,8 @@
 FROM node:14-alpine as builder
 
-WORKDIR /app
+WORKDIR /app/replnotes
 ADD package*.json ./
 RUN npm install
 COPY . ./
 
-RUN npm run build:prod
-
-FROM node:14-alpine 
-
-WORKDIR /app
-ENV NODE_ENV=production
-ADD package*.json ./
-RUN npm install
-
-ADD nuxt.config.js ./
-
-COPY --from=builder ./app/static ./static/
-
-EXPOSE 8080
-ENV HOST=0.0.0.0
-ENV PORT=8080
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "dev" ]

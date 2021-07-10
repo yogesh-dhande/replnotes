@@ -1,49 +1,44 @@
 <template>
-  <div class="prose max-w-none text-indigo-200">
-    <div v-html="html" v-if="html"></div>
-  </div>
+  <div class="prose max-w-none text-indigo-200"></div>
 </template>
 
 <script>
-import * as ipynb from "ipynb2html";
-import { render } from "ipynb2html/lib/browser";
-import "highlight.js/styles/monokai.css";
-import { Document } from "nodom";
+import { render } from 'ipynb2html/lib/browser'
+import 'highlight.js/styles/monokai.css'
 
 export default {
-  name: "notebook",
   props: {
     nbJson: {
       type: Object,
       default: () => {
         return {
           cells: [],
-        };
+        }
       },
     },
   },
   data() {
     return {
       html: null,
-    };
+    }
   },
   async created() {
     // this.html = ipynb.createRenderer(new Document())(this.nbJson).outerHTML;
   },
-  async mounted() {
+  mounted() {
     // Bokeh JS loaded on the server does not work on the client
-    await this.parseNotebook();
-    this.html = null;
+    this.parseNotebook()
+    this.html = null
   },
   methods: {
-    async parseNotebook() {
+    parseNotebook() {
       if (this.nbJson.cells && this.nbJson.cells.length > 0) {
-        const element = render(this.nbJson);
-        this.$el.appendChild(element);
+        const element = render(this.nbJson)
+        this.$el.appendChild(element)
       }
     },
   },
-};
+}
 </script>
 
 <style>

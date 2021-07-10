@@ -26,12 +26,12 @@
       </h2>
     </div>
 
-    <user-posts :userName="user.name" :posts="user.posts"></user-posts>
+    <user-posts :user-name="user.name" :posts="user.posts"></user-posts>
   </div>
 </template>
 
 <script>
-import UserPosts from "./../UserPosts.vue";
+import UserPosts from './../UserPosts.vue'
 
 export default {
   components: { UserPosts },
@@ -41,7 +41,7 @@ export default {
       default: () => {},
     },
   },
-};
+}
 </script>
 
 <style>

@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV === 'development'
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -8,8 +10,23 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'og:title', property: 'og:title', content: 'REPL Notes' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Blog with Jupyter Notebooks @ REPL Notes',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'Blog with Jupyter Notebooks @ REPL Notes',
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: process.env.NUXT_ENV_BASE_URL,
+      },
+      { hid: 'og:image', property: 'og:image', content: '~/static/logo.png' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -49,6 +66,12 @@ export default {
       measurementId: process.env.NUXT_ENV_MEASUREMENT_ID,
     },
     services: {
+      firestore: {
+        memoryOnly: false, // default
+        enablePersistence: !isDev,
+        // emulatorPort: isDev ? 10002 : undefined,
+        // emulatorHost: isDev ? 'localhost' : undefined,
+      },
       analytics: {
         collectionEnabled: true, // default
       },

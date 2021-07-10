@@ -30,14 +30,14 @@
       </h1>
 
       <file-input
-        class="mt-6 bg-gray-700"
         v-model="file"
-        refKey="landing-demo"
+        class="mt-6 bg-gray-700"
+        ref-key="landing-demo"
         @input="fileErrors = []"
         @change="validateFile"
       ></file-input>
       <div v-if="file && fileErrors.length == 0">
-        <text-input class="mt-3" label="Title" v-model="title"></text-input>
+        <text-input v-model="title" class="mt-3" label="Title"></text-input>
       </div>
       <h2 v-else class="text-center mt-3">
         You can download a sample notebook
@@ -52,27 +52,25 @@
         to use in the demo.
       </h2>
     </div>
-    <div class="mx-4" v-if="nbJson" :key="updateCount">
+    <div v-if="nbJson" :key="updateCount" class="mx-4">
       <h1 class="text-3xl lg:text-4xl font-extrabold my-6 tracking-tight">
         {{ title }}
       </h1>
-      <notebook class="my-6 text-indigo-200" :nbJson="nbJson"> </notebook>
+      <notebook class="my-6 text-indigo-200" :nb-json="nbJson"> </notebook>
     </div>
   </section>
 </template>
 
 <script>
-import { getNbJsonFromFile } from "@/../services/notebook";
-import Notebook from "@/../components/Notebook";
-import Card from "@/../components/Card";
-import FileInput from "@/../components/FileInput";
+import { getNbJsonFromFile } from '@/../services/notebook'
+import Notebook from '@/components/Notebook'
+import FileInput from '@/components/FileInput'
 
 export default {
-  name: "demo",
+  name: 'Demo',
   components: {
     Notebook,
     FileInput,
-    Card,
   },
   data() {
     return {
@@ -80,71 +78,69 @@ export default {
       fileErrors: [],
       nbJson: null,
       updateCount: 0,
-      title: "Add a custom title to the post",
-      pageTitle: "Live Demo: Create and Preview a Blog Post",
-    };
-  },
-  watch: {
-    async file(newValue) {
-      this.nbJson = null;
-      await this.handleFileChange(newValue);
-      this.updateCount += 1;
-    },
+      title: 'Add a custom title to the post',
+      pageTitle: 'Live Demo: Create and Preview a Blog Post',
+    }
   },
   computed: {
     fileType() {
       if (this.file) {
         return this.file.name.substr(
-          this.file.name.lastIndexOf(".") + 1,
+          this.file.name.lastIndexOf('.') + 1,
           this.file.length
-        );
+        )
       }
-      return null;
+      return null
+    },
+  },
+  watch: {
+    async file(newValue) {
+      this.nbJson = null
+      await this.handleFileChange(newValue)
+      this.updateCount += 1
     },
   },
   methods: {
     async handleFileChange(newValue) {
       if (newValue) {
-        if (this.fileErrors.length == 0) {
+        if (this.fileErrors.length === 0) {
           try {
-            this.nbJson = await getNbJsonFromFile(newValue);
+            this.nbJson = await getNbJsonFromFile(newValue)
           } catch (error) {
-            this.fileErrors.push(error.message);
-            this.fileErrors.push("Only Jupyter Notebooks are supported.");
+            this.fileErrors.push(error.message)
+            this.fileErrors.push('Only Jupyter Notebooks are supported.')
           }
         }
       }
     },
     parseMagicTags(line) {
-      let commands = line.split(":");
-      let key = commands[0].trim().replace(" ", "").toLowerCase();
-      let value = commands.length > 1 ? commands[1].trim() : "";
-      if (key.includes("#title")) {
-        this.title = value;
-      } else if (key.includes("#url")) {
-        this.url = value;
-      } else if (key.includes("#description")) {
-        this.description = value;
-      } else if (key.includes("#tags")) {
-        this.tags = value.split(",").map((tag) => tag.trim());
+      const commands = line.split(':')
+      const key = commands[0].trim().replace(' ', '').toLowerCase()
+      const value = commands.length > 1 ? commands[1].trim() : ''
+      if (key.includes('#title')) {
+        this.title = value
+      } else if (key.includes('#url')) {
+        this.url = value
+      } else if (key.includes('#description')) {
+        this.description = value
+      } else if (key.includes('#tags')) {
+        this.tags = value.split(',').map((tag) => tag.trim())
       }
     },
     validateFile() {
-      this.fileErrors = [];
+      this.fileErrors = []
       if (!this.file) {
         this.fileErrors.push(
-          "Please upload a Jupyter Notebook to create a post."
-        );
-      } else {
-        if (this.fileType != "ipynb") {
-          this.fileErrors.push("Only Jupyter Notebooks are supported");
-        } else if (this.file.size > 10 * 1024 * 1024) {
-          this.fileErrors.push("Files larger than 10 MB are not supported.");
-        }
+          'Please upload a Jupyter Notebook to create a post.'
+        )
+      } else if (this.fileType !== 'ipynb') {
+        this.fileErrors.push('Only Jupyter Notebooks are supported')
+      } else if (this.file.size > 10 * 1024 * 1024) {
+        this.fileErrors.push('Files larger than 10 MB are not supported.')
       }
     },
   },
-};
+}
 </script>
 
 <style>

@@ -30,11 +30,11 @@
 
 <script>
 import { mapState } from "vuex";
-import TextInput from "@/../components/TextInput";
-import TextAreaInput from "@/../components/TextAreaInput";
-import ImageUploader from "@/../components/ImageUploader";
-import FormPage from "@/../components/FormPage";
-import CustomButton from "@/../components/CustomButton.vue";
+import TextInput from "@/components/TextInput";
+import TextAreaInput from "@/components/TextAreaInput";
+import ImageUploader from "@/components/ImageUploader";
+import FormPage from "@/components/FormPage";
+import CustomButton from "@/components/CustomButton.vue";
 
 export default {
   name: "feedback-form",
@@ -50,7 +50,6 @@ export default {
       title: "Provide Feedback on REPL Notes",
     });
   },
-  middleware: ["invalidOnCustomDomain"],
   data() {
     return {
       feedback: {
@@ -74,7 +73,7 @@ export default {
       });
 
       this.feedback.message = "";
-      this.$router.push("/admin/dashboard");
+      this.$router.push("/dashboard");
     },
   },
 };

@@ -14,7 +14,7 @@
               >Home</nuxt-link
             >, or send us a
             <nuxt-link
-              to="/admin/feedback"
+              to="/feedback"
               class="text-indigo-500 hover:text-indigo-600"
               >message</nuxt-link
             >

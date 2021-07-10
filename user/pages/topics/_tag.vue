@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import UserPosts from '@/../components/UserPosts'
+import UserPosts from '@/components/UserPosts'
 import { mapState } from 'vuex'
 
 export default {
@@ -33,8 +33,8 @@ export default {
       : this.siteOwner.name
 
     return this.$createSEOMeta({
-      title: name + "'s Posts",
-      description: name + "'s Posts",
+      title: this.tag,
+      description: name + "'s Posts on " + this.tag,
       image: this.siteOwner.photoUrl,
     })
   },

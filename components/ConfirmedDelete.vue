@@ -61,7 +61,6 @@
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
         <button
           type="button"
-          @click="clicked"
           class="
             w-full
             inline-flex
@@ -82,12 +81,12 @@
             sm:w-auto
             sm:text-sm
           "
+          @click="clicked"
         >
           Delete
         </button>
         <button
           type="button"
-          @click="cancel"
           class="
             mt-3
             w-full
@@ -110,6 +109,7 @@
             sm:w-auto
             sm:text-sm
           "
+          @click="cancel"
         >
           Cancel
         </button>
@@ -120,34 +120,39 @@
 </template>
 
 <script>
-import Modal from "@/../components/Modal";
-import Errors from "@/../components/Errors";
+import Modal from '@/components/Modal'
+import Errors from '@/components/Errors'
 export default {
-  name: "confirmed-delete",
-  props: ["errors"],
+  name: 'ConfirmedDelete',
   components: {
     Modal,
     Errors,
   },
+  props: {
+    errors: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       modalVisible: false,
-    };
+    }
   },
   methods: {
     cancel() {
-      this.modalVisible = false;
-      this.$emit("clear");
+      this.modalVisible = false
+      this.$emit('clear')
     },
     clicked() {
-      this.$emit("click");
+      this.$emit('click')
     },
     modalClick(e) {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault()
+      e.stopPropagation()
     },
   },
-};
+}
 </script>
 
 <style>

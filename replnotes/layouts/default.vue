@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import NavBar from "@/../components/partials/NavBar";
-import AppFooter from "@/../components/partials/AppFooter";
+import NavBar from "@/components/partials/NavBar";
+import AppFooter from "@/components/partials/AppFooter";
 import AOS from "aos";
 import "aos/dist/aos.css";
 

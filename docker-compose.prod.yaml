@@ -1,15 +1,18 @@
 version: "3.8"
 services:
   #   Run the node application
-  replnotes:
-    container_name: replnotes
+  user:
+    container_name: user
     restart: unless-stopped
     env_file:
-      - replnotes/.env.staging.local
+      - .env.staging.local
     environment:
       - NODE_ENV=production
+      - PORT=8081
+    ports:
+      - "8081:8081"
     build:
-      context: replnotes
+      context: user
 
   # Run the caddy server
   caddy:

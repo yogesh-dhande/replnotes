@@ -46,6 +46,7 @@
           <div class="px-6 py-8 sm:p-10 sm:pb-6">
             <div>
               <h3
+                id="tier-standard"
                 class="
                   inline-flex
                   px-4
@@ -58,7 +59,6 @@
                   bg-indigo-600
                   text-indigo-100
                 "
-                id="tier-standard"
               >
                 Free
               </h3>
@@ -85,9 +85,9 @@
           >
             <ul class="space-y-4">
               <li
-                class="flex items-start"
                 v-for="feature in freeFeatures"
                 :key="feature"
+                class="flex items-start"
               >
                 <div class="flex-shrink-0">
                   <!-- Heroicon name: outline/check -->
@@ -114,7 +114,7 @@
             </ul>
             <div class="rounded-md shadow">
               <nuxt-link
-                to="/admin/register"
+                to="/register"
                 class="
                   flex
                   items-center
@@ -145,6 +145,7 @@
           <div class="px-6 py-8 sm:p-10 sm:pb-6">
             <div>
               <h3
+                id="tier-standard"
                 class="
                   inline-flex
                   px-4
@@ -157,7 +158,6 @@
                   bg-indigo-600
                   text-indigo-100
                 "
-                id="tier-standard"
               >
                 Premium
               </h3>
@@ -186,9 +186,9 @@
           >
             <ul class="space-y-4">
               <li
-                class="flex items-start"
                 v-for="feature in paidFeatures"
                 :key="feature"
+                class="flex items-start"
               >
                 <div class="flex-shrink-0">
                   <!-- Heroicon name: outline/check -->
@@ -215,7 +215,7 @@
             </ul>
             <div class="rounded-md shadow">
               <nuxt-link
-                to="/admin/register"
+                to="/register"
                 class="
                   flex
                   items-center
@@ -243,59 +243,29 @@
 </template>
 
 <script>
-import TextInput from "@/../components/TextInput";
-import InputErrors from "@/../components/InputErrors";
-
 export default {
-  name: "Pricing",
-  components: {
-    TextInput,
-    InputErrors,
-  },
+  name: 'Pricing',
   data() {
     return {
-      email: "",
+      email: '',
       emailErrors: [],
       freeFeatures: [
-        "Free subdomain at replnotes.com",
-        "SEO-friendly server-rendered pages",
-        "Social media previews with OG tags",
-        "100 MB total storage",
-        "10 MB size limit per post",
+        'Free subdomain at replnotes.com',
+        'SEO-friendly server-rendered pages',
+        'Social media previews with OG tags',
+        '100 MB total storage',
+        '10 MB size limit per post',
       ],
       paidFeatures: [
-        "All features in the free plan",
-        "One custom domain",
-        "1 GB total storage",
-        "100 MB size limit per post",
-        "Custom CSS styles and Javascript integrations",
+        'All features in the free plan',
+        'One custom domain',
+        '1 GB total storage',
+        '100 MB size limit per post',
+        'Custom CSS styles and Javascript integrations',
       ],
-    };
+    }
   },
-  methods: {
-    validateEmail() {
-      if (!this.email || this.email.length == 0) {
-        this.emailErrors.push("Please enter an email.");
-      } else if (!/^[0-9a-zA-Z_.-@]+$/.test(this.email)) {
-        this.emailErrors.push("No spaces allowed in the email.");
-      }
-    },
-    async notify() {
-      let docRef = subscriberCollection.doc("paidPlan");
-      let snap = await docRef.get();
-      if (!snap.exists) {
-        await docRef.set({
-          emails: [this.email],
-        });
-      } else {
-        await docRef.update({
-          emails: this.$fireModule.firestore.FieldValue.arrayUnion(this.email),
-        });
-      }
-      this.$router.push("/register");
-    },
-  },
-};
+}
 </script>
 
 <style>

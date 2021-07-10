@@ -94,7 +94,7 @@
               border-transparent
             "
           >
-            <nuxt-link to="/admin"
+            <nuxt-link to="/"
               ><img
                 class="inline h-8 md:h-10 lg:h-12"
                 src="@/static/logo.png"
@@ -120,7 +120,7 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <nuxt-link
-                to="/admin/feedback"
+                to="/feedback"
                 class="
                   text-indigo-100
                   hover:text-indigo-300
@@ -133,20 +133,7 @@
                 >Feedback</nuxt-link
               >
               <nuxt-link
-                to="/admin/discover"
-                class="
-                  text-indigo-100
-                  hover:text-indigo-300
-                  px-3
-                  py-2
-                  text-lg
-                  font-bold
-                  border-transparent
-                "
-                >Discover</nuxt-link
-              >
-              <nuxt-link
-                to="/admin/dashboard"
+                to="/dashboard"
                 class="
                   text-indigo-100
                   hover:text-indigo-300
@@ -160,7 +147,7 @@
               >
               <div v-if="!currentUser.id" class="self-center">
                 <nuxt-link
-                  to="/admin/#pricing"
+                  to="/#pricing"
                   class="
                     text-indigo-100
                     hover:text-indigo-300
@@ -173,7 +160,7 @@
                   >Pricing</nuxt-link
                 >
                 <nuxt-link
-                  to="/admin/login"
+                  to="/login"
                   class="
                     text-indigo-100
                     hover:text-indigo-300
@@ -186,7 +173,7 @@
                   >Sign In</nuxt-link
                 >
                 <nuxt-link
-                  to="/admin/register"
+                  to="/register"
                   class="
                     text-indigo-100
                     bg-indigo-600
@@ -234,7 +221,7 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <nuxt-link
-          to="/admin/feedback"
+          to="/feedback"
           class="
             block
             text-indigo-100
@@ -247,20 +234,7 @@
           >Feedback</nuxt-link
         >
         <nuxt-link
-          to="/admin/discover"
-          class="
-            block
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-          "
-          >Discover</nuxt-link
-        >
-        <nuxt-link
-          to="/admin/dashboard"
+          to="/dashboard"
           class="
             block
             text-indigo-100
@@ -274,7 +248,7 @@
         >
         <div v-if="!currentUser.id">
           <nuxt-link
-            to="/admin/login"
+            to="/login"
             class="
               block
               text-indigo-100
@@ -287,7 +261,7 @@
             >Sign In</nuxt-link
           >
           <nuxt-link
-            to="/admin/register"
+            to="/register"
             class="
               block
               text-indigo-100
@@ -346,38 +320,6 @@ export default {
   },
   computed: {
     ...mapState(["currentUser"]),
-    routeUsername() {
-      let userName;
-      // if (this.$route.params.userName) {
-      //     userName = this.$route.params.userName
-      // }
-      if (this.currentUser.name) {
-        userName = this.currentUser.name;
-      }
-      return userName;
-    },
-    routeUserDisplayName() {
-      let displayName = "Profile";
-      // if (this.$route.params.userName) {
-      //     userName = this.$route.params.userName
-      // }
-      // if (this.currentUser.displayName) {
-      //     displayName = this.currentUser.displayName
-      // }
-      return displayName;
-    },
-    aboutLink() {
-      if (this.routeUsername) {
-        return `/${this.routeUsername}`;
-      }
-      return null;
-    },
-    postsLink() {
-      if (this.routeUsername) {
-        return `/${this.routeUsername}/posts`;
-      }
-      return null;
-    },
   },
 };
 </script>

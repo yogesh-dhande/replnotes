@@ -219,10 +219,10 @@
 </template>
 
 <script>
-import CreatePost from "@/../components/CreatePost";
-import Profile from "@/../components/Profile";
+import CreatePost from "@/components/CreatePost";
+import Profile from "@/components/Profile";
 import { mapState } from "vuex";
-import SiteSettings from "@/../components/SiteSettings.vue";
+import SiteSettings from "@/components/SiteSettings.vue";
 
 export default {
   name: "dashboard",
@@ -231,7 +231,7 @@ export default {
     Profile,
     SiteSettings,
   },
-  middleware: ["invalidOnCustomDomain", "auth"],
+  middleware: ["auth"],
   head() {
     return this.$createSEOMeta({
       title: "Dashboard. REPL Notes",

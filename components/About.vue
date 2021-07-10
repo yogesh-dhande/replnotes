@@ -29,7 +29,7 @@
         </h1>
       </nuxt-link>
       <div class="mt-2 flex flex-row flex-wrap justify-center">
-        <badge class="mx-2 my-2" v-for="tag in tags" :key="tag"
+        <badge v-for="tag in tags" :key="tag" class="mx-2 my-2"
           ><nuxt-link
             :to="`/${user.name}/posts/?tag=${tag}`"
             class="italic hover:underline"
@@ -39,34 +39,39 @@
         >
       </div>
     </div>
-    <markdown class="mx-auto" :text="user.aboutMe" :key="user.aboutMe" />
+    <markdown :key="user.aboutMe" class="mx-auto" :text="user.aboutMe" />
     <social-links :user="user"></social-links>
   </div>
 </template>
 
 <script>
-import Markdown from "@/../components/Markdown";
-import SocialLinks from "@/../components/SocialLinks";
-import Badge from "@/../components/Badge";
-import Thumbnail from "@/../components/Thumbnail";
+import Markdown from '@/components/Markdown'
+import SocialLinks from '@/components/SocialLinks'
+import Badge from '@/components/Badge'
+import Thumbnail from '@/components/Thumbnail'
 
 export default {
-  name: "about",
+  name: 'About',
   components: { Markdown, Badge, Thumbnail, SocialLinks },
-  props: ["user"],
+  props: {
+    user: {
+      type: Object,
+      default: () => {},
+    },
+  },
   computed: {
     tags() {
       if (!this.user || !this.user.posts) {
-        return [];
+        return []
       }
-      let tagList = Object.values(this.user.posts).map((post) => {
-        return post.tags;
-      });
+      const tagList = Object.values(this.user.posts).map((post) => {
+        return post.tags
+      })
 
-      return [...new Set([].concat.apply([], tagList))];
+      return [...new Set([].concat.apply([], tagList))]
     },
   },
-};
+}
 </script>
 
 <style>

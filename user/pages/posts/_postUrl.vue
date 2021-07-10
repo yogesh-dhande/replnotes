@@ -29,10 +29,10 @@
 </template>
 
 <script>
-import Notebook from '@/../components/Notebook'
-import Card from '@/../components/Card'
-import Badge from '@/../components/Badge'
-import UserDateThumbnail from '@/../components/UserDateThumbnail'
+import Notebook from '@/components/Notebook'
+import Card from '@/components/Card'
+import Badge from '@/components/Badge'
+import UserDateThumbnail from '@/components/UserDateThumbnail'
 import { getNbJsonFromUrl, getReadableDate } from '@/../services/notebook'
 
 export default {
@@ -66,10 +66,7 @@ export default {
       title: this.post.title,
       description: this.post.description
         ? this.post.description
-        : this.post.title +
-          ' by ' +
-          this.post.user.displayName +
-          ' @ REPL Notes',
+        : this.post.title + ' by ' + this.post.user.displayName,
       image: this.post.thumbnail,
     })
   },

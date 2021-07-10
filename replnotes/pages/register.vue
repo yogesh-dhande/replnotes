@@ -98,7 +98,7 @@
       <div class="py-1 sm:px-6 text-md font-medium">
         <span class="float-right">
           <nuxt-link
-            to="/admin/login"
+            to="/login"
             class="
               p-1
               inline-flex
@@ -118,11 +118,11 @@
 </template>
 
 <script>
-import Submit from "@/../components/Submit";
-import InputErrors from "@/../components/InputErrors";
-import FormPage from "@/../components/FormPage";
-import PasswordInput from "@/../components/PasswordInput";
-import URLSlugInput from "@/../components/URLSlugInput";
+import Submit from "@/components/Submit";
+import InputErrors from "@/components/InputErrors";
+import FormPage from "@/components/FormPage";
+import PasswordInput from "@/components/PasswordInput";
+import URLSlugInput from "@/components/URLSlugInput";
 import axios from "axios";
 
 export default {
@@ -134,7 +134,7 @@ export default {
     "password-input": PasswordInput,
     "url-slug-input": URLSlugInput,
   },
-  middleware: ["invalidOnCustomDomain", "guest"],
+  middleware: ["guest"],
   head() {
     return this.$createSEOMeta({
       title: "Join REPL Notes",
@@ -202,7 +202,7 @@ export default {
             userCredential.user.toJSON()
           );
 
-          this.$router.push("/admin/dashboard");
+          this.$router.push("/dashboard");
         } catch (error) {
           if (error.response && error.response.data.message) {
             this.errors.push(error.response.data.message);

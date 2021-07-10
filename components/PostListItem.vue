@@ -5,7 +5,7 @@
       class="shadow-lg bg-gray-900 bg-opacity-25 hover:bg-opacity-50"
     >
       <window>
-        <template v-slot:top-right v-if="showButtons && editable">
+        <template v-if="showButtons && editable" #top-right>
           <icon-button @click="edit">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -22,11 +22,11 @@
             </svg>
           </icon-button>
           <confirmed-delete
-            @click="deletePost"
             :errors="errors"
+            @click="deletePost"
             @clear="clearErrors"
           >
-            <template v-slot:message>
+            <template #message>
               <div class="mx-4">
                 <p class="text-sm text-gray-600">
                   Are you sure you want to delete this post? This action cannot
@@ -36,68 +36,73 @@
             </template>
           </confirmed-delete>
         </template>
-        <template v-slot:body>
+        <template #body>
           <slot><post-preview :post="post"></post-preview></slot>
         </template>
       </window>
     </card>
-    <edit-post :post="post" v-else @cancel="cancelEdit" />
+    <edit-post v-else :post="post" @cancel="cancelEdit" />
   </div>
 </template>
 
 <script>
-import Card from "@/../components/Card";
-import PostPreview from "@/../components/PostPreview";
-import Window from "@/../components/Window";
-import ConfirmedDelete from "@/../components/ConfirmedDelete";
-import IconButton from "@/../components/IconButton";
-import { mapState } from "vuex";
+import Card from '@/components/Card'
+import PostPreview from '@/components/PostPreview'
+import Window from '@/components/Window'
+import ConfirmedDelete from '@/components/ConfirmedDelete'
+import IconButton from '@/components/IconButton'
+import { mapState } from 'vuex'
 
 export default {
-  name: "post-list-item",
+  name: 'PostListItem',
   components: {
     card: Card,
     Window,
-    "confirmed-delete": ConfirmedDelete,
-    "icon-button": IconButton,
-    "post-preview": PostPreview,
-    "edit-post": () => import("@/../components/EditPost"),
+    'confirmed-delete': ConfirmedDelete,
+    'icon-button': IconButton,
+    'post-preview': PostPreview,
+    'edit-post': () => import('@/components/EditPost'),
   },
-  props: ["post"],
+  props: {
+    post: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       errors: [],
       editMode: false,
       showButtons: false,
-    };
+    }
   },
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(['currentUser']),
     editable() {
-      return this.currentUser.id == this.post.user.id;
+      return this.currentUser.id === this.post.user.id
     },
   },
   methods: {
     async deletePost() {
       try {
-        this.$postsCollection.doc(this.post.id).delete();
-        this.$router.go(); // Refresh the page
+        await this.$postsCollection.doc(this.post.id).delete()
+        this.$router.go() // Refresh the page
       } catch (error) {
-        console.log(error);
-        this.errors.push(error.message);
+        console.log(error)
+        this.errors.push(error.message)
       }
     },
     clearErrors() {
-      this.errors = [];
+      this.errors = []
     },
     edit() {
-      this.editMode = true;
+      this.editMode = true
     },
     cancelEdit() {
-      this.editMode = false;
+      this.editMode = false
     },
   },
-};
+}
 </script>
 
 <style>
