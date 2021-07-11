@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "site": "staging-user",
+    "public": "static",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "replnotes-user",
+          "region": "us-central1"
+        }
+      }
+    ]
+  }
+}

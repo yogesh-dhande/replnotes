@@ -15,7 +15,6 @@ docker run --rm -d \
 
 
 docker run --rm -d \
-    --env-file .env.production.local
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v "$PWD:$PWD" \
     -w="$PWD" \

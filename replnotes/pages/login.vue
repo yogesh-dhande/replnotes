@@ -142,9 +142,7 @@ export default {
   },
   asyncData(context) {
     return {
-      redirect: context.query.redirect
-        ? context.query.redirect
-        : "/admin/dashboard",
+      redirect: context.query.redirect ? context.query.redirect : "/dashboard",
     };
   },
   computed: {

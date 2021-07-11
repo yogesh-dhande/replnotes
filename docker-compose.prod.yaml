@@ -13,7 +13,7 @@ services:
       - "8081:8081"
     build:
       context: user
-
+      dockerfile: Dockerfile-prod
   # Run the caddy server
   caddy:
     image: caddy/caddy:2.4.3-alpine

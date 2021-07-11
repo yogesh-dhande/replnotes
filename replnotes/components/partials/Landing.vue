@@ -80,8 +80,8 @@
           </nuxt-link>
         </div>
         <div class="ml-3 inline-flex">
-          <a
-            href="/#demo"
+          <nuxt-link
+            to="/demo"
             class="
               w-full
               px-8
@@ -99,7 +99,7 @@
             "
           >
             See Demo
-          </a>
+          </nuxt-link>
         </div>
       </div>
     </div>

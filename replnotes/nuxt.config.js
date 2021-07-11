@@ -2,13 +2,6 @@ const isDev = process.env.NODE_ENV === "development";
 
 const axios = require("axios");
 
-async function getAppRoutes() {
-  let res = await axios.get(
-    `${process.env.NUXT_ENV_FIREBASE_FUNCTIONS_URL}/getRoutes`
-  );
-  return res.data;
-}
-
 export default {
   target: "static",
   dev: isDev,
@@ -69,11 +62,7 @@ export default {
     "@nuxtjs/sitemap"
   ],
   sitemap: {
-    hostname: process.env.NUXT_ENV_BASE_URL,
-    async routes() {
-      let routes = await getAppRoutes();
-      return routes;
-    },
+    hostname: "https://replnotes.com",
     exclude: ["/dashboard"]
   },
   firebase: {

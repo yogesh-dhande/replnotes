@@ -1,5 +1,12 @@
 const isDev = process.env.NODE_ENV === 'development'
 
+const path = require('path')
+require('dotenv').config({
+  path: path.resolve(__dirname, '../.env.staging.local'),
+})
+
+console.log(process.env.NUXT_ENV_FIREBASE_CONFIG_PROJECT_ID)
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

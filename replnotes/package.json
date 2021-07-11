@@ -10,8 +10,8 @@
     "start": "nuxt start",
     "prod": "firebase use prod",
     "build": "rm -rf dist && nuxt generate",
-    "deploy": "npm run default && firebase deploy",
-    "deploy:prod": "npm run prod && firebase deploy",
+    "deploy": "npm run default && npm run build && firebase deploy --only=hosting",
+    "deploy:prod": "npm run prod &&  && npm run build && firebase deploy --only=hosting",
     "test": "firebase emulators:exec 'jest --env=node'",
     "reinstall": "rm package-lock.json && rm -rf node_modules && npm i"
   },
