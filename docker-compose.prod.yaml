@@ -4,8 +4,6 @@ services:
   user:
     container_name: user
     restart: unless-stopped
-    env_file:
-      - .env.staging.local
     environment:
       - NODE_ENV=production
       - PORT=8081
@@ -14,21 +12,23 @@ services:
     build:
       context: user
       dockerfile: Dockerfile-prod
-  # Run the caddy server
-  caddy:
-    image: caddy/caddy:2.4.3-alpine
-    container_name: caddy-service
-    restart: unless-stopped
-    environment:
-      - ACME_AGREE=true
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      args:
+        - DEPLOY_TAREGT=staging
+#   # Run the caddy server
+#   caddy:
+#     image: caddy/caddy:2.4.3-alpine
+#     container_name: caddy-service
+#     restart: unless-stopped
+#     environment:
+#       - ACME_AGREE=true
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+#       - caddy_data:/data
+#       - caddy_config:/config
 
-volumes:
-  caddy_data:
-  caddy_config:
+# volumes:
+#   caddy_data:
+#   caddy_config:

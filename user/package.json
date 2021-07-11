@@ -3,20 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "PORT=8081 nuxt",
-    "generate": "nuxt generate",
+    "dev": "PORT=8080 nuxt",
     "default": "firebase use default",
     "prod": "firebase use prod",
     "build": "rm -rf .nuxt && nuxt build",
     "start": "nuxt start",
-    "deploy": "npm run default && firebase deploy --only hosting:staging-user",
-    "deploy:prod": "npm run prod && firebase deploy",
+    "deploy": "firebase use $NODE_ENV && firebase deploy --only hosting:user-replnotes",
     "reinstall": "rm package-lock.json && rm -rf node_modules && npm i",
     "test": "firebase emulators:exec 'jest --env=node'",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "npm run lint:js",
-    "sync": "cp -r ../components .",
-    "watch": "watch 'npm run build:css' ../components"
+    "lint": "npm run lint:js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",

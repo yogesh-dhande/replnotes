@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "staging-user",
+    "site": "user-replnotes",
     "public": "static",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [

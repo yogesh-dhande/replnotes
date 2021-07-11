@@ -1,13 +1,17 @@
+import path from 'path'
 const isDev = process.env.NODE_ENV === 'development'
 
-const path = require('path')
+const deployTarget = process.env.DEPLOY_TARGET || 'development'
+console.log(deployTarget)
+
 require('dotenv').config({
-  path: path.resolve(__dirname, '../.env.staging.local'),
+  path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`),
 })
 
 console.log(process.env.NUXT_ENV_FIREBASE_CONFIG_PROJECT_ID)
 
 export default {
+  dev: isDev,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'user',
@@ -42,7 +46,11 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/meta.js', '~/plugins/analytics.client.js'],
+  plugins: [
+    '~/plugins/meta.js',
+    '~/plugins/firebaseConfig.js',
+    '~/plugins/analytics.client.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -62,6 +70,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
   ],
+
   firebase: {
     config: {
       apiKey: process.env.NUXT_ENV_FIREBASE_CONFIG_API_KEY,

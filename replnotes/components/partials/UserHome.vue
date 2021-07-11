@@ -11,7 +11,7 @@
           my-6
         "
       >
-        {{ user.site.title }}
+        {{ user.site && user.site.title ? user.site.title : user.displayName }}
       </h1>
       <h2
         class="
@@ -22,7 +22,7 @@
           my-6
         "
       >
-        {{ user.site.description }}
+        {{ user.site && user.site.description ? user.site.description : '' }}
       </h2>
     </div>
 

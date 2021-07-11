@@ -47,7 +47,11 @@ const reservedNames = [
   "confidential",
   "token",
   "free",
-  "premium"
+  "premium",
+  "upgrade",
+  "plans",
+  "create",
+  "update"
 ];
 
 module.exports = { reservedNames };

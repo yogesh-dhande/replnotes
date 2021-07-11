@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "staging-2cacb"
+    "production": "nbtoblog-8a03f",
+    "staging": "staging-2cacb"
   }
 }
