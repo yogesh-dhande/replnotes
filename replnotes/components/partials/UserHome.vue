@@ -26,7 +26,7 @@
       </h2>
     </div>
 
-    <user-posts :user-name="user.name" :posts="user.posts"></user-posts>
+    <user-posts :user-name="user.name" :posts="posts"></user-posts>
   </div>
 </template>
 
@@ -39,6 +39,10 @@ export default {
     user: {
       type: Object,
       default: () => {},
+    },
+    posts: {
+      type: Array,
+      default: () => [],
     },
   },
 }

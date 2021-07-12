@@ -1,6 +1,10 @@
 <template>
   <div>
-    <user-home v-if="siteOwner && siteOwner.name" :user="siteOwner"></user-home>
+    <user-home
+      v-if="siteOwner && siteOwner.name"
+      :user="siteOwner"
+      :posts="posts"
+    ></user-home>
     <div v-else class="text-4xl text-indigo-200 font-bold p-12 text-center">
       Site Not Found
     </div>
@@ -36,7 +40,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['siteOwner']),
+    ...mapState(['siteOwner', 'posts']),
   },
 }
 </script>

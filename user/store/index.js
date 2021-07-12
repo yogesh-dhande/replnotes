@@ -1,3 +1,5 @@
+import { getUserFromRequest } from '~/services/domains'
+
 export const state = () => ({
   siteOwner: {},
   currentUser: {},
@@ -25,31 +27,32 @@ export const getters = {
 }
 
 export const actions = {
-  async nuxtServerInit({ commit }, { req }) {
-    // TODO: set siteOwner and siteOwner.posts if custom domain
-    console.log(req.headers)
-    const snap = await this.$usersCollection.where('name', '==', 'blog').get()
-
-    if (snap.size > 0) {
-      const siteOwner = snap.docs[0].data() || {}
-      siteOwner.posts = []
-
-      const postsSnap = await this.$postsCollection
-        .where('user.name', '==', siteOwner.name)
-        .get()
-
-      if (postsSnap.size > 0) {
-        postsSnap.forEach((doc) => {
-          siteOwner.posts.push(doc.data())
-        })
-      }
-      commit('SET_USER', siteOwner)
+  async nuxtServerInit({ commit }, context) {
+    const siteOwner = await getUserFromRequest(context)
+    if (!siteOwner.name) {
+      context.error({ statusCode: 404 })
     }
+    commit('SET_USER', siteOwner)
+
+    const posts = []
+    const postsSnap = await this.$postsCollection
+      .where('user.name', '==', siteOwner.name)
+      .get()
+
+    if (postsSnap.size > 0) {
+      postsSnap.forEach((doc) => {
+        posts.push(doc.data())
+      })
+    }
+    commit('SET_POSTS', posts)
   },
 }
 
 export const mutations = {
   SET_USER(state, val) {
     state.siteOwner = val
+  },
+  SET_POSTS(state, posts) {
+    state.posts = posts
   },
 }
