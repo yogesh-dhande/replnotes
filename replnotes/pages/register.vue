@@ -19,7 +19,7 @@
       class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 rounded-lg shadow-xl"
     >
       <url-slug-input
-        :prefix="BASE_URL"
+        :suffix="BASE_URL"
         v-model="name"
         label="Username"
         @focus="
@@ -142,7 +142,7 @@ export default {
   },
   data() {
     return {
-      BASE_URL: `${process.env.NUXT_ENV_DISPLAY_URL}/`,
+      BASE_URL: `.${process.env.NUXT_ENV_DISPLAY_URL}`,
       name: "",
       nameErrors: [],
       email: "",

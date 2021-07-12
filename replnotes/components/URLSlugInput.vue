@@ -4,7 +4,10 @@
       {{ label }}
     </label>
     <div class="mt-1 flex rounded-md shadow-sm">
-      <span class="inline-flex items-center px-3 rounded-l-md bg-gray-700">
+      <span
+        v-if="prefix"
+        class="inline-flex items-center px-3 rounded-l-md bg-gray-700"
+      >
         {{ prefix }}
       </span>
       <input
@@ -26,23 +29,45 @@
         @blur="$emit('blur')"
         @focus="$emit('focus')"
       />
+      <span
+        v-if="suffix"
+        class="inline-flex items-center px-3 rounded-r-md bg-gray-700"
+      >
+        {{ suffix }}
+      </span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "url-slug-input",
-  props: ["label", "value", "prefix"],
-  methods: {
-    handleInput(e) {
-      this.$emit("input", e.target.value);
+  props: {
+    label: {
+      type: String,
+      default: '',
     },
-    handleChange(e) {
-      this.$emit("change", e.target.value);
+    value: {
+      type: String,
+      default: '',
+    },
+    prefix: {
+      type: String,
+      default: '',
+    },
+    suffix: {
+      type: String,
+      default: '',
     },
   },
-};
+  methods: {
+    handleInput(e) {
+      this.$emit('input', e.target.value)
+    },
+    handleChange(e) {
+      this.$emit('change', e.target.value)
+    },
+  },
+}
 </script>
 
 <style>
