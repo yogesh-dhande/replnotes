@@ -1,6 +1,12 @@
 const isDev = process.env.NODE_ENV === "development";
 
-const axios = require("axios");
+import path from "path";
+const deployTarget = process.env.DEPLOY_TARGET || "development";
+console.log(deployTarget);
+
+require("dotenv").config({
+  path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`)
+});
 
 export default {
   target: "static",

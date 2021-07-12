@@ -238,8 +238,8 @@ export default {
     validateUsername() {
       if (!this.name || this.name.length == 0) {
         this.nameErrors.push("Please enter a username.");
-      } else if (!/^[0-9a-zA-Z_@.-]+$/.test(this.name)) {
-        this.nameErrors.push("No spaces allowed in the username.");
+      } else if (!/^[0-9a-zA-Z_@-]+$/.test(this.name)) {
+        this.nameErrors.push("No spaces or periods allowed in the username.");
       }
     },
     validateEmail() {
