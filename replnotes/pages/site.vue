@@ -3,7 +3,8 @@
     <site-settings
       @cancel="$router.push('/dashboard')"
       @save="$router.push('/dashboard')"
-      :user="currentUser"
+      :site="site"
+      v-if="site"
     ></site-settings>
   </form-page>
 </template>
@@ -13,7 +14,7 @@ import { mapState } from "vuex";
 export default {
   middleware: ["auth"],
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(["site"]),
   },
 };
 </script>

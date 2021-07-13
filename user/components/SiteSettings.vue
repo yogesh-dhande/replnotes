@@ -29,7 +29,6 @@
         ></nav-item-builder>
       </div>
       <button
-        @click="addNavItem"
         class="
           px-3
           py-2
@@ -39,13 +38,14 @@
           font-medium
           rounded
         "
+        @click="addNavItem"
       >
         Add a link
       </button>
     </div>
     <save-cancel
       class="my-3"
-      :isLoading="isLoading"
+      :is-loading="isLoading"
       :errors="errors"
       @save="save"
       @cancel="cancel"
@@ -66,59 +66,59 @@ export default {
       showButtons: true,
       editMode: false,
       site: {
-        title: this.user.site ? this.user.site.title : "",
-        description: this.user.site ? this.user.site.description : "",
+        title: this.user.site ? this.user.site.title : '',
+        description: this.user.site ? this.user.site.description : '',
         // favicon: this.user.site ? this.user.site.favicon : "",
         navbar:
           this.user.site && this.user.site.navbar
             ? this.user.site.navbar
             : [
                 {
-                  label: "Home",
+                  label: 'Home',
                   external: false,
-                  url: "/",
+                  url: '/',
                 },
                 {
-                  label: "About",
+                  label: 'About',
                   external: false,
-                  url: "/about",
+                  url: '/about',
                 },
               ],
       },
       favicon: null,
       isLoading: false,
       errors: [],
-    };
+    }
   },
   methods: {
     async save() {
       try {
-        this.isLoading = true;
+        this.isLoading = true
         await this.$usersCollection.doc(this.user.id).update({
           site: this.site,
-        });
-        this.cancel();
+        })
+        this.cancel()
       } catch (error) {
-        this.errors.push(error.message);
+        this.errors.push(error.message)
       } finally {
-        this.isLoading = false;
+        this.isLoading = false
       }
     },
     cancel() {
-      this.$emit("cancel");
+      this.$emit('cancel')
     },
     clearErrors() {
-      this.erros = [];
+      this.erros = []
     },
     addNavItem() {
       this.site.navbar.push({
-        label: "Home",
+        label: 'Home',
         external: false,
-        url: "/",
-      });
+        url: '/',
+      })
     },
   },
-};
+}
 </script>
 
 <style>

@@ -4,6 +4,7 @@ export const state = () => ({
   token: null,
   currentUser: {},
   posts: [],
+  site: null,
   isEmailVerified: null,
   readonly: {}
 });
@@ -35,6 +36,14 @@ export const getters = {
       const posts = state.posts.filter(post => post.url === url);
       return posts.length > 0 ? posts[0] : {};
     };
+  },
+  siteDomain(state) {
+    return state.site ? `http://${state.site.domain}.replnotes.com` : null;
+  },
+  customDomain(state) {
+    return state.site && state.site.customDomain
+      ? `http://${state.site.customDomain}`
+      : null;
   }
 };
 
@@ -69,6 +78,14 @@ export const actions = {
             });
             commit("SET_POSTS", posts);
           });
+
+        this.$sitesCollection
+          .where("user.id", "==", authUser.uid)
+          .onSnapshot(querySnapshot => {
+            if (querySnapshot.size > 0) {
+              commit("SET_SITE", querySnapshot.docs[0].data());
+            }
+          });
       });
     }
   }
@@ -80,6 +97,9 @@ export const mutations = {
   },
   SET_POSTS(state, posts) {
     state.posts = posts;
+  },
+  SET_SITE(state, site) {
+    state.site = site;
   },
   SET_AUTH_STATE(state, authUser) {
     state.authUserId = authUser.uid;
