@@ -7,6 +7,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  middleware: ["auth"],
   asyncData(context) {
     return {
       postUrl: context.params.postUrl,
