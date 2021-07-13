@@ -25,109 +25,99 @@
             <span class="text-2xl font-bold text-indigo-500">MB</span>
           </dd>
         </div>
-        <div class="flex flex-col">
-          <div v-if="!editProfile">
-            <button
-              class="
-                flex flex-row
-                w-full
-                py-6
-                justify-center
-                items-center
-                text-indigo-300
-                font-bold
-                text-lg
-                bg-gray-900 bg-opacity-50
-                rounded-lg
-                hover:bg-opacity-100
-                mouse
-                shadow
-                transition
-                ease-in
-                duration-200
-                focus:outline-none
-              "
-              @click="editProfile = true"
+        <div
+          class="
+            flex flex-row
+            w-full
+            py-6
+            justify-center
+            items-center
+            text-indigo-300
+            font-bold
+            text-lg
+            bg-gray-900 bg-opacity-50
+            rounded-lg
+            hover:bg-opacity-100
+            mouse
+            shadow
+            transition
+            ease-in
+            duration-200
+            focus:outline-none
+          "
+          @click="$router.push('/profile')"
+        >
+          <div>Profile</div>
+          <icon-button @click="$router.push('/profile')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <div>
-                <svg
-                  class="h-8 w-8 mx-auto p-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </div>
-
-              <div class="ml-3">Edit Your Profile</div>
-            </button>
-          </div>
-
-          <div v-else>
-            <profile
-              @cancel="editProfile = false"
-              :currentUser="currentUser"
-            ></profile>
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
+            </svg>
+          </icon-button>
         </div>
-        <div class="flex flex-col">
-          <div v-if="!editSiteSettings">
-            <button
-              class="
-                flex flex-row
-                w-full
-                py-6
-                justify-center
-                items-center
-                text-indigo-300
-                font-bold
-                text-lg
-                bg-gray-900 bg-opacity-50
-                rounded-lg
-                hover:bg-opacity-100
-                mouse
-                shadow
-                transition
-                ease-in
-                duration-200
-                focus:outline-none
-              "
-              @click="editSiteSettings = true"
+        <div
+          class="
+            flex flex-row
+            w-full
+            py-6
+            justify-center
+            items-center
+            text-indigo-300
+            font-bold
+            text-lg
+            bg-gray-900 bg-opacity-50
+            rounded-lg
+            hover:bg-opacity-100
+            mouse
+            shadow
+            transition
+            ease-in
+            duration-200
+            focus:outline-none
+          "
+        >
+          <div>Site Settings</div>
+
+          <icon-button @click="$router.push('/site')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8 mx-auto p-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                  />
-                </svg>
-              </div>
-
-              <div class="ml-3">Edit Site Settings</div>
-            </button>
-          </div>
-
-          <div v-else>
-            <site-settings
-              @cancel="editSiteSettings = false"
-              :user="currentUser"
-            ></site-settings>
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+              />
+            </svg>
+          </icon-button>
+          <a :href="siteLink" target="_blank" class="hover:text-indigo-400">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </a>
         </div>
         <div
           class="
@@ -151,67 +141,93 @@
           </div>
 
           <div class="flex flex-col my-3 mx-6">
-            <div v-if="!editPosts">
-              <button
-                class="
-                  flex flex-row
-                  w-full
-                  py-2
-                  justify-center
-                  items-center
-                  text-indigo-100
-                  font-bold
-                  bg-indigo-600
-                  hover:bg-indigo-700
-                  rounded-lg
-                  hover:bg-opacity-100
-                  mouse
-                  shadow
-                  transition
-                  ease-in
-                  duration-200
-                  focus:outline-none
-                "
-                @click="editPosts = true"
-              >
-                <div>
-                  <svg
-                    class="h-8 w-8 mx-auto"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg>
-                </div>
+            <button
+              class="
+                mt-3
+                flex flex-row
+                w-full
+                py-2
+                justify-center
+                items-center
+                text-indigo-100
+                font-bold
+                bg-indigo-600
+                hover:bg-indigo-700
+                rounded-lg
+                hover:bg-opacity-100
+                mouse
+                shadow
+                transition
+                ease-in
+                duration-200
+                focus:outline-none
+              "
+              @click="$router.push('/posts')"
+            >
+              <div>
+                <svg
+                  class="h-8 w-8 mx-auto"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+              </div>
 
-                <div class="ml-3">Add a New Post</div>
-              </button>
-            </div>
-
-            <div v-else>
-              <create-post @cancel="editPosts = false"></create-post>
-            </div>
+              <div class="ml-2">New Post</div>
+            </button>
           </div>
-          <post-list-item
-            class="mt-6"
+          <div
+            class="flex px-8 py-8 rounded justify-between"
             :post="post"
             v-for="post in orderedPosts"
             :key="post.id"
           >
-            <div class="text-left px-3 py-8 rounded">
+            <div>
               <h2>{{ post.title }}</h2>
               <h3 class="text-sm text-indigo-300">
                 URL: {{ `/posts/${post.url}` }}
               </h3>
             </div>
-          </post-list-item>
+            <div>
+              <icon-button @click="$router.push(`/posts/${post.url}`)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                  />
+                </svg>
+              </icon-button>
+              <confirmed-delete
+                :errors="errors"
+                @click="() => deletePost(post.id)"
+                @clear="clearErrors"
+              >
+                <template #message>
+                  <div class="mx-4">
+                    <p class="text-sm text-gray-600">
+                      Are you sure you want to delete this post? This action
+                      cannot be be undone.
+                    </p>
+                  </div>
+                </template>
+              </confirmed-delete>
+            </div>
+          </div>
         </div>
       </dl>
     </div>
@@ -240,15 +256,13 @@ export default {
   },
   data() {
     return {
-      posts: [],
       listeners: [],
       editPosts: false,
-      editProfile: false,
-      editSiteSettings: false,
+      errors: [],
     };
   },
   computed: {
-    ...mapState(["currentUser", "readonly"]),
+    ...mapState(["currentUser", "readonly", "posts"]),
     orderedPosts() {
       // most recent first
       return this.posts
@@ -262,35 +276,11 @@ export default {
       }
       return this.formatBytes(0, 1);
     },
-  },
-  mounted() {
-    this.attachListerners();
-  },
-  watch: {
-    currentUser() {
-      this.detachListeners();
-      this.attachListerners();
+    siteLink() {
+      return `http://${this.currentUser.name}.replnotes.com`;
     },
   },
   methods: {
-    attachListerners() {
-      if (this.currentUser.id) {
-        let listener = this.$postsCollection
-          .where("user.id", "==", this.currentUser.id)
-          .onSnapshot((querySnapshot) => {
-            this.posts = [];
-            querySnapshot.forEach((doc) => {
-              this.posts.push(doc.data());
-            });
-          });
-        this.listeners.push(listener);
-      }
-    },
-    detachListeners() {
-      if (this.listeners) {
-        this.listeners.forEach((listener) => listener());
-      }
-    },
     formatBytes(bytes, decimals = 2) {
       const k = 1024;
       const dm = decimals < 0 ? 0 : decimals;
@@ -309,9 +299,24 @@ export default {
         units: sizes[i],
       };
     },
-  },
-  beforeDestroy() {
-    this.detachListeners();
+    async deletePost(postId) {
+      try {
+        await this.$postsCollection.doc(postId).delete();
+        this.$router.go(); // Refresh the page
+      } catch (error) {
+        console.log(error);
+        this.errors.push(error.message);
+      }
+    },
+    clearErrors() {
+      this.errors = [];
+    },
+    edit() {
+      this.editMode = true;
+    },
+    cancelEdit() {
+      this.editMode = false;
+    },
   },
 };
 </script>

@@ -247,20 +247,16 @@ export default {
   name: 'Pricing',
   data() {
     return {
-      email: '',
-      emailErrors: [],
       freeFeatures: [
         'Free subdomain at replnotes.com',
         'SEO-friendly server-rendered pages',
         'Social media previews with OG tags',
         '100 MB total storage',
-        '10 MB size limit per post',
       ],
       paidFeatures: [
         'All features in the free plan',
         'One custom domain',
         '1 GB total storage',
-        '100 MB size limit per post',
         'Custom CSS styles and Javascript integrations',
       ],
     }

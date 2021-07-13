@@ -1,77 +1,94 @@
 <template>
-  <card :key="post.id" class="mx-auto shadow bg-gray-900 text-indigo-100">
-    <h2 class="mb-3 py-2 text-xl font-bold">Add a New Post</h2>
-    <file-input
-      v-model="file"
-      class="mt-3"
-      :ref-key="post.id"
-      @input="
-        fileErrors = []
-        errors = []
-      "
-      @change="validateFile"
-    ></file-input>
-    <input-errors :errors="fileErrors"></input-errors>
-    <div v-if="file && fileErrors.length == 0">
-      <url-slug-input
-        v-model="url"
+  <div class="my-12 text-indigo-200">
+    <card :key="post.id" class="max-w-lg mx-auto bg-gray-900 py-4 shadow">
+      <h2 class="mb-3 py-2 text-xl text-center font-bold">New Post</h2>
+      <file-input
+        v-model="file"
         class="mt-3"
-        label="Post URL"
-        :prefix="baseUrl"
-        @focus="
-          urlErrors = []
+        :ref-key="post.id"
+        @input="
+          fileErrors = []
           errors = []
         "
-        @blur="validateUrl"
-      ></url-slug-input>
-      <input-errors :errors="urlErrors"></input-errors>
-      <text-input
-        v-model="title"
-        class="mt-3"
-        label="Title"
-        @focus="
-          titleErrors = []
-          errors = []
-        "
-      ></text-input>
-      <input-errors :errors="titleErrors"></input-errors>
+        @change="validateFile"
+      ></file-input>
+      <input-errors :errors="fileErrors"></input-errors>
+      <div v-if="file && fileErrors.length == 0">
+        <url-slug-input
+          v-model="url"
+          class="mt-3"
+          label="Post URL"
+          :prefix="baseUrl"
+          @focus="
+            urlErrors = []
+            errors = []
+          "
+          @blur="validateUrl"
+        ></url-slug-input>
+        <input-errors :errors="urlErrors"></input-errors>
+        <text-input
+          v-model="title"
+          class="mt-3"
+          label="Title"
+          @focus="
+            titleErrors = []
+            errors = []
+          "
+        ></text-input>
+        <input-errors :errors="titleErrors"></input-errors>
 
-      <text-area-input
-        v-model="description"
-        class="mt-3"
-        label="Description"
-      ></text-area-input>
-      <image-picker
-        v-if="thumbnails.length > 0"
-        v-model="thumbnailSrc"
-        class="mt-3"
-        :thumbnails="thumbnails"
-      >
-      </image-picker>
-      <multi-choice
-        v-model="tags"
-        class="mt-3"
-        label="Tags"
-        :options="userTags"
-        allow-insertion-of-new-keys
-      ></multi-choice>
-      <div v-if="file">
-        <h2 class="mt-3 text-gray-700 text-sm font-medium">Preview</h2>
-        <card class="shadow">
-          <post-preview :post="post"></post-preview>
-        </card>
+        <text-area-input
+          v-model="description"
+          class="mt-3"
+          label="Description"
+        ></text-area-input>
+        <image-picker
+          v-if="thumbnails.length > 0"
+          v-model="thumbnailSrc"
+          class="mt-3"
+          :thumbnails="thumbnails"
+        >
+        </image-picker>
+        <multi-choice
+          v-model="tags"
+          class="mt-3"
+          label="Tags"
+          :options="userTags"
+          allow-insertion-of-new-keys
+        ></multi-choice>
       </div>
+      <save-cancel
+        class="mt-3"
+        :is-loading="isLoading"
+        :progress="progress"
+        :errors="errors"
+        :disabled="disabled"
+        @save="createPost"
+        @cancel="$emit('cancel')"
+      />
+    </card>
+    <div v-if="file" class="text-indigo-500">
+      <h2 class="mt-6 text-center text-2xl sm:text-4xl font-bold">
+        Thumbnail Preview
+      </h2>
+      <card class="mt-3 max-w-lg mx-auto bg-gray-900 shadow">
+        <post-preview :post="post"></post-preview>
+      </card>
+      <h2 class="mt-12 text-center text-2xl sm:text-4xl font-bold">
+        Post Preview
+      </h2>
+      <post :post="post" :nb-json="nbJson" />
+      <save-cancel
+        class="mt-3 max-w-lg mx-auto"
+        :is-loading="isLoading"
+        :progress="progress"
+        :errors="errors"
+        :disabled="disabled"
+        @save="createPost"
+        @cancel="$emit('cancel')"
+      />
     </div>
-    <save-cancel
-      class="mt-3"
-      :is-loading="isLoading"
-      :progress="progress"
-      :errors="errors"
-      :disabled="disabled"
-      @save="createPost"
-      @cancel="$emit('cancel')"
-    />
-  </card>
+  </div>
 </template>
 
 <script>
@@ -86,7 +103,11 @@ import MultiChoice from '@/components/MultiChoice'
 import PostPreview from '@/components/PostPreview'
 import InputErrors from '@/components/InputErrors'
 
-import { readFile, parseThumbnailsFromNbJson } from '@/services/notebook'
+import {
+  readFile,
+  parseThumbnailsFromNbJson,
+  parseNbJson,
+} from '@/services/notebook'
 import { mapGetters, mapState } from 'vuex'
 
 export default {
@@ -179,6 +200,9 @@ export default {
         },
         thumbnail: this.thumbnailSrc,
       }
+    },
+    nbJson() {
+      return parseNbJson(this.content)
     },
   },
   watch: {

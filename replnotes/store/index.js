@@ -3,6 +3,7 @@ export const state = () => ({
   showFeedbackModal: false,
   token: null,
   currentUser: {},
+  posts: [],
   isEmailVerified: null,
   readonly: {}
 });
@@ -28,6 +29,12 @@ export const getters = {
   },
   loggedIn(state) {
     return state.authUserId;
+  },
+  post(state) {
+    return url => {
+      const posts = state.posts.filter(post => post.url === url);
+      return posts.length > 0 ? posts[0] : {};
+    };
   }
 };
 
@@ -52,6 +59,16 @@ export const actions = {
         this.$readonlyCollection.doc(authUser.uid).onSnapshot(snap => {
           commit("SET_READONLY_DATA", snap.data() || {});
         });
+
+        this.$postsCollection
+          .where("user.id", "==", authUser.uid)
+          .onSnapshot(querySnapshot => {
+            const posts = [];
+            querySnapshot.forEach(doc => {
+              posts.push(doc.data());
+            });
+            commit("SET_POSTS", posts);
+          });
       });
     }
   }
@@ -60,6 +77,9 @@ export const actions = {
 export const mutations = {
   SET_USER(state, val) {
     state.currentUser = val;
+  },
+  SET_POSTS(state, posts) {
+    state.posts = posts;
   },
   SET_AUTH_STATE(state, authUser) {
     state.authUserId = authUser.uid;

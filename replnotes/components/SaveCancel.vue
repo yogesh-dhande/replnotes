@@ -6,7 +6,7 @@
         v-else-if="disabled"
         :errors="['Please correct all errors before proceeding.']"
       />
-      <div v-if="!isLoading" class="sm:flex sm:flex-row-reverse">
+      <div v-if="!isLoading" class="mt-3 sm:flex sm:flex-row-reverse">
         <button
           type="button"
           class="

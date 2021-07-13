@@ -121,8 +121,6 @@ export default {
       try {
         this.isLoading = true
         await this.updateUser()
-        this.$router.push(`/${this.currentUser.name}`)
-        this.$router.go() // Refresh the page
       } catch (error) {
         if (error.message) {
           this.errors.push(error.message)

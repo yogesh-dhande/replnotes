@@ -6,7 +6,7 @@
       min-h-screen
       flex flex-1
       justify-center
-      pt-10
+      p-10
       text-gray-300
     "
   >
@@ -19,9 +19,7 @@
 </template>
 
 <script>
-export default {
-  name: "form-page",
-};
+export default {}
 </script>
 
 <style>

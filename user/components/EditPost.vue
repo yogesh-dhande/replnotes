@@ -1,72 +1,77 @@
 <template>
-  <card :key="localPost.id" class="mx-auto shadow bg-gray-900 text-indigo-100">
-    <file-input
-      v-model="file"
-      class="mt-3"
-      :ref-key="localPost.id"
-      @input="
-        fileErrors = []
-        errors = []
-      "
-      @change="validateFile"
-    ></file-input>
-    <input-errors :errors="fileErrors"></input-errors>
-
-    <url-slug-input
-      v-model="url"
-      class="mt-3"
-      label="Post URL"
-      :prefix="baseUrl"
-      @focus="
-        urlErrors = []
-        errors = []
-      "
-      @blur="validateUrl"
-    ></url-slug-input>
-    <input-errors :errors="urlErrors"></input-errors>
-    <text-input
-      v-model="title"
-      class="mt-3"
-      label="Title"
-      @focus="titleErrors = []"
-    ></text-input>
-    <input-errors :errors="titleErrors"></input-errors>
-
-    <text-area-input
-      v-model="description"
-      class="mt-3"
-      label="Description"
-    ></text-area-input>
-    <image-picker
-      v-if="thumbnails.length > 0"
-      v-model="thumbnailSrc"
-      class="mt-3"
-      :thumbnails="thumbnails"
+  <div>
+    <card
+      :key="localPost.id"
+      class="mx-auto shadow bg-gray-900 text-indigo-200"
     >
-    </image-picker>
-    <multi-choice
-      v-model="tags"
-      class="mt-3"
-      label="Tags"
-      :options="userTags"
-      allow-insertion-of-new-keys
-    ></multi-choice>
+      <file-input
+        v-model="file"
+        class="mt-3"
+        :ref-key="localPost.id"
+        @input="
+          fileErrors = []
+          errors = []
+        "
+        @change="validateFile"
+      ></file-input>
+      <input-errors :errors="fileErrors"></input-errors>
+
+      <url-slug-input
+        v-model="url"
+        class="mt-3"
+        label="Post URL"
+        :prefix="baseUrl"
+        @focus="
+          urlErrors = []
+          errors = []
+        "
+        @blur="validateUrl"
+      ></url-slug-input>
+      <input-errors :errors="urlErrors"></input-errors>
+      <text-input
+        v-model="title"
+        class="mt-3"
+        label="Title"
+        @focus="titleErrors = []"
+      ></text-input>
+      <input-errors :errors="titleErrors"></input-errors>
+
+      <text-area-input
+        v-model="description"
+        class="mt-3"
+        label="Description"
+      ></text-area-input>
+      <image-picker
+        v-if="thumbnails.length > 0"
+        v-model="thumbnailSrc"
+        class="mt-3"
+        :thumbnails="thumbnails"
+      >
+      </image-picker>
+      <multi-choice
+        v-model="tags"
+        class="mt-3"
+        label="Tags"
+        :options="userTags"
+        allow-insertion-of-new-keys
+      ></multi-choice>
+      <save-cancel
+        class="mt-3"
+        :is-loading="isLoading"
+        :progress="progress"
+        :errors="errors"
+        :disabled="disabled"
+        @save="savePost"
+        @cancel="$emit('cancel')"
+      />
+    </card>
     <div v-if="file">
-      <h2 class="mt-3 text-sm font-medium">Preview</h2>
-      <card class="bg-gray-700 bg-opacity-25 hover:bg-opacity-50 shadow mt-3">
+      <h2 class="mt-6 text-center text-2xl font-bold">Thumbnail Preview</h2>
+      <card class="mt-3 bg-gray-700 bg-opacity-25 hover:bg-opacity-50 shadow">
         <post-preview :post="localPost"></post-preview>
       </card>
     </div>
-    <save-cancel
-      class="mt-3"
-      :is-loading="isLoading"
-      :progress="progress"
-      :errors="errors"
-      :disabled="disabled"
-      @save="savePost"
-      @cancel="$emit('cancel')"
-    />
-  </card>
+  </div>
 </template>
 
 <script>

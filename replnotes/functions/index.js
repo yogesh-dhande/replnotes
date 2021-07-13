@@ -7,6 +7,7 @@ const fs = require("fs");
 const BusBoy = require("busboy");
 const spawn = require("child-process-promise").spawn;
 const { reservedNames } = require("./validation");
+const { default: axios } = require("axios");
 
 const cors = require("cors")({ origin: true });
 
@@ -34,6 +35,16 @@ const plans = {
     fileSizeLimit: 100 * 1024 * 1024
   }
 };
+
+function getStorageLimit(uid) {
+  const doc = await db
+        .collection("readonly")
+        .doc(uid)
+        .get();
+
+  const readonly = doc.data();
+  return plans[readonly.plan].storageLimit
+}
 
 const calculateStorageUsed = async function(userId) {
   return await bucket.getFiles(
@@ -301,17 +312,11 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       let uid = await getUIDFromRequest(req);
-      let doc = await db
-        .collection("readonly")
-        .doc(uid)
-        .get();
 
-      let readonly = doc.data();
-      if (readonly.totalStorageUsed > plans[readonly.plan].storageLimit) {
+      const storageLimit = getStorageLimit(uid)
+      if (readonly.totalStorageUsed > storageLimit) {
         res.status(403).json({
-          message: `Storage exceeded the limit of ${
-            plans[readonly.plan].storageLimit
-          }`
+          message: `Storage exceeded the limit of ${storageLimit}`
         });
         return null;
       }
@@ -487,4 +492,58 @@ exports.getRoutes = functions.https.onRequest(async (req, res) => {
       return res.status(200).send([]);
     }
   });
+});
+
+exports.addVirtualHost = functions.https.onCall(async (data, context) => {
+  const userDomain = `${data.userName}.replnotes.com`;
+  const customDomain = data.incoming_address;
+  const patch = {};
+
+  let userSiteUrl = null;
+  if (process.env.FUNCTIONS_EMULATOR) {
+    userSiteUrl = null;
+  } else if (adminConfig.projectId == "staging-2cacb") {
+    userSiteUrl = "user-replnotes.web.app";
+  } else if (adminConfig.projectId == "nbtoblog-8a03f") {
+    userSiteUrl = "user-replnotes-production.web.app";
+  }
+
+  if (userSiteUrl) {
+    if (customDomain) {
+      patch["customDomain"] = customDomain;
+    } else {
+      patch["domain"] = userDomain;
+    }
+    const res = await axios.post(
+      "https://cloud.approximated.app/api/vhosts",
+      {
+        incoming_address: customDomain ? customDomain : userDomain,
+        // or just my-domain.com
+        target_address: USER_SITE_URL,
+        // any IP, domain, or subdomain
+        target_ports: "443"
+        // optional, defaults to 80
+        // Use 443 if your target already serves over https
+      },
+      {
+        headers: {
+          "api-key": functions.config().app.approximated_api_key
+        }
+      }
+    );
+
+    if (res.data.id) {
+      return await db
+        .collection("users")
+        .doc(data.userId)
+        .update(patch);
+    }
+  } else {
+    patch["domain"] = "localhost:8081";
+    return await db
+      .collection("users")
+      .doc(data.userId)
+      .update(patch);
+  }
+  return null;
 });
