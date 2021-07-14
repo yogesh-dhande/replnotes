@@ -54,4 +54,19 @@ export default async ({ app }, inject) => {
   }
 
   inject("updateUserPhoto", updateUserPhoto);
+
+  function addCustomDomain(customDomain, token) {
+    return app.$axios.post(
+      "/addCustomDomain",
+      { customDomain },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+  }
+
+  inject("addCustomDomain", addCustomDomain);
 };

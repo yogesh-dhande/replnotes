@@ -92,7 +92,9 @@
           @click="$router.push('/site')"
         >
           <div class="flex flex-row justify-between">
-            <div>Blog Settings</div>
+            <div class="flex space-x-2">
+              <div>Blog Settings</div>
+            </div>
             <div>
               <icon-button @click="$router.push('/site')">
                 <svg
@@ -109,28 +111,6 @@
                   />
                 </svg>
               </icon-button>
-
-              <a
-                v-if="siteDomain"
-                :href="customDomain ? customDomain : siteDomain"
-                target="_blank"
-                class="hover:text-indigo-400"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
             </div>
           </div>
           <div v-if="!siteDomain" class="mx-auto text-sm text-yellow-100">
@@ -156,6 +136,28 @@
             </svg>
             <span class="ml-2">Setting up your blog...</span>
           </div>
+          <a
+            v-else
+            :href="siteLink"
+            target="_blank"
+            class="text-pink-500 rounded shadow bg-opacity-100 hover:underline"
+          >
+            {{ siteLink }}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="inline ml-1 mb-1 h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </a>
         </div>
 
         <div
@@ -297,6 +299,9 @@ export default {
         return this.formatBytes(this.readonly.totalStorageUsed, 1);
       }
       return this.formatBytes(0, 1);
+    },
+    siteLink() {
+      return this.customDomain ? this.customDomain : this.siteDomain;
     },
   },
   methods: {

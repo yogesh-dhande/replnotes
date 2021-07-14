@@ -38,11 +38,13 @@ export const getters = {
     };
   },
   siteDomain(state) {
-    return state.site ? `http://${state.site.domain}.replnotes.com` : null;
+    return state.site && state.site.domain
+      ? `https://${state.site.domain}`
+      : null;
   },
   customDomain(state) {
     return state.site && state.site.customDomain
-      ? `http://${state.site.customDomain}`
+      ? `https://${state.site.customDomain}`
       : null;
   }
 };
@@ -80,7 +82,7 @@ export const actions = {
           });
 
         this.$sitesCollection
-          .where("user.id", "==", authUser.uid)
+          .where("uid", "==", authUser.uid)
           .onSnapshot(querySnapshot => {
             if (querySnapshot.size > 0) {
               commit("SET_SITE", querySnapshot.docs[0].data());

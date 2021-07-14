@@ -162,6 +162,20 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
             totalStorageUsed: 0,
             plan: "free"
           });
+        
+        const siteId = user.uid
+        const domain = `${newUser.name}.replnotes.com`
+        await db
+          .collection("sites")
+          .doc(siteId)
+          .set({
+            id: siteId,
+            uid: user.uid,
+            domain,
+          });
+        
+        await addVirtualHost(siteId, domain)
+
         return res.status(200).send(newUser);
       }
     } catch (error) {
@@ -169,6 +183,21 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
     }
   });
 });
+
+
+exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
+  return cors(req, res, async () => {
+    try {
+      let uid = await getUIDFromRequest(req);
+      await addVirtualHost(uid, req.body.customDomain)
+      return null
+    } 
+    catch (error) {
+      res.status(400).json(error);
+    }
+  })
+})
+
 
 exports.updateUserWhenNewPostCreated = functions.firestore
   .document("posts/{postId}")
@@ -494,9 +523,7 @@ exports.getRoutes = functions.https.onRequest(async (req, res) => {
   });
 });
 
-exports.addVirtualHost = functions.https.onCall(async (data, context) => {
-  const userDomain = `${data.userName}.replnotes.com`;
-  const customDomain = data.incoming_address;
+async function addVirtualHost(siteId, incomingAddress, isCustomDomain=false) {
   const patch = {};
 
   let userSiteUrl = null;
@@ -509,21 +536,17 @@ exports.addVirtualHost = functions.https.onCall(async (data, context) => {
   }
 
   if (userSiteUrl) {
-    if (customDomain) {
-      patch["customDomain"] = customDomain;
+    if (isCustomDomain) {
+      patch["customDomain"] = incomingAddress;
     } else {
-      patch["domain"] = userDomain;
+      patch["domain"] = incomingAddress;
     }
     const res = await axios.post(
       "https://cloud.approximated.app/api/vhosts",
       {
-        incoming_address: customDomain ? customDomain : userDomain,
-        // or just my-domain.com
+        incoming_address: incomingAddress,
         target_address: USER_SITE_URL,
-        // any IP, domain, or subdomain
         target_ports: "443"
-        // optional, defaults to 80
-        // Use 443 if your target already serves over https
       },
       {
         headers: {
@@ -531,19 +554,11 @@ exports.addVirtualHost = functions.https.onCall(async (data, context) => {
         }
       }
     );
-
-    if (res.data.id) {
-      return await db
-        .collection("users")
-        .doc(data.userId)
-        .update(patch);
-    }
   } else {
     patch["domain"] = "localhost:8081";
-    return await db
-      .collection("users")
-      .doc(data.userId)
-      .update(patch);
   }
-  return null;
-});
+    return await db
+          .collection("sites")
+          .doc(siteId)
+      .update(patch);
+}

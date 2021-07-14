@@ -5,7 +5,7 @@
       class="shadow-lg bg-gray-900 bg-opacity-25 hover:bg-opacity-50"
     >
       <window>
-        <template v-slot:top-right v-if="showButtons">
+        <template v-if="showButtons" #top-right>
           <icon-button @click="editMode = true">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -40,12 +40,12 @@
             </svg>
           </button>
         </template>
-        <template v-slot:body>
+        <template #body>
           <h2 class="bg-gray-800 px-3 py-2 rounded">{{ navItem.label }}</h2>
         </template>
       </window>
     </div>
-    <div class="flex flex-col space-y-2 bg-gray-900 p-4 mt-2" v-else>
+    <div v-else class="flex flex-col space-y-2 bg-gray-900 p-4 mt-2">
       <text-input v-model="navItem.label" label="Link Text"></text-input>
       <toggle
         v-model="navItem.external"
@@ -53,21 +53,20 @@
         class="block mt-2"
       />
       <text-input v-model="navItem.url" label="URL"></text-input>
-            <button
-        @click="save"
+      <button
         class="
           px-3
-          py-2
+          py-1
           bg-indigo-600
           hover:bg-indigo-700
           text-indigo-100
           font-medium
           rounded
         "
+        @click="save"
       >
         Save
       </button>
-    </div>
     </div>
   </div>
 </template>
@@ -77,7 +76,7 @@ export default {
   props: {
     label: {
       type: String,
-      default: "Home",
+      default: 'Home',
     },
     external: {
       type: Boolean,
@@ -85,7 +84,7 @@ export default {
     },
     url: {
       type: String,
-      default: "/",
+      default: '/',
     },
   },
   data() {
@@ -98,18 +97,18 @@ export default {
         url: this.url,
       },
       errors: [],
-    };
+    }
   },
   methods: {
     deleteLink() {
-      this.$emit("delete");
+      this.$emit('delete')
     },
     save() {
-      this.$emit("save", this.navItem);
-      this.editMode = false;
+      this.$emit('save', this.navItem)
+      this.editMode = false
     },
   },
-};
+}
 </script>
 
 <style>
