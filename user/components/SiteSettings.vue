@@ -13,7 +13,23 @@
       class="mt-3"
       @input="clearErrors"
     ></text-area-input>
-    <div v-if="isPaidAccount">
+    <div v-if="!isPaidAccount" class="text-sm mt-3">
+      <nuxt-link
+        to="/plans"
+        class="
+          px-3
+          py-1
+          bg-indigo-600
+          hover:bg-indigo-700
+          rounded
+          shadow
+          text-indigo-100
+        "
+        >Upgrade</nuxt-link
+      >
+      to the paid plan to add a custom domain to your blog.
+    </div>
+    <div v-else>
       <text-input
         v-model="customDomain"
         placeholder="mydomain.com"
@@ -80,12 +96,6 @@
           >Google</a
         >
       </div>
-    </div>
-    <div v-else class="text-sm mt-6">
-      <nuxt-link to="/plans" class="px-3 py-1 bg-indigo-600 rounded shadow"
-        >Upgrade</nuxt-link
-      >
-      to the paid plan to add a custom domain to your blog.
     </div>
 
     <label for="navbar-builder" class="block mt-6 px-2">Navigation Menu</label>

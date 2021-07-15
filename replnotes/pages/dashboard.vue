@@ -134,6 +134,22 @@
               />
             </svg>
           </a>
+          <div v-if="!isPaidAccount" class="text-sm mt-3">
+            <nuxt-link
+              to="/plans"
+              class="
+                px-3
+                py-1
+                bg-indigo-600
+                hover:bg-indigo-700
+                rounded
+                shadow
+                text-indigo-100
+              "
+              >Upgrade</nuxt-link
+            >
+            to the paid plan to add a custom domain to your blog.
+          </div>
         </div>
 
         <div
@@ -262,7 +278,7 @@ export default {
   },
   computed: {
     ...mapState(["currentUser", "readonly", "posts"]),
-    ...mapGetters(["siteDomain", "customDomain"]),
+    ...mapGetters(["siteDomain", "customDomain", "isPaidAccount"]),
     orderedPosts() {
       // most recent first
       return this.posts
