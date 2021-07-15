@@ -88,20 +88,20 @@ export default {
           onAuthStateChangedAction: "onAuthStateChangedAction",
           subscribeManually: false
         },
-        ssr: true // default
-        // emulatorPort: isDev ? 10000 : undefined,
-        // emulatorHost: isDev ? 'http://localhost' : undefined,
+        ssr: true, // default
+        emulatorPort: isDev ? 10000 : undefined,
+        emulatorHost: isDev ? "http://localhost" : undefined
       },
       functions: {
-        location: "us-central1"
-        // emulatorPort: isDev ? 10001 : undefined,
-        // emulatorHost: isDev ? 'localhost' : undefined,
+        location: "us-central1",
+        emulatorPort: isDev ? 10001 : undefined,
+        emulatorHost: isDev ? "localhost" : undefined
       },
       firestore: {
         memoryOnly: false, // default
-        enablePersistence: !isDev
-        // emulatorPort: isDev ? 10002 : undefined,
-        // emulatorHost: isDev ? 'localhost' : undefined,
+        enablePersistence: !isDev,
+        emulatorPort: isDev ? 10002 : undefined,
+        emulatorHost: isDev ? "localhost" : undefined
       },
       storage: true,
       analytics: {

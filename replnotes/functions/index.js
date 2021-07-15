@@ -9,7 +9,15 @@ const spawn = require("child-process-promise").spawn;
 const { reservedNames } = require("./validation");
 const { default: axios } = require("axios");
 
-const cors = require("cors")({ origin: true });
+const cors = require("cors")({
+  origin: [
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "https://replnotes.com",
+    "https://www.replnotes.com",
+    "https://staging-2cacb.web.app"
+  ]
+});
 
 const adminConfig = JSON.parse(process.env.FIREBASE_CONFIG);
 
@@ -36,17 +44,17 @@ const plans = {
   }
 };
 
-function getStorageLimit(uid) {
+async function getStorageLimit(uid) {
   const doc = await db
-        .collection("readonly")
-        .doc(uid)
-        .get();
+    .collection("readonly")
+    .doc(uid)
+    .get();
 
   const readonly = doc.data();
-  return plans[readonly.plan].storageLimit
+  return plans[readonly.plan].storageLimit;
 }
 
-const calculateStorageUsed = async function(userId) {
+async function calculateStorageUsed(userId) {
   return await bucket.getFiles(
     { prefix: join("users", userId) },
     async (error, files) => {
@@ -62,7 +70,7 @@ const calculateStorageUsed = async function(userId) {
       await db.doc(`readonly/${userId}`).update(readonly);
     }
   );
-};
+}
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes";
@@ -162,42 +170,66 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
             totalStorageUsed: 0,
             plan: "free"
           });
-        
-        const siteId = user.uid
-        const domain = `${newUser.name}.replnotes.com`
+
+        const siteId = user.uid;
+        const domain = `${newUser.name}.replnotes.com`;
         await db
           .collection("sites")
           .doc(siteId)
           .set({
             id: siteId,
             uid: user.uid,
-            domain,
+            domain
           });
-        
-        await addVirtualHost(siteId, domain)
+
+        await addVirtualHost(siteId, domain);
 
         return res.status(200).send(newUser);
       }
     } catch (error) {
-      res.status(400).json(error);
+      console.log(error.message);
+      res.status(400).json({ message: error.message });
     }
   });
 });
-
 
 exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       let uid = await getUIDFromRequest(req);
-      await addVirtualHost(uid, req.body.customDomain)
-      return null
-    } 
-    catch (error) {
-      res.status(400).json(error);
+      return await addVirtualHost(
+        uid,
+        req.body.customDomain,
+        req.body.oldDomain,
+        isCustomDomain
+      );
+    } catch (error) {
+      console.log(error.message);
+      res.status(400).json({ message: error.message });
     }
-  })
-})
+  });
+});
 
+exports.getCustomDomainStatus = functions.https.onRequest(async (req, res) => {
+  return cors(req, res, async () => {
+    try {
+      return await axios.get(
+        "https://cloud.approximated.app/api/vhosts/by/incoming",
+        {
+          incoming_address: req.query.customDomain
+        },
+        {
+          headers: {
+            "api-key": functions.config().app.approximated_api_key
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error.message);
+      res.status(error.response.status).json({ message: error.message });
+    }
+  });
+});
 
 exports.updateUserWhenNewPostCreated = functions.firestore
   .document("posts/{postId}")
@@ -342,7 +374,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
     try {
       let uid = await getUIDFromRequest(req);
 
-      const storageLimit = getStorageLimit(uid)
+      const storageLimit = getStorageLimit(uid);
       if (readonly.totalStorageUsed > storageLimit) {
         res.status(403).json({
           message: `Storage exceeded the limit of ${storageLimit}`
@@ -397,8 +429,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
 
       return null;
     } catch (error) {
-      console.log(error);
-      res.status(400).json(error);
+      res.status(400).json({ message: error.message });
       return null;
     }
   });
@@ -467,7 +498,7 @@ exports.updateUserPhoto = functions.https.onRequest(async (req, res) => {
       res.status(200).send("ok");
       return null;
     } catch (error) {
-      res.status(400).json(error);
+      res.status(400).json({ message: error.message });
       return null;
     }
   });
@@ -523,7 +554,12 @@ exports.getRoutes = functions.https.onRequest(async (req, res) => {
   });
 });
 
-async function addVirtualHost(siteId, incomingAddress, isCustomDomain=false) {
+async function addVirtualHost(
+  siteId,
+  incomingAddress,
+  oldDomain = null,
+  isCustomDomain = false
+) {
   const patch = {};
 
   let userSiteUrl = null;
@@ -541,7 +577,7 @@ async function addVirtualHost(siteId, incomingAddress, isCustomDomain=false) {
     } else {
       patch["domain"] = incomingAddress;
     }
-    const res = await axios.post(
+    await axios.post(
       "https://cloud.approximated.app/api/vhosts",
       {
         incoming_address: incomingAddress,
@@ -554,11 +590,25 @@ async function addVirtualHost(siteId, incomingAddress, isCustomDomain=false) {
         }
       }
     );
+
+    if (oldDomain) {
+      await axios.delete(
+        "https://cloud.approximated.app/api/vhosts",
+        {
+          incoming_address: oldDomain
+        },
+        {
+          headers: {
+            "api-key": functions.config().app.approximated_api_key
+          }
+        }
+      );
+    }
   } else {
     patch["domain"] = "localhost:8081";
   }
-    return await db
-          .collection("sites")
-          .doc(siteId)
-      .update(patch);
+  return await db
+    .collection("sites")
+    .doc(siteId)
+    .update(patch);
 }

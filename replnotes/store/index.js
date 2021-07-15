@@ -4,7 +4,7 @@ export const state = () => ({
   token: null,
   currentUser: {},
   posts: [],
-  site: null,
+  site: {},
   isEmailVerified: null,
   readonly: {}
 });

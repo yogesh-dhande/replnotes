@@ -12,6 +12,5 @@ import PageNotFound from "@/components/partials/PageNotFound.vue";
 export default {
   components: { AnErrorOccured, PageNotFound },
   props: ["error"],
-  layout: ({ store }) => (store.state.siteOwner.name ? "custom" : "default"),
 };
 </script>

@@ -55,13 +55,12 @@ export default async ({ app }, inject) => {
 
   inject("updateUserPhoto", updateUserPhoto);
 
-  function addCustomDomain(customDomain, token) {
+  function addCustomDomain(customDomain, oldDomain, token) {
     return app.$axios.post(
       "/addCustomDomain",
-      { customDomain },
+      { customDomain, oldDomain },
       {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
           Authorization: `Bearer ${token}`
         }
       }
@@ -69,4 +68,18 @@ export default async ({ app }, inject) => {
   }
 
   inject("addCustomDomain", addCustomDomain);
+
+  function getCustomDomainStatus(customDomain, token) {
+    return app.$axios.get(
+      "/getCustomDomainStatus",
+      { customDomain: customDomain },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+  }
+
+  inject("getCustomDomainStatus", getCustomDomainStatus);
 };

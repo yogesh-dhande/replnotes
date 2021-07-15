@@ -20,8 +20,8 @@ service cloud.firestore {
     }
     match /sites/{siteId} {
     	allow read;
-      allow create, delete: false
-      allow update: if request.auth != null && request.resource.data.user.id == request.auth.uid && request.resource.data.user.name == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.name
+      allow create, delete: if false
+      allow update: if request.auth != null && request.resource.data.uid == request.auth.uid
     }
   }
 }
