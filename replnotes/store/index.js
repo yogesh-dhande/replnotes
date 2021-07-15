@@ -46,6 +46,9 @@ export const getters = {
     return state.site && state.site.customDomain
       ? `https://${state.site.customDomain}`
       : null;
+  },
+  isPaidAccount(state) {
+    return state.readonly.plan !== "free";
   }
 };
 

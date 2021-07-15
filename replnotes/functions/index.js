@@ -36,22 +36,25 @@ const bucket = admin.storage().bucket();
 const plans = {
   free: {
     storageLimit: 100 * 1024 * 1024, // MB
-    fileSizeLimit: 10 * 1024 * 1024
+    fileSizeLimit: 10 * 1024 * 1024,
+    customDomain: false
   },
   paid: {
     storageLimit: 1024, // MB,
-    fileSizeLimit: 100 * 1024 * 1024
+    fileSizeLimit: 100 * 1024 * 1024,
+    customDomain: true
   }
 };
 
-async function getStorageLimit(uid) {
+async function getReadonly(uid) {
   const doc = await db
     .collection("readonly")
     .doc(uid)
     .get();
 
   const readonly = doc.data();
-  return plans[readonly.plan].storageLimit;
+  readonly.plan = plans[readonly.plan];
+  return readonly;
 }
 
 async function calculateStorageUsed(userId) {
@@ -196,13 +199,22 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
 exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
-      let uid = await getUIDFromRequest(req);
-      return await addVirtualHost(
-        uid,
-        req.body.customDomain,
-        req.body.oldDomain,
-        isCustomDomain
-      );
+      const uid = await getUIDFromRequest(req);
+      const readonly = getReadonly(uid);
+      if (readonly.plan.customDomain) {
+        return await addVirtualHost(
+          uid,
+          req.body.customDomain,
+          req.body.oldDomain,
+          isCustomDomain
+        );
+      } else {
+        res
+          .status(403)
+          .json({
+            message: "Custom domains are only available on the paid plan"
+          });
+      }
     } catch (error) {
       console.log(error.message);
       res.status(400).json({ message: error.message });
@@ -374,8 +386,8 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
     try {
       let uid = await getUIDFromRequest(req);
 
-      const storageLimit = getStorageLimit(uid);
-      if (readonly.totalStorageUsed > storageLimit) {
+      const readonly = getReadonly(uid);
+      if (readonly.totalStorageUsed > readonly.plan.storageLimit) {
         res.status(403).json({
           message: `Storage exceeded the limit of ${storageLimit}`
         });
@@ -394,7 +406,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
         file.pipe(fs.createWriteStream(filepath));
       });
       busboy.on("finish", async () => {
-        let fileSizeLimit = plans[readonly.plan].fileSizeLimit;
+        let fileSizeLimit = readonly.plan.fileSizeLimit;
         if (fs.statSync(fileToUpload.filepath).size > fileSizeLimit) {
           let message = `Files larger than ${formatBytes(
             fileSizeLimit
