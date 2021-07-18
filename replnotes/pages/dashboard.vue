@@ -5,6 +5,7 @@
     <div class="max-w-3xl mx-auto">
       <dl class="mx-12 mt-5 grid grid-cols-1 gap-5 lg:grid-cols-1">
         <div
+          v-if="!isPaidAccount"
           class="
             text-center text-indigo-300
             px-4
@@ -89,7 +90,6 @@
             duration-200
             focus:outline-none
           "
-          @click="$router.push('/site')"
         >
           <div class="flex flex-row justify-between">
             <div class="flex space-x-2">

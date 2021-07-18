@@ -201,8 +201,9 @@ export default {
             this.$analyticsEvents.SIGN_UP,
             userCredential.user.toJSON()
           );
+          this.$store.commit("SET_AUTH_STATE", userCredential.user);
 
-          this.$router.push("/dashboard");
+          this.$router.push("/plans");
         } catch (error) {
           if (error.response && error.response.data.message) {
             this.errors.push(error.response.data.message);

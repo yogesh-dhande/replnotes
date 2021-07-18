@@ -183,7 +183,40 @@
       </div>
     </div>
     <process />
-    <pricing />
+    <section id="pricing" class="bg-gray-800 text-indigo-100">
+      <div class="pt-12 sm:pt-16 lg:pt-24">
+        <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto space-y-2 lg:max-w-none">
+            <h2
+              class="
+                text-3xl
+                font-bold
+                text-indigo-400
+                sm:text-4xl
+                lg:text-5xl
+                my-4
+              "
+              data-aos="fade-up"
+            >
+              Simple, Transparent Pricing
+            </h2>
+          </div>
+          <h3
+            class="text-xl text-indigo-200"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            Start creating content for free. Upgrade for more features when
+            ready!
+          </h3>
+        </div>
+        <pricing
+          class="my-8 sm:my-16"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        />
+      </div>
+    </section>
     <h2
       class="
         mb-12
@@ -194,6 +227,8 @@
         sm:text-2xl
         text-center
       "
+      data-aos="fade-up"
+      data-aos-delay="200"
     >
       Have questions? Ask them
       <nuxt-link

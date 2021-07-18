@@ -7,6 +7,7 @@ console.log(deployTarget);
 require("dotenv").config({
   path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`)
 });
+console.log(process.env.NUXT_ENV_PADDLE_VENDOR_ID);
 
 export default {
   target: "static",
@@ -38,7 +39,12 @@ export default {
       },
       { hid: "og:image", property: "og:image", content: "~/static/logo.png" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    script: [
+      {
+        src: "https://cdn.paddle.com/paddle/paddle.js"
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
