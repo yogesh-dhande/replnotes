@@ -48,7 +48,7 @@ export const getters = {
       : null;
   },
   isPaidAccount(state, getters) {
-    return getters.loggedIn && state.readonly.plan !== "free";
+    return getters.loggedIn && state.readonly.plan === "paid";
   }
 };
 

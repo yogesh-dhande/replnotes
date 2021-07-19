@@ -194,7 +194,6 @@ export default {
             userCredential.user.toJSON()
           )
           this.$store.commit('SET_AUTH_STATE', userCredential.user)
-
           this.$router.push('/plans')
         } catch (error) {
           if (error.response && error.response.data.message) {
