@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "PORT=8080 nuxt",
-    "firebase": "npm run default && firebase emulators:start",
+    "firebase": "npm run default && firebase emulators:start --import tests/.seed",
     "export": "firebase emulators:export tests/.seed",
     "default": "firebase use staging",
     "prod": "firebase use production",
