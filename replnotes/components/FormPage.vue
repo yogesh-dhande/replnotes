@@ -6,11 +6,11 @@
       min-h-screen
       flex flex-1
       justify-center
-      p-10
-      text-gray-300
+      py-10
+      text-indigo-100
     "
   >
-    <div class="text-indigo-100 w-full h-full leading-loose">
+    <div class="w-full h-full leading-loose">
       <div class="max-w-lg mx-auto">
         <slot> </slot>
       </div>

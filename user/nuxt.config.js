@@ -8,8 +8,6 @@ require('dotenv').config({
   path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`),
 })
 
-console.log(process.env.NUXT_ENV_FIREBASE_CONFIG_PROJECT_ID)
-
 export default {
   dev: isDev,
   // Global page headers: https://go.nuxtjs.dev/config-head

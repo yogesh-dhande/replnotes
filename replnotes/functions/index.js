@@ -209,11 +209,9 @@ exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
           isCustomDomain
         );
       } else {
-        res
-          .status(403)
-          .json({
-            message: "Custom domains are only available on the paid plan"
-          });
+        res.status(403).json({
+          message: "Custom domains are only available on the paid plan"
+        });
       }
     } catch (error) {
       console.log(error.message);

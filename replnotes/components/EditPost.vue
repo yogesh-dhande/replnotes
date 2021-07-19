@@ -291,7 +291,7 @@ export default {
             this.progress = 50
           }
           await this.updatePost()
-          this.$router.go() // Refresh the page
+          this.$router.push('/dashboard')
         } catch (error) {
           if (error.message) {
             this.errors.push(error.message)

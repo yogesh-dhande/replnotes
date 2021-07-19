@@ -7,7 +7,6 @@ console.log(deployTarget);
 require("dotenv").config({
   path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`)
 });
-console.log(process.env.NUXT_ENV_PADDLE_VENDOR_ID);
 
 export default {
   target: "static",

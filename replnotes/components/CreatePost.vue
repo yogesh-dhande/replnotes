@@ -321,6 +321,7 @@ export default {
           this.progress = 66
           await this.upload()
           this.progress = 100
+          this.$router.push('/dashboard')
         } catch (error) {
           // this.postRef.delete();
           console.log(error.message)
@@ -340,8 +341,6 @@ export default {
       data.append('file', this.file)
       data.append('post', JSON.stringify(this.post))
       await this.$uploadPostFile(data, this.token)
-      this.$router.push(`/${this.post.user.name}/posts/${this.post.url}`)
-
       this.postRef = this.$postsCollection.doc()
       this.file = null
     },
