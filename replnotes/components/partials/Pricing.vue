@@ -263,9 +263,9 @@
               "
               data-product="14054"
               aria-describedby="tier-standard"
-              @click="$router.push('/register')"
+              @click="selectPlan"
             >
-              Coming soon!
+              Start 1-month trial
             </button>
           </div>
         </div>
@@ -275,57 +275,66 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters } from 'vuex'
 export default {
-  name: "Pricing",
+  name: 'Pricing',
   data() {
     return {
       annual: true,
+      allowFreeTrial: true,
       freeFeatures: [
-        "Free subdomain at replnotes.com",
-        "SEO-friendly server-rendered pages",
-        "Social media previews with OG tags",
-        "100 MB total storage",
+        'Free subdomain at replnotes.com',
+        'SEO-friendly server-rendered pages',
+        'Social media previews with OG tags',
+        '100 MB total storage',
       ],
       paidFeatures: [
-        "All features in the free plan",
-        "One custom domain",
-        "1 GB total storage",
-        "Custom CSS styles and Javascript integrations",
+        'All features in the free plan',
+        'One custom domain',
+        '1 GB total storage',
+        'Custom CSS styles and Javascript integrations',
       ],
-    };
+    }
   },
   computed: {
-    ...mapState(["currentUser"]),
-    ...mapGetters(["loggedIn", "isPaidAccount"]),
+    ...mapState(['currentUser', 'token']),
+    ...mapGetters(['loggedIn', 'isPaidAccount']),
   },
   methods: {
-    selectPlan() {
+    async selectPlan() {
       if (this.loggedIn && !this.isPaidAccount) {
-        this.openCheckout();
+        if (this.allowFreeTrial) {
+          await this.successCallback()
+        } else {
+          this.openCheckout()
+        }
       } else {
-        this.$router.push("/register");
+        this.$router.push('/register')
       }
     },
     openCheckout() {
-      console.log(process.env.NUXT_ENV_PADDLE_VENDOR_ID);
-      if (process.env.NODE_ENV !== "production") {
+      console.log(process.env.NUXT_ENV_PADDLE_VENDOR_ID)
+      if (process.env.NODE_ENV !== 'production') {
         // eslint-disable-next-line no-undef
-        Paddle.Environment.set("sandbox");
+        Paddle.Environment.set('sandbox')
       }
       // eslint-disable-next-line no-undef
-      Paddle.Setup({ vendor: parseInt(process.env.NUXT_ENV_PADDLE_VENDOR_ID) });
+      Paddle.Setup({ vendor: parseInt(process.env.NUXT_ENV_PADDLE_VENDOR_ID) })
       // eslint-disable-next-line no-undef
       Paddle.Checkout.open({
         product: this.annual
           ? process.env.NUXT_ENV_PADDLE_ANNUAL_PRODUCT_ID
           : process.env.NUXT_ENV_PADDLE_MONTHLY_PRODUCT_ID,
         email: this.currentUser.email,
-        successCallback: () => this.$router.push("/dashboard"),
-      });
+        successCallback: this.successCallback,
+      })
+    },
+    async successCallback() {
+      await this.$upgradePlan(this.token)
+      this.$router.push('/dashboard')
     },
   },
-};
+}
 </script>
 
 <style>

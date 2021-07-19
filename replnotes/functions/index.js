@@ -196,18 +196,32 @@ exports.signUp = functions.https.onRequest(async (req, res) => {
   });
 });
 
+exports.upgradePlan = functions.https.onRequest(async (req, res) => {
+  return cors(req, res, async () => {
+    try {
+      const uid = await getUIDFromRequest(req);
+      await db.doc(`readonly/${uid}`).update({ plan: "paid" });
+      return res.status(200).send("ok");
+    } catch (error) {
+      console.log(error.message);
+      res.status(400).json({ message: error.message });
+    }
+  });
+});
+
 exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       const uid = await getUIDFromRequest(req);
       const readonly = getReadonly(uid);
       if (readonly.plan.customDomain) {
-        return await addVirtualHost(
+        await addVirtualHost(
           uid,
           req.body.customDomain,
           req.body.oldDomain,
           isCustomDomain
         );
+        return res.status(200).send(req.body);
       } else {
         res.status(403).json({
           message: "Custom domains are only available on the paid plan"
@@ -223,7 +237,7 @@ exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
 exports.getCustomDomainStatus = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
-      return await axios.get(
+      const status = await axios.get(
         "https://cloud.approximated.app/api/vhosts/by/incoming",
         {
           incoming_address: req.query.customDomain
@@ -234,6 +248,7 @@ exports.getCustomDomainStatus = functions.https.onRequest(async (req, res) => {
           }
         }
       );
+      res.status(200).send(status.data);
     } catch (error) {
       console.log(error.message);
       res.status(error.response.status).json({ message: error.message });

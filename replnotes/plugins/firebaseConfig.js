@@ -55,6 +55,20 @@ export default async ({ app }, inject) => {
 
   inject("updateUserPhoto", updateUserPhoto);
 
+  function upgradePlan(token) {
+    return app.$axios.post(
+      "/upgradePlan",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+  }
+
+  inject("upgradePlan", upgradePlan);
+
   function addCustomDomain(customDomain, oldDomain, token) {
     return app.$axios.post(
       "/addCustomDomain",
