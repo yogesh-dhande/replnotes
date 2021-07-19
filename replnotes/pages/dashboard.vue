@@ -81,8 +81,6 @@
             bg-gray-900 bg-opacity-50
             rounded-lg
             hover:bg-opacity-100
-            hover:
-            cursor-pointer
             mouse
             shadow
             transition
@@ -116,9 +114,15 @@
           <a
             :href="siteLink"
             target="_blank"
-            class="text-pink-500 rounded shadow bg-opacity-100 hover:underline"
+            class="
+              text-pink-500
+              rounded
+              shadow
+              bg-opacity-100
+              hover:underline
+              cursor-pointer
+            "
           >
-            {{ siteLink }}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="inline ml-1 mb-1 h-5 w-5"
@@ -133,6 +137,7 @@
                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
               />
             </svg>
+            {{ siteLink }}
           </a>
           <div v-if="!isPaidAccount" class="text-sm mt-3">
             <nuxt-link
@@ -207,8 +212,15 @@
           >
             <div>
               <h2>{{ post.title }}</h2>
-              <h3 class="text-sm text-indigo-300">
-                URL: {{ `/posts/${post.url}` }}
+              <h3
+                class="
+                  text-sm text-indigo-300
+                  hover:text-indigo-400
+                  hover:underline
+                  cursor-pointer
+                "
+              >
+                {{ `${siteLink}/posts/${post.url}` }}
               </h3>
             </div>
             <div>
