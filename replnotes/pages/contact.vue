@@ -22,7 +22,7 @@
         @remove="feedback.image = ''"
       ></image-uploader>
       <custom-button class="my-3" @click="saveFeedback" type="button"
-        >Send Feedback</custom-button
+        >Submit</custom-button
       >
     </form>
   </form-page>

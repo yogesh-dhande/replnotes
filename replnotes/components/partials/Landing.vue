@@ -156,7 +156,7 @@
       >
         Have questions? Ask them
         <nuxt-link
-          to="/feedback"
+          to="/contact"
           class="text-indigo-400 hover:text-indigo-500 italic"
           >here!</nuxt-link
         >

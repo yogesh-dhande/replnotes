@@ -14,7 +14,7 @@
               >Home</nuxt-link
             >, or send us a
             <nuxt-link
-              to="/feedback"
+              to="/contact"
               class="text-indigo-500 hover:text-indigo-600"
               >message</nuxt-link
             >
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>

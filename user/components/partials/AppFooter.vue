@@ -62,7 +62,7 @@
           >Discover</nuxt-link
         >
         <nuxt-link
-          to="/feedback"
+          to="/contact"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -73,7 +73,7 @@
             border-transparent
           "
           @click.native="scrollToTop"
-          >Feedback</nuxt-link
+          >Contact</nuxt-link
         >
         <nuxt-link
           v-if="!currentUser.id"
@@ -120,22 +120,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
-  name: "app-footer",
   methods: {
+    computed: {
+      ...mapState(['currentUser']),
+    },
     scrollToTop() {
       window.scroll({
         top: 0,
         left: 0,
-        behavior: "smooth",
-      });
+        behavior: 'smooth',
+      })
     },
   },
-  computed: {
-    ...mapState(["currentUser"]),
-  },
-};
+}
 </script>
 
 <style>
