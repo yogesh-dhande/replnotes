@@ -162,10 +162,7 @@ export default {
       this.$fire.auth
         .signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
-          this.$fire.analytics.logEvent(
-            this.$analyticsEvents.LOGIN,
-            userCredential.user.toJSON()
-          );
+          this.$splitbee.track("Log In");
           this.$store.commit("SET_AUTH_STATE", userCredential.user);
 
           this.$router.push(this.redirect);

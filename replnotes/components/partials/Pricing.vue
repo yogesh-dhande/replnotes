@@ -141,8 +141,7 @@
             </li>
           </ul>
           <div class="rounded-md shadow">
-            <nuxt-link
-              to="/register"
+            <button
               class="
                 flex
                 items-center
@@ -158,9 +157,10 @@
                 hover:bg-indigo-700
               "
               aria-describedby="tier-standard"
+              @click="selectFree"
             >
               Select
-            </nuxt-link>
+            </button>
           </div>
         </div>
       </div>
@@ -301,10 +301,19 @@ export default {
     ...mapGetters(['loggedIn', 'isPaidAccount']),
   },
   methods: {
+    selectFree() {
+      this.$router.push('/register')
+      this.$splitbee.track('Select Plan', {
+        type: 'free',
+      })
+    },
     async selectPlan() {
       if (this.loggedIn && !this.isPaidAccount) {
         if (this.allowFreeTrial) {
           await this.successCallback()
+          this.$splitbee.track('Select Plan', {
+            type: 'trial',
+          })
         } else {
           this.openCheckout()
         }
@@ -328,10 +337,14 @@ export default {
         email: this.currentUser.email,
         successCallback: this.successCallback,
       })
+      this.$splitbee.track('Select Plan', {
+        type: this.annual ? 'annual' : 'monthly',
+      })
     },
     async successCallback() {
       await this.$upgradePlan(this.token)
       this.$router.push('/dashboard')
+      this.$splitbee.track('Payment Successful')
     },
   },
 }

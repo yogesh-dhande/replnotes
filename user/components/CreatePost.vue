@@ -320,6 +320,9 @@ export default {
           await this.postRef.set(this.post)
           this.progress = 66
           await this.upload()
+          this.$splitbee.track('Post Created', {
+            count: this.userPostUrls.length,
+          })
           this.progress = 100
           this.$router.push('/dashboard')
         } catch (error) {

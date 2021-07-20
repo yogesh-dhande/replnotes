@@ -62,12 +62,17 @@ export const actions = {
       commit("SET_TOKEN", null);
     } else {
       authUser.getIdToken(/* forceRefresh */ true).then(token => {
-        this.$fire.analytics.setUserId(authUser.uid);
         commit("SET_TOKEN", token);
         commit("SET_EMAIL_VERIFIED", authUser.emailVerified);
 
         this.$usersCollection.doc(authUser.uid).onSnapshot(snap => {
-          commit("SET_USER", snap.data() || {});
+          const userData = snap.data();
+          commit("SET_USER", userData || {});
+          this.$splitbee.user.set({
+            email: userData.email,
+            name: userData.name,
+            userId: userData.id
+          });
         });
 
         this.$readonlyCollection.doc(authUser.uid).onSnapshot(snap => {

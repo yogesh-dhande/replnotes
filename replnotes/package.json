@@ -21,6 +21,7 @@
     "@nuxtjs/firebase": "^7.5.0",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sitemap": "^2.4.0",
+    "@splitbee/web": "^0.2.4",
     "aos": "^2.3.4",
     "axios": "^0.21.1",
     "core-js": "^3.11.1",

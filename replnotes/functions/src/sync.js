@@ -1,7 +1,7 @@
 const { isEmpty } = require("./utils");
 const { calculateStorageUsed } = require("./storage");
 const functions = require("firebase-functions");
-const { db, bucket } = require("./app");
+const { db, bucket, admin } = require("./app");
 
 exports.updateUserWhenNewPostCreated = functions.firestore
   .document("posts/{postId}")

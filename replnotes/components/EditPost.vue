@@ -291,6 +291,7 @@ export default {
             this.progress = 50
           }
           await this.updatePost()
+          this.$splitbee.track('Post Edited')
           this.$router.push('/dashboard')
         } catch (error) {
           if (error.message) {

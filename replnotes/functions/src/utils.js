@@ -1,4 +1,5 @@
 const { auth, db } = require("./app");
+const { plans } = require("./plans");
 
 exports.cors = require("cors")({
   origin: [
