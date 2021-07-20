@@ -1,5 +1,4 @@
-const { auth, db } = require("./app");
-const { plans } = require("./plans");
+const { auth } = require("./app");
 
 exports.cors = require("cors")({
   origin: [
@@ -36,15 +35,4 @@ exports.getUIDFromRequest = async req => {
     req.get("authorization").replace("Bearer ", "")
   );
   return decodedToken.uid;
-};
-
-exports.getReadonly = async uid => {
-  const doc = await db
-    .collection("readonly")
-    .doc(uid)
-    .get();
-
-  const readonly = doc.data();
-  readonly.plan = plans[readonly.plan];
-  return readonly;
 };

@@ -1,7 +1,8 @@
 const axios = require("axios");
-const { cors, getUIDFromRequest, getReadonly } = require("./utils");
+const { cors, getUIDFromRequest } = require("./utils");
 const functions = require("firebase-functions");
 const { db } = require("./app");
+const { getReadonly } = require("./plans");
 
 exports.addVirtualHost = async (
   siteId,
@@ -88,7 +89,7 @@ exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       const uid = await getUIDFromRequest(req);
-      const readonly = getReadonly(uid);
+      const readonly = await getReadonly(uid);
       if (readonly.plan.customDomain) {
         await addVirtualHost(
           uid,

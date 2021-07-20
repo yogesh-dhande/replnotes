@@ -120,21 +120,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
+  computed: {
+    ...mapState(["currentUser"]),
+  },
   methods: {
-    computed: {
-      ...mapState(['currentUser']),
-    },
     scrollToTop() {
       window.scroll({
         top: 0,
         left: 0,
-        behavior: 'smooth',
-      })
+        behavior: "smooth",
+      });
     },
   },
-}
+};
 </script>
 
 <style>

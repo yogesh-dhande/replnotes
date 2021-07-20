@@ -1,3 +1,4 @@
+const { join } = require("path");
 const { isEmpty } = require("./utils");
 const { calculateStorageUsed } = require("./storage");
 const functions = require("firebase-functions");

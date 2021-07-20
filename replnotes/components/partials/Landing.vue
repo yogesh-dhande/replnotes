@@ -18,6 +18,7 @@
           class="
             text-center text-5xl
             sm:text-7xl
+            lg:text-8xl
             tracking-tight
             font-extrabold
             text-indigo-400
@@ -26,7 +27,9 @@
           Jupyter Notebooks
           <span class="block text-indigo-100">
             <span class="inline text-indigo-400">
-              <span class="block text-4xl sm:text-6xl text-indigo-100">
+              <span
+                class="block text-4xl sm:text-6xl lg:text-7xl text-indigo-100"
+              >
                 to a Blog Within Minutes</span
               ></span
             >
@@ -39,16 +42,16 @@
             sm:px-0
             text-indigo-200
             sm:mt-5
-            text-md
-            sm:text-xl
-            md:text-2xl
-            sm:max-w-2xl
+            text-lg
+            sm:text-2xl
+            md:text-3xl
+            sm:max-w-3xl
             sm:mx-auto
-            md:mt-5
+            md:mt-10
             lg:mx-0
           "
         >
-          Quickly create a portfolio by turning Jupyter notebooks into beautiful
+          Create a portfolio website by turning Jupyter notebooks into beautiful
           blog posts. No coding required.
         </p>
       </div>
@@ -65,11 +68,9 @@
               font-medium
               rounded-md
               text-white
-              bg-gradient-to-r
-              from-pink-600
-              to-indigo-600
-              hover:from-indigo-600
-              hover:to-pink-600
+              bg-pink-600
+              hover:bg-pink-700
+              shadow
               border-none
               md:py-4
               md:text-lg
@@ -90,6 +91,7 @@
               text-base
               font-medium
               rounded-md
+              shadow
               text-indigo-700
               bg-indigo-100
               hover:bg-indigo-200

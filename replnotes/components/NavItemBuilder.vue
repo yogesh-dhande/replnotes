@@ -49,10 +49,10 @@
       <text-input v-model="navItem.label" label="Link Text"></text-input>
       <toggle
         v-model="navItem.external"
-        label="External URL"
+        label="External Link"
         class="block mt-2"
       />
-      <text-input v-model="navItem.url" label="URL"></text-input>
+      <text-input v-model="navItem.url" label="Link"></text-input>
       <button
         class="
           px-3

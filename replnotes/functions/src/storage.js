@@ -1,13 +1,14 @@
-const { formatBytes } = require("./utils");
 const { join } = require("path");
 const os = require("os");
 const path = require("path");
 const fs = require("fs");
 const BusBoy = require("busboy");
 const spawn = require("child-process-promise").spawn;
-const { cors, getUIDFromRequest, getReadonly } = require("./utils");
 const functions = require("firebase-functions");
+
+const { cors, getUIDFromRequest, formatBytes } = require("./utils");
 const { db, bucket } = require("./app");
+const { getReadonly } = require("./plans");
 
 exports.calculateStorageUsed = async userId => {
   return await bucket.getFiles(
@@ -60,7 +61,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
     try {
       let uid = await getUIDFromRequest(req);
 
-      const readonly = getReadonly(uid);
+      const readonly = await getReadonly(uid);
       if (readonly.totalStorageUsed > readonly.plan.storageLimit) {
         res.status(403).json({
           message: `Storage exceeded the limit of ${storageLimit}`
@@ -115,6 +116,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
 
       return null;
     } catch (error) {
+      console.log(error.message);
       res.status(400).json({ message: error.message });
       return null;
     }
@@ -184,6 +186,7 @@ exports.updateUserPhoto = functions.https.onRequest(async (req, res) => {
       res.status(200).send("ok");
       return null;
     } catch (error) {
+      console.log(error.message);
       res.status(400).json({ message: error.message });
       return null;
     }
