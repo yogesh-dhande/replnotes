@@ -1,7 +1,7 @@
 <template>
   <div class="text-indigo-100">
-    <div class="flex justify-center mb-6 sm:mb-12">
-      <div class="flex items-center">
+    <div class="flex justify-around mb-6 sm:mb-12">
+      <div class="flex items-center text-lg sm:text-xl">
         <span id="monthly-billing-label" class="mr-3">
           <span class="font-medium">Monthly billing </span>
         </span>
@@ -9,6 +9,7 @@
         <button
           type="button"
           class="
+            justify-self-center
             bg-gray-200
             relative
             inline-flex

@@ -1,36 +1,15 @@
 <template>
-  <section class="bg-gray-800">
+  <section class="bg-gray-800 leading-relaxed">
     <div class="max-w-7xl mx-auto px-6 sm:px-12 text-indigo-200">
       <div class="py-12 sm:py-24">
         <!-- Section header -->
         <div class="text-center">
           <h2
-            class="
-              text-4xl
-              sm:text-5xl
-              text-indigo-400
-              font-bold
-              tracking-wide
-              uppercase
-            "
+            class="text-4xl sm:text-5xl text-indigo-400 font-bold"
             data-aos="fade-up"
           >
-            Get Started
+            Get started in three quick steps
           </h2>
-          <p
-            class="
-              mt-2
-              text-3xl
-              sm:text-4xl
-              leading-8
-              font-extrabold
-              tracking-tight
-            "
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            In three quick steps
-          </p>
         </div>
 
         <!-- Items -->
@@ -92,7 +71,7 @@
             <h4 class="text-2xl font-bold mb-2 text-indigo-100">
               <span>1</span>. Create an account
             </h4>
-            <p class="text-md text-indigo-200 text-center">
+            <p class="text-lg text-indigo-200 text-center">
               Create an account and get a free subdomain at
               <span class="italic">username.replnotes.com</span> to host your
               blog. You can also set up your own custom domain under the premium
@@ -145,10 +124,10 @@
             <h4 class="text-2xl font-bold mb-2 text-indigo-100">
               <span>2</span>. Upload a notebook
             </h4>
-            <p class="text-md text-indigo-200 text-center">
+            <p class="text-lg text-indigo-200 text-center">
               Creating a blog post is as easy as uploading your Jupyter
-              notebook. It is scanned to autofill all necessary details, but you
-              can always customize them to your satisfaction.
+              notebook. The notebook is scanned to autofill all necessary
+              details but you can always customize them to your satisfaction.
             </p>
           </div>
 
@@ -182,10 +161,10 @@
             <h4 class="text-2xl font-bold mb-2 text-indigo-100">
               <span>3</span>. Save and publish
             </h4>
-            <p class="text-md text-indigo-200 text-center">
-              Just hit save and the blog post will be online at
-              username.replnotes.com/url, and your custom domain if you have it
-              set up.
+            <p class="text-lg text-indigo-200 text-center">
+              Just hit save and the blog post will be online on your custom
+              domain. No need to write any HTML or Javascript. We handle the
+              website creation and deployment for you.
             </p>
           </div>
         </div>

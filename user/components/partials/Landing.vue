@@ -89,7 +89,7 @@
               border-none
               md:py-4
               md:text-xl
-              md:px-5
+              md:px-10
             "
           >
             Start Blogging
@@ -142,7 +142,7 @@
             </h2>
           </div>
           <h3
-            class="text-xl text-indigo-200"
+            class="text-xl sm:text-2xl text-indigo-200"
             data-aos="fade-up"
             data-aos-delay="200"
           >
