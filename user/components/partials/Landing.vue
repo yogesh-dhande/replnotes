@@ -146,8 +146,7 @@
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            Start creating content for free. Upgrade for more features when
-            ready!
+            Create a blog for free. Upgrade for more features when ready!
           </h3>
         </div>
         <pricing
@@ -169,7 +168,6 @@
           text-center
         "
         data-aos="fade-up"
-        data-aos-delay="200"
       >
         Have questions? Ask them
         <nuxt-link

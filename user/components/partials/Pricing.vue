@@ -291,9 +291,11 @@ export default {
       ],
       paidFeatures: [
         'All features in the free plan',
-        'One custom domain',
+        'Custom domains',
+        'Remove REPL Notes branding',
         '1 GB total storage',
-        'Custom CSS styles and Javascript integrations',
+        'Custom CSS styles (coming soon)',
+        'Custom Javascript (coming soon)',
       ],
     }
   },
