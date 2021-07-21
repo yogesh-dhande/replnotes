@@ -11,7 +11,7 @@
           my-6
         "
       >
-        {{ user.site && user.site.title ? user.site.title : user.displayName }}
+        {{ site && site.title ? site.title : user.displayName }}
       </h1>
       <h2
         class="
@@ -22,11 +22,11 @@
           my-6
         "
       >
-        {{ user.site && user.site.description ? user.site.description : '' }}
+        {{ site && site.description ? site.description : '' }}
       </h2>
     </div>
 
-    <user-posts :user-name="user.name" :posts="posts"></user-posts>
+    <user-posts :user-name="user.name" :site="site" :posts="posts"></user-posts>
   </div>
 </template>
 
@@ -37,6 +37,10 @@ export default {
   components: { UserPosts },
   props: {
     user: {
+      type: Object,
+      default: () => {},
+    },
+    site: {
       type: Object,
       default: () => {},
     },

@@ -195,9 +195,7 @@ export default {
         ) {
           this.addCustomDomain()
         }
-        await this.$sitesCollection.doc(this.site.id).update({
-          site: this.localSite,
-        })
+        await this.$sitesCollection.doc(this.site.id).update(this.localSite)
         this.cancel()
       } catch (error) {
         this.errors.push(error.message)

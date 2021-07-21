@@ -3,6 +3,7 @@
     <div class="min-h-screen">
       <UserNavBar
         :user="siteOwner"
+        :site="site"
         class="sticky top-0 z-50"
         :class="{
           'shadow-2xl bg-gray-800 border-b-2 border-gray-900 border-opacity-75':
@@ -12,7 +13,7 @@
       <Nuxt />
     </div>
 
-    <UserFooter :user="siteOwner" />
+    <UserFooter :user="siteOwner" :site="site" />
   </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['siteOwner']),
+    ...mapState(['siteOwner', 'site']),
   },
   // a beforeMount call to add a listener to the window
   beforeMount() {

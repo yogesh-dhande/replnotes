@@ -1,45 +1,40 @@
 export function isSubdomain(domain) {
-  return true;
+  return domain.split('.')[1] === 'replnotes'
 }
 
 export function getSubdomain(domain) {
-  return domain.split(".")[0];
+  return domain.split('.')[0]
 }
 
-async function getUserFromSubdomain(context, domain) {
-  let user = {};
-  const snap = await context.$usersCollection
-    .where("name", "==", getSubdomain(domain))
-    .get();
+async function getSiteFromSubdomain(context, domain) {
+  let site = {}
+  const snap = await context.$sitesCollection
+    .where('domain', '==', domain)
+    .get()
 
   if (snap.size > 0) {
-    user = snap.docs[0].data() || {};
+    site = snap.docs[0].data() || {}
   }
-  return user;
+  return site
 }
 
-async function getUserFromCustomDomain(context, domain) {
-  let user = {};
-  const snap = await context.$usersCollection
-    .where("customDomain", "==", getSubdomain(domain))
-    .get();
+async function getSiteFromCustomDomain(context, domain) {
+  let site = {}
+  const snap = await context.$sitesCollection
+    .where('customDomain', '==', domain)
+    .get()
   if (snap.size > 0) {
-    user = snap.docs[0].data() || {};
+    site = snap.docs[0].data() || {}
   }
-  return user;
+  return site
 }
 
-export async function getUserFromRequest(context) {
-  let incoming = context.req.headers["Apx-Incoming-Address"];
-  if (process.env.NODE_ENV === "development") {
-    incoming = "blog.replnotes.com";
-  }
-  if (!incoming) {
-    return {};
-  }
+export async function getSiteFromRequest(context) {
+  const incoming =
+    context.req.headers['Apx-Incoming-Address'] || 'blog.replnotes.com'
   if (isSubdomain(incoming)) {
-    return await getUserFromSubdomain(context, incoming);
+    return await getSiteFromSubdomain(context, incoming)
   } else {
-    return await getUserFromCustomDomain(context, incoming);
+    return await getSiteFromCustomDomain(context, incoming)
   }
 }

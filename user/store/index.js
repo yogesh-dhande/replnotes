@@ -1,8 +1,10 @@
-import { getUserFromRequest } from '~/services/domains'
+import { getSiteFromRequest } from '~/services/domains'
 
 export const state = () => ({
   siteOwner: {},
+  site: {},
   currentUser: {},
+  readonly: {},
 })
 
 export const getters = {
@@ -24,20 +26,26 @@ export const getters = {
 
     return [...new Set([].concat.apply([], tagList))]
   },
+  isPaidAccount(state) {
+    return state.readonly.plan === 'paid'
+  },
 }
 
 export const actions = {
   async nuxtServerInit({ commit }, context) {
-    const siteOwner = await getUserFromRequest(context)
-    if (!siteOwner.name) {
+    const site = await getSiteFromRequest(context)
+    if (!site.uid) {
       context.error({ statusCode: 404 })
     }
-    commit('SET_USER', siteOwner)
+    commit('SET_SITE', site)
 
     const posts = []
-    const postsSnap = await this.$postsCollection
-      .where('user.name', '==', siteOwner.name)
-      .get()
+
+    const [postsSnap, readonlySnap, userSnap] = await Promise.all([
+      this.$postsCollection.where('user.id', '==', site.uid).get(),
+      this.$readonlyCollection.doc(site.uid).get(),
+      this.$usersCollection.doc(site.uid).get(),
+    ])
 
     if (postsSnap.size > 0) {
       postsSnap.forEach((doc) => {
@@ -45,6 +53,8 @@ export const actions = {
       })
     }
     commit('SET_POSTS', posts)
+    commit('SET_READONLY_DATA', readonlySnap.data())
+    commit('SET_USER', userSnap.data())
   },
 }
 
@@ -54,5 +64,11 @@ export const mutations = {
   },
   SET_POSTS(state, posts) {
     state.posts = posts
+  },
+  SET_SITE(state, site) {
+    state.site = site
+  },
+  SET_READONLY_DATA(state, data) {
+    state.readonly = data
   },
 }

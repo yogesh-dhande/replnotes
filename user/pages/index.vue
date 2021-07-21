@@ -3,6 +3,7 @@
     <user-home
       v-if="siteOwner && siteOwner.name"
       :user="siteOwner"
+      :site="site"
       :posts="posts"
     ></user-home>
     <div v-else class="text-4xl text-indigo-200 font-bold p-12 text-center">
@@ -28,19 +29,17 @@ export default {
         : this.siteOwner.name
       return this.$createSEOMeta({
         title:
-          this.siteOwner.site && this.siteOwner.site.title
-            ? this.siteOwner.site.title
-            : name + "'s Posts", // replace with site title
+          this.site && this.site.title ? this.site.title : name + "'s Posts", // replace with site title
         description:
-          this.siteOwner.site && this.siteOwner.site.description
-            ? this.siteOwner.site.description
+          this.site && this.site.description
+            ? this.site.description
             : name + "'s Posts", // replace with site description
         image: this.siteOwner.photoUrl,
       })
     }
   },
   computed: {
-    ...mapState(['siteOwner', 'posts']),
+    ...mapState(['siteOwner', 'site', 'posts']),
   },
 }
 </script>

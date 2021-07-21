@@ -9,7 +9,7 @@
       text-center text-base text-indigo-200
     "
   >
-    <social-links :user="user" v-if="user.social"></social-links>
+    <social-links v-if="user.social" :user="user"></social-links>
     <p class="">
       &copy; {{ new Date().getFullYear() }}
       {{ user.displayName ? user.displayName : user.name }}, All Rights
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import SocialLinks from "./../SocialLinks.vue";
+import SocialLinks from './../SocialLinks.vue'
 
 export default {
   components: { SocialLinks },
@@ -36,8 +36,12 @@ export default {
       type: Object,
       default: () => {},
     },
+    site: {
+      type: Object,
+      default: () => {},
+    },
   },
-};
+}
 </script>
 
 <style>

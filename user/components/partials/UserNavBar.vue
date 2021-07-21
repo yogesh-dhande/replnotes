@@ -199,9 +199,12 @@
 
 <script>
 export default {
-  name: "nav-bar",
   props: {
     user: {
+      type: Object,
+      default: () => {},
+    },
+    site: {
       type: Object,
       default: () => {},
     },
@@ -210,25 +213,25 @@ export default {
     return {
       showProfileMenu: false,
       showMobileMenu: false,
-    };
+    }
   },
   computed: {
     navbar() {
-      return this.user.site && this.user.site.navbar
-        ? this.user.site.navbar
+      return this.site && this.site.navbar
+        ? this.site.navbar
         : [
             {
-              label: "Home",
+              label: 'Home',
               external: false,
-              url: "/",
+              url: '/',
             },
             {
-              label: "About",
+              label: 'About',
               external: false,
-              url: "/about",
+              url: '/about',
             },
-          ];
+          ]
     },
   },
-};
+}
 </script>
