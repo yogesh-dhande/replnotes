@@ -24,7 +24,7 @@
           </div>
           <img
             v-if="imageSrc"
-            class="my-2 mx-auto max-h-48 bg-white opacity-80 rounded-md"
+            class="my-2 mx-auto max-w-3/4 bg-white opacity-80 rounded-md"
             :src="imageSrc"
             alt="Thumbnail"
           />
