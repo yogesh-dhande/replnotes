@@ -34,27 +34,26 @@ export const getters = {
 export const actions = {
   async nuxtServerInit({ commit }, context) {
     const site = await getSiteFromRequest(context)
-    if (!site.uid) {
-      context.error({ statusCode: 404 })
+    if (site.uid) {
+      commit('SET_SITE', site)
+
+      const posts = []
+
+      const [postsSnap, readonlySnap, userSnap] = await Promise.all([
+        this.$postsCollection.where('user.id', '==', site.uid).get(),
+        this.$readonlyCollection.doc(site.uid).get(),
+        this.$usersCollection.doc(site.uid).get(),
+      ])
+
+      if (postsSnap.size > 0) {
+        postsSnap.forEach((doc) => {
+          posts.push(doc.data())
+        })
+      }
+      commit('SET_POSTS', posts)
+      commit('SET_READONLY_DATA', readonlySnap.data())
+      commit('SET_USER', userSnap.data())
     }
-    commit('SET_SITE', site)
-
-    const posts = []
-
-    const [postsSnap, readonlySnap, userSnap] = await Promise.all([
-      this.$postsCollection.where('user.id', '==', site.uid).get(),
-      this.$readonlyCollection.doc(site.uid).get(),
-      this.$usersCollection.doc(site.uid).get(),
-    ])
-
-    if (postsSnap.size > 0) {
-      postsSnap.forEach((doc) => {
-        posts.push(doc.data())
-      })
-    }
-    commit('SET_POSTS', posts)
-    commit('SET_READONLY_DATA', readonlySnap.data())
-    commit('SET_USER', userSnap.data())
   },
 }
 

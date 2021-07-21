@@ -10,12 +10,12 @@
           </h1>
           <p class="text-lg sm:text-2xl">
             Head to
-            <nuxt-link to="/" class="text-indigo-500 hover:text-indigo-600"
+            <nuxt-link to="/" class="text-indigo-400 hover:text-indigo-500"
               >Home</nuxt-link
             >, or send us a
             <nuxt-link
               to="/contact"
-              class="text-indigo-500 hover:text-indigo-600"
+              class="text-indigo-400 hover:text-indigo-500"
               >message</nuxt-link
             >
             to help us fix the issue..

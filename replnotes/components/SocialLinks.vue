@@ -1,9 +1,9 @@
 <template>
   <div class="flex items-center justify-center lg:justify-start space-x-8">
     <a
+      v-if="user.social.github.url"
       class="link"
       :href="user.social.github.url"
-      v-if="user.social.github.url"
       data-tippy-content="@github_handle"
       ><svg
         class="h-6 fill-current text-gray-600 hover:text-indigo-700"
@@ -17,9 +17,9 @@
         /></svg
     ></a>
     <a
+      v-if="user.social.linkedIn.url"
       class="link"
       :href="user.social.linkedIn.url"
-      v-if="user.social.linkedIn.url"
       data-tippy-content="@linkedin_handle"
     >
       <svg
@@ -35,9 +35,9 @@
       </svg>
     </a>
     <a
+      v-if="user.social.twitter.url"
       class="link"
       :href="user.social.twitter.url"
-      v-if="user.social.twitter.url"
       data-tippy-content="@twitter_handle"
       ><svg
         class="h-6 fill-current text-gray-600 hover:text-indigo-700"
@@ -52,9 +52,9 @@
     ></a>
 
     <a
+      v-if="user.social.youtube.url"
       class="link"
       :href="user.social.youtube.url"
-      v-if="user.social.youtube.url"
       data-tippy-content="@youtube_handle"
       ><svg
         class="h-6 fill-current text-gray-600 hover:text-indigo-700"
@@ -78,11 +78,11 @@ export default {
       default: () => {
         return {
           social: {},
-        };
+        }
       },
     },
   },
-};
+}
 </script>
 
 <style>

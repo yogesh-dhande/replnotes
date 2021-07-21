@@ -40,7 +40,7 @@
       </div>
     </div>
     <markdown :key="user.aboutMe" class="mx-auto" :text="user.aboutMe" />
-    <social-links :user="user"></social-links>
+    <social-links v-if="user.social" :user="user"></social-links>
   </div>
 </template>
 

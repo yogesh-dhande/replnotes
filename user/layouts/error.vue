@@ -1,16 +1,16 @@
 <template>
   <div>
     <page-not-found v-if="error.statusCode === 404" />
-    <an-error-occured v-else />
+    <div v-else class="text-indigo-200">{{ error.message }}</div>
   </div>
 </template>
 
 <script>
-import AnErrorOccured from '@/components/partials/AnErrorOccured.vue'
 import PageNotFound from '@/components/partials/PageNotFound.vue'
 
 export default {
-  components: { AnErrorOccured, PageNotFound },
+  components: { PageNotFound },
+  layout: 'empty',
   props: {
     error: {
       type: Object,

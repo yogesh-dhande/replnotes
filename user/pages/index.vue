@@ -21,7 +21,11 @@ export default {
   components: {
     UserHome,
   },
-
+  asyncData({ error, store }) {
+    if (!store.state.siteOwner.name) {
+      error({ statusCode: 404 })
+    }
+  },
   head() {
     if (this.siteOwner.name) {
       const name = this.siteOwner.displayName
