@@ -2,7 +2,7 @@
   <div>
     <h1
       class="
-        text-center text-5xl
+        text-center text-6xl
         tracking-tight
         font-extrabold
         text-indigo-100
@@ -10,7 +10,7 @@
       "
     >
       Start Blogging
-      <span class="block text-indigo-400 text-3xl">
+      <span class="block text-indigo-400 text-4xl">
         <span class="text-indigo-100">with</span>
         Jupyter notebooks</span
       >
@@ -23,8 +23,8 @@
         :suffix="BASE_URL"
         label="Username"
         @focus="
-          nameErrors = [];
-          errors = [];
+          nameErrors = []
+          errors = []
         "
         @blur="validateUsername"
       />
@@ -54,8 +54,8 @@
               rounded-md
             "
             @focus="
-              emailErrors = [];
-              errors = [];
+              emailErrors = []
+              errors = []
             "
             @blur="validateEmail"
           />
@@ -68,8 +68,8 @@
         class="mt-3"
         label="Password"
         @focus="
-          passwordErrors = [];
-          errors = [];
+          passwordErrors = []
+          errors = []
         "
         @blur="validatePassword"
       ></password-input>
@@ -80,8 +80,8 @@
         class="mt-3"
         label="Confirm Password"
         @focus="
-          passwordConfirmationErrors = [];
-          errors = [];
+          passwordConfirmationErrors = []
+          errors = []
         "
         @blur="validatePasswordConfirmation"
       ></password-input>
@@ -118,34 +118,34 @@
 </template>
 
 <script>
-import Submit from "@/components/Submit";
-import InputErrors from "@/components/InputErrors";
+import Submit from '@/components/Submit'
+import InputErrors from '@/components/InputErrors'
 
-import PasswordInput from "@/components/PasswordInput";
-import URLSlugInput from "@/components/URLSlugInput";
-import axios from "axios";
+import PasswordInput from '@/components/PasswordInput'
+import URLSlugInput from '@/components/URLSlugInput'
+import axios from 'axios'
 export default {
   components: {
     submit: Submit,
     InputErrors,
-    "password-input": PasswordInput,
-    "url-slug-input": URLSlugInput,
+    'password-input': PasswordInput,
+    'url-slug-input': URLSlugInput,
   },
   data() {
     return {
       BASE_URL: `.${process.env.NUXT_ENV_DISPLAY_URL}`,
-      name: "",
+      name: '',
       nameErrors: [],
-      email: "",
+      email: '',
       emailErrors: [],
-      password: "",
+      password: '',
       passwordErrors: [],
-      passwordConfirmation: "",
+      passwordConfirmation: '',
       passwordConfirmationErrors: [],
       isLoading: false,
       errors: [],
       otherErrors: [],
-    };
+    }
   },
   computed: {
     allErrors() {
@@ -155,22 +155,22 @@ export default {
         this.emailErrors,
         this.passwordErrors,
         this.passwordConfirmationErrors
-      );
+      )
     },
     disabled() {
       if (this.allErrors.length > 0) {
-        return true;
+        return true
       }
-      return false;
+      return false
     },
   },
   methods: {
     async register() {
       // on each new attempt clear the old errors
-      this.errors = [];
+      this.errors = []
       if (this.isFormValid()) {
         // set loading class to true
-        this.isLoading = true;
+        this.isLoading = true
         try {
           await axios.post(
             `${process.env.NUXT_ENV_FIREBASE_FUNCTIONS_URL}/signUp`,
@@ -180,24 +180,24 @@ export default {
               password: this.password,
               passwordConfirmation: this.passwordConfirmation,
             }
-          );
+          )
           const userCredential =
             await this.$fire.auth.signInWithEmailAndPassword(
               this.email,
               this.password
-            );
+            )
           userCredential.user.sendEmailVerification({
             url: `${process.env.NUXT_ENV_BASE_URL}/dashboard`,
-          });
-          this.$splitbee.track("Sign Up");
-          this.$store.commit("SET_AUTH_STATE", userCredential.user);
-          this.$router.push("/plans");
+          })
+          this.$splitbee.track('Sign Up')
+          this.$store.commit('SET_AUTH_STATE', userCredential.user)
+          this.$router.push('/plans')
         } catch (error) {
           if (error.response && error.response.data.message) {
-            this.errors.push(error.response.data.message);
+            this.errors.push(error.response.data.message)
           }
         } finally {
-          this.isLoading = false;
+          this.isLoading = false
         }
       }
     },
@@ -208,49 +208,47 @@ export default {
         this.password.length === 0 ||
         this.passwordConfirmation.length === 0
       ) {
-        return true;
+        return true
       }
-      return false;
+      return false
     },
     validatePassword() {
       if (!this.password || this.password.length < 6) {
-        this.passwordErrors.push(
-          "Password must be at least 6 characters long."
-        );
+        this.passwordErrors.push('Password must be at least 6 characters long.')
       }
     },
     validatePasswordConfirmation() {
       if (this.password !== this.passwordConfirmation) {
-        this.passwordConfirmationErrors.push("Passwords do not match.");
+        this.passwordConfirmationErrors.push('Passwords do not match.')
       }
     },
     validateUsername() {
       if (!this.name || this.name.length === 0) {
-        this.nameErrors.push("Please enter a username.");
+        this.nameErrors.push('Please enter a username.')
       } else if (!/^[0-9a-zA-Z_@-]+$/.test(this.name)) {
-        this.nameErrors.push("No spaces or periods allowed in the username.");
+        this.nameErrors.push('No spaces or periods allowed in the username.')
       }
     },
     validateEmail() {
       if (!this.email || this.email.length === 0) {
-        this.emailErrors.push("Please enter an email.");
+        this.emailErrors.push('Please enter an email.')
       } else if (!/^[0-9a-zA-Z_.-@]+$/.test(this.email)) {
-        this.emailErrors.push("No spaces allowed in the email.");
+        this.emailErrors.push('No spaces allowed in the email.')
       }
     },
     isFormValid() {
       if (this.isEmpty()) {
-        this.errors.push("Please complete all fields.");
-        return false;
+        this.errors.push('Please complete all fields.')
+        return false
       }
-      return true;
+      return true
     },
     clearErrors() {
-      this.errors = [];
-      this.otherErrors = [];
+      this.errors = []
+      this.otherErrors = []
     },
   },
-};
+}
 </script>
 
 <style>

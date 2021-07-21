@@ -143,7 +143,7 @@
           <div class="rounded-md shadow">
             <button
               class="
-                flex
+                w-full
                 items-center
                 justify-center
                 px-5

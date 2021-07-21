@@ -138,7 +138,7 @@
               "
               data-aos="fade-up"
             >
-              Simple, Transparent Pricing
+              Simple Pricing
             </h2>
           </div>
           <h3
