@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-not-found v-if="error.statusCode === 404" />
-    <an-error-occured v-else />
+    <an-error-occured v-else :error="error" />
   </div>
 </template>
 

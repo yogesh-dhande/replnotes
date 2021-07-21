@@ -6,7 +6,8 @@
           <!-- Top image -->
           <!-- 404 content -->
           <h1 class="text-indigo-300 text-2xl sm:text-4xl mb-4">
-            😢 An error occured.
+            😢 <span v-if="error.message">{{ error.message }}</span>
+            <span v-else>An error occurred.</span>
           </h1>
           <p class="text-lg sm:text-2xl">
             Head to
@@ -27,7 +28,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    error: {
+      type: Object,
+      default: () => {},
+    },
+  },
+}
 </script>
 
 <style>
