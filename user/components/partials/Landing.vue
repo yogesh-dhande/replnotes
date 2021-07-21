@@ -2,7 +2,8 @@
   <div class="bg-gray-800 text-indigo-100">
     <div
       class="
-        max-w-5xl
+        md:max-w-4xl
+        lg:max-w-5xl
         mx-auto
         text-center
         px-2
@@ -13,7 +14,7 @@
         lg:px-8
       "
     >
-      <div class="flex flex-col place-items-center px-2">
+      <div class="flex flex-col place-items-center px-2 sm:px-8">
         <h1
           class="
             text-center text-5xl
@@ -25,12 +26,26 @@
           "
         >
           Jupyter Notebooks
-          <span class="block text-indigo-100">
+          <span class="text-indigo-100">
             <span class="inline text-indigo-400">
-              <span
-                class="block text-4xl sm:text-6xl lg:text-7xl text-indigo-100"
-              >
-                to a Blog Within Minutes</span
+              <span class="text-4xl sm:text-6xl lg:text-7xl text-indigo-100">
+                to a
+                <span class="inline-flex relative">
+                  <span
+                    aria-hidden=""
+                    class="
+                      inline
+                      absolute
+                      inset-0
+                      bg-yellow-500
+                      transform
+                      -rotate-1
+                      scale-105
+                    "
+                  ></span>
+                  <span class="relative px-2">Blog</span>
+                </span>
+                Within Minutes</span
               ></span
             >
           </span>
@@ -65,7 +80,7 @@
               py-3
               border border-transparent
               text-base
-              font-medium
+              font-bold
               rounded-md
               text-white
               bg-pink-600
@@ -73,11 +88,11 @@
               shadow
               border-none
               md:py-4
-              md:text-lg
-              md:px-10
+              md:text-xl
+              md:px-5
             "
           >
-            Start a Blog
+            Start Blogging
           </nuxt-link>
         </div>
         <div class="ml-3 inline-flex">
@@ -89,14 +104,14 @@
               py-3
               border border-transparent
               text-base
-              font-medium
+              font-bold
               rounded-md
               shadow
               text-indigo-700
               bg-indigo-100
               hover:bg-indigo-200
               md:py-4
-              md:text-lg
+              md:text-xl
               md:px-10
             "
           >
