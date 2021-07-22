@@ -190,12 +190,12 @@ export default {
         this.thumbnailSrc = null
         this.fileToUpload = this.file
         await this.handleFileChange(newValue)
-        this.content.cells.forEach((cell) => {
-          cell.source.forEach(this.parseMagicTags)
-        })
-        if (!this.description & (this.content.cells.length > 0)) {
-          this.description = this.content.cells[0].source.join()
+        if (this.content.cells.length > 0) {
+          this.content.cells[0].source.forEach(this.parseMagicTags)
         }
+        // if (!this.description & (this.content.cells.length > 0)) {
+        //   this.description = this.content.cells[0].source.join()
+        // }
       } else {
         await this.handleFileChange(newValue)
       }

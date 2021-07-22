@@ -22,18 +22,23 @@ export default {
       html: null,
     }
   },
+  watch: {
+    nbJson(newValue) {
+      this.parseNotebook(newValue)
+    },
+  },
   async created() {
     // this.html = ipynb.createRenderer(new Document())(this.nbJson).outerHTML;
   },
   mounted() {
     // Bokeh JS loaded on the server does not work on the client
-    this.parseNotebook()
+    this.parseNotebook(this.nbJson)
     this.html = null
   },
   methods: {
-    parseNotebook() {
-      if (this.nbJson.cells && this.nbJson.cells.length > 0) {
-        const element = render(this.nbJson)
+    parseNotebook(nbJson) {
+      if (nbJson.cells && nbJson.cells.length > 0) {
+        const element = render(nbJson)
         this.$el.appendChild(element)
       }
     },
