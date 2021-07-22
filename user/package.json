@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "PORT=8080 nuxt",
+    "dev": "PORT=8081 nuxt",
     "default": "firebase use default",
     "prod": "firebase use prod",
     "build": "rm -rf .nuxt && nuxt build",

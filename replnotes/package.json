@@ -29,7 +29,6 @@
     "firebase-admin": "^9.2.0",
     "highlight.js": "^10.7.2",
     "ipynb2html": "^0.3.0",
-    "nodom": "^2.4.0",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {

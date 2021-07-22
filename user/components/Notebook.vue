@@ -1,10 +1,13 @@
 <template>
-  <div class="prose max-w-none text-indigo-200"></div>
+  <div class="prose max-w-none text-indigo-200">
+    <div v-if="html" v-html="html"></div>
+  </div>
 </template>
 
 <script>
-import { render } from 'ipynb2html/lib/browser'
+import { render, createRenderer } from 'ipynb2html/lib/browser'
 import 'highlight.js/styles/monokai.css'
+import { Document } from 'nodom'
 
 export default {
   props: {
@@ -27,19 +30,19 @@ export default {
       this.parseNotebook(newValue)
     },
   },
-  async created() {
-    // this.html = ipynb.createRenderer(new Document())(this.nbJson).outerHTML;
+  created() {
+    this.html = createRenderer(new Document())(this.nbJson).outerHTML
   },
   mounted() {
     // Bokeh JS loaded on the server does not work on the client
     this.parseNotebook(this.nbJson)
-    this.html = null
   },
   methods: {
     parseNotebook(nbJson) {
       if (nbJson.cells && nbJson.cells.length > 0) {
         const element = render(nbJson)
-        this.$el.appendChild(element)
+        this.$el.prepend(element) // show the client-side rendered content first
+        this.html = null // remove the server-side rendered content
       }
     },
   },
