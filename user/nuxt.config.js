@@ -1,7 +1,7 @@
 import path from 'path'
 const isDev = process.env.NODE_ENV === 'development'
 
-const deployTarget = process.env.DEPLOY_TARGET || 'development'
+const deployTarget = process.env.DEPLOY_TARGET || 'staging'
 console.log(deployTarget)
 
 require('dotenv').config({

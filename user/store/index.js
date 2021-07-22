@@ -8,6 +8,12 @@ export const state = () => ({
 })
 
 export const getters = {
+  post(state) {
+    return (url) => {
+      const posts = state.posts.filter((post) => post.url === url)
+      return posts.length > 0 ? posts[0] : {}
+    }
+  },
   userPostUrls(state) {
     if (!state.siteOwner.posts) {
       return []

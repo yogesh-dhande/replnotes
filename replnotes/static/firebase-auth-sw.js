@@ -11,6 +11,8 @@ firebase.initializeApp({"apiKey":"AIzaSyBWKIWo53-7-NRtQTT2tiZtCyXg4koowjA","auth
 // Initialize authService
 const authService = firebase.auth()
 
+authService.useEmulator('http://localhost:10000')
+
 /**
  * Returns a promise that resolves with an ID token if available.
  * @return {!Promise<?string>} The promise that resolves with an ID token if

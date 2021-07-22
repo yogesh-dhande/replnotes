@@ -8,7 +8,6 @@
 import { getNbJsonFromUrl } from '@/services/notebook'
 
 export default {
-  name: 'Post',
   async asyncData(context) {
     const returnData = {
       userName: context.store.state.siteOwner.name,
@@ -18,12 +17,12 @@ export default {
       },
     }
 
-    const posts = context.store.state.siteOwner.posts.filter(
-      (post) => post.url === returnData.postUrl
-    )
-    if (posts.length > 0) {
-      returnData.post = posts[0]
+    const post = context.store.getters.post(returnData.postUrl)
+    if (post.id) {
+      returnData.post = post
       returnData.nbJson = await getNbJsonFromUrl(returnData.post.file.url)
+    } else {
+      context.error({ statusCode: 404 })
     }
     return returnData
   },

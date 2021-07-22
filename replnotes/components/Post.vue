@@ -15,10 +15,7 @@
     <notebook class="my-6" :nb-json="nbJson"> </notebook>
     <div class="flex flex-row flex-wrap">
       <badge v-for="tag in post.tags" :key="tag" class="mt-0 mb-2 ml-0 mr-2"
-        ><nuxt-link
-          :to="`/${post.user.name}/posts/?tag=${tag}`"
-          class="hover:underline"
-        >
+        ><nuxt-link :to="topicLink(tag)" class="hover:underline">
           {{ tag }}</nuxt-link
         ></badge
       >
@@ -28,6 +25,7 @@
 
 <script>
 import { getReadableDate } from '@/services/notebook'
+import { mapState } from 'vuex'
 
 export default {
   props: {
@@ -41,8 +39,14 @@ export default {
     },
   },
   computed: {
+    ...mapState(['siteOwner']),
     readableDate() {
       return getReadableDate(this.post.created)
+    },
+    topicLink() {
+      return (tag) => {
+        return this.siteOwner ? `/topics/${tag}` : '#'
+      }
     },
   },
 }

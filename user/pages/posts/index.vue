@@ -1,5 +1,5 @@
 <template>
-  <user-posts :user-name="siteOwner.name" :posts="siteOwner.posts"></user-posts>
+  <user-posts :user-name="siteOwner.name" :posts="posts"></user-posts>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
     UserPosts,
   },
   computed: {
-    ...mapState(['siteOwner']),
+    ...mapState(['siteOwner', 'posts']),
   },
 }
 </script>

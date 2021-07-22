@@ -79,7 +79,7 @@ export default {
     },
     topicLink() {
       return (tag) => {
-        return `/topics/${tag}`
+        return this.siteOwner ? `/topics/${tag}` : '#'
       }
     },
     readableDate() {
