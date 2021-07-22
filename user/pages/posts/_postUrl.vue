@@ -27,11 +27,14 @@ export default {
     return returnData
   },
   head() {
+    const name = this.post.user.displayName
+      ? this.post.user.displayName
+      : this.post.user.name
     return this.$createSEOMeta({
       title: this.post.title,
       description: this.post.description
         ? this.post.description
-        : this.post.title + ' by ' + this.post.user.displayName,
+        : this.post.title + ' by ' + name,
       image: this.post.thumbnail,
     })
   },

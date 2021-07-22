@@ -5,6 +5,12 @@ export default async ({ route }, inject) => {
     let meta = {
       title: data.title,
       meta: [
+        { hid: "og:type", property: "og:type", content: "website" },
+        {
+          hid: "twitter:card",
+          property: "twitter:card",
+          content: "summary_large_image"
+        },
         { hid: "og:title", property: "og:title", content: data.title },
         {
           hid: "og:url",
@@ -42,6 +48,11 @@ export default async ({ route }, inject) => {
       meta.meta.push({
         hid: "og:image",
         property: "og:image",
+        content: data.image
+      });
+      meta.meta.push({
+        hid: "twitter:image",
+        property: "twitter:image",
         content: data.image
       });
     }
