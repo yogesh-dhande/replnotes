@@ -276,62 +276,62 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters } from "vuex";
 export default {
-  name: 'Pricing',
+  name: "Pricing",
   data() {
     return {
       annual: true,
       allowFreeTrial: true,
       freeFeatures: [
-        'Free subdomain at replnotes.com',
-        'SEO-friendly server-rendered pages',
-        'Social media previews with OG tags',
-        '100 MB total storage',
+        "Free subdomain at replnotes.com",
+        "SEO-friendly server-rendered pages",
+        "Social media previews with OG tags",
+        "100 MB total storage",
       ],
       paidFeatures: [
-        'All features in the free plan',
-        'Custom domains',
-        'Remove REPL Notes branding',
-        '1 GB total storage',
-        'Custom CSS styles (coming soon)',
-        'Custom Javascript (coming soon)',
+        "All features in the free plan",
+        "Custom domains",
+        "Remove REPL Notes branding",
+        "1 GB total storage",
+        // 'Custom CSS styles (coming soon)',
+        "Javascript integrations (coming soon)",
       ],
-    }
+    };
   },
   computed: {
-    ...mapState(['currentUser', 'token']),
-    ...mapGetters(['loggedIn', 'isPaidAccount']),
+    ...mapState(["currentUser", "token"]),
+    ...mapGetters(["loggedIn", "isPaidAccount"]),
   },
   methods: {
     selectFree() {
-      this.$router.push('/register')
-      this.$splitbee.track('Select Plan', {
-        type: 'free',
-      })
+      this.$router.push("/register");
+      this.$splitbee.track("Select Plan", {
+        type: "free",
+      });
     },
     async selectPlan() {
       if (this.loggedIn && !this.isPaidAccount) {
         if (this.allowFreeTrial) {
-          await this.successCallback()
-          this.$splitbee.track('Select Plan', {
-            type: 'trial',
-          })
+          await this.successCallback();
+          this.$splitbee.track("Select Plan", {
+            type: "trial",
+          });
         } else {
-          this.openCheckout()
+          this.openCheckout();
         }
       } else {
-        this.$router.push('/register')
+        this.$router.push("/register");
       }
     },
     openCheckout() {
-      console.log(process.env.NUXT_ENV_PADDLE_VENDOR_ID)
-      if (process.env.NODE_ENV !== 'production') {
+      console.log(process.env.NUXT_ENV_PADDLE_VENDOR_ID);
+      if (process.env.NODE_ENV !== "production") {
         // eslint-disable-next-line no-undef
-        Paddle.Environment.set('sandbox')
+        Paddle.Environment.set("sandbox");
       }
       // eslint-disable-next-line no-undef
-      Paddle.Setup({ vendor: parseInt(process.env.NUXT_ENV_PADDLE_VENDOR_ID) })
+      Paddle.Setup({ vendor: parseInt(process.env.NUXT_ENV_PADDLE_VENDOR_ID) });
       // eslint-disable-next-line no-undef
       Paddle.Checkout.open({
         product: this.annual
@@ -339,18 +339,18 @@ export default {
           : process.env.NUXT_ENV_PADDLE_MONTHLY_PRODUCT_ID,
         email: this.currentUser.email,
         successCallback: this.successCallback,
-      })
-      this.$splitbee.track('Select Plan', {
-        type: this.annual ? 'annual' : 'monthly',
-      })
+      });
+      this.$splitbee.track("Select Plan", {
+        type: this.annual ? "annual" : "monthly",
+      });
     },
     async successCallback() {
-      await this.$upgradePlan(this.token)
-      this.$router.push('/dashboard')
-      this.$splitbee.track('Payment Successful')
+      await this.$upgradePlan(this.token);
+      this.$router.push("/dashboard");
+      this.$splitbee.track("Payment Successful");
     },
   },
-}
+};
 </script>
 
 <style>
