@@ -62,12 +62,12 @@
 </template>
 
 <script>
-import { getNbJsonFromFile } from '@/services/notebook'
-import Notebook from '@/components/Notebook'
-import FileInput from '@/components/FileInput'
+import { getNbJsonFromFile } from "@/services/notebook";
+import Notebook from "@/components/Notebook";
+import FileInput from "@/components/FileInput";
 
 export default {
-  name: 'Demo',
+  name: "Demo",
   components: {
     Notebook,
     FileInput,
@@ -78,26 +78,26 @@ export default {
       fileErrors: [],
       nbJson: null,
       updateCount: 0,
-      title: 'Add a custom title to the post',
-      pageTitle: 'Live Demo: Create and Preview a Blog Post',
-    }
+      title: "Add a custom title to the post",
+      pageTitle: "Live Demo: Create and Preview a Blog Post",
+    };
   },
   computed: {
     fileType() {
       if (this.file) {
         return this.file.name.substr(
-          this.file.name.lastIndexOf('.') + 1,
+          this.file.name.lastIndexOf(".") + 1,
           this.file.length
-        )
+        );
       }
-      return null
+      return null;
     },
   },
   watch: {
     async file(newValue) {
-      this.nbJson = null
-      await this.handleFileChange(newValue)
-      this.updateCount += 1
+      this.nbJson = null;
+      await this.handleFileChange(newValue);
+      this.updateCount += 1;
     },
   },
   methods: {
@@ -105,42 +105,28 @@ export default {
       if (newValue) {
         if (this.fileErrors.length === 0) {
           try {
-            this.nbJson = await getNbJsonFromFile(newValue)
+            this.nbJson = await getNbJsonFromFile(newValue);
           } catch (error) {
-            this.fileErrors.push(error.message)
-            this.fileErrors.push('Only Jupyter Notebooks are supported.')
+            this.fileErrors.push(error.message);
+            this.fileErrors.push("Only Jupyter Notebooks are supported.");
           }
         }
       }
     },
-    parseMagicTags(line) {
-      const commands = line.split(':')
-      const key = commands[0].trim().replace(' ', '').toLowerCase()
-      const value = commands.length > 1 ? commands[1].trim() : ''
-      if (key.includes('#title')) {
-        this.title = value
-      } else if (key.includes('#url')) {
-        this.url = value
-      } else if (key.includes('#description')) {
-        this.description = value
-      } else if (key.includes('#tags')) {
-        this.tags = value.split(',').map((tag) => tag.trim())
-      }
-    },
     validateFile() {
-      this.fileErrors = []
+      this.fileErrors = [];
       if (!this.file) {
         this.fileErrors.push(
-          'Please upload a Jupyter Notebook to create a post.'
-        )
-      } else if (this.fileType !== 'ipynb') {
-        this.fileErrors.push('Only Jupyter Notebooks are supported')
+          "Please upload a Jupyter Notebook to create a post."
+        );
+      } else if (this.fileType !== "ipynb") {
+        this.fileErrors.push("Only Jupyter Notebooks are supported");
       } else if (this.file.size > 10 * 1024 * 1024) {
-        this.fileErrors.push('Files larger than 10 MB are not supported.')
+        this.fileErrors.push("Files larger than 10 MB are not supported.");
       }
     },
   },
-}
+};
 </script>
 
 <style>

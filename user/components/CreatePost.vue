@@ -116,6 +116,7 @@ import {
   readFile,
   parseThumbnailsFromNbJson,
   parseNbJson,
+  applyMagicTagsFromLine,
 } from '@/services/notebook'
 import { mapGetters, mapState } from 'vuex'
 
@@ -245,13 +246,13 @@ export default {
           try {
             this.content = JSON.parse(text)
 
-            console.log(this.content)
-
             if (this.content.cells.length > 0) {
-              this.content.cells[0].source.forEach(this.parseMagicTags)
+              this.content.cells[0].source.forEach((line) =>
+                applyMagicTagsFromLine(this, line)
+              )
             }
             if (!this.url) {
-              this.url = this.filename.replace(' ', '_')
+              this.url = this.filename.replace(/ /g, '-')
             }
             // if (!this.description & (this.content.cells.length > 0)) {
             //   // TODO description should not be taken from the first cell if it has magic commands
@@ -264,21 +265,6 @@ export default {
             this.fileErrors.push('Only Jupyter Notebooks are supported.')
           }
         }
-      }
-    },
-    parseMagicTags(line) {
-      const commands = line.split(':')
-      const key = commands[0].trim().replace(' ', '').toLowerCase()
-      const value = commands.length > 1 ? commands[1].trim() : ''
-      if (key.includes('#title')) {
-        this.title = value
-      } else if (key.includes('#url')) {
-        this.url = value
-      } else if (key.includes('#description')) {
-        this.description = value
-      } else if (key.includes('#tags')) {
-        console.log(value)
-        this.tags = value.split(',').map((tag) => tag.trim())
       }
     },
     clearErrors() {

@@ -14,7 +14,7 @@ export function parseNbJson(nbJson) {
     if (cell.cell_type === 'markdown') {
       parseAttachments(cell)
     }
-    cell.source = cell.source.filter(parseMagicTags)
+    cell.source = cell.source.filter((line) => !containsMagicTags(line))
   })
   return nbJson
 }
@@ -69,19 +69,34 @@ export function readFile(file) {
   })
 }
 
-export function parseMagicTags(line) {
+function containsMagicTags(line) {
   const commands = line.split(':')
-  const key = commands[0].trim().replace(' ', '').toLowerCase()
+  const key = commands[0].trim().replace(/ /g, '').toLowerCase()
   if (key.includes('#title')) {
-    return false
+    return true
   } else if (key.includes('#url')) {
-    return false
+    return true
   } else if (key.includes('#description')) {
-    return false
+    return true
   } else if (key.includes('#tags')) {
-    return false
+    return true
   }
-  return true
+  return false
+}
+
+export function applyMagicTagsFromLine(obj, line) {
+  const commands = line.split(':')
+  const key = commands[0].trim().replace(/ /g, '').toLowerCase()
+  const value = commands.length > 1 ? commands[1].trim() : ''
+  if (key.includes('#title')) {
+    obj.title = value
+  } else if (key.includes('#url')) {
+    obj.url = value
+  } else if (key.includes('#description')) {
+    obj.description = value
+  } else if (key.includes('#tags')) {
+    obj.tags = value.split(',').map((tag) => tag.trim())
+  }
 }
 
 export function getImageSrcFromBase64String(base64String, type) {
