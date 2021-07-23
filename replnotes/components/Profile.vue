@@ -1,59 +1,61 @@
 <template>
-  <card class="mx-auto shadow items-center bg-gray-900 text-indigo-200">
-    <h2 class="mb-3 py-2 text-xl font-bold">Update Your Profile</h2>
-    <text-input v-model="displayName" class="mt-3" label="Display Name" />
-    <text-input v-model="title" class="mt-3" label="Title" />
-    <text-input v-model="location" class="mt-3" label="Location" />
-    <text-area-input
-      v-model="aboutMe"
-      class="mt-3"
-      label="About Me (Plan Text/Markdown) "
-    />
-
-    <div class="mt-3">
-      <label class="block text-sm font-medium"> Photo </label>
-      <image-uploader
-        :key="photoUrl"
-        v-model="photo"
-        :ref-key="currentUser.id"
-        :image-src="photoUrl"
-        @url="assignUrl"
-        @remove="removePhoto"
-      ></image-uploader>
-    </div>
-    <div v-if="social">
-      <text-input
-        v-model="social.github.url"
+  <div class="mx-6 text-indigo-200">
+    <card class="max-w-lg mx-auto bg-gray-900 p-4 shadow">
+      <h2 class="mb-3 py-2 text-xl font-bold">Update Your Profile</h2>
+      <text-input v-model="displayName" class="mt-3" label="Display Name" />
+      <text-input v-model="title" class="mt-3" label="Title" />
+      <text-input v-model="location" class="mt-3" label="Location" />
+      <text-area-input
+        v-model="aboutMe"
         class="mt-3"
-        :label="social.github.label"
-      />
-      <text-input
-        v-model="social.linkedIn.url"
-        class="mt-3"
-        :label="social.linkedIn.label"
+        label="About Me (Plan Text/Markdown) "
       />
 
-      <text-input
-        v-model="social.twitter.url"
-        class="mt-3"
-        :label="social.twitter.label"
-      />
-      <text-input
-        v-model="social.youtube.url"
-        class="mt-3"
-        :label="social.youtube.label"
-      />
-    </div>
+      <div class="mt-3">
+        <label class="block text-sm font-medium"> Photo </label>
+        <image-uploader
+          :key="photoUrl"
+          v-model="photo"
+          :ref-key="currentUser.id"
+          :image-src="photoUrl"
+          @url="assignUrl"
+          @remove="removePhoto"
+        ></image-uploader>
+      </div>
+      <div v-if="social">
+        <text-input
+          v-model="social.github.url"
+          class="mt-3"
+          :label="social.github.label"
+        />
+        <text-input
+          v-model="social.linkedIn.url"
+          class="mt-3"
+          :label="social.linkedIn.label"
+        />
 
-    <save-cancel
-      class="mt-3"
-      :is-loading="isLoading"
-      :progress="progress"
-      :errors="errors"
-      @save="save"
-      @cancel="$emit('cancel')"
-    />
-  </card>
+        <text-input
+          v-model="social.twitter.url"
+          class="mt-3"
+          :label="social.twitter.label"
+        />
+        <text-input
+          v-model="social.youtube.url"
+          class="mt-3"
+          :label="social.youtube.label"
+        />
+      </div>
+
+      <save-cancel
+        class="mt-3"
+        :is-loading="isLoading"
+        :progress="progress"
+        :errors="errors"
+        @save="save"
+        @cancel="$emit('cancel')"
+      />
+    </card>
+  </div>
 </template>
 
 <script>

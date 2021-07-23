@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <card
-      :key="localPost.id"
-      class="mx-auto shadow bg-gray-900 text-indigo-200"
-    >
+  <div class="mx-6 my-12 text-indigo-200">
+    <card :key="localPost.id" class="max-w-lg mx-auto bg-gray-900 p-4 shadow">
       <file-input
         v-model="file"
         class="mt-3"
