@@ -1,6 +1,6 @@
 <template>
-  <div class="my-12 text-indigo-200">
-    <card :key="post.id" class="max-w-lg mx-auto bg-gray-900 py-4 shadow">
+  <div class="mx-6 my-12 text-indigo-200">
+    <card :key="post.id" class="max-w-lg mx-auto bg-gray-900 px-4 py-4 shadow">
       <h2 class="mb-3 py-2 text-xl text-center font-bold">New Post</h2>
       <file-input
         v-model="file"
@@ -71,13 +71,22 @@
       <h2 class="mt-6 text-center text-2xl sm:text-4xl font-bold">
         Thumbnail Preview
       </h2>
-      <card class="mt-3 max-w-lg mx-auto bg-gray-900 shadow">
+      <card
+        class="
+          mt-3
+          max-w-md
+          mx-auto
+          bg-gray-900 bg-opacity-25
+          hover:bg-opacity-50
+          shadow
+        "
+      >
         <post-preview :post="post"></post-preview>
       </card>
       <h2 class="mt-12 text-center text-2xl sm:text-4xl font-bold">
         Post Preview
       </h2>
-      <post :post="post" :nb-json="nbJson" />
+      <post v-if="nbJson" :post="post" :nb-json="nbJson" />
       <save-cancel
         class="mt-3 max-w-lg mx-auto"
         :is-loading="isLoading"
@@ -111,7 +120,6 @@ import {
 import { mapGetters, mapState } from 'vuex'
 
 export default {
-  name: 'CreatePost',
   components: {
     'image-picker': ImagePicker,
     'file-input': FileInput,
@@ -237,6 +245,8 @@ export default {
           try {
             this.content = JSON.parse(text)
 
+            console.log(this.content)
+
             if (this.content.cells.length > 0) {
               this.content.cells[0].source.forEach(this.parseMagicTags)
             }
@@ -267,6 +277,7 @@ export default {
       } else if (key.includes('#description')) {
         this.description = value
       } else if (key.includes('#tags')) {
+        console.log(value)
         this.tags = value.split(',').map((tag) => tag.trim())
       }
     },

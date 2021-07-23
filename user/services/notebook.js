@@ -4,8 +4,8 @@ import { firebase } from '@firebase/app'
 import '@firebase/firestore'
 
 export function parseNbJson(nbJson) {
-  if (!nbJson) {
-    return {}
+  if (!nbJson || !nbJson.cells) {
+    return null
   }
   nbJson.cells.forEach((cell) => {
     // parseMagicCommands

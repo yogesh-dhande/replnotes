@@ -31,7 +31,11 @@ export default {
     },
   },
   created() {
-    this.html = createRenderer(new Document())(this.nbJson).outerHTML
+    try {
+      this.html = createRenderer(new Document())(this.nbJson).outerHTML
+    } catch (error) {
+      // nbJson was probably null
+    }
   },
   mounted() {
     // Bokeh JS loaded on the server does not work on the client
@@ -39,7 +43,7 @@ export default {
   },
   methods: {
     parseNotebook(nbJson) {
-      if (nbJson.cells && nbJson.cells.length > 0) {
+      if (nbJson && nbJson.cells && nbJson.cells.length > 0) {
         const element = render(nbJson)
         this.$el.prepend(element) // show the client-side rendered content first
         this.html = null // remove the server-side rendered content

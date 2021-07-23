@@ -9,4 +9,8 @@ rsyncb() {
 }
 
 while true; do rsyncb user/components/ replnotes/components/ ; sleep 1; done &
-while true; do rsyncb user/services/ replnotes/services/ ; sleep 1; done
+while true; do rsyncb user/services/ replnotes/services/ ; sleep 1; done &
+
+cd replnotes && npm run firebase &
+cd replnotes && npm run dev &
+cd user && npm run dev

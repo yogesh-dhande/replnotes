@@ -66,8 +66,19 @@
       />
     </card>
     <div v-if="file">
-      <h2 class="mt-6 text-center text-2xl font-bold">Thumbnail Preview</h2>
-      <card class="mt-3 bg-gray-700 bg-opacity-25 hover:bg-opacity-50 shadow">
+      <h2 class="mt-6 text-center text-2xl sm:text-4xl font-bold">
+        Thumbnail Preview
+      </h2>
+      <card
+        class="
+          mt-3
+          max-w-md
+          mx-auto
+          bg-gray-900 bg-opacity-25
+          hover:bg-opacity-50
+          shadow
+        "
+      >
         <post-preview :post="localPost"></post-preview>
       </card>
     </div>

@@ -13,7 +13,7 @@
         @click="navigate"
         @keypress.enter="navigate"
       >
-        <div class="flex-1 p-6 flex flex-col justify-between">
+        <div class="flex-1 p-4 flex flex-col justify-between">
           <div class="flex-1 block mt-2">
             <p class="text-xl my-2 font-bold tracking-tight text-indigo-200">
               {{ post.title }}

@@ -49,7 +49,10 @@
           transition-all
           sm:my-16
           sm:align-middle
-          sm:max-w-4xl
+          max-w-sm
+          sm:max-w-lg
+          md:max-w-xl
+          lg:max-w-3xl
           sm:w-full
         "
         role="dialog"
@@ -85,7 +88,7 @@
                   mt-4
                   px-4
                   sm:grid-cols-2
-                  md:grid-cols-3
+                  lg:grid-cols-3
                   gap-4
                 "
               >
@@ -93,7 +96,6 @@
                   class="
                     border border-gray-500
                     rounded
-                    shadow
                     hover:shadow-2xl
                     text-gray-300
                   "
@@ -104,7 +106,7 @@
                 <button
                   v-for="(imageSrc, i) in thumbnails"
                   :key="i"
-                  class="border border-gray-500 rounded shadow hover:shadow-2xl"
+                  class="mx-auto rounded hover:shadow-2xl"
                   @click="() => select(imageSrc)"
                 >
                   <img :src="imageSrc" alt="Thumbnail" class="rounded" />
