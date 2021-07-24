@@ -8,7 +8,6 @@ export function parseNbJson(nbJson) {
     return null
   }
   nbJson.cells.forEach((cell) => {
-    // parseMagicCommands
     parseMagicMethods(cell)
 
     if (cell.cell_type === 'markdown') {

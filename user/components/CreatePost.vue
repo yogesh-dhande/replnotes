@@ -86,7 +86,7 @@
       <h2 class="mt-12 text-center text-2xl sm:text-4xl font-bold">
         Post Preview
       </h2>
-      <post v-if="nbJson" :post="post" :nb-json="nbJson" />
+      <post v-if="content" :post="post" :nb-json="content" />
       <save-cancel
         class="mt-3 max-w-lg mx-auto"
         :is-loading="isLoading"
@@ -210,9 +210,6 @@ export default {
         thumbnail: this.thumbnailSrc,
       }
     },
-    nbJson() {
-      return parseNbJson(this.content)
-    },
   },
   watch: {
     async file(newValue) {
@@ -245,7 +242,6 @@ export default {
           const text = await readFile(this.file)
           try {
             this.content = JSON.parse(text)
-
             if (this.content.cells.length > 0) {
               this.content.cells[0].source.forEach((line) =>
                 applyMagicTagsFromLine(this, line)
@@ -254,9 +250,17 @@ export default {
             if (!this.url) {
               this.url = this.filename.replace(/ /g, '-')
             }
+
+            parseNbJson(this.content)
+
             // if (!this.description & (this.content.cells.length > 0)) {
-            //   // TODO description should not be taken from the first cell if it has magic commands
-            //   this.description = this.content.cells[0].source.join()
+            //   // TODO description should be taken from the first non-empty cell after removing magic commands
+            //   for (const cell of this.content.cells) {
+            //     if (cell.source.length > 0) {
+            //       this.description = cell.source.join('').substring(0, 280)
+            //       break
+            //     }
+            //   }
             // }
 
             this.thumbnails = parseThumbnailsFromNbJson(this.content)
