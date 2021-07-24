@@ -290,7 +290,7 @@ export default {
   },
   computed: {
     ...mapState(["currentUser", "readonly", "posts"]),
-    ...mapGetters(["siteDomain", "customDomain", "isPaidAccount"]),
+    ...mapGetters(["siteLink", "isPaidAccount"]),
     orderedPosts() {
       // most recent first
       return this.posts
@@ -303,9 +303,6 @@ export default {
         return this.formatBytes(this.readonly.totalStorageUsed, 1);
       }
       return this.formatBytes(0, 1);
-    },
-    siteLink() {
-      return this.customDomain ? this.customDomain : this.siteDomain;
     },
   },
   methods: {

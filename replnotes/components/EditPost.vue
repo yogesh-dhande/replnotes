@@ -142,7 +142,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userPostUrls', 'userTags']),
+    ...mapGetters(['userPostUrls', 'userTags', 'siteLink']),
     ...mapState(['currentUser', 'token']),
     allErrors() {
       return [].concat(
@@ -159,7 +159,7 @@ export default {
       return false
     },
     baseUrl() {
-      return `${process.env.NUXT_ENV_DISPLAY_URL}/${this.currentUser.name}/posts/`
+      return `${this.siteLink}/posts/`
     },
     fileType() {
       if (this.file && this.file.name) {

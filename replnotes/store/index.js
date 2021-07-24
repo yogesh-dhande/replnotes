@@ -47,6 +47,9 @@ export const getters = {
       ? `https://${state.site.customDomain}`
       : null;
   },
+  siteLink(_, getters) {
+    return getters.customDomain ? getters.customDomain : getters.siteDomain;
+  },
   isPaidAccount(state, getters) {
     return getters.loggedIn && state.readonly.plan === "paid";
   }
