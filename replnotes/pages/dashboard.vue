@@ -212,16 +212,18 @@
           >
             <div>
               <h2>{{ post.title }}</h2>
-              <h3
+              <a
+                :href="postLink(post.url)"
                 class="
                   text-sm text-indigo-300
                   hover:text-indigo-400
                   hover:underline
                   cursor-pointer
                 "
+                target="_blank"
               >
-                {{ `${siteLink}/posts/${post.url}` }}
-              </h3>
+                {{ postLink(post.url) }}
+              </a>
             </div>
             <div>
               <icon-button @click="$router.push(`/posts/${post.url}`)">
@@ -303,6 +305,9 @@ export default {
         return this.formatBytes(this.readonly.totalStorageUsed, 1);
       }
       return this.formatBytes(0, 1);
+    },
+    postLink() {
+      return (url) => `${this.siteLink}/posts/${url}`;
     },
   },
   methods: {

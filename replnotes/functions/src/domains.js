@@ -1,10 +1,10 @@
 const axios = require("axios");
 const { cors, getUIDFromRequest } = require("./utils");
 const functions = require("firebase-functions");
-const { db } = require("./app");
+const { adminConfig, db } = require("./app");
 const { getReadonly } = require("./plans");
 
-exports.addVirtualHost = async (
+const addVirtualHost = async (
   siteId,
   incomingAddress,
   oldDomain = null,
@@ -31,7 +31,7 @@ exports.addVirtualHost = async (
       "https://cloud.approximated.app/api/vhosts",
       {
         incoming_address: incomingAddress,
-        target_address: USER_SITE_URL,
+        target_address: userSiteUrl,
         target_ports: "443"
       },
       {
@@ -62,6 +62,8 @@ exports.addVirtualHost = async (
     .doc(siteId)
     .update(patch);
 };
+
+exports.addVirtualHost = addVirtualHost;
 
 exports.getCustomDomainStatus = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {

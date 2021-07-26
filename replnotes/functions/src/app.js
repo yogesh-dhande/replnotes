@@ -10,6 +10,7 @@ const serviceAccount = !(
 adminConfig.credential = admin.credential.cert(serviceAccount);
 admin.initializeApp(adminConfig);
 
+exports.adminConfig = adminConfig;
 exports.db = admin.firestore();
 exports.bucket = admin.storage().bucket();
 exports.auth = admin.auth();
