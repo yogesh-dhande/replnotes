@@ -18,7 +18,7 @@ const addVirtualHost = async (
   } else if (adminConfig.projectId == "staging-2cacb") {
     userSiteUrl = "user-replnotes.web.app";
   } else if (adminConfig.projectId == "nbtoblog-8a03f") {
-    userSiteUrl = "user-replnotes-production.web.app";
+    userSiteUrl = "user-replnotes-prod.web.app";
   }
 
   if (userSiteUrl) {

@@ -11,7 +11,7 @@
     "start": "nuxt start",
     "build": "rm -rf dist && nuxt generate",
     "deploy": "npm run default && DEPLOY_TARGET=staging npm run build && firebase deploy",
-    "deploy:prod": "npm run prod &&  && DEPLOY_TARGET=production npm run build && firebase deploy",
+    "deploy:prod": "npm run prod && DEPLOY_TARGET=production npm run build && firebase deploy",
     "test": "firebase emulators:exec 'jest --env=node'",
     "reinstall": "rm package-lock.json && rm -rf node_modules && npm i"
   },
