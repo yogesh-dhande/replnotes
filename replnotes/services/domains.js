@@ -32,7 +32,7 @@ async function getSiteFromCustomDomain(context, domain) {
 export async function getSiteFromRequest(context) {
   let incoming = context.req.headers['apx-incoming-host']
   if (!incoming) {
-    incoming = 'blog.replnotes.com'
+    incoming = 'yogesh.replnotes.com'
   }
   if (isSubdomain(incoming)) {
     return await getSiteFromSubdomain(context, incoming)

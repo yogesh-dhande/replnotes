@@ -64,7 +64,7 @@ exports.uploadPostFile = functions.https.onRequest(async (req, res) => {
       const readonly = await getReadonly(uid);
       if (readonly.totalStorageUsed > readonly.plan.storageLimit) {
         res.status(403).json({
-          message: `Storage exceeded the limit of ${storageLimit}`
+          message: `Storage exceeded the limit of ${readonly.plan.storageLimit}`
         });
         return null;
       }

@@ -4,7 +4,7 @@
       {{ tag }}
     </h1>
     <user-posts
-      :user-name="userName"
+      :user-name="siteOwner.name"
       :query-tags="[tag]"
       :posts="posts"
     ></user-posts>
@@ -21,9 +21,7 @@ export default {
   },
   asyncData(context) {
     const returnData = {
-      userName: context.store.state.siteOwner.name,
       tag: context.params.tag,
-      posts: context.store.state.siteOwner.posts,
     }
     return returnData
   },
@@ -39,7 +37,7 @@ export default {
     })
   },
   computed: {
-    ...mapState(['siteOwner']),
+    ...mapState(['siteOwner', 'posts']),
   },
 }
 </script>

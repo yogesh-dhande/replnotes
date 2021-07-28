@@ -42,17 +42,14 @@ const addVirtualHost = async (
     );
 
     if (oldDomain) {
-      await axios.delete(
-        "https://cloud.approximated.app/api/vhosts",
-        {
-          incoming_address: oldDomain
+      await axios.delete("https://cloud.approximated.app/api/vhosts", {
+        headers: {
+          "api-key": functions.config().app.approximated_api_key
         },
-        {
-          headers: {
-            "api-key": functions.config().app.approximated_api_key
-          }
+        data: {
+          incoming_address: oldDomain
         }
-      );
+      });
     }
   } else {
     patch["domain"] = "localhost:8081";
@@ -71,9 +68,9 @@ exports.getCustomDomainStatus = functions.https.onRequest(async (req, res) => {
       const status = await axios.get(
         "https://cloud.approximated.app/api/vhosts/by/incoming",
         {
-          incoming_address: req.query.customDomain
-        },
-        {
+          params: {
+            incoming_address: req.query.customDomain
+          },
           headers: {
             "api-key": functions.config().app.approximated_api_key
           }
@@ -97,7 +94,7 @@ exports.addCustomDomain = functions.https.onRequest(async (req, res) => {
           uid,
           req.body.customDomain,
           req.body.oldDomain,
-          isCustomDomain
+          true
         );
         return res.status(200).send(req.body);
       } else {

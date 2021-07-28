@@ -9,7 +9,7 @@ const plans = {
     customDomain: false
   },
   paid: {
-    storageLimit: 1024, // MB,
+    storageLimit: 1024 * 1024 * 1024, // MB,
     fileSizeLimit: 100 * 1024 * 1024,
     customDomain: true
   }

@@ -37,7 +37,7 @@
         class="w-full mt-3"
         @input="clearErrors"
       ></text-input>
-      <div class="flex flex-row items-center">
+      <!-- <div class="flex flex-row items-center">
         <icon-button @click="refreshDomainStatus">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@
         >
           {{ status.status_message }}
         </p>
-      </div>
+      </div> -->
 
       <div
         v-if="!status.is_resolving || customDomain !== site.customDomain"
@@ -75,7 +75,9 @@
           domain registrar's or DNS host's dashboard.
         </p>
 
-        <p class="mt-3">Links to some guides on some domain providers.</p>
+        <p class="mt-3">
+          Links to instructions for some of the most popular domain providers.
+        </p>
 
         <a
           href="https://www.godaddy.com/help/add-an-a-record-19238"
@@ -183,7 +185,7 @@ export default {
     },
   },
   mounted() {
-    this.refreshDomainStatus()
+    // this.refreshDomainStatus()
   },
   methods: {
     async save() {
@@ -193,7 +195,7 @@ export default {
           this.customDomain !== this.site.customDomain &&
           this.isPaidAccount
         ) {
-          this.addCustomDomain()
+          await this.addCustomDomain()
         }
         await this.$sitesCollection.doc(this.site.id).update(this.localSite)
         this.cancel()
@@ -239,7 +241,7 @@ export default {
         this.site.customDomain,
         this.token
       )
-      this.refreshDomainStatus()
+      // this.refreshDomainStatus()
     },
     async deleteDomain() {
       await this.$addCustomDomain('', this.token)

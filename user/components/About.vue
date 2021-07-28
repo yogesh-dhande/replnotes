@@ -30,10 +30,7 @@
       </nuxt-link>
       <div class="mt-2 flex flex-row flex-wrap justify-center">
         <badge v-for="tag in tags" :key="tag" class="mx-2 my-2"
-          ><nuxt-link
-            :to="`/${user.name}/posts/?tag=${tag}`"
-            class="italic hover:underline"
-          >
+          ><nuxt-link :to="topicLink(tag)" class="italic hover:underline">
             {{ tag }}</nuxt-link
           ></badge
         >
@@ -69,6 +66,11 @@ export default {
       })
 
       return [...new Set([].concat.apply([], tagList))]
+    },
+    topicLink() {
+      return (tag) => {
+        return this.user ? `/topics/${tag}` : '#'
+      }
     },
   },
 }
