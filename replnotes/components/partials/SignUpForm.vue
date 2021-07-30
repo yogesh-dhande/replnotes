@@ -1,20 +1,5 @@
 <template>
   <div>
-    <h1
-      class="
-        text-center text-6xl
-        tracking-tight
-        font-extrabold
-        text-indigo-100
-        mb-6
-      "
-    >
-      Start Blogging
-      <span class="block text-indigo-400 text-4xl">
-        <span class="text-indigo-100">with</span>
-        Jupyter notebooks</span
-      >
-    </h1>
     <form
       class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 rounded-lg shadow-xl"
     >

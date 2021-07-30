@@ -156,8 +156,23 @@
         />
       </div>
     </section>
-    <form-page data-aos="fade-up" data-aos-delay="200"
-      ><sign-up-form />
+    <form-page data-aos="fade-up" data-aos-delay="200">
+      <h2
+        class="
+          text-center text-6xl
+          tracking-tight
+          font-extrabold
+          text-indigo-100
+          mb-6
+        "
+      >
+        Start Blogging
+        <span class="block text-indigo-400 text-4xl">
+          <span class="text-indigo-100">with</span>
+          Jupyter notebooks</span
+        >
+      </h2>
+      <sign-up-form />
       <h2
         class="
           mt-16
@@ -167,7 +182,6 @@
           sm:text-2xl
           text-center
         "
-        data-aos="fade-up"
       >
         Have questions? Ask them
         <nuxt-link
