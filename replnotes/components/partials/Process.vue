@@ -5,7 +5,7 @@
         <!-- Section header -->
         <div class="text-center">
           <h2
-            class="text-4xl sm:text-5xl text-indigo-400 font-bold"
+            class="text-4xl sm:text-5xl text-indigo-100 font-extrabold"
             data-aos="fade-up"
           >
             Get started in three quick steps
@@ -33,8 +33,11 @@
               flex flex-col
               items-center
               bg-gray-900
-              p-4
+              px-4
+              py-8
               rounded-xl
+              bg-opacity-50
+              hover:bg-opacity-100
             "
             data-aos="fade-up"
             data-aos-delay="200"
@@ -86,8 +89,11 @@
               flex flex-col
               items-center
               bg-gray-900
-              p-4
+              px-4
+              py-8
               rounded-xl
+              bg-opacity-50
+              hover:bg-opacity-100
             "
             data-aos="fade-up"
             data-aos-delay="400"
@@ -138,8 +144,11 @@
               flex flex-col
               items-center
               bg-gray-900
-              p-4
+              px-4
+              py-8
               rounded-xl
+              bg-opacity-50
+              hover:bg-opacity-100
             "
             data-aos="fade-up"
             data-aos-delay="600"

@@ -9,10 +9,9 @@
           class="
             text-4xl
             sm:text-5xl
-            text-indigo-400
-            font-semibold
+            text-indigo-100
+            font-extrabold
             tracking-wide
-            uppercase
           "
           data-aos="fade-up"
           data-aos-delay="200"
@@ -22,17 +21,17 @@
         <p
           class="
             mt-2
-            text-3xl
-            sm:text-4xl
+            text-2xl
+            sm:text-3xl
             leading-8
-            font-extrabold
+            font-medium
             tracking-tight
-            text-indigo-100
+            text-indigo-200
           "
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          No coding required
+          No web development experience required.
         </p>
       </div>
 

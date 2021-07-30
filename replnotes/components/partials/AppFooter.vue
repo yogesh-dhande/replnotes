@@ -34,34 +34,6 @@
           >Blog</nuxt-link
         > -->
         <nuxt-link
-          to="/demo"
-          class="
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-            border-transparent
-          "
-          @click.native="scrollToTop"
-          >Demo</nuxt-link
-        >
-        <nuxt-link
-          to="/discover"
-          class="
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-            border-transparent
-          "
-          @click.native="scrollToTop"
-          >Discover</nuxt-link
-        >
-        <nuxt-link
           to="/contact"
           class="
             text-indigo-100
@@ -74,6 +46,35 @@
           "
           @click.native="scrollToTop"
           >Contact</nuxt-link
+        >
+        <nuxt-link
+          to="/dashboard"
+          class="
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+            border-transparent
+          "
+          @click.native="scrollToTop"
+          >Dashboard</nuxt-link
+        >
+
+        <nuxt-link
+          to="/demo"
+          class="
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+            border-transparent
+          "
+          @click.native="scrollToTop"
+          >Demo</nuxt-link
         >
         <nuxt-link
           v-if="!currentUser.id"
@@ -120,21 +121,21 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(['currentUser']),
   },
   methods: {
     scrollToTop() {
       window.scroll({
         top: 0,
         left: 0,
-        behavior: "smooth",
-      });
+        behavior: 'smooth',
+      })
     },
   },
-};
+}
 </script>
 
 <style>

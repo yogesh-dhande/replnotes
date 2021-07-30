@@ -1,92 +1,78 @@
 <template>
   <!-- Hero image -->
-  <div class="relative">
-    <div class="absolute inset-0 flex flex-col" aria-hidden="true">
-      <div class="flex-1"></div>
-      <div class="flex-1 w-full bg-gray-900"></div>
-    </div>
-    <div>
-      <div
-        class="relative flex justify-center items-center"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        <img
-          class="mx-auto rounded-lg"
-          src="/appImage.png"
-          width="1024"
-          height="504"
-          alt="Hero"
-        />
-        <a
-          class="absolute group"
-          href="#0"
-          aria-controls="modal"
-          @click.prevent.stop="videoModalOpen = true"
-        >
-          <svg
-            class="
-              w-16
-              h-16
-              sm:w-20
-              sm:h-20
-              hover:opacity-75
-              transition
-              duration-150
-              ease-in-out
-            "
-            viewBox="0 0 88 88"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient
-                id="a"
-                x1="78.169%"
-                y1="9.507%"
-                x2="24.434%"
-                y2="90.469%"
-              >
-                <stop stop-color="#EBF1F5" stop-opacity=".8" offset="0%" />
-                <stop stop-color="#EBF1F5" offset="100%" />
-              </linearGradient>
-            </defs>
-            <circle fill="url(#a)" cx="44" cy="44" r="44" />
-            <path
-              class="fill-current text-purple-600"
-              d="M52 44a.999.999 0 00-.427-.82l-10-7A1 1 0 0040 37V51a.999.999 0 001.573.82l10-7A.995.995 0 0052 44V44c0 .001 0 .001 0 0z"
-            />
-          </svg>
-        </a>
+  <div class="mx-auto">
+    <div id="browser-window" class="mx-4 sm:mx-8">
+      <div id="controls" class="px-3 sm:py-1">
+        <span class="close rounded-full w-3 h-3 sm:w-4 sm:h-4"></span>
+        <span class="minimize rounded-full w-3 h-3 sm:w-4 sm:h-4"></span>
+        <span class="maximize rounded-full w-3 h-3 sm:w-4 sm:h-4"></span>
       </div>
-
-      <!-- Modal -->
-      <Modal
-        id="modal"
-        aria-label="modal-headline"
-        :show="videoModalOpen"
-        @handleClose="videoModalOpen = false"
-      >
-        <iframe
-          width="1424"
-          height="595"
-          src="https://www.youtube.com/embed/6Pvrk1Qt-B4"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </Modal>
+      <div class="viewport">
+        <div class="content">
+          <img
+            class="sm:hidden rounded-lg shadow-lg mx-auto w-full"
+            src="~/static/demo-sm.gif"
+            alt="App screenshot"
+          />
+          <img
+            class="hidden sm:block rounded-lg shadow-lg mx-auto w-full"
+            src="~/static/demo-lg.gif"
+            alt="App screenshot"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Modal from "@/components/layouts/Modal.vue";
-
-export default {
-  components: { Modal },
-};
+export default {}
 </script>
 
-<style>
+<style scoped>
+#browser-window {
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  /* fix height for controls*/
+  text-align: left;
+  box-shadow: 0 0 10px #2f7083;
+}
+
+#controls {
+  background: #e7eaed;
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top: 1px solid white;
+}
+
+#controls span {
+  display: inline-block;
+  margin-left: 5px;
+  background: #333;
+}
+
+#controls span.close {
+  background: #ed6a5e;
+}
+
+#controls span.minimize {
+  background: #f6be50;
+}
+
+#controls span.maximize {
+  background: #62c555;
+}
+
+.viewport {
+  overflow: scroll;
+  height: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.content img {
+  width: 100%;
+}
 </style>

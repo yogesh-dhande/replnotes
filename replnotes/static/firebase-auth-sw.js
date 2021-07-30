@@ -6,10 +6,12 @@ importScripts(
 importScripts(
   'https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js'
 )
-firebase.initializeApp({"apiKey":"AIzaSyC9NjggpUa0sG9QigWDTUHoDWbmSCM2cs4","authDomain":"nbtoblog-8a03f.firebaseapp.com","projectId":"nbtoblog-8a03f","storageBucket":"nbtoblog-8a03f.appspot.com","messagingSenderId":"885795574335","appId":"1:885795574335:web:ecf17f4eb83c4d9d419e8a","measurementId":"G-GZR6SK4TRH"})
+firebase.initializeApp({"apiKey":"AIzaSyBWKIWo53-7-NRtQTT2tiZtCyXg4koowjA","authDomain":"staging-2cacb.firebaseapp.com","projectId":"staging-2cacb","storageBucket":"staging-2cacb.appspot.com","messagingSenderId":"436006303418","appId":"1:436006303418:web:682a37b2efd0fc02347483","measurementId":"G-BZ4LSGQD7P"})
 
 // Initialize authService
 const authService = firebase.auth()
+
+authService.useEmulator('http://localhost:10000')
 
 /**
  * Returns a promise that resolves with an ID token if available.

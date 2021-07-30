@@ -24,19 +24,33 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "Blog with Jupyter Notebooks @ REPL Notes"
+        content: "Start Blogging with Jupyter Notebooks @ REPL Notes"
       },
       {
         hid: "og:description",
         property: "og:description",
-        content: "Blog with Jupyter Notebooks @ REPL Notes"
+        content: "Start Blogging with Jupyter Notebooks @ REPL Notes"
       },
       {
         hid: "og:url",
         property: "og:url",
         content: process.env.NUXT_ENV_BASE_URL
       },
-      { hid: "og:image", property: "og:image", content: "~/static/logo.png" }
+      {
+        hid: "twitter:card",
+        property: "twitter:card",
+        content: "summary_large_image"
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: "/og-image.png"
+      },
+      {
+        hid: "twitter:image",
+        property: "og:image",
+        content: "/og-image.png"
+      }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     script: [
@@ -74,7 +88,7 @@ export default {
   ],
   sitemap: {
     hostname: "https://replnotes.com",
-    exclude: ["/dashboard"]
+    exclude: ["/dashboard", "/profile", "/site", "/posts"]
   },
   firebase: {
     config: {

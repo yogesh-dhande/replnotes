@@ -60,14 +60,14 @@
             text-lg
             sm:text-2xl
             md:text-3xl
-            sm:max-w-3xl
+            sm:max-w-4xl
             sm:mx-auto
             md:mt-10
             lg:mx-0
           "
         >
           Create a portfolio website by turning Jupyter notebooks into beautiful
-          blog posts. No coding required.
+          blog posts. No web development experience required.
         </p>
       </div>
       <div class="mt-8 flex justify-center">
@@ -120,7 +120,7 @@
         </div>
       </div>
     </div>
-    <app-preview v-if="false" />
+    <app-preview class="max-w-5xl" />
     <process />
     <features />
     <section id="pricing" class="bg-gray-800 text-indigo-100">
@@ -130,8 +130,8 @@
             <h2
               class="
                 text-3xl
-                font-bold
-                text-indigo-400
+                font-extrabold
+                text-indigo-100
                 sm:text-4xl
                 lg:text-5xl
                 my-4

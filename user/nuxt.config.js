@@ -35,7 +35,7 @@ export default {
         property: 'og:url',
         content: process.env.NUXT_ENV_BASE_URL,
       },
-      { hid: 'og:image', property: 'og:image', content: '~/static/logo.png' },
+      { hid: 'og:image', property: 'og:image', content: '/logo.png' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },

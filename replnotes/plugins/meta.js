@@ -6,11 +6,6 @@ export default async ({ route }, inject) => {
       title: data.title,
       meta: [
         { hid: "og:type", property: "og:type", content: "website" },
-        {
-          hid: "twitter:card",
-          property: "twitter:card",
-          content: "summary_large_image"
-        },
         { hid: "og:title", property: "og:title", content: data.title },
         {
           hid: "og:url",
