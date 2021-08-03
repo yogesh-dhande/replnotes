@@ -1,6 +1,6 @@
 FROM node:14-alpine as builder
 
-ARG DEPLOY_TARGET=staging
+ARG DEPLOY_TARGET=production
 WORKDIR /app
 ADD package*.json ./
 RUN npm install

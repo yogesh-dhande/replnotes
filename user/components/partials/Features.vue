@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-6 sm:px-12 py-12 bg-gray-800 text-indigo-50"
+    class="px-6 sm:px-12 py-12 bg-gray-800 text-indigo-100"
     data-aos="fade-up"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@
                   />
                 </svg>
               </div>
-              <p class="ml-16 text-lg leading-6 font-medium">
+              <p class="ml-16 text-lg leading-6 font-bold">
                 Quick and Easy Set Up
               </p>
             </dt>
@@ -119,7 +119,7 @@
                   />
                 </svg>
               </div>
-              <p class="ml-16 text-lg leading-6 font-medium">Custom Domains</p>
+              <p class="ml-16 text-lg leading-6 font-bold">Custom Domains</p>
             </dt>
             <dd class="mt-2 ml-16 text-base text-indigo-200">
               Add a custom domain (or subdomain) to your website. Site hosting
@@ -200,7 +200,7 @@
                   />
                 </svg>
               </div>
-              <p class="ml-16 text-lg leading-6 font-medium">
+              <p class="ml-16 text-lg leading-6 font-bold">
                 Preview Thumbnails
               </p>
             </dt>
@@ -242,7 +242,7 @@
                   />
                 </svg>
               </div>
-              <p class="ml-16 text-lg leading-6 font-mediu">
+              <p class="ml-16 text-lg leading-6 font-bold">
                 No Coding Required
               </p>
             </dt>
@@ -284,7 +284,7 @@
                   />
                 </svg>
               </div>
-              <p class="ml-16 text-lg leading-6 font-medium">Topics</p>
+              <p class="ml-16 text-lg leading-6 font-bold">Topics</p>
             </dt>
             <dd class="mt-2 ml-16 text-base text-indigo-200">
               Organize posts into topics by simply adding tags to each post. A

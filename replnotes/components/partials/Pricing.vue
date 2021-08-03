@@ -1,8 +1,8 @@
 <template>
-  <div class="text-indigo-100">
-    <div class="flex justify-around mb-6 sm:mb-12">
-      <div class="flex items-center text-lg sm:text-xl">
-        <span id="monthly-billing-label" class="mr-3">
+  <div class="text-indigo-100 px-4 sm:px-8">
+    <div class="flex justify-center mb-6 sm:mb-12">
+      <div class="flex items-center justify-center text-lg sm:text-xl">
+        <span id="monthly-billing-label" class="mr-3 text-right">
           <span class="font-medium">Monthly billing </span>
         </span>
         <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
@@ -52,7 +52,7 @@
             :class="{ 'translate-x-5': annual }"
           ></span>
         </button>
-        <span id="annual-billing-label" class="ml-3">
+        <span id="annual-billing-label text-left" class="ml-3">
           <span class="font-medium">Annual billing </span>
           <span>(Save 50%)</span>
         </span>

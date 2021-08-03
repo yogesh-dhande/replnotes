@@ -7,13 +7,16 @@ export function parseNbJson(nbJson) {
   if (!nbJson || !nbJson.cells) {
     return null
   }
+
+  nbJson.cells[0].source = nbJson.cells[0].source.filter(
+    (line) => !containsMagicTags(line)
+  )
   nbJson.cells.forEach((cell) => {
     parseMagicMethods(cell)
 
     if (cell.cell_type === 'markdown') {
       parseAttachments(cell)
     }
-    cell.source = cell.source.filter((line) => !containsMagicTags(line))
   })
   return nbJson
 }
