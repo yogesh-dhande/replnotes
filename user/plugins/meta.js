@@ -70,7 +70,7 @@ export default ({ route }, inject) => {
       })
       meta.meta.push({
         hid: 'twitter:image',
-        property: 'twitter:image',
+        name: 'twitter:image',
         content: data.image,
       })
     }

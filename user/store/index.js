@@ -1,10 +1,11 @@
-import { getSiteFromRequest } from '~/services/domains'
+import { getSiteFromRequest, isSubdomain } from '~/services/domains'
 
 export const state = () => ({
   siteOwner: {},
   site: {},
   currentUser: {},
   readonly: {},
+  domain: null,
 })
 
 export const getters = {
@@ -34,6 +35,9 @@ export const getters = {
   },
   isPaidAccount(state) {
     return state.readonly.plan === 'paid'
+  },
+  isCustomDomain(state) {
+    return !isSubdomain(state.domain)
   },
 }
 
@@ -75,5 +79,8 @@ export const mutations = {
   },
   SET_READONLY_DATA(state, data) {
     state.readonly = data
+  },
+  SET_DOMAIN(state, domain) {
+    state.domain = domain
   },
 }

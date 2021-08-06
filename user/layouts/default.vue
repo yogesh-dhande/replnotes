@@ -20,7 +20,7 @@
 <script>
 import UserNavBar from '@/components/partials/UserNavBar'
 import UserFooter from '@/components/partials/UserFooter'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -35,11 +35,18 @@ export default {
     }
   },
   computed: {
-    ...mapState(['siteOwner', 'site']),
+    ...mapState(['siteOwner', 'site', 'domain']),
+    ...mapGetters(['isCustomDomain']),
   },
   // a beforeMount call to add a listener to the window
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
+  },
+  mounted() {
+    if (!this.isCustomDomain) {
+      // Only add event on subdomains
+      this.$splitbee.track(this.domain)
+    }
   },
 
   methods: {

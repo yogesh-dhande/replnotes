@@ -11,6 +11,7 @@ require("dotenv").config({
 export default {
   target: "static",
   dev: isDev,
+  publicRuntimeConfig: { baseURL: process.env.NUXT_ENV_BASE_URL },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "REPL Notes",
@@ -44,12 +45,12 @@ export default {
       {
         hid: "og:image",
         property: "og:image",
-        content: "/og-image.png"
+        content: `${process.env.NUXT_ENV_BASE_URL}/og-image.png`
       },
       {
         hid: "twitter:image",
-        property: "og:image",
-        content: "/og-image.png"
+        name: "twitter:image",
+        content: `${process.env.NUXT_ENV_BASE_URL}/og-image.png`
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
@@ -87,7 +88,7 @@ export default {
     "@nuxtjs/sitemap"
   ],
   sitemap: {
-    hostname: "https://replnotes.com",
+    hostname: process.env.NUXT_ENV_BASE_URL,
     exclude: ["/dashboard", "/profile", "/site", "/posts"]
   },
   firebase: {

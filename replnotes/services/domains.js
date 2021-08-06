@@ -1,4 +1,7 @@
 export function isSubdomain(domain) {
+  if (!domain) {
+    return false
+  }
   return domain.split('.')[1] === 'replnotes'
 }
 
@@ -34,6 +37,7 @@ export async function getSiteFromRequest(context) {
   if (!incoming) {
     incoming = 'blog.replnotes.com'
   }
+  context.store.commit('SET_DOMAIN', incoming)
   if (isSubdomain(incoming)) {
     return await getSiteFromSubdomain(context, incoming)
   } else {

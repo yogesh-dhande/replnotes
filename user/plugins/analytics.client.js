@@ -1,14 +1,14 @@
-export default ({ app }, inject) => {
-  const EventName = app.$fireModule.analytics.EventName
+import splitbee from '@splitbee/web'
 
-  const analyticsEvents = {
-    ...EventName,
-    VIEW_USER_POSTS: 'view_user_posts',
-    VIEW_USER_HOME: 'view_user_home',
-    VIEW_POST: 'view_post',
-    CREATE_POST: 'create_post',
-    EDIT_POST: 'edit_post',
+export default ({ store }, inject) => {
+  if (store.getters.isCustomDomain) {
+    splitbee.init()
+  } else {
+    splitbee.init({
+      // Only add replnotes.com token for subdomains
+      token: '39GRO023ROKV',
+    })
   }
 
-  inject('analyticsEvents', analyticsEvents)
+  inject('splitbee', splitbee)
 }
