@@ -1,21 +1,24 @@
-export default ({ route }, inject) => {
+export default ({ route, store }, inject) => {
   function createSEOMeta(data) {
+    const name = store.state.siteOwner.name
+      ? store.state.siteOwner.displayName
+      : store.state.siteOwner.name
     if (!data.title) {
       data.title =
-        this.siteOwner.site && this.siteOwner.site.title
-          ? this.siteOwner.site.title
+        store.state.site && store.state.site.title
+          ? store.state.site.title
           : name + "'s Posts"
     }
 
     if (!data.description) {
       data.description =
-        this.siteOwner.site && this.siteOwner.site.description
-          ? this.siteOwner.site.description
+        store.state && store.state.description
+          ? store.state.description
           : name + "'s Posts"
     }
 
     if (!data.image) {
-      data.image = this.siteOwner.photoUrl
+      data.image = store.state.siteOwner.photoUrl
     }
 
     const pageUrl = process.env.NUXT_ENV_BASE_URL + route.fullPath

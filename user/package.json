@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "PORT=8081 nuxt",
+    "dev:static": "domain=yogesh.replnotes.com PORT=8081 nuxt",
     "default": "firebase use staging",
     "prod": "firebase use production",
     "build": "rm -rf .nuxt && nuxt build",
+    "generate": "USERNAME=yogesh DOMAIN=yogesh.replnotes.com nuxt generate",
     "start": "nuxt start",
     "deploy": "npm run default && firebase deploy --only hosting:user-replnotes",
     "deploy:prod": "npm run prod && firebase deploy --only hosting:user-replnotes",

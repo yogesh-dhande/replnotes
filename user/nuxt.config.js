@@ -1,5 +1,9 @@
+/* eslint-disable no-console */
 import path from 'path'
+import getAppRoutes from './services/getRoutes'
 const isDev = process.env.NODE_ENV === 'development'
+
+console.log(process.env.DOMAIN)
 
 const deployTarget = process.env.DEPLOY_TARGET || 'staging'
 console.log(deployTarget)
@@ -10,6 +14,13 @@ require('dotenv').config({
 
 export default {
   dev: isDev,
+  target: process.env.DOMAIN ? 'static' : 'server',
+  generate: {
+    dir: `sites/${process.env.DOMAIN}`,
+    async routes() {
+      return await getAppRoutes(process.env.USERNAME)
+    },
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'user',
@@ -60,7 +71,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/axios',
     '@nuxtjs/firebase',
-    '@nuxtjs/sitemap',
+    // '@nuxtjs/sitemap',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -19,7 +19,7 @@
 
       <nuxt-link
         v-if="user.posts"
-        :to="`/${user.name}/posts`"
+        :to="`/posts`"
         class="mt-2 text-lg sm:text-xl font-semibold hover:text-indigo-100"
       >
         <h1>

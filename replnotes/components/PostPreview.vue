@@ -31,7 +31,7 @@
           <user-date-thumbnail
             :name="post.user.displayName"
             :date="readableDate"
-            :link="`/${post.user.name}`"
+            :link="`/about`"
             :thumbnail-url="post.user.thumbnailUrl"
           ></user-date-thumbnail>
           <div class="flex flex-row flex-wrap space-x-2 mt-6">

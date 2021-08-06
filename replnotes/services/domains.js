@@ -33,7 +33,12 @@ async function getSiteFromCustomDomain(context, domain) {
 }
 
 export async function getSiteFromRequest(context) {
-  let incoming = context.req.headers['apx-incoming-host']
+  let incoming
+  if (context.isStatic) {
+    incoming = process.env.DOMAIN
+  } else if (context.req && context.req.headers) {
+    incoming = context.req.headers['apx-incoming-host']
+  }
   if (!incoming) {
     incoming = 'blog.replnotes.com'
   }

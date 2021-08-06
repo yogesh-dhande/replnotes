@@ -4,22 +4,9 @@ const functions = require("firebase-functions");
 async function getAppRoutes(userName) {
   let routes = [];
 
-  const usersRef = db.collection("users");
-
   let snapshot;
-  if (!userName) {
-    snapshot = await usersRef.get();
-    snapshot.forEach(doc => {
-      let user = doc.data();
-      if (user.posts) {
-        routes.push(`/${user.name}`);
-        routes.push(`/${user.name}/posts`);
-        Object.values(user.posts).map(post => {
-          routes.push(`/${user.name}/posts/${post.url}`);
-        });
-      }
-    });
-  } else {
+  if (userName) {
+    const usersRef = db.collection("users");
     snapshot = await usersRef.where("name", "==", userName).get();
     snapshot.forEach(doc => {
       let user = doc.data();
@@ -28,9 +15,9 @@ async function getAppRoutes(userName) {
           routes.push(`/posts/${post.url}`);
         });
       }
-      if (user.tags) {
+      if (user.tags && user.tags.length > 0) {
         tags.map(tag => {
-          routes.push(`/tags/${tag}`);
+          routes.push(`/topics/${tag}`);
         });
       }
     });

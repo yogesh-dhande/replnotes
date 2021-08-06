@@ -7,7 +7,7 @@
       <user-date-thumbnail
         :name="post.user.displayName"
         :date="readableDate"
-        :link="`/${post.user.name}`"
+        :link="`/about`"
         :thumbnail-url="post.user.thumbnailUrl"
       ></user-date-thumbnail>
     </div>
@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { getReadableDate } from '@/services/notebook'
-import { mapState } from 'vuex'
+import { getReadableDate } from "@/services/notebook";
+import { mapState } from "vuex";
 
 export default {
   props: {
@@ -39,17 +39,17 @@ export default {
     },
   },
   computed: {
-    ...mapState(['siteOwner']),
+    ...mapState(["siteOwner"]),
     readableDate() {
-      return getReadableDate(this.post.created)
+      return getReadableDate(this.post.created);
     },
     topicLink() {
       return (tag) => {
-        return this.siteOwner ? `/topics/${tag}` : '#'
-      }
+        return this.siteOwner ? `/topics/${tag}` : "#";
+      };
     },
   },
-}
+};
 </script>
 
 <style>
