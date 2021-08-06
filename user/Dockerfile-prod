@@ -19,6 +19,7 @@ ADD nuxt.config.js ./
 ADD envs envs
 COPY --from=builder ./app/.nuxt ./.nuxt/
 COPY --from=builder ./app/static ./static/
+COPY --from=builder ./app/services ./services/
 
 EXPOSE 8080
 ENV HOST=0.0.0.0

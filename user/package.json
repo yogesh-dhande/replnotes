@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "PORT=8081 nuxt",
-    "dev:static": "domain=yogesh.replnotes.com PORT=8081 nuxt",
+    "dev:static": "DOMAIN=yogesh.replnotes.com PORT=8081 nuxt",
     "default": "firebase use staging",
     "prod": "firebase use production",
     "build": "rm -rf .nuxt && nuxt build",
