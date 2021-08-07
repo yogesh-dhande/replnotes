@@ -5,22 +5,8 @@
         class="-mx-5 -my-2 flex flex-wrap justify-center"
         aria-label="Footer"
       >
-        <!-- <nuxt-link
-          to="/blog"
-          class="
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-            border-transparent
-          "
-          @click.native="scrollToTop"
-          >About</nuxt-link
-        >
         <nuxt-link
-          to="/blog/posts"
+          to="/guides"
           class="
             text-indigo-100
             hover:text-indigo-300
@@ -31,8 +17,8 @@
             border-transparent
           "
           @click.native="scrollToTop"
-          >Blog</nuxt-link
-        > -->
+          >Guides</nuxt-link
+        >
         <nuxt-link
           to="/contact"
           class="

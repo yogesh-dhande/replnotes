@@ -1,6 +1,7 @@
 const isDev = process.env.NODE_ENV === "development";
 
 import path from "path";
+import getAppRoutes from "./services/getRoutes";
 const deployTarget = process.env.DEPLOY_TARGET || "development";
 console.log(deployTarget);
 
@@ -8,9 +9,17 @@ require("dotenv").config({
   path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`)
 });
 
+const useFirebaseEmulators = false;
+
 export default {
-  target: "static",
   dev: isDev,
+  target: "static",
+  generate: {
+    async routes() {
+      const routes = await getAppRoutes("blog");
+      return routes.map(route => route.replace("posts", "guides"));
+    }
+  },
   publicRuntimeConfig: { baseURL: process.env.NUXT_ENV_BASE_URL },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -109,19 +118,19 @@ export default {
           subscribeManually: false
         },
         ssr: true, // default
-        emulatorPort: isDev ? 10000 : undefined,
-        emulatorHost: isDev ? "http://localhost" : undefined
+        emulatorPort: useFirebaseEmulators ? 10000 : undefined,
+        emulatorHost: useFirebaseEmulators ? "http://localhost" : undefined
       },
       functions: {
         location: "us-central1",
-        emulatorPort: isDev ? 10001 : undefined,
-        emulatorHost: isDev ? "localhost" : undefined
+        emulatorPort: useFirebaseEmulators ? 10001 : undefined,
+        emulatorHost: useFirebaseEmulators ? "localhost" : undefined
       },
       firestore: {
         memoryOnly: false, // default
-        enablePersistence: !isDev,
-        emulatorPort: isDev ? 10002 : undefined,
-        emulatorHost: isDev ? "localhost" : undefined
+        enablePersistence: !useFirebaseEmulators,
+        emulatorPort: useFirebaseEmulators ? 10002 : undefined,
+        emulatorHost: useFirebaseEmulators ? "localhost" : undefined
       },
       storage: true,
       analytics: {

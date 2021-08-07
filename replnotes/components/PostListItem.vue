@@ -88,7 +88,6 @@ export default {
         await this.$postsCollection.doc(this.post.id).delete()
         this.$router.go() // Refresh the page
       } catch (error) {
-        console.log(error)
         this.errors.push(error.message)
       }
     },

@@ -32,7 +32,8 @@
     "highlight.js": "^10.7.2",
     "ipynb2html": "^0.3.0",
     "nodom": "^2.4.0",
-    "nuxt": "^2.15.3"
+    "nuxt": "^2.15.3",
+    "postscribe": "^2.0.8"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

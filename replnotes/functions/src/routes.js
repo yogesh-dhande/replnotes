@@ -1,5 +1,6 @@
 const { cors } = require("./utils");
 const functions = require("firebase-functions");
+const { db } = require("./app");
 
 async function getAppRoutes(userName) {
   let routes = [];
@@ -30,10 +31,11 @@ exports.getRoutes = functions.https.onRequest(async (req, res) => {
   return cors(req, res, async () => {
     try {
       const userName = req.query.userName;
+      console.log(userName);
       return res.status(200).send(await getAppRoutes(userName));
     } catch (error) {
       console.log(error);
-      return res.status(200).send([]);
+      return res.status(400).json({ message: error.message });
     }
   });
 });

@@ -120,6 +120,19 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <nuxt-link
+                to="/guides"
+                class="
+                  text-indigo-100
+                  hover:text-indigo-300
+                  px-3
+                  py-2
+                  text-lg
+                  font-bold
+                  border-transparent
+                "
+                >Guides</nuxt-link
+              >
+              <nuxt-link
                 to="/contact"
                 class="
                   text-indigo-100
@@ -131,19 +144,6 @@
                   border-transparent
                 "
                 >Contact</nuxt-link
-              >
-              <nuxt-link
-                to="/dashboard"
-                class="
-                  text-indigo-100
-                  hover:text-indigo-300
-                  px-3
-                  py-2
-                  text-lg
-                  font-bold
-                  border-transparent
-                "
-                >Dashboard</nuxt-link
               >
               <div v-if="!currentUser.id" class="self-center">
                 <nuxt-link
@@ -189,7 +189,8 @@
                 >
               </div>
               <div v-else>
-                <button
+                <nuxt-link
+                  to="/dashboard"
                   class="
                     text-indigo-100
                     hover:text-indigo-300
@@ -199,7 +200,19 @@
                     font-bold
                     border-transparent
                   "
+                  >Dashboard</nuxt-link
+                >
+                <button
                   id="user-menu"
+                  class="
+                    text-indigo-100
+                    hover:text-indigo-300
+                    px-3
+                    py-2
+                    text-lg
+                    font-bold
+                    border-transparent
+                  "
                   aria-haspopup="true"
                   @click="logout"
                 >
@@ -221,6 +234,20 @@
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <nuxt-link
+          to="/guides"
+          class="
+            block
+            text-indigo-100
+            hover:text-indigo-300
+            px-3
+            py-2
+            text-lg
+            font-bold
+            border-transparent
+          "
+          >Guides</nuxt-link
+        >
+        <nuxt-link
           to="/contact"
           class="
             block
@@ -232,19 +259,6 @@
             font-bold
           "
           >Contact</nuxt-link
-        >
-        <nuxt-link
-          to="/dashboard"
-          class="
-            block
-            text-indigo-100
-            hover:text-indigo-300
-            px-3
-            py-2
-            text-lg
-            font-bold
-          "
-          >Dashboard</nuxt-link
         >
         <div v-if="!currentUser.id">
           <nuxt-link
@@ -277,7 +291,8 @@
           >
         </div>
         <div v-else>
-          <button
+          <nuxt-link
+            to="/dashboard"
             class="
               block
               text-indigo-100
@@ -287,7 +302,19 @@
               text-lg
               font-bold
             "
+            >Dashboard</nuxt-link
+          >
+          <button
             id="user-menu"
+            class="
+              block
+              text-indigo-100
+              hover:text-indigo-300
+              px-3
+              py-2
+              text-lg
+              font-bold
+            "
             aria-haspopup="true"
             @click="logout"
           >
@@ -303,7 +330,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "nav-bar",
+  name: "NavBar",
   data() {
     return {
       showProfileMenu: false,
