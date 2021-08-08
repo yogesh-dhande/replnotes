@@ -3,10 +3,10 @@ import path from 'path'
 import getAppRoutes from './services/getRoutes'
 const isDev = process.env.NODE_ENV === 'development'
 
-console.log(process.env.DOMAIN)
+console.log('domain: ', process.env.DOMAIN)
 
 const deployTarget = process.env.DEPLOY_TARGET || 'staging'
-console.log(deployTarget)
+console.log('deploy target: ', deployTarget)
 
 require('dotenv').config({
   path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`),
@@ -58,6 +58,7 @@ export default {
   plugins: [
     '~/plugins/firebaseConfig.js',
     '~/plugins/analytics.client.js',
+    '~/plugins/postscribe.client.js',
     '~/plugins/meta.js',
   ],
 

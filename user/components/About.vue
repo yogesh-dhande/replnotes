@@ -5,7 +5,11 @@
       class="flex flex-col items-center mt-6 sm:mt-12 text-center text-gray-300"
     >
       <!-- Image for mobile view-->
-      <thumbnail class="block h-64 w-64 sm:h-80 sm:w-80" :src="user.photoUrl" />
+      <thumbnail
+        v-if="user.photoUrl"
+        class="block h-64 w-64 sm:h-80 sm:w-80"
+        :src="user.photoUrl"
+      />
 
       <h1 class="text-4xl sm:text-5xl font-bold text-indigo-100 pt-8">
         {{ user.displayName }}

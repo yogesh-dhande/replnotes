@@ -99,6 +99,11 @@
         >
       </div>
     </div>
+    <text-area-input
+      v-if="isPaidAccount"
+      v-model="embedTags"
+      label="Embed Tags"
+    />
 
     <label for="navbar-builder" class="block mt-6 px-2">Navigation Menu</label>
     <div id="navbar-builder" class="flex flex-col space-y-3">
@@ -150,6 +155,7 @@ export default {
         this.site && this.site.description ? this.site.description : '',
       customDomain:
         this.site && this.site.customDomain ? this.site.customDomain : '',
+      embedTags: this.site && this.site.embedTags ? this.site.embedTags : '',
       navbar:
         this.site && this.site.navbar
           ? this.site.navbar
@@ -178,6 +184,7 @@ export default {
         title: this.title,
         description: this.description,
         navbar: this.navbar,
+        embedTags: this.embedTags,
       }
     },
     ipAddress() {

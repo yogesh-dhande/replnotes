@@ -2,7 +2,7 @@ const isDev = process.env.NODE_ENV === "development";
 
 import path from "path";
 import getAppRoutes from "./services/getRoutes";
-const deployTarget = process.env.DEPLOY_TARGET || "development";
+const deployTarget = process.env.DEPLOY_TARGET || "staging";
 console.log(deployTarget);
 
 require("dotenv").config({

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="posts" class="px-2 lg:px-12 py-2 bg-gray-800 min-h-screen">
+  <div v-if="posts" class="px-2 lg:px-12 py-2 bg-gray-800">
     <div v-if="currentUser.name == userName" class="mt-6">
       <div v-if="!editMode" class="text-center">
         <button
@@ -52,16 +52,16 @@
 </template>
 
 <script>
-import PostList from '@/components/PostList'
-import CreatePost from '@/components/CreatePost'
-import { mapState, mapGetters } from 'vuex'
+import PostList from "@/components/PostList";
+import CreatePost from "@/components/CreatePost";
+import { mapState, mapGetters } from "vuex";
 
 function findCommonElements(arr1, arr2) {
-  return arr1.some((item) => arr2.includes(item))
+  return arr1.some((item) => arr2.includes(item));
 }
 
 export default {
-  name: 'UserPosts',
+  name: "UserPosts",
   components: {
     PostList,
     CreatePost,
@@ -84,36 +84,36 @@ export default {
     return {
       listeners: [],
       editMode: false,
-    }
+    };
   },
   computed: {
-    ...mapState(['currentUser']),
-    ...mapGetters(['userTags']),
+    ...mapState(["currentUser"]),
+    ...mapGetters(["userTags"]),
     filteredPosts() {
       if (this.tags.length > 0) {
         return this.posts.filter((post) => {
-          return findCommonElements(this.tags, post.tags)
-        })
+          return findCommonElements(this.tags, post.tags);
+        });
       }
-      return this.posts
+      return this.posts;
     },
     orderedPosts() {
       // most recent first
       const o = this.filteredPosts
         .slice()
-        .sort((a, b) => b.created.seconds - a.created.seconds)
-      return o
+        .sort((a, b) => b.created.seconds - a.created.seconds);
+      return o;
     },
     tags() {
-      return Array.isArray(this.queryTags) ? this.queryTags : [this.queryTags]
+      return Array.isArray(this.queryTags) ? this.queryTags : [this.queryTags];
     },
   },
   watch: {
     queryTags(newValue) {
-      this.tags = Array.isArray(newValue) ? newValue : [newValue]
+      this.tags = Array.isArray(newValue) ? newValue : [newValue];
     },
   },
-}
+};
 </script>
 
 <style>

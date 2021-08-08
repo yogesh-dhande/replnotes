@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-800">
-    <div class="min-h-screen">
+  <div class="bg-gray-800 flex flex-col min-h-screen">
+    <div id="nuxt-view" class="flex-grow">
       <UserNavBar
         :user="siteOwner"
         :site="site"
@@ -43,6 +43,9 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
   },
   mounted() {
+    if (this.site.embedTags) {
+      this.$postscribe('#nuxt-view', this.site.embedTags)
+    }
     if (!this.isCustomDomain) {
       // Only add event on subdomains
       this.$splitbee.track(this.domain)
