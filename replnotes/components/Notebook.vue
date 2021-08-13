@@ -1,6 +1,6 @@
 <template>
   <div class="prose max-w-none text-indigo-200">
-    <div v-if="html" v-html="html"></div>
+    <div v-if="html" v-html="html" id="server-rendered-notebook"></div>
   </div>
 </template>
 
@@ -105,6 +105,16 @@ export default {
 }
 
 .nb-source > pre {
+  background-color: #111827;
+  color: #c7d2fe;
+  border: none;
+  border-radius: 0.5em;
+  padding: 1em;
+  margin: 0;
+  overflow-x: auto;
+}
+
+.nb-markdown-cell > pre {
   background-color: #111827;
   color: #c7d2fe;
   border: none;

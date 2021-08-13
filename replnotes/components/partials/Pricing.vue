@@ -29,6 +29,7 @@
           role="switch"
           aria-checked="false"
           aria-labelledby="annual-billing-label"
+          data-splitbee-event="Toggle Monthly/Annual Pricing"
           @click="annual = !annual"
         >
           <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
@@ -287,15 +288,13 @@ export default {
         'Free subdomain at replnotes.com',
         'SEO-friendly server-rendered pages',
         'Social media previews with OG tags',
-        '100 MB total storage',
       ],
       paidFeatures: [
         'All features in the free plan',
         'Custom domains',
-        'Remove REPL Notes branding',
-        '1 GB total storage',
+        'No REPL Notes branding',
         // 'Custom CSS styles (coming soon)',
-        'Javascript integrations (coming soon)',
+        'Embed Javascript tags to add analytics, forms, etc',
       ],
     }
   },

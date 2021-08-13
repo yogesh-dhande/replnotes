@@ -1,6 +1,6 @@
 <template>
   <div class="mx-6 text-indigo-200">
-    <card class="max-w-lg mx-auto bg-gray-900 p-4 shadow">
+    <card class="max-w-2xl mx-auto bg-gray-900 p-4 shadow">
       <h2 class="mb-3 py-2 text-xl font-bold">Update Your Profile</h2>
       <text-input v-model="displayName" class="mt-3" label="Display Name" />
       <text-input v-model="title" class="mt-3" label="Title" />

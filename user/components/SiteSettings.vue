@@ -1,43 +1,44 @@
 <template>
-  <card class="mx-auto shadow items-center bg-gray-900 text-indigo-200">
-    <h2 class="mb-3 py-2 text-xl font-bold">Customize Your Website</h2>
-    <text-input
-      v-model="title"
-      label="Home page heading"
-      class="mt-3"
-      @input="clearErrors"
-    ></text-input>
-    <text-area-input
-      v-model="description"
-      label="Home page sub-heading"
-      class="mt-3"
-      @input="clearErrors"
-    ></text-area-input>
-    <div v-if="!isPaidAccount" class="text-sm mt-3">
-      <nuxt-link
-        to="/plans"
-        class="
-          px-3
-          py-1
-          bg-indigo-600
-          hover:bg-indigo-700
-          rounded
-          shadow
-          text-indigo-100
-        "
-        >Upgrade</nuxt-link
-      >
-      to the paid plan to add a custom domain to your blog.
-    </div>
-    <div v-else>
+  <div class="mx-6">
+    <card class="mx-auto shadow items-center p-4 bg-gray-900 text-indigo-200">
+      <h2 class="mb-3 py-2 text-xl font-bold">Customize Your Website</h2>
       <text-input
-        v-model="customDomain"
-        placeholder="mydomain.com"
-        label="Custom Domain"
-        class="w-full mt-3"
+        v-model="title"
+        label="Home page heading"
+        class="mt-3"
         @input="clearErrors"
       ></text-input>
-      <!-- <div class="flex flex-row items-center">
+      <text-area-input
+        v-model="description"
+        label="Home page sub-heading"
+        class="mt-3"
+        @input="clearErrors"
+      ></text-area-input>
+      <div v-if="!isPaidAccount" class="text-sm mt-6">
+        <nuxt-link
+          to="/plans"
+          class="
+            px-3
+            py-1
+            bg-indigo-600
+            hover:bg-indigo-700
+            rounded
+            shadow
+            text-indigo-100
+          "
+          >Upgrade</nuxt-link
+        >
+        to the paid plan to add a custom domain to your blog.
+      </div>
+      <div v-else>
+        <text-input
+          v-model="customDomain"
+          placeholder="mydomain.com"
+          label="Custom Domain"
+          class="w-full mt-3"
+          @input="clearErrors"
+        ></text-input>
+        <!-- <div class="flex flex-row items-center">
         <icon-button @click="refreshDomainStatus">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,78 +66,82 @@
         </p>
       </div> -->
 
-      <div
-        v-if="!status.is_resolving || customDomain !== site.customDomain"
-        class="text-sm p-1"
-      >
-        <p class="mt-3">
-          To connect a custom domain to your blog, point an A record at
-          <span class="bg-gray-600 px-2 rounded">{{ ipAddress }}</span> in your
-          domain registrar's or DNS host's dashboard.
-        </p>
+        <div
+          v-if="!status.is_resolving || customDomain !== site.customDomain"
+          class="text-sm p-1"
+        >
+          <p class="mt-3">
+            To connect a custom domain to your blog, point an A record at
+            <span class="bg-gray-600 px-2 rounded">{{ ipAddress }}</span> in
+            your domain registrar's or DNS host's dashboard.
+          </p>
 
-        <p class="mt-3">
-          Links to instructions for some of the most popular domain providers.
-        </p>
+          <p class="mt-3">
+            Links to instructions for some of the most popular domain providers.
+          </p>
 
-        <a
-          href="https://www.godaddy.com/help/add-an-a-record-19238"
-          class="text-indigo-400 hover:text-indigo-600 underline"
-          target="_blank"
-          >Go Daddy</a
-        >
-        <a
-          href="https://www.namecheap.com/support/knowledgebase/article.aspx/434/2237/how-do-i-set-up-host-records-for-a-domain/"
-          class="text-indigo-400 hover:text-indigo-600 underline inline ml-3"
-          target="_blank"
-          >Namecheap</a
-        >
-        <a
-          href="https://support.google.com/domains/answer/3290350#zippy=%2Chost-name"
-          class="text-indigo-400 hover:text-indigo-600 underline inline ml-3"
-          target="_blank"
-          >Google</a
-        >
+          <a
+            href="https://www.godaddy.com/help/add-an-a-record-19238"
+            class="text-indigo-400 hover:text-indigo-600 underline"
+            target="_blank"
+            >Go Daddy</a
+          >
+          <a
+            href="https://www.namecheap.com/support/knowledgebase/article.aspx/434/2237/how-do-i-set-up-host-records-for-a-domain/"
+            class="text-indigo-400 hover:text-indigo-600 underline inline ml-3"
+            target="_blank"
+            >Namecheap</a
+          >
+          <a
+            href="https://support.google.com/domains/answer/3290350#zippy=%2Chost-name"
+            class="text-indigo-400 hover:text-indigo-600 underline inline ml-3"
+            target="_blank"
+            >Google</a
+          >
+        </div>
       </div>
-    </div>
-    <text-area-input
-      v-if="isPaidAccount"
-      v-model="embedTags"
-      label="Embed Tags"
-    />
+      <text-area-input
+        v-if="isPaidAccount"
+        v-model="embedTags"
+        label="Embed Tags"
+      />
 
-    <label for="navbar-builder" class="block mt-6 px-2">Navigation Menu</label>
-    <div id="navbar-builder" class="flex flex-col space-y-3">
-      <div v-for="(navItem, i) in navbar" :key="i" class="mt-3">
-        <nav-item-builder
-          v-bind="navItem"
-          @delete="() => navbar.splice(i, 1)"
-          @save="(val) => saveNavItem(val, i)"
-        ></nav-item-builder>
-      </div>
-      <button
-        class="
-          px-3
-          py-1
-          bg-indigo-600
-          hover:bg-indigo-700
-          text-indigo-100
-          font-medium
-          rounded
-        "
-        @click="addNavItem"
+      <label for="navbar-builder" class="block mt-6 px-2"
+        >Navigation Menu</label
       >
-        Add a link
-      </button>
-    </div>
-    <save-cancel
-      class="my-3"
-      :is-loading="isLoading"
-      :errors="errors"
-      @save="save"
-      @cancel="cancel"
-    />
-  </card>
+      <div id="navbar-builder" class="flex flex-col space-y-3">
+        <div v-for="(navItem, i) in navbar" :key="i" class="mt-3 mx-4">
+          <nav-item-builder
+            v-bind="navItem"
+            @delete="() => navbar.splice(i, 1)"
+            @save="(val) => saveNavItem(val, i)"
+          ></nav-item-builder>
+        </div>
+        <button
+          class="
+            mx-4
+            px-3
+            py-1
+            bg-indigo-600
+            hover:bg-indigo-700
+            text-indigo-100
+            font-medium
+            rounded
+          "
+          @click="addNavItem"
+        >
+          Add a link
+        </button>
+      </div>
+      <save-cancel
+        class="my-3"
+        :is-loading="isLoading"
+        :errors="errors"
+        @save="save"
+        @cancel="cancel"
+      />
+    </card>
+  </div>
 </template>
 
 <script>

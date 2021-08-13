@@ -65,7 +65,7 @@
         "
         @click="save"
       >
-        Save
+        Save Link
       </button>
     </div>
   </div>

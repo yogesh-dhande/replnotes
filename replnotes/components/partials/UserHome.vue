@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="max-w-2xl lg:max-w-5xl px-8 md:px-12 lg:px-24 mx-auto">
       <h1
         class="
           text-center text-5xl
@@ -15,9 +15,11 @@
       </h1>
       <h2
         class="
-          text-center text-2xl
-          sm:text-4xl
-          font-medium
+          sm:text-center
+          text-xl
+          md:text-2xl
+          sm:text-3xl
+          font-normal
           text-indigo-200
           my-6
         "

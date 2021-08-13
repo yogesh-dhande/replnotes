@@ -1,12 +1,12 @@
 <template>
-  <div class="flex items-center justify-center lg:justify-start space-x-8">
+  <div class="flex items-center justify-center space-x-8">
     <a
       v-if="user.social.github.url"
       class="link"
       :href="user.social.github.url"
       data-tippy-content="@github_handle"
       ><svg
-        class="h-6 fill-current text-gray-600 hover:text-indigo-700"
+        class="h-6 fill-current text-indigo-100 hover:text-blue-600"
         role="img"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@
       data-tippy-content="@linkedin_handle"
     >
       <svg
-        class="h-6 fill-current text-gray-600 hover:text-indigo-700"
+        class="h-6 fill-current text-indigo-100 hover:text-blue-600"
         role="img"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@
       :href="user.social.twitter.url"
       data-tippy-content="@twitter_handle"
       ><svg
-        class="h-6 fill-current text-gray-600 hover:text-indigo-700"
+        class="h-6 fill-current text-indigo-100 hover:text-blue-600"
         role="img"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +57,7 @@
       :href="user.social.youtube.url"
       data-tippy-content="@youtube_handle"
       ><svg
-        class="h-6 fill-current text-gray-600 hover:text-indigo-700"
+        class="h-6 fill-current text-indigo-100 hover:text-blue-600"
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

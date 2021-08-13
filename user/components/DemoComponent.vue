@@ -16,8 +16,8 @@
     <div
       class="
         shadow
-        mt-24
-        sm:mt-36
+        mt-6
+        sm:mt-12
         py-6
         sm:py-12
         px-12
@@ -43,11 +43,11 @@
         You can download a sample notebook
         <a
           class="text-indigo-400 hover:text-indigo-600"
-          download="test_notebook.ipynb"
-          href="https://storage.googleapis.com/nbtoblog-8a03f.appspot.com/users/cYRYkpBCsja6GSqm8KYaxsVeZ0g1/posts/8HEYqgsToYdwviW8kj6L/post.ipynb?GoogleAccessId=firebase-adminsdk-e46p5%40nbtoblog-8a03f.iam.gserviceaccount.com&Expires=16730323200&Signature=h2oXF7DsNtuf7fgf3UBh1MweiOYDHDP3kR8ulA5%2FrPPERVllBcMVPA%2BAlq32OC58OZad7MURQgPW%2B1Y3LeFYwMdyB28TV4gcwA3p9YSx8H%2BxTVP7VcN5L1%2BljCWELE%2BZhai6%2BXUahqFaSQm%2FjWupmQc3FQdfpLkSGy8ZTtty1c1uuVsDbs9kPTz972YxczmLPtPH449uwWfI9vn1RHINGXMs1OKyNHbvU%2F8AwKpdNOakw25AqaUNeojoG%2BpzckJ1gVjBA%2BMhdvky%2FB2D0msMdRR0oAHDqeuszVDd8kjG5oF%2F0D%2BXTxJEUT7PyvjnM0Rx1urXVhqKBOfJzdyWs3w2kw%3D%3D"
-          title="Test Jupyter Notebook"
+          data-splitbee-event="Download Demo File"
+          href="https://firebasestorage.googleapis.com/v0/b/nbtoblog-8a03f.appspot.com/o/demo_jupyter_notebook.ipynb?alt=media&token=1898f691-a7d2-497d-ab73-41c4e2b383bc"
+          download
         >
-          <button>here</button>
+          here
         </a>
         to use in the demo.
       </h2>
@@ -62,12 +62,12 @@
 </template>
 
 <script>
-import { getNbJsonFromFile } from "@/services/notebook";
-import Notebook from "@/components/Notebook";
-import FileInput from "@/components/FileInput";
+import { getNbJsonFromFile } from '@/services/notebook'
+import Notebook from '@/components/Notebook'
+import FileInput from '@/components/FileInput'
 
 export default {
-  name: "Demo",
+  name: 'Demo',
   components: {
     Notebook,
     FileInput,
@@ -78,26 +78,26 @@ export default {
       fileErrors: [],
       nbJson: null,
       updateCount: 0,
-      title: "Add a custom title to the post",
-      pageTitle: "Live Demo: Create and Preview a Blog Post",
-    };
+      title: 'Add a custom title to the post',
+      pageTitle: 'Live Demo: Create and Preview a Blog Post',
+    }
   },
   computed: {
     fileType() {
       if (this.file) {
         return this.file.name.substr(
-          this.file.name.lastIndexOf(".") + 1,
+          this.file.name.lastIndexOf('.') + 1,
           this.file.length
-        );
+        )
       }
-      return null;
+      return null
     },
   },
   watch: {
     async file(newValue) {
-      this.nbJson = null;
-      await this.handleFileChange(newValue);
-      this.updateCount += 1;
+      this.nbJson = null
+      await this.handleFileChange(newValue)
+      this.updateCount += 1
     },
   },
   methods: {
@@ -105,28 +105,30 @@ export default {
       if (newValue) {
         if (this.fileErrors.length === 0) {
           try {
-            this.nbJson = await getNbJsonFromFile(newValue);
+            this.$splitbee.track('Upload Demo File')
+            this.nbJson = await getNbJsonFromFile(newValue)
           } catch (error) {
-            this.fileErrors.push(error.message);
-            this.fileErrors.push("Only Jupyter Notebooks are supported.");
+            this.fileErrors.push(error.message)
+            this.fileErrors.push('Only Jupyter Notebooks are supported.')
+            this.$splitbee.track('Demo Errors', { errors: this.fileErrors })
           }
         }
       }
     },
     validateFile() {
-      this.fileErrors = [];
+      this.fileErrors = []
       if (!this.file) {
         this.fileErrors.push(
-          "Please upload a Jupyter Notebook to create a post."
-        );
-      } else if (this.fileType !== "ipynb") {
-        this.fileErrors.push("Only Jupyter Notebooks are supported");
+          'Please upload a Jupyter Notebook to create a post.'
+        )
+      } else if (this.fileType !== 'ipynb') {
+        this.fileErrors.push('Only Jupyter Notebooks are supported')
       } else if (this.file.size > 10 * 1024 * 1024) {
-        this.fileErrors.push("Files larger than 10 MB are not supported.");
+        this.fileErrors.push('Files larger than 10 MB are not supported.')
       }
     },
   },
-};
+}
 </script>
 
 <style>

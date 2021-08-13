@@ -9,7 +9,7 @@
       text-center text-base text-indigo-200
     "
   >
-    <social-links v-if="user.social" :user="user"></social-links>
+    <social-links v-if="user.social" :user="user" class="my-2"></social-links>
     <p class="">
       &copy; {{ new Date().getFullYear() }}
       {{ user.displayName ? user.displayName : user.name }}, All Rights

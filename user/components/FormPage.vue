@@ -11,7 +11,7 @@
     "
   >
     <div class="w-full h-full leading-loose">
-      <div class="max-w-lg mx-auto">
+      <div class="max-w-2xl mx-auto">
         <slot> </slot>
       </div>
     </div>

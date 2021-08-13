@@ -120,10 +120,10 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal'
-import Errors from '@/components/Errors'
+import Modal from "@/components/Modal";
+import Errors from "@/components/Errors";
 export default {
-  name: 'ConfirmedDelete',
+  name: "ConfirmedDelete",
   components: {
     Modal,
     Errors,
@@ -137,22 +137,22 @@ export default {
   data() {
     return {
       modalVisible: false,
-    }
+    };
   },
   methods: {
     cancel() {
-      this.modalVisible = false
-      this.$emit('clear')
+      this.modalVisible = false;
+      this.$emit("clear");
     },
     clicked() {
-      this.$emit('click')
+      this.$emit("click");
     },
     modalClick(e) {
-      e.preventDefault()
-      e.stopPropagation()
+      e.preventDefault();
+      e.stopPropagation();
     },
   },
-}
+};
 </script>
 
 <style>

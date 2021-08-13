@@ -2,7 +2,13 @@
   <!--Main Col-->
   <div>
     <div
-      class="flex flex-col items-center mt-6 sm:mt-12 text-center text-gray-300"
+      class="
+        flex flex-col
+        items-center
+        mt-6
+        sm:mt-12
+        text-center text-indigo-100
+      "
     >
       <!-- Image for mobile view-->
       <thumbnail
@@ -41,19 +47,17 @@
       </div>
     </div>
     <markdown :key="user.aboutMe" class="mx-auto" :text="user.aboutMe" />
-    <social-links v-if="user.social" :user="user"></social-links>
   </div>
 </template>
 
 <script>
 import Markdown from '@/components/Markdown'
-import SocialLinks from '@/components/SocialLinks'
 import Badge from '@/components/Badge'
 import Thumbnail from '@/components/Thumbnail'
 
 export default {
   name: 'About',
-  components: { Markdown, Badge, Thumbnail, SocialLinks },
+  components: { Markdown, Badge, Thumbnail },
   props: {
     user: {
       type: Object,

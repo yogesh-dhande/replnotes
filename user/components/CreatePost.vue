@@ -1,6 +1,6 @@
 <template>
   <div class="mx-6 my-12 text-indigo-200">
-    <card :key="post.id" class="max-w-lg mx-auto bg-gray-900 p-4 shadow">
+    <card :key="post.id" class="max-w-2xl mx-auto bg-gray-900 p-4 shadow">
       <h2 class="mb-3 py-2 text-xl text-center font-bold">New Post</h2>
       <file-input
         v-model="file"

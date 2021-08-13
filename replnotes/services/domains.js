@@ -40,7 +40,7 @@ export async function getSiteFromRequest(context) {
     incoming = context.req.headers['apx-incoming-host']
   }
   if (!incoming) {
-    incoming = 'blog.replnotes.com'
+    incoming = 'yogesh.replnotes.com'
   }
   context.store.commit('SET_DOMAIN', incoming)
   if (isSubdomain(incoming)) {

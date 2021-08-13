@@ -97,7 +97,7 @@
                     border border-gray-500
                     rounded
                     hover:shadow-2xl
-                    text-gray-300
+                    text-indigo-100
                   "
                   @click="() => select(null)"
                 >
@@ -121,16 +121,16 @@
 </template>
 
 <script>
-import Modal from '@/components/Modal'
-import Window from '@/components/Window'
+import Modal from "@/components/Modal";
+import Window from "@/components/Window";
 
 export default {
-  name: 'ImagePicker',
+  name: "ImagePicker",
   components: { Modal, Window },
   props: {
     label: {
       type: String,
-      default: '',
+      default: "",
     },
     thumbnails: {
       type: Array,
@@ -145,36 +145,36 @@ export default {
     return {
       thumbnailSrc: this.value,
       showModal: false,
-    }
+    };
   },
   watch: {
     thumbnailSrc(newVal) {
-      this.$emit('input', newVal)
-      this.$emit('change', newVal)
+      this.$emit("input", newVal);
+      this.$emit("change", newVal);
     },
     thumbnails(newVal) {
       try {
-        this.thumbnailSrc = newVal[0]
+        this.thumbnailSrc = newVal[0];
       } catch (error) {
-        this.thumbnailSrc = null
+        this.thumbnailSrc = null;
       }
     },
   },
   mounted() {
     if (!this.value && this.thumbnails.length > 0) {
-      this.thumbnailSrc = this.thumbnails[0]
+      this.thumbnailSrc = this.thumbnails[0];
     }
   },
   methods: {
     select(val) {
-      this.thumbnailSrc = val
-      this.closeModal()
+      this.thumbnailSrc = val;
+      this.closeModal();
     },
     closeModal() {
-      this.showModal = false
+      this.showModal = false;
     },
   },
-}
+};
 </script>
 
 <style>
