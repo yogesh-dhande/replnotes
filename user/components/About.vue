@@ -8,6 +8,7 @@
         mt-6
         sm:mt-12
         text-center text-indigo-100
+        space-y-4
       "
     >
       <!-- Image for mobile view-->
@@ -20,24 +21,12 @@
       <h1 class="text-4xl sm:text-5xl font-bold text-indigo-100 pt-8">
         {{ user.displayName }}
       </h1>
-      <p v-if="user.title" class="mt-2 text-xl sm:text-2xl font-medium">
+      <p v-if="user.title" class="my-2 text-xl sm:text-2xl font-medium">
         {{ user.title }}
       </p>
-      <p v-if="user.location" class="mt-2 text-xl sm:text-2xl font-medium">
+      <p v-if="user.location" class="my-2 text-xl sm:text-2xl font-medium">
         {{ user.location }}
       </p>
-
-      <nuxt-link
-        v-if="user.posts"
-        :to="`/posts`"
-        class="mt-2 text-lg sm:text-xl font-semibold hover:text-indigo-100"
-      >
-        <h1>
-          {{ Object.values(user.posts).length }}
-          <span v-if="Object.values(user.posts).length > 1">posts</span>
-          <span v-else>post</span>
-        </h1>
-      </nuxt-link>
       <div class="mt-2 flex flex-row flex-wrap justify-center">
         <badge v-for="tag in tags" :key="tag" class="mx-2 my-2"
           ><nuxt-link :to="topicLink(tag)" class="italic hover:underline">
@@ -46,6 +35,8 @@
         >
       </div>
     </div>
+    <social-links v-if="user.social" :user="user" class="my-4"></social-links>
+
     <markdown :key="user.aboutMe" class="mx-auto" :text="user.aboutMe" />
   </div>
 </template>
