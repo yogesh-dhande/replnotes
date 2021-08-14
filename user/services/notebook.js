@@ -162,7 +162,8 @@ export function parseThumbnailsFromNbJson(nbJson) {
 }
 
 export function parseMagicMethods(cell) {
-  cell.source.forEach((line) => {
+  if (cell.source && cell.source.length > 0) {
+    const line = cell.source[0]
     const commands = line.split(':')
     const key = commands[0].trim().toLowerCase()
 
@@ -191,5 +192,5 @@ export function parseMagicMethods(cell) {
     // if (key.includes("#collapse-output-hide")) {
     //   console.log(key, value);
     // }
-  })
+  }
 }

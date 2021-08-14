@@ -1,6 +1,6 @@
 <template>
   <!--Main Col-->
-  <div>
+  <div class="max-w-sm sm:max-w-2xl mx-auto pb-12 sm:pb-24">
     <div
       class="
         flex flex-col
@@ -35,7 +35,11 @@
         >
       </div>
     </div>
-    <social-links v-if="user.social" :user="user" class="my-4"></social-links>
+    <social-links
+      v-if="user.social"
+      :user="user"
+      class="mt-4 mb-8"
+    ></social-links>
 
     <markdown :key="user.aboutMe" class="mx-auto" :text="user.aboutMe" />
   </div>

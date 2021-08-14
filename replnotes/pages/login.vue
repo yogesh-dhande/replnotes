@@ -16,7 +16,17 @@
       >
     </h1>
     <form
-      class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 rounded-lg shadow-xl"
+      class="
+        max-w-lg
+        mx-auto
+        my-4
+        pt-6
+        pb-12
+        px-10
+        bg-gray-900
+        rounded-lg
+        shadow-xl
+      "
     >
       <div class="mt-3">
         <label class="block text-sm font-medium mt-2 mb-0"> Email </label>

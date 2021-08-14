@@ -5,6 +5,7 @@
       @save="$router.push('/dashboard')"
       :site="site"
       v-if="site"
+      class="max-w-2xl mx-auto"
     ></site-settings>
   </form-page>
 </template>
