@@ -69,7 +69,6 @@
 
 <script>
 import TextInput from '@/components/TextInput'
-import TextAreaInput from '@/components/TextAreaInput'
 import SaveCancel from '@/components/SaveCancel'
 import Card from '@/components/Card'
 import { mapState } from 'vuex'
@@ -79,7 +78,6 @@ export default {
   name: 'Profile',
   components: {
     'text-input': TextInput,
-    'text-area-input': TextAreaInput,
     ImageUploader,
     Card,
     SaveCancel,

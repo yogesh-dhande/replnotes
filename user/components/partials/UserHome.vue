@@ -2,6 +2,7 @@
   <div>
     <div class="max-w-2xl lg:max-w-5xl px-8 md:px-12 lg:px-24 mx-auto">
       <h1
+        v-if="site && site.title"
         class="
           text-center text-5xl
           sm:text-7xl
@@ -11,9 +12,10 @@
           my-6
         "
       >
-        {{ site && site.title ? site.title : user.displayName }}
+        {{ site.title }}
       </h1>
       <h2
+        v-if="site && site.description"
         class="
           sm:text-center
           text-xl
@@ -24,7 +26,7 @@
           my-6
         "
       >
-        {{ site && site.description ? site.description : '' }}
+        {{ site.description }}
       </h2>
     </div>
 
