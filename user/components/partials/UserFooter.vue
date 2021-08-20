@@ -15,19 +15,10 @@
       {{ user.displayName ? user.displayName : user.name }}, All Rights
       Reserved.
     </p>
-    <p v-if="!isPaidAccount" class="border-transparent mt-3">
-      <a href="https://replnotes.com" class="cursor-pointer" target="_blank">
-        Made with
-        <span class="text-indigo-400 hover:text-indigo-500 font-bold"
-          >REPL Notes</span
-        ></a
-      >
-    </p>
   </footer>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import SocialLinks from './../SocialLinks.vue'
 
 export default {
@@ -41,9 +32,6 @@ export default {
       type: Object,
       default: () => {},
     },
-  },
-  computed: {
-    ...mapGetters(['isPaidAccount']),
   },
 }
 </script>
