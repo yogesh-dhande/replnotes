@@ -5,11 +5,10 @@
       <text-input v-model="displayName" class="mt-3" label="Display Name" />
       <text-input v-model="title" class="mt-3" label="Title" />
       <text-input v-model="location" class="mt-3" label="Location" />
-      <text-area-input
-        v-model="aboutMe"
-        class="mt-3"
-        label="About Me (Plan Text/Markdown) "
-      />
+      <div class="mt-6">
+        <label for="aboutMe">About Me (Plan Text/Markdown) </label>
+        <v-md-editor id="aboutMe" v-model="aboutMe"></v-md-editor>
+      </div>
 
       <div class="mt-3">
         <label class="block text-sm font-medium"> Photo </label>

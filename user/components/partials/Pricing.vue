@@ -291,7 +291,7 @@ export default {
       ],
       paidFeatures: [
         'All features in the free plan',
-        'Custom domains',
+        'Custom domains and SSL certificates',
         'No REPL Notes branding',
         // 'Custom CSS styles (coming soon)',
         'Embed Javascript tags to add analytics, forms, etc',

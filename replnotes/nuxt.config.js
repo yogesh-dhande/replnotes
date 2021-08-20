@@ -75,6 +75,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/markdownEditor.js",
     "~/plugins/firebaseConfig.js",
     "~/plugins/analytics.client.js",
     "~/plugins/meta.js"

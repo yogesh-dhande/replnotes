@@ -18,6 +18,7 @@
     "reinstall": "rm package-lock.json && rm -rf node_modules && npm i"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^1.7.7",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/firebase": "^7.5.0",
@@ -31,6 +32,7 @@
     "firebase-admin": "^9.2.0",
     "highlight.js": "^10.7.2",
     "ipynb2html": "^0.3.0",
+    "nodom": "^2.4.0",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {
