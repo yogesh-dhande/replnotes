@@ -1,5 +1,9 @@
 <template>
-  <card v-if="post.id" class="py-6 px-12 max-w-6xl mx-auto text-indigo-200">
+  <card
+    v-if="post.id"
+    class="py-6 px-2 sm:px-12 max-w-6xl mx-auto text-indigo-200"
+    style="word-wrap: break-word; overflow-wrap: break-word"
+  >
     <div v-if="post.title">
       <h1 class="text-3xl lg:text-4xl font-extrabold my-6 tracking-tight">
         {{ post.title }}
@@ -24,8 +28,8 @@
 </template>
 
 <script>
-import { getReadableDate } from "@/services/notebook";
-import { mapState } from "vuex";
+import { getReadableDate } from '@/services/notebook'
+import { mapState } from 'vuex'
 
 export default {
   props: {
@@ -39,17 +43,17 @@ export default {
     },
   },
   computed: {
-    ...mapState(["siteOwner"]),
+    ...mapState(['siteOwner']),
     readableDate() {
-      return getReadableDate(this.post.created);
+      return getReadableDate(this.post.created)
     },
     topicLink() {
       return (tag) => {
-        return this.siteOwner ? `/topics/${tag}` : "#";
-      };
+        return this.siteOwner ? `/topics/${tag}` : '#'
+      }
     },
   },
-};
+}
 </script>
 
 <style>

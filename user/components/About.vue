@@ -1,6 +1,6 @@
 <template>
   <!--Main Col-->
-  <div class="max-w-sm sm:max-w-2xl mx-auto pb-12 sm:pb-24">
+  <div class="max-w-lg sm:max-w-2xl px-4 mx-auto pb-12 sm:pb-24">
     <div
       class="
         flex flex-col

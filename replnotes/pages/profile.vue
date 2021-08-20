@@ -1,6 +1,7 @@
 <template>
   <form-page>
     <profile
+      :key="currentUser.id"
       @cancel="$router.push('/dashboard')"
       @save="$router.push('/dashboard')"
       :currentUser="currentUser"

@@ -1,8 +1,16 @@
 <template>
   <form-page>
     <form
-      class="m-4 py-6 px-10 bg-gray-900 rounded-lg shadow-xl"
-      data-aos="fade-up"
+      class="
+        max-w-lg
+        mx-2
+        sm:mx-auto
+        py-6
+        px-10
+        bg-gray-900
+        rounded-lg
+        shadow-xl
+      "
     >
       <text-input
         label="Email"

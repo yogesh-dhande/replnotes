@@ -22,27 +22,37 @@
           @remove="removePhoto"
         ></image-uploader>
       </div>
-      <div v-if="social">
+      <div>
         <text-input
+          v-if="social.github"
           v-model="social.github.url"
           class="mt-3"
           :label="social.github.label"
         />
         <text-input
+          v-if="social.linkedIn"
           v-model="social.linkedIn.url"
           class="mt-3"
           :label="social.linkedIn.label"
         />
 
         <text-input
+          v-if="social.twitter"
           v-model="social.twitter.url"
           class="mt-3"
           :label="social.twitter.label"
         />
         <text-input
+          v-if="social.youtube"
           v-model="social.youtube.url"
           class="mt-3"
           :label="social.youtube.label"
+        />
+        <text-input
+          v-if="social.scholar"
+          v-model="social.scholar.url"
+          class="mt-3"
+          :label="social.scholar.label"
         />
       </div>
 
@@ -93,7 +103,34 @@ export default {
       photoUrl: this.currentUser.photoUrl || '',
       thumbnailUrl: this.currentUser.thumbnailUrl || '',
       aboutMe: this.currentUser.aboutMe,
-      social: this.currentUser.social,
+      social: this.currentUser.social
+        ? {
+            github: {
+              label: this.currentUser.social.github.label,
+              url: this.currentUser.social.github.url,
+            },
+            linkedIn: {
+              label: this.currentUser.social.linkedIn.label,
+              url: this.currentUser.social.linkedIn.url,
+            },
+            twitter: {
+              label: this.currentUser.social.twitter.label,
+              url: this.currentUser.social.twitter.url,
+            },
+            youtube: {
+              label: this.currentUser.social.youtube.label,
+              url: this.currentUser.social.youtube.url,
+            },
+            scholar: {
+              label: this.currentUser.social.scholar
+                ? this.currentUser.social.scholar.label
+                : 'Google Scholar',
+              url: this.currentUser.social.scholar
+                ? this.currentUser.social.scholar.url
+                : '',
+            },
+          }
+        : {},
     }
   },
   computed: {
