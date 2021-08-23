@@ -7,7 +7,11 @@
       <text-input v-model="location" class="mt-3" label="Location" />
       <div class="mt-6">
         <label for="aboutMe">About Me (Plan Text/Markdown) </label>
-        <v-md-editor id="aboutMe" v-model="aboutMe"></v-md-editor>
+        <markdown-editor
+          id="aboutMe"
+          v-model="aboutMe"
+          mode="editable"
+        ></markdown-editor>
       </div>
 
       <div class="mt-3">
