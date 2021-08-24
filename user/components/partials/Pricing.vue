@@ -55,7 +55,7 @@
         </button>
         <span id="annual-billing-label text-left" class="ml-3">
           <span class="font-medium">Annual billing </span>
-          <span>(Save 50%)</span>
+          <span>(Save 66%)</span>
         </span>
       </div>
     </div>
@@ -192,11 +192,11 @@
           </div>
           <div class="mt-4 flex items-baseline text-6xl font-extrabold">
             <span v-if="!annual">
-              $8
+              $5
               <span class="text-2xl font-medium text-indigo-300">/month</span>
             </span>
             <span v-else>
-              $48
+              $20
               <span class="text-2xl font-medium text-indigo-300">/year</span>
             </span>
           </div>
