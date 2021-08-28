@@ -40,7 +40,7 @@
         <nuxt-link
           v-if="post"
           v-slot="{ navigate }"
-          :to="`guides/${post.url}`"
+          :to="`/guides/${post.url}`"
           alt="Post Link"
           custom
         >
