@@ -205,7 +205,10 @@ export default {
           : null,
         file: {
           type: this.fileType,
-          lastModifiedDate: this.file ? this.file.lastModifiedDate : '',
+          lastModifiedDate:
+            this.file && this.file.lastModifiedDate
+              ? this.file.lastModifiedDate
+              : '',
         },
         thumbnail: this.thumbnailSrc,
       }
@@ -330,13 +333,14 @@ export default {
           this.$router.push('/dashboard')
         } catch (error) {
           // await this.postRef.delete();
-          console.log(error.message)
+
           if (error.message) {
             this.errors.push(error.message)
           }
           if (error.response && error.response.data.message) {
             this.errors.push(error.response.data.message)
           }
+          this.$splitbee.track('Error', { errors: this.errors })
         } finally {
           this.isLoading = false
         }

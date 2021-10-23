@@ -168,6 +168,7 @@ export default {
         if (error.response.data.message) {
           this.errors.push(error.response.data.message)
         }
+        this.$splitbee.track('Error', { errors: this.errors })
       } finally {
         this.isLoading = false
       }

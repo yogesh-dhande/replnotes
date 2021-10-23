@@ -40,8 +40,7 @@
             rows="3"
             class="
               shadow-sm
-              focus:ring-gray-500
-              focus:border-gray-500
+              focus:ring-gray-500 focus:border-gray-500
               mt-1
               p-2
               block
@@ -179,6 +178,7 @@ export default {
         })
         .catch((error) => {
           this.errors.push(error.message);
+          this.$splitbee.track("Error", { errors: this.errors });
         })
         .finally(() => (this.isLoading = false));
     },
@@ -195,6 +195,7 @@ export default {
         })
         .catch((error) => {
           this.errors.push(error.message);
+          this.$splitbee.track("Error", { errors: this.errors });
         })
         .finally(() => (this.isLoading = false));
     },

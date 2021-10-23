@@ -72,13 +72,17 @@ export default {
   },
   methods: {
     saveFeedback() {
-      this.$feedbackCollection.doc().set({
+      const feedback = {
         email: this.currentUser.email
           ? this.currentUser.email
           : this.feedback.email,
         message: this.feedback.message,
         image: this.feedback.image,
-      });
+      };
+
+      this.$feedbackCollection.doc().set(feedback);
+
+      this.$splitbee.track("Feedback", feedback);
 
       this.feedback.message = "";
       this.$router.push("/dashboard");

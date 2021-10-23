@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters } from "vuex";
 export default {
   props: {
     site: {
@@ -155,45 +155,45 @@ export default {
   },
   data() {
     return {
-      title: this.site && this.site.title ? this.site.title : '',
+      title: this.site && this.site.title ? this.site.title : "",
       description:
-        this.site && this.site.description ? this.site.description : '',
+        this.site && this.site.description ? this.site.description : "",
       customDomain:
-        this.site && this.site.customDomain ? this.site.customDomain : '',
-      embedTags: this.site && this.site.embedTags ? this.site.embedTags : '',
+        this.site && this.site.customDomain ? this.site.customDomain : "",
+      embedTags: this.site && this.site.embedTags ? this.site.embedTags : "",
       navbar:
         this.site && this.site.navbar
           ? this.site.navbar
           : [
               {
-                label: 'Home',
+                label: "Home",
                 external: false,
-                url: '/',
+                url: "/",
               },
               {
-                label: 'About',
+                label: "About",
                 external: false,
-                url: '/about',
+                url: "/about",
               },
             ],
       status: {},
       isLoading: false,
       errors: [],
-    }
+    };
   },
   computed: {
-    ...mapState(['token']),
-    ...mapGetters(['isPaidAccount']),
+    ...mapState(["token"]),
+    ...mapGetters(["isPaidAccount"]),
     localSite() {
       return {
         title: this.title,
         description: this.description,
         navbar: this.navbar,
         embedTags: this.embedTags,
-      }
+      };
     },
     ipAddress() {
-      return process.env.NUXT_ENV_PROXY_CLUSTER_IP
+      return process.env.NUXT_ENV_PROXY_CLUSTER_IP;
     },
   },
   mounted() {
@@ -202,49 +202,50 @@ export default {
   methods: {
     async save() {
       try {
-        this.isLoading = true
+        this.isLoading = true;
         if (
           this.customDomain !== this.site.customDomain &&
           this.isPaidAccount
         ) {
-          await this.addCustomDomain()
+          await this.addCustomDomain();
         }
-        await this.$sitesCollection.doc(this.site.id).update(this.localSite)
-        this.cancel()
+        await this.$sitesCollection.doc(this.site.id).update(this.localSite);
+        this.cancel();
       } catch (error) {
-        this.errors.push(error.message)
+        this.errors.push(error.message);
+        this.$splitbee.track("Error", { errors: this.errors });
       } finally {
-        this.isLoading = false
+        this.isLoading = false;
       }
     },
     cancel() {
-      this.$emit('cancel')
+      this.$emit("cancel");
     },
     clearErrors() {
-      this.erros = []
+      this.erros = [];
     },
     addNavItem() {
       this.navbar.push({
-        label: 'Home',
+        label: "Home",
         external: false,
-        url: '/',
-      })
+        url: "/",
+      });
     },
     saveNavItem(val, index) {
-      this.navbar[index] = val
-      this.clearErrors()
+      this.navbar[index] = val;
+      this.clearErrors();
     },
     async refreshDomainStatus() {
       try {
         const res = await this.$getCustomDomainStatus(
           this.customDomain,
           this.token
-        )
-        this.status = res.data
+        );
+        this.status = res.data;
       } catch (error) {
         this.status = {
           status_message: error.message,
-        }
+        };
       }
     },
     async addCustomDomain() {
@@ -252,14 +253,14 @@ export default {
         this.customDomain,
         this.site.customDomain,
         this.token
-      )
+      );
       // this.refreshDomainStatus()
     },
     async deleteDomain() {
-      await this.$addCustomDomain('', this.token)
+      await this.$addCustomDomain("", this.token);
     },
   },
-}
+};
 </script>
 
 <style>
