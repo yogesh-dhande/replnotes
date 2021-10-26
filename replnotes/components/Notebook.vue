@@ -5,9 +5,10 @@
 </template>
 
 <script>
-import { render, createRenderer } from 'ipynb2html/lib/browser'
-import 'highlight.js/styles/monokai.css'
-import { Document } from 'nodom'
+import { render, createRenderer } from "ipynb2html/lib/browser";
+import "highlight.js/styles/monokai.css";
+import "katex/dist/katex.min.css";
+import { Document } from "nodom";
 
 export default {
   props: {
@@ -16,41 +17,41 @@ export default {
       default: () => {
         return {
           cells: [],
-        }
+        };
       },
     },
   },
   data() {
     return {
       html: null,
-    }
+    };
   },
   watch: {
     nbJson(newValue) {
-      this.parseNotebook(newValue)
+      this.parseNotebook(newValue);
     },
   },
   created() {
     try {
-      this.html = createRenderer(new Document())(this.nbJson).outerHTML
+      this.html = createRenderer(new Document())(this.nbJson).outerHTML;
     } catch (error) {
       // nbJson was probably null
     }
   },
   mounted() {
     // Bokeh JS loaded on the server does not work on the client
-    this.parseNotebook(this.nbJson)
+    this.parseNotebook(this.nbJson);
   },
   methods: {
     parseNotebook(nbJson) {
       if (nbJson && nbJson.cells && nbJson.cells.length > 0) {
-        const element = render(nbJson)
-        this.$el.prepend(element) // show the client-side rendered content first
-        this.html = null // remove the server-side rendered content
+        const element = render(nbJson);
+        this.$el.prepend(element); // show the client-side rendered content first
+        this.html = null; // remove the server-side rendered content
       }
     },
   },
-}
+};
 </script>
 
 <style>
