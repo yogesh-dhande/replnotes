@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  #   Run the node application
+  user:
+    container_name: user
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=8081
+    ports:
+      - "8081:8081"
+    build:
+      context: user
+      dockerfile: Dockerfile-prod
+      args:
+        - DEPLOY_TAREGT=staging
+#   # Run the caddy server
+#   caddy:
+#     image: caddy/caddy:2.4.3-alpine
+#     container_name: caddy-service
+#     restart: unless-stopped
+#     environment:
+#       - ACME_AGREE=true
+#     ports:
+#       - "80:80"
+#       - "443:443"
+#     volumes:
+#       - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+#       - caddy_data:/data
+#       - caddy_config:/config
+
+# volumes:
+#   caddy_data:
+#   caddy_config:

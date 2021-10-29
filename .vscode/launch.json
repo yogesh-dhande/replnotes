@@ -1,28 +1,33 @@
 {
-    "configurations": [
-        {
-            "name": "Cloud Run: Run/Debug Locally",
-            "type": "cloudcode.cloudrun",
-            "request": "launch",
-            "build": {
-                "docker": {
-                    "path": "replnotes/Dockerfile"
+  "configurations": [
+    {
+        "name": "Cloud Run: Run/Debug Locally",
+        "type": "cloudcode.cloudrun",
+        "request": "launch",
+        "build": {
+            "docker": {
+                "path": "user/Dockerfile-prod"
+            }
+        },
+        "image": "staging-user",
+        "service": {
+            "name": "staging-user",
+            "containerPort": 8080,
+            "resources": {
+                "limits": {
+                    "memory": "1024Mi"
                 }
-            },
-            "image": "replnotes",
-            "service": {
-                "name": "replnotes",
-                "containerPort": 8080,
-                "resources": {
-                    "limits": {
-                        "memory": "256Mi"
-                    }
-                }
-            },
-            "target": {
-                "minikube": {}
-            },
-            "watch": true
+            }
+        },
+        "target": {
+            "minikube": {}
+        },
+        "watch": true,
+        "debug": {
+            "sourceFileMap": {
+                "${workspaceFolder}": "/app"
+            }
         }
-    ]
+    }
+]
 }

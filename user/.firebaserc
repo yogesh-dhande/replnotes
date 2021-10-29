@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "production": "nbtoblog-8a03f",
+    "staging": "staging-2cacb"
+  },
+  "targets": {
+    "nbtoblog-8a03f": {
+      "hosting": {
+        "user-replnotes": [
+          "user-replnotes-prod"
+        ]
+      }
+    }
+  }
+}

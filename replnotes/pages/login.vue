@@ -1,7 +1,13 @@
 <template>
   <form-page>
     <h1
-      class="text-center text-5xl tracking-tight font-extrabold text-indigo-100 mb-6"
+      class="
+        text-center text-5xl
+        tracking-tight
+        font-extrabold
+        text-indigo-100
+        mb-6
+      "
     >
       Start Blogging
       <span class="block text-indigo-400 text-3xl">
@@ -10,7 +16,17 @@
       >
     </h1>
     <form
-      class="max-w-lg m-4 pt-6 pb-12 px-10 bg-gray-900 bg-opacity-25 rounded-lg shadow-xl"
+      class="
+        max-w-lg
+        mx-auto
+        my-4
+        pt-6
+        pb-12
+        px-10
+        bg-gray-900
+        rounded-lg
+        shadow-xl
+      "
     >
       <div class="mt-3">
         <label class="block text-sm font-medium mt-2 mb-0"> Email </label>
@@ -22,7 +38,17 @@
             autocomplete="email"
             required
             rows="3"
-            class="shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 p-2 block w-full text-sm bg-gray-800 rounded-md"
+            class="
+              shadow-sm
+              focus:ring-gray-500 focus:border-gray-500
+              mt-1
+              p-2
+              block
+              w-full
+              text-sm
+              bg-gray-800
+              rounded-md
+            "
             v-model="email"
             @focus="clearErrors"
           />
@@ -58,7 +84,15 @@
         <span class="float-left">
           <nuxt-link
             to="/register"
-            class="p-1 inline-flex justify-center rounded hover:underline outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="
+              p-1
+              inline-flex
+              justify-center
+              rounded
+              hover:underline
+              outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+            "
           >
             <span>Sign Up</span>
           </nuxt-link>
@@ -67,7 +101,15 @@
           <button
             ref="fpButton"
             type="submit"
-            class="p-1 inline-flex justify-center rounded hover:underline outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="
+              p-1
+              inline-flex
+              justify-center
+              rounded
+              hover:underline
+              outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+            "
             @click.prevent="fp"
           >
             <span v-if="!fpform">Forgot password?</span>
@@ -90,7 +132,7 @@ export default {
     FormPage,
     "password-input": PasswordInput,
   },
-  middleware: "guest",
+  middleware: ["guest"],
   head() {
     return this.$createSEOMeta({
       title: "Sign In to REPL Notes",
@@ -129,16 +171,14 @@ export default {
       this.$fire.auth
         .signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
-          this.$fire.analytics.logEvent(
-            this.$analyticsEvents.LOGIN,
-            userCredential.user.toJSON()
-          );
+          this.$splitbee.track("Log In");
           this.$store.commit("SET_AUTH_STATE", userCredential.user);
 
           this.$router.push(this.redirect);
         })
         .catch((error) => {
           this.errors.push(error.message);
+          this.$splitbee.track("Error", { errors: this.errors });
         })
         .finally(() => (this.isLoading = false));
     },
@@ -155,6 +195,7 @@ export default {
         })
         .catch((error) => {
           this.errors.push(error.message);
+          this.$splitbee.track("Error", { errors: this.errors });
         })
         .finally(() => (this.isLoading = false));
     },

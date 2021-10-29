@@ -4,23 +4,15 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
-    "predeploy": [
-    ]
+    "predeploy": []
   },
   "hosting": {
-    "public": "static",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
-        "run": {
-          "serviceId": "replnotes",
-          "region": "us-central1"
-        }
+        "destination": "/index.html"
       }
     ]
   },
@@ -36,6 +28,9 @@
     },
     "firestore": {
       "port": 10002
+    },
+    "hosting": {
+      "port": 10003
     },
     "ui": {
       "enabled": true,

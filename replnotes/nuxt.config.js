@@ -1,15 +1,26 @@
 const isDev = process.env.NODE_ENV === "development";
 
-const axios = require("axios");
+import path from "path";
+import getAppRoutes from "./services/getRoutes";
+const deployTarget = process.env.DEPLOY_TARGET || "staging";
+console.log(deployTarget);
 
-async function getAppRoutes() {
-  let res = await axios.get(
-    `${process.env.NUXT_ENV_FIREBASE_FUNCTIONS_URL}/getRoutes`
-  );
-  return res.data;
-}
+require("dotenv").config({
+  path: path.resolve(__dirname, `envs/.env.${deployTarget}.local`)
+});
+
+const useFirebaseEmulators = false;
 
 export default {
+  dev: isDev,
+  target: "static",
+  generate: {
+    async routes() {
+      const routes = await getAppRoutes("blog");
+      return routes.map(route => route.replace("posts", "guides"));
+    }
+  },
+  publicRuntimeConfig: { baseURL: process.env.NUXT_ENV_BASE_URL },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "REPL Notes",
@@ -23,21 +34,40 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: "Blog with Jupyter Notebooks @ REPL Notes"
+        content: "Start Blogging with Jupyter Notebooks @ REPL Notes"
       },
       {
         hid: "og:description",
         property: "og:description",
-        content: "Blog with Jupyter Notebooks @ REPL Notes"
+        content: "Start Blogging with Jupyter Notebooks @ REPL Notes"
       },
       {
         hid: "og:url",
         property: "og:url",
         content: process.env.NUXT_ENV_BASE_URL
       },
-      { hid: "og:image", property: "og:image", content: "~/static/logo.png" }
+      {
+        hid: "twitter:card",
+        property: "twitter:card",
+        content: "summary_large_image"
+      },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: `${process.env.NUXT_ENV_BASE_URL}/og-image.png`
+      },
+      {
+        hid: "twitter:image",
+        name: "twitter:image",
+        content: `${process.env.NUXT_ENV_BASE_URL}/og-image.png`
+      }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    script: [
+      {
+        src: "https://cdn.paddle.com/paddle/paddle.js"
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -45,6 +75,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/markdownEditor.js",
     "~/plugins/firebaseConfig.js",
     "~/plugins/analytics.client.js",
     "~/plugins/meta.js"
@@ -68,11 +99,7 @@ export default {
   ],
   sitemap: {
     hostname: process.env.NUXT_ENV_BASE_URL,
-    async routes() {
-      let routes = await getAppRoutes();
-      return routes;
-    },
-    exclude: ["/dashboard"]
+    exclude: ["/dashboard", "/profile", "/site", "/posts"]
   },
   firebase: {
     config: {
@@ -91,20 +118,20 @@ export default {
           onAuthStateChangedAction: "onAuthStateChangedAction",
           subscribeManually: false
         },
-        ssr: true // default
-        // emulatorPort: isDev ? 10000 : undefined,
-        // emulatorHost: isDev ? 'http://localhost' : undefined,
+        ssr: true, // default
+        emulatorPort: useFirebaseEmulators ? 10000 : undefined,
+        emulatorHost: useFirebaseEmulators ? "http://localhost" : undefined
       },
       functions: {
-        location: "us-central1"
-        // emulatorPort: isDev ? 10001 : undefined,
-        // emulatorHost: isDev ? 'localhost' : undefined,
+        location: "us-central1",
+        emulatorPort: useFirebaseEmulators ? 10001 : undefined,
+        emulatorHost: useFirebaseEmulators ? "localhost" : undefined
       },
       firestore: {
         memoryOnly: false, // default
-        enablePersistence: !isDev
-        // emulatorPort: isDev ? 10002 : undefined,
-        // emulatorHost: isDev ? 'localhost' : undefined,
+        enablePersistence: !useFirebaseEmulators,
+        emulatorPort: useFirebaseEmulators ? 10002 : undefined,
+        emulatorHost: useFirebaseEmulators ? "localhost" : undefined
       },
       storage: true,
       analytics: {

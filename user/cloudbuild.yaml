@@ -1,0 +1,37 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '--build-arg',
+        'DEPLOY_TARGET=$_DEPLOY_TARGET',
+        '-t',
+        'gcr.io/$PROJECT_ID/replnotes-user',
+        '.',
+      ]
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/replnotes-user']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+        'run',
+        'deploy',
+        'replnotes-user', # change to your service name
+        '--image',
+        'gcr.io/$PROJECT_ID/replnotes-user',
+        '--max-instances',
+        '1',
+        '--memory',
+        '1024M',
+        '--concurrency',
+        '80',
+        '--region',
+        'us-central1',
+        '--platform',
+        'managed',
+        '--allow-unauthenticated',
+      ]
+images:
+  - gcr.io/$PROJECT_ID/replnotes-user
