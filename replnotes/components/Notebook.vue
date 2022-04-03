@@ -132,6 +132,7 @@ export default {
 .nb-output {
   min-height: 1em;
   width: 100%;
+  overflow-x: auto;
 }
 
 .nb-output > pre {
