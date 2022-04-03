@@ -109,7 +109,6 @@ export default {
             this.nbJson = await getNbJsonFromFile(newValue);
           } catch (error) {
             this.fileErrors.push(error.message);
-            this.fileErrors.push("Only Jupyter Notebooks are supported.");
             this.$splitbee.track("Error", { errors: this.fileErrors });
           }
         }
@@ -125,6 +124,10 @@ export default {
         this.fileErrors.push("Only Jupyter Notebooks are supported");
       } else if (this.file.size > 10 * 1024 * 1024) {
         this.fileErrors.push("Files larger than 10 MB are not supported.");
+      }
+
+      if (this.fileErrors.length > 0) {
+        this.$splitbee.track("Error", { errors: this.fileErrors });
       }
     },
   },

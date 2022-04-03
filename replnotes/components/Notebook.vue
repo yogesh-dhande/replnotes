@@ -72,6 +72,10 @@ export default {
   position: relative;
 }
 
+.nb-html-output {
+  overflow-x: auto;
+}
+
 .nb-source::before,
 .nb-output::before {
   position: absolute;

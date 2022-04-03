@@ -2,8 +2,6 @@ const { auth } = require("./app");
 
 exports.cors = require("cors")({
   origin: [
-    "http://localhost:8080",
-    "http://localhost:8081",
     "https://replnotes.com",
     "https://www.replnotes.com",
     "https://staging-2cacb.web.app"
