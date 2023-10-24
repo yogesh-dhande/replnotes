@@ -65,7 +65,12 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     script: [
       {
-        src: "https://cdn.paddle.com/paddle/paddle.js"
+        src: "https://cdn.paddle.com/paddle/paddle.js",
+        async: true
+      },
+      {
+        src: "https://tally.so/widgets/embed.js",
+        async: true
       }
     ]
   },
