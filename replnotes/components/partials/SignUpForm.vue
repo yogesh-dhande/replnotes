@@ -1,17 +1,7 @@
 <template>
   <div>
     <form
-      class="
-        max-w-lg
-        mx-auto
-        my-4
-        pt-6
-        pb-12
-        px-10
-        bg-gray-900
-        rounded-lg
-        shadow-xl
-      "
+      class="max-w-lg mx-auto my-4 pt-6 pb-12 px-10 bg-gray-900 rounded-lg shadow-xl"
     >
       <url-slug-input
         v-model="name"
@@ -36,17 +26,7 @@
             autocomplete="email"
             required
             rows="3"
-            class="
-              shadow-sm
-              focus:ring-gray-500 focus:border-gray-500
-              mt-1
-              p-2
-              block
-              w-full
-              text-sm
-              bg-gray-800
-              rounded-md
-            "
+            class="shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 p-2 block w-full text-sm bg-gray-800 rounded-md"
             @focus="
               emailErrors = [];
               errors = [];
@@ -93,15 +73,7 @@
         <span class="float-right">
           <nuxt-link
             to="/login"
-            class="
-              p-1
-              inline-flex
-              justify-center
-              rounded
-              hover:underline
-              outline-none
-              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-            "
+            class="p-1 inline-flex justify-center rounded hover:underline outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <span>Sign In</span>
           </nuxt-link>
@@ -222,8 +194,10 @@ export default {
     validateUsername() {
       if (!this.name || this.name.length === 0) {
         this.nameErrors.push("Please enter a username.");
-      } else if (!/^[0-9a-zA-Z_@-]+$/.test(this.name)) {
-        this.nameErrors.push("No spaces or periods allowed in the username.");
+      } else if (!/^[0-9a-z_@-]+$/.test(this.name)) {
+        this.nameErrors.push(
+          "No spaces, periods, or capital letters allowed in the username."
+        );
       }
     },
     validateEmail() {

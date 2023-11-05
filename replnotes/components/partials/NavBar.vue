@@ -81,7 +81,11 @@
                 class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
                 >Guides</nuxt-link
               >
-
+              <nuxt-link
+                to="/showcase"
+                class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+                >Showcase</nuxt-link
+              >
               <div v-if="!currentUser.id" class="self-center">
                 <nuxt-link
                   to="/#pricing"
@@ -142,7 +146,11 @@
           class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
           >Guides</nuxt-link
         >
-
+        <nuxt-link
+          to="/showcase"
+          class="block text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent"
+          >Showcase</nuxt-link
+        >
         <div v-if="!currentUser.id">
           <nuxt-link
             to="/login"
