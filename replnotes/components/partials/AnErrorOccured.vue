@@ -9,14 +9,12 @@
           </h1>
           <p class="text-lg sm:text-2xl">
             Head to
-            <nuxt-link to="/" class="text-indigo-400 hover:text-indigo-500"
-              >Home</nuxt-link
-            >, or send us a
-            <nuxt-link
-              to="/contact"
-              class="text-indigo-400 hover:text-indigo-500"
-              >message</nuxt-link
-            >
+            <nuxt-link to="/" class="text-indigo-400 hover:text-indigo-500">Home</nuxt-link>, or send us a
+            <button data-tally-open="3jopW9" data-tally-hide-title="1" data-environment="prod"
+              :data-email="currentUser.email"
+              class="text-indigo-100 hover:text-indigo-300 px-3 py-2 text-lg font-bold border-transparent">
+              message
+            </button>
             to help us fix the issue..
           </p>
         </div>
@@ -26,15 +24,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   props: {
     error: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
 }
 </script>
 
-<style>
-</style>
+<style></style>
