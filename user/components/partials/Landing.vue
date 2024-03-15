@@ -1,7 +1,6 @@
 <template>
   <div class="bg-gray-800 text-indigo-100">
-    <div
-      class="
+    <div class="
         md:max-w-4xl
         lg:max-w-5xl
         mx-auto
@@ -12,28 +11,23 @@
         sm:py-16
         lg:py-24
         lg:px-8
-      "
-    >
+      ">
       <div class="flex flex-col place-items-center px-2 sm:px-8">
-        <h1
-          class="
+        <h1 class="
             text-center text-5xl
             sm:text-7xl
             lg:text-8xl
             tracking-tight
             font-extrabold
             text-indigo-400
-          "
-        >
+          ">
           Jupyter Notebooks
           <span class="text-indigo-100">
             <span class="inline text-indigo-400">
               <span class="text-4xl sm:text-6xl lg:text-7xl text-indigo-100">
                 to a
                 <span class="inline-flex relative">
-                  <span
-                    aria-hidden=""
-                    class="
+                  <span aria-hidden="" class="
                       inline
                       absolute
                       inset-0
@@ -41,17 +35,13 @@
                       transform
                       -rotate-1
                       scale-105
-                    "
-                  ></span>
+                    "></span>
                   <span class="relative px-2">Blog</span>
                 </span>
-                Within Minutes</span
-              ></span
-            >
+                Within Minutes</span></span>
           </span>
         </h1>
-        <p
-          class="
+        <p class="
             mt-3
             px-12
             sm:px-0
@@ -64,17 +54,14 @@
             sm:mx-auto
             md:mt-10
             lg:mx-0
-          "
-        >
+          ">
           Create a portfolio website by turning Jupyter notebooks into beautiful
           blog posts. No web development experience required.
         </p>
       </div>
       <div class="mt-8 flex justify-center">
         <div class="inline-flex rounded-md shadow">
-          <nuxt-link
-            to="/register"
-            class="
+          <nuxt-link to="/register" class="
               w-full
               px-8
               py-3
@@ -90,15 +77,12 @@
               md:py-4
               md:text-xl
               md:px-10
-            "
-          >
+            ">
             Start Blogging
           </nuxt-link>
         </div>
         <div class="ml-3 inline-flex">
-          <nuxt-link
-            to="/demo"
-            class="
+          <nuxt-link to="/demo" class="
               w-full
               px-8
               py-3
@@ -113,8 +97,7 @@
               md:py-4
               md:text-xl
               md:px-10
-            "
-          >
+            ">
             See Demo
           </nuxt-link>
         </div>
@@ -127,68 +110,51 @@
       <div class="pt-12 sm:pt-16 lg:pt-24">
         <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mx-auto space-y-2 lg:max-w-none">
-            <h2
-              class="
+            <h2 class="
                 text-3xl
                 font-extrabold
                 text-indigo-100
                 sm:text-4xl
                 lg:text-5xl
                 my-4
-              "
-              data-aos="fade-up"
-            >
+              " data-aos="fade-up">
               Simple Pricing
             </h2>
           </div>
-          <h3
-            class="text-xl sm:text-2xl text-indigo-200"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
+          <h3 class="text-xl sm:text-2xl text-indigo-200" data-aos="fade-up" data-aos-delay="200">
             Create a blog for free. Upgrade for more features when ready!
           </h3>
         </div>
-        <pricing
-          class="my-8 sm:my-16"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        />
+        <pricing class="my-8 sm:my-16" data-aos="fade-up" data-aos-delay="200" />
       </div>
     </section>
     <form-page data-aos="fade-up" data-aos-delay="200">
-      <h2
-        class="
+      <h2 class="
           text-center text-6xl
           tracking-tight
           font-extrabold
           text-indigo-100
           mb-6
-        "
-      >
+        ">
         Start Blogging
         <span class="block text-indigo-400 text-4xl">
           <span class="text-indigo-100">with</span>
-          Jupyter notebooks</span
-        >
+          Jupyter notebooks</span>
       </h2>
       <sign-up-form />
-      <h2
-        class="
+      <h2 class="
           mt-16
           text-indigo-100
           font-medium
           text-xl
           sm:text-2xl
           text-center
-        "
-      >
+        ">
         Have questions? Ask them
-        <nuxt-link
-          to="/contact"
-          class="text-indigo-400 hover:text-indigo-500 italic"
-          >here!</nuxt-link
-        >
+        <button data-tally-open="3jopW9" data-tally-hide-title="1" data-environment="prod"
+          :data-email="currentUser.email" class="text-indigo-400 hover:text-indigo-500 font-bold border-transparent">
+          here!
+        </button>
       </h2>
     </form-page>
   </div>
@@ -202,12 +168,16 @@ import SignUpForm from '@/components/partials/SignUpForm'
 import Features from '@/components/partials/Features.vue'
 import FormPage from '@/components/FormPage'
 
+import { mapState } from "vuex";
 export default {
   components: { Process, Pricing, AppPreview, Features, SignUpForm, FormPage },
   data() {
     return {
       videoModalOpen: false,
     }
+  },
+  computed: {
+    ...mapState(["currentUser"]),
   },
 }
 </script>
